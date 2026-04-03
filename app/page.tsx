@@ -1,13 +1,60 @@
 import { ContactForm } from "@/components/contact-form";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
+const pillars = [
+  {
+    icon: "🤖",
+    id: "agentes",
+    label: "Agentes de IA",
+    tagline: "Tu negocio trabaja solo, las 24 horas.",
+    description: "Agentes conversacionales que venden, agendan y atienden por WhatsApp, Instagram y Facebook — con el tono y el conocimiento de tu negocio.",
+    items: ["Agente de ventas", "Agendamiento de turnos", "Seguimiento de clientes", "Cobranzas automáticas"],
+    cta: "Ver soluciones de IA",
+    href: "#servicios",
+    featured: true,
+  },
+  {
+    icon: "⚙️",
+    id: "automatizacion",
+    label: "Automatización de procesos",
+    tagline: "Menos tareas repetitivas, más foco en lo que importa.",
+    description: "Convertimos flujos manuales en procesos automáticos: presupuestos, reportes, onboarding, notificaciones y todo lo que hoy consume tiempo de tu equipo.",
+    items: ["Flujos de cotización", "Reportes automáticos", "Onboarding de clientes", "Notificaciones inteligentes"],
+    cta: "Ver ejemplos",
+    href: "#a-medida",
+    featured: true,
+  },
+  {
+    icon: "🌐",
+    id: "sitios",
+    label: "Desarrollo de sitios web",
+    tagline: "Tu presencia digital, rápida y profesional.",
+    description: "Diseñamos y desarrollamos sitios web modernos, rápidos y orientados a convertir visitantes en clientes. Desde landing pages hasta sitios institucionales completos.",
+    items: ["Landing pages de alto impacto", "Sitios institucionales", "E-commerce", "Portafolios y catálogos"],
+    cta: "Hablar de tu proyecto",
+    href: "#contacto",
+    featured: false,
+  },
+  {
+    icon: "💻",
+    id: "sistemas",
+    label: "Sistemas a medida",
+    tagline: "Tecnología que se adapta a tu operación, no al revés.",
+    description: "Desarrollamos sistemas y aplicaciones diseñados exactamente para tu negocio: paneles de gestión, CRMs, plataformas internas o cualquier herramienta que necesites.",
+    items: ["Paneles de gestión", "CRM personalizados", "Integraciones entre plataformas", "Apps internas"],
+    cta: "Consultar desarrollo",
+    href: "#contacto",
+    featured: false,
+  },
+];
+
 const services = [
   {
     featured: true,
     tag: "Más solicitado",
     title: "Agente de ventas con IA",
     description:
-      "Responde consultas, presenta productos y cierra ventas en WhatsApp, Instagram y Facebook — las 24 horas, sin que nadie tenga que estar detrás del teléfono.",
+      "Responde consultas, presenta productos y cierra ventas en WhatsApp, Instagram y Facebook — las 24 horas, con la velocidad y el conocimiento que tu negocio necesita.",
     examples: ["Tiendas", "Servicios profesionales", "E-commerce"],
   },
   {
@@ -22,13 +69,13 @@ const services = [
     featured: false,
     title: "Seguimiento y reactivación",
     description:
-      "Secuencias automáticas que recuerdan, reactivan y fidelizan. El agente sabe cuándo contactar según el comportamiento de cada cliente.",
+      "Secuencias automáticas que recuerdan, reactivan y fidelizan. El agente sabe cuándo y cómo contactar a cada cliente para maximizar cada oportunidad.",
   },
   {
     featured: false,
     title: "Automatización de cobranzas",
     description:
-      "Avisos de vencimiento, confirmación de pagos y recordatorios consistentes sin perseguir cada caso a mano.",
+      "Avisos de vencimiento, confirmación de pagos y recordatorios consistentes que liberan tu tiempo y mejoran el flujo de caja.",
   },
 ];
 
@@ -91,9 +138,9 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "24/7", label: "Atención sin pausas" },
-  { value: "<5s", label: "Tiempo de respuesta" },
-  { value: "3 en 1", label: "Ventas, turnos y cobranza" },
+  { value: "24/7", label: "Tu negocio activo siempre" },
+  { value: "×3", label: "Más consultas respondidas" },
+  { value: "Bajo costo", label: "Accesible para cualquier negocio" },
 ];
 
 const chatMessages = [
@@ -131,7 +178,7 @@ export default function Home() {
             <span className="text-sm font-semibold tracking-[0.22em] text-[color:var(--color-ink)] uppercase" style={{ fontFamily: "var(--font-display)" }}>Crolia</span>
           </a>
           <nav aria-label="Principal" className="hidden items-center gap-7 text-sm text-[color:var(--color-muted)] md:flex">
-            <a href="#servicios" className="transition hover:text-[color:var(--color-ink)]">Servicios</a>
+            <a href="#que-hacemos" className="transition hover:text-[color:var(--color-ink)]">Servicios</a>
             <a href="#a-medida" className="transition hover:text-[color:var(--color-ink)]">A medida</a>
             <a href="#industrias" className="transition hover:text-[color:var(--color-ink)]">Industrias</a>
             <a href="#proceso" className="transition hover:text-[color:var(--color-ink)]">Proceso</a>
@@ -150,12 +197,12 @@ export default function Home() {
       {/* ── Hero ── */}
       <section id="inicio" className="section-shell grid gap-12 py-16 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
         <div className="space-y-8">
-          <div className="eyebrow reveal">IA para negocios que quieren crecer y ganar tiempo</div>
+          <div className="eyebrow reveal">Tecnología accesible para negocios que quieren escalar</div>
           <h1 className="display-title max-w-4xl reveal delay-100">
-            Agentes de IA que venden, agendan y atienden — mientras vos te enfocás en tu negocio.
+            Hacé crecer tu negocio con IA, automatización y tecnología a tu medida.
           </h1>
           <p className="max-w-2xl text-lg leading-8 text-[color:var(--color-muted)] reveal delay-200">
-            Más respuestas, más turnos, más ventas — sin sumar personal ni cambiar cómo trabaja tu equipo.
+            Más ventas, más turnos, más tiempo libre — con soluciones accesibles que se adaptan a cualquier negocio que quiera dar el siguiente paso.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row reveal delay-300">
             <a href="#contacto" className="rounded-full bg-[color:var(--color-ink)] px-7 py-4 text-center text-sm font-medium text-white transition hover:bg-[color:var(--color-accent)]">
@@ -210,6 +257,58 @@ export default function Home() {
             <div className="chat-mockup-footer">
               <p>Respondió en <strong>4 segundos</strong> · sin intervención humana</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pillars / What we offer ── */}
+      <section id="que-hacemos" className="section-shell py-16 md:py-24">
+        <div className="section-heading reveal">
+          <div className="eyebrow">Qué hacemos</div>
+          <h2 className="section-title mt-4">Una sola empresa para todo lo que tu negocio necesita crecer.</h2>
+          <p className="section-copy">
+            Desde un agente de IA hasta un sistema completo a medida — con la misma lógica: tecnología accesible, resultados concretos y bajo costo de entrada.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          {pillars.map((p, i) => (
+            <article key={p.id} className={`${p.featured ? "card-featured" : "card-surface"} flex flex-col p-8 reveal delay-${(i % 2 + 1) * 100}`}>
+              <div className="flex items-start justify-between gap-4">
+                <div className="text-4xl">{p.icon}</div>
+                {p.featured && <span className="badge-accent shrink-0">Popular</span>}
+              </div>
+              <h3 className="mt-5 text-2xl font-bold tracking-tight text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>{p.label}</h3>
+              <p className="mt-1 text-sm font-semibold text-[color:var(--color-accent)]">{p.tagline}</p>
+              <p className="mt-3 text-base leading-7 text-[color:var(--color-muted)]">{p.description}</p>
+              <ul className="mt-5 space-y-2 flex-1">
+                {p.items.map(item => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-[color:var(--color-ink)]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)] shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <a href={p.href} className="mt-7 self-start rounded-full border border-[color:var(--color-accent)]/30 bg-white/70 px-5 py-2.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:bg-[color:var(--color-accent)] hover:text-white">
+                {p.cta} →
+              </a>
+            </article>
+          ))}
+        </div>
+        {/* Low cost callout */}
+        <div className="mt-8 rounded-[2rem] bg-[color:var(--color-ink)] p-8 text-white reveal md:p-10">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/50">¿Por qué Crolia?</p>
+              <p className="text-2xl font-bold leading-snug" style={{ fontFamily: "var(--font-display)" }}>
+                Tecnología de punta, accesible para cualquier negocio — sin grandes inversiones.
+              </p>
+              <p className="text-base text-white/65 max-w-2xl">
+                No hace falta ser una gran empresa para tener un agente de IA o un sistema propio. Diseñamos soluciones que se adaptan a tu presupuesto y escalan con vos.
+              </p>
+            </div>
+            <a href="#contacto" className="shrink-0 rounded-full bg-[color:var(--color-accent)] px-7 py-4 text-sm font-semibold text-white transition hover:opacity-90 whitespace-nowrap">
+              Consultar precios →
+            </a>
           </div>
         </div>
       </section>
