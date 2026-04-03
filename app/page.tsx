@@ -44,6 +44,39 @@ const pillars = [
   },
 ];
 
+const agentFeatures = [
+  {
+    icon: "🧠",
+    title: "Memoria de conversaciones",
+    description: "El agente recuerda a cada cliente. Historial completo por número, sin repetir preguntas ni perder contexto.",
+  },
+  {
+    icon: "📚",
+    title: "Base de conocimiento propia",
+    description: "Cargamos tu menú, lista de precios, FAQ o catálogo. El agente responde con información real de tu negocio.",
+  },
+  {
+    icon: "🔄",
+    title: "Actualizaciones a demanda",
+    description: "¿Cambió un precio o un servicio? Actualizamos el agente en el momento, sin tiempos de espera ni procesos complicados.",
+  },
+  {
+    icon: "📊",
+    title: "Seguimiento punta a punta",
+    description: "Desde el primer mensaje hasta la conversión — trazabilidad completa de cada conversación y su resultado.",
+  },
+  {
+    icon: "🌐",
+    title: "Multi-canal y multi-proveedor",
+    description: "WhatsApp (Meta, Whapi, Twilio), Instagram y Facebook. Un agente que opera en todos tus canales al mismo tiempo.",
+  },
+  {
+    icon: "✅",
+    title: "Probado antes de lanzar",
+    description: "Cada agente se valida con escenarios reales antes de salir a producción. Nada llega a tus clientes sin estar aprobado.",
+  },
+];
+
 const processSteps = [
   {
     step: "01",
@@ -235,6 +268,26 @@ export default function Home() {
               Consultar precios →
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* ── Agent features ── */}
+      <section id="incluye" className="section-shell py-16 md:py-24">
+        <div className="section-heading reveal">
+          <div className="eyebrow">Qué incluye cada agente</div>
+          <h2 className="section-title mt-4">No es un chatbot. Es un agente que trabaja de verdad.</h2>
+          <p className="section-copy">
+            Cada implementación incluye todo lo necesario para operar desde el día uno, con seguimiento real y capacidad de actualización permanente.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {agentFeatures.map((f, i) => (
+            <div key={f.title} className={`card-surface p-7 reveal delay-${Math.min((i % 3 + 1) * 100, 400)}`}>
+              <div className="text-3xl mb-4">{f.icon}</div>
+              <h3 className="text-lg font-bold tracking-tight text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>{f.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-[color:var(--color-muted)]">{f.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 
