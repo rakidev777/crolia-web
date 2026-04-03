@@ -18,9 +18,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Crolia | Automatización con IA para ventas y operación",
+  title: "Crolia | IA, Automatización y Desarrollo Web",
   description:
-    "Landing de Crolia para presentar agentes de IA, automatización operativa y contacto comercial por WhatsApp.",
+    "Agentes de IA, automatización de procesos, sitios web y sistemas a medida para negocios que quieren crecer. Tecnología accesible para cualquier empresa.",
+  icons: {
+    icon: "/crolia-logo.svg",
+    apple: "/crolia-logo.svg",
+  },
 };
 
 export default function RootLayout({
