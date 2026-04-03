@@ -8,7 +8,7 @@ const pillars = [
     label: "Agentes de IA",
     tagline: "Tu negocio trabaja solo, las 24 horas.",
     description: "Agentes conversacionales que venden, agendan y atienden por WhatsApp, Instagram y Facebook — con el tono y el conocimiento de tu negocio.",
-    items: ["Agente de ventas", "Agendamiento de turnos", "Seguimiento de clientes", "Cobranzas automáticas"],
+    items: ["Agente de ventas", "Agendamiento de turnos", "Seguimiento de clientes", "Cobranzas automáticas", "Productores de seguros"],
     cta: "Quiero un agente",
     featured: true,
   },
@@ -288,20 +288,6 @@ export default function Home() {
               <p className="mt-2 text-sm leading-6 text-[color:var(--color-muted)]">{f.description}</p>
             </div>
           ))}
-        </div>
-
-        {/* Insurance callout */}
-        <div className="mt-5 flex flex-col gap-4 rounded-[1.75rem] border border-[color:var(--color-accent)]/20 bg-[color:var(--color-accent-soft)]/40 p-7 reveal sm:flex-row sm:items-center">
-          <div className="text-3xl shrink-0">🛡️</div>
-          <div className="flex-1">
-            <p className="font-bold text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>Productores de seguros</p>
-            <p className="mt-1 text-sm leading-6 text-[color:var(--color-muted)]">
-              Automatizamos consultas de cobertura, renovaciones y cotizaciones con integración vía API a las principales aseguradoras — para que tu productor atienda más clientes sin perder tiempo en tareas repetitivas.
-            </p>
-          </div>
-          <a href="#contacto" className="shrink-0 rounded-full border border-[color:var(--color-accent)]/30 bg-white px-5 py-2.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:bg-[color:var(--color-accent)] hover:text-white">
-            Me interesa →
-          </a>
         </div>
       </section>
 
