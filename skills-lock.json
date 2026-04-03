@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "skills": {
+    "bootstrap": {
+      "source": "manojbajaj95/gtm-skills",
+      "sourceType": "github",
+      "computedHash": "18a59465a651b0bd1dfdc6ba64965f74da153162fae5f2cb92e08f3504a4d561"
+    },
+    "landing-page-optimization": {
+      "source": "manojbajaj95/gtm-skills",
+      "sourceType": "github",
+      "computedHash": "aeae834b5664cc5f5e9b4719358e8e390f7d71ccc0e7a1a14a8ee523d5727535"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "b1142c5e1bc7b77e8479db09dbabf671f44e1f2d4d9d3eed8cc20cc2c90aeb20"
+    }
+  }
+}
