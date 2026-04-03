@@ -71,6 +71,11 @@ const agentFeatures = [
     description: "WhatsApp (Meta, Whapi, Twilio), Instagram y Facebook. Un agente que opera en todos tus canales al mismo tiempo.",
   },
   {
+    icon: "🔌",
+    title: "Integraciones con APIs externas",
+    description: "El agente se conecta a sistemas de terceros para dar respuestas en tiempo real: stock, turnos, cotizaciones, estados de cuenta — sin que el cliente tenga que esperar.",
+  },
+  {
     icon: "✅",
     title: "Probado antes de lanzar",
     description: "Cada agente se valida con escenarios reales antes de salir a producción. Nada llega a tus clientes sin estar aprobado.",
