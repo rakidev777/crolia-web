@@ -25,9 +25,15 @@ export interface AgentStats {
 }
 
 const PLAN_LIMITS: Record<string, number> = {
-  starter: 1500,
-  growth:  5000,
+  starter: 500,
+  growth:  3000,
   pro:     999999,
+};
+
+const PLAN_PRICES_USD: Record<string, number> = {
+  starter: 80,
+  growth:  130,
+  pro:     280,
 };
 
 function getAgentsConfig(): AgentConfig[] {
@@ -105,6 +111,8 @@ export async function GET(request: NextRequest) {
   const totalCosto = results.reduce((s, a) => s + a.costo_usd_mes, 0);
   const online     = results.filter(a => a.online).length;
 
+  const mrr = results.reduce((s, a) => s + (PLAN_PRICES_USD[a.plan] ?? 0), 0);
+
   return NextResponse.json({
     agents: results,
     summary: {
@@ -112,6 +120,7 @@ export async function GET(request: NextRequest) {
       clientes_online: online,
       total_conversaciones_mes: totalConv,
       total_costo_usd_mes: Math.round(totalCosto * 10000) / 10000,
+      mrr_usd: mrr,
     },
   });
 }

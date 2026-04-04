@@ -8,6 +8,7 @@ interface Summary {
   clientes_online: number;
   total_conversaciones_mes: number;
   total_costo_usd_mes: number;
+  mrr_usd: number;
 }
 
 interface StatsResponse {
@@ -184,7 +185,7 @@ export default function AdminPanel() {
               { label: "Clientes activos", value: `${data.summary.clientes_online} / ${data.summary.total_clientes}`, sub: "online ahora" },
               { label: "Conversaciones este mes", value: data.summary.total_conversaciones_mes.toLocaleString("es-AR"), sub: "mensajes de usuarios" },
               { label: "Costo API este mes", value: `$${data.summary.total_costo_usd_mes.toFixed(3)} USD`, sub: "Claude API total" },
-              { label: "MRR estimado", value: `$${(data.summary.total_clientes * 150).toLocaleString("es-AR")} USD`, sub: "ingresos recurrentes" },
+              { label: "MRR", value: `$${data.summary.mrr_usd.toLocaleString("es-AR")} USD`, sub: "ingresos recurrentes" },
             ].map(card => (
               <div key={card.label} style={{
                 background: "white",
