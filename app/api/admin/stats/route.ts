@@ -31,9 +31,9 @@ const PLAN_LIMITS: Record<string, number> = {
 };
 
 const PLAN_PRICES_USD: Record<string, number> = {
-  starter: 80,
-  growth:  130,
-  pro:     280,
+  starter: 95,
+  growth:  135,
+  pro:     245,
 };
 
 function getAgentsConfig(): AgentConfig[] {
