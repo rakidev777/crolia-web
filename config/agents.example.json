@@ -1,0 +1,23 @@
+[
+  {
+    "id": "cliente-001",
+    "nombre": "Nombre del Cliente S.A.",
+    "plan": "starter",
+    "url": "https://tu-agente.up.railway.app",
+    "apiKey": "clave-secreta-del-agente"
+  },
+  {
+    "id": "cliente-002",
+    "nombre": "Otro Cliente SRL",
+    "plan": "growth",
+    "url": "https://otro-agente.up.railway.app",
+    "apiKey": "otra-clave-secreta"
+  },
+  {
+    "id": "cliente-003",
+    "nombre": "Cliente Pro",
+    "plan": "pro",
+    "url": "https://agente-pro.up.railway.app",
+    "apiKey": "clave-pro"
+  }
+]
