@@ -137,7 +137,7 @@ export default function Home() {
       <header className="sticky top-0 z-30 border-b border-black/6 bg-[color:var(--color-surface-soft)]/85 backdrop-blur-xl">
         <div className="section-shell flex items-center justify-between py-4">
           <a href="#inicio" className="flex items-center gap-3">
-            <img src="/crolia-logo.svg" alt="Crolia" className="h-9 w-9 rounded-full" />
+            <img src="/crolia-logo.png" alt="Crolia" className="h-9 w-9 rounded-full" />
             <span className="text-sm font-semibold tracking-[0.22em] text-[color:var(--color-ink)] uppercase" style={{ fontFamily: "var(--font-display)" }}>Crolia</span>
           </a>
           <nav aria-label="Principal" className="hidden items-center gap-7 text-sm text-[color:var(--color-muted)] md:flex">
@@ -317,7 +317,7 @@ export default function Home() {
       <section id="contacto" className="section-shell py-16 md:py-24">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[2.5rem] border border-black/7 bg-[color:var(--color-ink)] p-8 text-white md:p-12 reveal-left">
-            <img src="/crolia-logo.svg" alt="Crolia" className="h-20 w-20 rounded-full mb-6 opacity-90" />
+            <img src="/crolia-logo.png" alt="Crolia" className="h-20 w-20 rounded-full mb-6 opacity-90" />
             <div className="eyebrow !border-white/12 !bg-white/8 !text-white/70">Contacto</div>
             <h2 className="mt-6 max-w-lg text-4xl font-bold tracking-tight md:text-5xl" style={{ fontFamily: "var(--font-display)" }}>
               Empezá con un diagnóstico gratuito.
@@ -341,7 +341,7 @@ export default function Home() {
       <footer className="border-t border-black/6">
         <div className="section-shell flex flex-col gap-6 py-8 text-sm text-[color:var(--color-muted)] md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
-            <img src="/crolia-logo.svg" alt="Crolia" className="h-9 w-9 rounded-full opacity-80" />
+            <img src="/crolia-logo.png" alt="Crolia" className="h-9 w-9 rounded-full opacity-80" />
             <span className="font-semibold text-[color:var(--color-ink)]">Crolia</span>
             <span>— tecnología accesible para negocios que quieren avanzar.</span>
           </div>
