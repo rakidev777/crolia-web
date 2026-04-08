@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import type { AgentStats } from "../api/admin/stats/route";
+import type { DemoLead } from "../api/demo/lead/route";
 
 interface Summary {
   total_clientes: number;
@@ -76,10 +77,20 @@ function fmtRelative(iso: string | null) {
   return `Hace ${Math.floor(hs / 24)} días`;
 }
 
+const AGENT_LABELS: Record<string, string> = {
+  peluqueria: "💈 Peluquería",
+  ventas:     "🛒 Ventas",
+  seguros:    "🛡️ Seguros",
+  clinica:    "🏥 Clínica",
+};
+
 export default function AdminPanel() {
   const [data, setData] = useState<StatsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  const [tab, setTab] = useState<"agentes" | "leads">("agentes");
+  const [leads, setLeads] = useState<DemoLead[]>([]);
+  const [leadsLoading, setLeadsLoading] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -98,11 +109,30 @@ export default function AdminPanel() {
     }
   }, []);
 
+  const loadLeads = useCallback(async () => {
+    setLeadsLoading(true);
+    try {
+      const res = await fetch("/api/admin/demo-leads");
+      if (res.ok) {
+        const json = await res.json();
+        setLeads(json.leads ?? []);
+      }
+    } catch {
+      // silenciar
+    } finally {
+      setLeadsLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     load();
-    const interval = setInterval(load, 30000); // refresh cada 30s
+    const interval = setInterval(load, 30000);
     return () => clearInterval(interval);
   }, [load]);
+
+  useEffect(() => {
+    if (tab === "leads") loadLeads();
+  }, [tab, loadLeads]);
 
   async function handleLogout() {
     await fetch("/api/admin/logout", { method: "POST" });
@@ -135,6 +165,27 @@ export default function AdminPanel() {
           }}>Crolia</span>
           <span style={{ color: "rgba(255,255,255,0.15)", fontSize: "0.8rem" }}>/</span>
           <span style={{ fontSize: "0.85rem", fontWeight: 600, color: "white" }}>Panel Admin</span>
+          <div style={{ display: "flex", gap: "0.25rem", marginLeft: "1rem" }}>
+            {(["agentes", "leads"] as const).map(t => (
+              <button
+                key={t}
+                onClick={() => setTab(t)}
+                style={{
+                  background: tab === t ? "rgba(255,255,255,0.12)" : "transparent",
+                  border: tab === t ? "1px solid rgba(255,255,255,0.15)" : "1px solid transparent",
+                  borderRadius: "0.5rem",
+                  padding: "0.3rem 0.85rem",
+                  color: tab === t ? "white" : "rgba(255,255,255,0.45)",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  textTransform: "capitalize",
+                }}
+              >
+                {t === "agentes" ? "🤖 Agentes" : "🎯 Leads Demo"}
+              </button>
+            ))}
+          </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}>
           {lastUpdate && (
@@ -173,28 +224,107 @@ export default function AdminPanel() {
 
       <main style={{ maxWidth: "1200px", margin: "0 auto", padding: "2rem 1.5rem" }}>
 
-        {loading && (
-          <div style={{ textAlign: "center", padding: "4rem", color: "#6d6057" }}>
-            Cargando métricas...
+        {/* ── TAB: LEADS DEMO ── */}
+        {tab === "leads" && (
+          <div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
+              <div>
+                <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "#221a14", margin: 0 }}>Leads del Demo Online</h2>
+                <p style={{ fontSize: "0.78rem", color: "#6d6057", marginTop: "0.25rem" }}>{leads.length} {leads.length === 1 ? "persona probó" : "personas probaron"} el demo</p>
+              </div>
+              <button
+                onClick={loadLeads}
+                style={{ background: "white", border: "1px solid rgba(34,26,20,0.1)", borderRadius: "0.5rem", padding: "0.4rem 0.9rem", fontSize: "0.75rem", cursor: "pointer", color: "#6d6057" }}
+              >
+                ↻ Refrescar
+              </button>
+            </div>
+
+            {leadsLoading && (
+              <div style={{ textAlign: "center", padding: "3rem", color: "#6d6057" }}>Cargando leads...</div>
+            )}
+
+            {!leadsLoading && leads.length === 0 && (
+              <div style={{ textAlign: "center", padding: "4rem", background: "white", borderRadius: "1.5rem", border: "1px solid rgba(34,26,20,0.07)", color: "#6d6057" }}>
+                <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>🎯</div>
+                <p style={{ fontWeight: 600, color: "#221a14" }}>Aún no hay leads</p>
+                <p style={{ fontSize: "0.85rem", marginTop: "0.5rem" }}>Cuando alguien complete el form del demo, van a aparecer acá.</p>
+                <a href="/demo" target="_blank" style={{ display: "inline-block", marginTop: "1rem", fontSize: "0.82rem", color: "#8a6448" }}>Ver el demo →</a>
+              </div>
+            )}
+
+            {!leadsLoading && leads.length > 0 && (
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                {leads.map(lead => {
+                  const fecha = new Date(lead.createdAt).toLocaleString("es-AR", {
+                    day: "2-digit", month: "2-digit", year: "numeric",
+                    hour: "2-digit", minute: "2-digit",
+                  });
+                  return (
+                    <div key={lead.id} style={{
+                      background: "white",
+                      border: "1px solid rgba(34,26,20,0.07)",
+                      borderRadius: "1.25rem",
+                      padding: "1.25rem 1.5rem",
+                      boxShadow: "0 4px 24px rgba(34,26,20,0.05)",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1.5rem",
+                      flexWrap: "wrap",
+                    }}>
+                      <div style={{ flex: 1, minWidth: 200 }}>
+                        <div style={{ fontWeight: 700, fontSize: "0.95rem", color: "#221a14", fontFamily: "'Space Grotesk', sans-serif" }}>{lead.nombre}</div>
+                        <div style={{ fontSize: "0.78rem", color: "#6d6057", marginTop: "0.2rem" }}>{AGENT_LABELS[lead.agentType] ?? lead.agentType} · {fecha}</div>
+                      </div>
+                      <div style={{ fontSize: "0.82rem", color: "#6d6057" }}>{lead.email}</div>
+                      <div style={{ fontSize: "0.82rem", color: "#6d6057" }}>{lead.telefono}</div>
+                      <div style={{ display: "flex", gap: "0.5rem" }}>
+                        <a
+                          href={`https://wa.me/${lead.telefono.replace(/\D/g, "")}?text=Hola%20${encodeURIComponent(lead.nombre)}%2C%20soy%20Fran%20de%20Crolia.%20Vi%20que%20probaste%20nuestro%20demo%20de%20agentes%20IA%20%F0%9F%A4%96%20%C2%BFTe%20interesa%20implementarlo%20en%20tu%20negocio%3F`}
+                          target="_blank" rel="noopener noreferrer"
+                          style={{ background: "#25d366", color: "white", borderRadius: "0.5rem", padding: "0.4rem 0.85rem", fontSize: "0.75rem", fontWeight: 600, textDecoration: "none" }}
+                        >
+                          💬 WA
+                        </a>
+                        <a
+                          href={`mailto:${lead.email}?subject=Tu%20demo%20de%20Crolia&body=Hola%20${encodeURIComponent(lead.nombre)}%2C`}
+                          style={{ background: "#221a14", color: "white", borderRadius: "0.5rem", padding: "0.4rem 0.85rem", fontSize: "0.75rem", fontWeight: 600, textDecoration: "none" }}
+                        >
+                          ✉️ Email
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         )}
 
-        {data?.warning && (
-          <div style={{
-            background: "rgba(245,158,11,0.1)",
-            border: "1px solid rgba(245,158,11,0.3)",
-            borderRadius: "1rem",
-            padding: "1rem 1.5rem",
-            marginBottom: "1.5rem",
-            fontSize: "0.85rem",
-            color: "#92400e",
-          }}>
-            ⚠️ {data.warning} — Configurá <code>AGENTS_CONFIG</code> en las variables de entorno.
-          </div>
-        )}
+        {tab === "agentes" && (
+          <>
+            {loading && (
+              <div style={{ textAlign: "center", padding: "4rem", color: "#6d6057" }}>
+                Cargando métricas...
+              </div>
+            )}
 
-        {/* Summary cards */}
-        {data?.summary && (
+            {data?.warning && (
+              <div style={{
+                background: "rgba(245,158,11,0.1)",
+                border: "1px solid rgba(245,158,11,0.3)",
+                borderRadius: "1rem",
+                padding: "1rem 1.5rem",
+                marginBottom: "1.5rem",
+                fontSize: "0.85rem",
+                color: "#92400e",
+              }}>
+                ⚠️ {data.warning} — Configurá <code>AGENTS_CONFIG</code> en las variables de entorno.
+              </div>
+            )}
+
+            {/* Summary cards */}
+            {data?.summary && (
           <div style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
@@ -348,19 +478,21 @@ export default function AdminPanel() {
           })}
         </div>
 
-        {data?.agents.length === 0 && !loading && (
-          <div style={{
-            textAlign: "center",
-            padding: "4rem",
-            background: "white",
-            borderRadius: "1.5rem",
-            border: "1px solid rgba(34,26,20,0.07)",
-            color: "#6d6057",
-          }}>
-            <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>🤖</div>
-            <p style={{ fontWeight: 600, color: "#221a14" }}>No hay agentes configurados</p>
-            <p style={{ fontSize: "0.85rem", marginTop: "0.5rem" }}>Configurá <code>AGENTS_CONFIG</code> en las variables de entorno para ver los clientes acá.</p>
-          </div>
+            {data?.agents.length === 0 && !loading && (
+              <div style={{
+                textAlign: "center",
+                padding: "4rem",
+                background: "white",
+                borderRadius: "1.5rem",
+                border: "1px solid rgba(34,26,20,0.07)",
+                color: "#6d6057",
+              }}>
+                <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>🤖</div>
+                <p style={{ fontWeight: 600, color: "#221a14" }}>No hay agentes configurados</p>
+                <p style={{ fontSize: "0.85rem", marginTop: "0.5rem" }}>Configurá <code>AGENTS_CONFIG</code> en las variables de entorno para ver los clientes acá.</p>
+              </div>
+            )}
+          </>
         )}
       </main>
     </div>
