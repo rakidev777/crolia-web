@@ -48,11 +48,7 @@ async function appendToSheet(lead: DemoLead) {
 
 async function sendNotificationEmail(lead: DemoLead) {
   const key = process.env.RESEND_API_KEY;
-  console.log("[EMAIL] key presente:", !!key, "| primeros chars:", key?.slice(0, 6));
-  if (!key || key.includes("REEMPLAZAR")) {
-    console.log("[EMAIL] retornando por key inválida");
-    return;
-  }
+  if (!key || key.includes("REEMPLAZAR")) return;
 
   const resend = new Resend(key);
   const agentLabel = AGENT_LABELS[lead.agentType] ?? lead.agentType;
@@ -62,8 +58,8 @@ async function sendNotificationEmail(lead: DemoLead) {
   });
 
   await resend.emails.send({
-    from: "Crolia Demo <onboarding@resend.dev>",
-    to: "rakidev777@gmail.com",
+    from: "Crolia <noreply@crolia.com.ar>",
+    to: ["contacto@crolia.com.ar"],
     subject: `🎯 Nuevo lead del demo — ${lead.nombre}`,
     html: `
       <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #f6f1ea; border-radius: 16px; overflow: hidden;">
