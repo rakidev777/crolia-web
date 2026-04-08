@@ -12,6 +12,7 @@ const AGENTS = [
     bg: "rgba(138, 100, 72, 0.08)",
     border: "rgba(138, 100, 72, 0.25)",
     welcome: "¡Hola! Soy Bruno de Barbería El Maestro 💈 ¿En qué te puedo ayudar hoy?",
+    context: "Negocio: Barbería El Maestro · Agente: Bruno · Servicios: corte ($7.000), corte+barba ($8.500), barba ($3.500), coloración ($12.000) · Turnos disponibles mañana",
   },
   {
     id: "ventas",
@@ -22,6 +23,7 @@ const AGENTS = [
     bg: "rgba(79, 70, 229, 0.08)",
     border: "rgba(79, 70, 229, 0.25)",
     welcome: "¡Hola! Soy Nova de TechStore BA 🛒 ¿Qué producto estás buscando?",
+    context: "Negocio: TechStore BA (electrónica) · Agente: Nova · Productos: iPhone, MacBook, auriculares Sony, iPad, Apple Watch, Samsung · Cuotas sin interés disponibles",
   },
   {
     id: "seguros",
@@ -32,6 +34,7 @@ const AGENTS = [
     bg: "rgba(5, 150, 105, 0.08)",
     border: "rgba(5, 150, 105, 0.25)",
     welcome: "¡Hola! Soy Valentina de Seguros Vidal 🛡️ ¿Qué tipo de seguro necesitás cotizar?",
+    context: "Negocio: Seguros Vidal · Agente: Valentina · Productos: auto, hogar, vida, comercios, mala praxis · Cotiza al instante pidiendo datos básicos",
   },
   {
     id: "clinica",
@@ -42,6 +45,7 @@ const AGENTS = [
     bg: "rgba(2, 132, 199, 0.08)",
     border: "rgba(2, 132, 199, 0.25)",
     welcome: "¡Hola! Soy Sofía de Clínica Integral Salud 🏥 ¿Con qué especialidad querés sacar turno?",
+    context: "Negocio: Clínica Integral Salud · Agente: Sofía · Especialidades: clínica, cardiología, ginecología, pediatría, nutrición, psicología, dermatología · Obras sociales: OSDE, Swiss Medical, Galeno, Medicus, IOMA, Pami",
   },
 ];
 
@@ -206,7 +210,19 @@ export default function DemoPage() {
                   <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>{agent.icon}</div>
                   <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem", fontWeight: 700, color: "var(--color-ink)", marginBottom: "0.4rem" }}>{agent.name}</h3>
                   <p style={{ fontSize: "0.85rem", color: "var(--color-muted)", lineHeight: 1.6 }}>{agent.tagline}</p>
-                  <div style={{ marginTop: "1.25rem", display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "0.82rem", fontWeight: 600, color: agent.color }}>
+                  <div style={{
+                    marginTop: "1rem",
+                    padding: "0.6rem 0.85rem",
+                    borderRadius: "0.75rem",
+                    background: "rgba(0,0,0,0.04)",
+                    fontSize: "0.72rem",
+                    color: "var(--color-muted)",
+                    lineHeight: 1.6,
+                  }}>
+                    <span style={{ fontWeight: 600, color: agent.color }}>Contexto cargado: </span>
+                    {agent.context}
+                  </div>
+                  <div style={{ marginTop: "1rem", display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "0.82rem", fontWeight: 600, color: agent.color }}>
                     Probar demo →
                   </div>
                 </button>
@@ -333,6 +349,20 @@ export default function DemoPage() {
                   </p>
                 </div>
                 <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.4)", flexShrink: 0 }}>Demo Crolia</div>
+              </div>
+
+              {/* Context banner */}
+              <div style={{
+                padding: "0.55rem 1.1rem",
+                background: "rgba(0,0,0,0.03)",
+                borderBottom: "1px solid rgba(0,0,0,0.06)",
+                fontSize: "0.7rem",
+                color: "var(--color-muted)",
+                lineHeight: 1.5,
+                flexShrink: 0,
+              }}>
+                <span style={{ fontWeight: 600, color: "var(--color-ink)" }}>Contexto cargado: </span>
+                {selectedAgent.context}
               </div>
 
               {/* Messages */}
