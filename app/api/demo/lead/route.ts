@@ -108,8 +108,8 @@ export async function POST(req: NextRequest) {
   };
 
   await Promise.all([
-    appendToSheet(lead).catch(() => {}),
-    sendNotificationEmail(lead).catch(() => {}),
+    appendToSheet(lead).catch((e) => console.error("[SHEET ERROR]", e?.message ?? e)),
+    sendNotificationEmail(lead).catch((e) => console.error("[EMAIL ERROR]", e?.message ?? e)),
   ]);
 
   return NextResponse.json({ ok: true });
