@@ -63,7 +63,7 @@ async function sendNotificationEmail(lead: DemoLead) {
 
   await resend.emails.send({
     from: "Crolia Demo <onboarding@resend.dev>",
-    to: "contacto@crolia.com.ar",
+    to: "rakidev777@gmail.com",
     subject: `🎯 Nuevo lead del demo — ${lead.nombre}`,
     html: `
       <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 480px; margin: 0 auto; background: #f6f1ea; border-radius: 16px; overflow: hidden;">
