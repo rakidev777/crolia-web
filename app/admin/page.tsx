@@ -18,15 +18,35 @@ interface StatsResponse {
 }
 
 const PLAN_LABELS: Record<string, string> = {
-  starter: "Starter",
-  growth: "Growth",
-  pro: "Pro",
+  esencial: "Esencial",
+  "esencial+": "Esencial+",
+  profesional: "Profesional",
+  escala: "Escala",
+  // legacy
+  starter: "Esencial",
+  growth: "Esencial+",
+  pro: "Profesional",
 };
 
 const PLAN_COLORS: Record<string, string> = {
+  esencial: "#6d6057",
+  "esencial+": "#8a6448",
+  profesional: "#221a14",
+  escala: "#4f46e5",
   starter: "#6d6057",
   growth: "#8a6448",
   pro: "#221a14",
+};
+
+// Features disponibles por plan
+const PLAN_FEATURES: Record<string, { audio: boolean; imagenes: boolean; crm: boolean }> = {
+  esencial:     { audio: false, imagenes: false, crm: false },
+  "esencial+":  { audio: true,  imagenes: true,  crm: false },
+  profesional:  { audio: true,  imagenes: true,  crm: false },
+  escala:       { audio: true,  imagenes: true,  crm: true  },
+  starter:      { audio: false, imagenes: false, crm: false },
+  growth:       { audio: true,  imagenes: true,  crm: false },
+  pro:          { audio: true,  imagenes: true,  crm: true  },
 };
 
 function pct(conv: number, limit: number) {
@@ -282,6 +302,24 @@ export default function AdminPanel() {
                     }} />
                   </div>
                 </div>
+
+                {/* Feature badges */}
+                {(() => {
+                  const f = PLAN_FEATURES[agent.plan] ?? { audio: false, imagenes: false, crm: false };
+                  return (
+                    <div style={{ display: "flex", gap: "0.5rem", marginTop: "1rem", flexWrap: "wrap" }}>
+                      <span style={{ fontSize: "0.7rem", padding: "0.2rem 0.6rem", borderRadius: "999px", background: f.audio ? "rgba(16,185,129,0.1)" : "rgba(34,26,20,0.05)", color: f.audio ? "#059669" : "#9ca3af", fontWeight: 600 }}>
+                        🎤 Audio {f.audio ? "✓" : "—"}
+                      </span>
+                      <span style={{ fontSize: "0.7rem", padding: "0.2rem 0.6rem", borderRadius: "999px", background: f.imagenes ? "rgba(16,185,129,0.1)" : "rgba(34,26,20,0.05)", color: f.imagenes ? "#059669" : "#9ca3af", fontWeight: 600 }}>
+                        📷 Imágenes {f.imagenes ? "✓" : "—"}
+                      </span>
+                      <span style={{ fontSize: "0.7rem", padding: "0.2rem 0.6rem", borderRadius: "999px", background: f.crm ? "rgba(16,185,129,0.1)" : "rgba(34,26,20,0.05)", color: f.crm ? "#059669" : "#9ca3af", fontWeight: 600 }}>
+                        📋 CRM {f.crm ? "✓" : "—"}
+                      </span>
+                    </div>
+                  );
+                })()}
 
                 {/* Stats row */}
                 <div style={{

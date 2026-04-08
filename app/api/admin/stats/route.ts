@@ -25,15 +25,25 @@ export interface AgentStats {
 }
 
 const PLAN_LIMITS: Record<string, number> = {
+  esencial:    500,
+  "esencial+": 3000,
+  profesional: 10000,
+  escala:      999999,
+  // legacy
   starter: 500,
   growth:  3000,
-  pro:     999999,
+  pro:     10000,
 };
 
 const PLAN_PRICES_USD: Record<string, number> = {
-  starter: 95,
-  growth:  135,
-  pro:     245,
+  esencial:    90,
+  "esencial+": 150,
+  profesional: 190,
+  escala:      320,
+  // legacy
+  starter: 90,
+  growth:  150,
+  pro:     190,
 };
 
 function getAgentsConfig(): AgentConfig[] {

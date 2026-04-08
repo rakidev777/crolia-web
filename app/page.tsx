@@ -108,9 +108,11 @@ const stats = [
 
 const chatMessages = [
   { from: "client", text: "Hola! cuánto cuesta el corte + barba?" },
-  { from: "agent", text: "Hola Martín 👋 El corte + barba son $8.500. ¿Reservamos turno directo?" },
-  { from: "client", text: "Sí dale, para mañana si hay lugar" },
-  { from: "agent", text: "✅ Turno confirmado — Mañana 11:00am. Te mando recordatorio 1h antes 🙌", success: true },
+  { from: "agent", text: "Hola Martín 👋 El corte + barba son $8.500. ¿Cuándo te vendría bien venir?" },
+  { from: "client", text: "Para mañana si hay lugar" },
+  { from: "agent", text: "Mañana tengo libre: 10:00, 11:00 o 16:30 hs. ¿Cuál te queda mejor?" },
+  { from: "client", text: "Las 11, perfecto" },
+  { from: "agent", text: "✅ Listo Martín — Mañana 11:00am con Diego. Te mando recordatorio 1h antes 🙌", success: true },
 ];
 
 export default function Home() {
@@ -176,9 +178,9 @@ export default function Home() {
           </div>
           <div className="grid gap-4 grid-cols-3 reveal delay-400">
             {stats.map((stat) => (
-              <div key={stat.label} className="card-surface p-5">
-                <div className="text-2xl font-bold text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>{stat.value}</div>
-                <p className="mt-1 text-xs leading-5 text-[color:var(--color-muted)]">{stat.label}</p>
+              <div key={stat.label} className="card-surface p-4 sm:p-5 min-w-0">
+                <div className="text-lg sm:text-2xl font-bold leading-tight text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>{stat.value}</div>
+                <p className="mt-1 text-xs leading-4 text-[color:var(--color-muted)]">{stat.label}</p>
               </div>
             ))}
           </div>
