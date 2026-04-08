@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import fs from "fs";
-import path from "path";
-
-const LEADS_FILE = path.join(process.cwd(), "data", "demo-leads.json");
+import { google } from "googleapis";
 
 const AGENT_LABELS: Record<string, string> = {
   peluqueria: "💈 Barbería / Peluquería",
@@ -21,18 +18,30 @@ export interface DemoLead {
   createdAt: string;
 }
 
-function readLeads(): DemoLead[] {
-  try {
-    if (!fs.existsSync(LEADS_FILE)) return [];
-    return JSON.parse(fs.readFileSync(LEADS_FILE, "utf-8"));
-  } catch {
-    return [];
-  }
-}
+async function appendToSheet(lead: DemoLead) {
+  const credsJson = process.env.GOOGLE_CREDENTIALS_JSON;
+  const spreadsheetId = process.env.DEMO_LEADS_SPREADSHEET_ID;
+  if (!credsJson || !spreadsheetId || spreadsheetId.includes("REEMPLAZAR")) return;
 
-function saveLeads(leads: DemoLead[]) {
-  fs.mkdirSync(path.dirname(LEADS_FILE), { recursive: true });
-  fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2));
+  const auth = new google.auth.GoogleAuth({
+    credentials: JSON.parse(credsJson),
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  const sheets = google.sheets({ version: "v4", auth });
+  const fecha = new Date(lead.createdAt).toLocaleString("es-AR", {
+    day: "2-digit", month: "2-digit", year: "numeric",
+    hour: "2-digit", minute: "2-digit",
+  });
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId,
+    range: "Leads!A:F",
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[lead.nombre, lead.email, lead.telefono, AGENT_LABELS[lead.agentType] ?? lead.agentType, fecha, lead.id]],
+    },
+  });
 }
 
 async function sendNotificationEmail(lead: DemoLead) {
@@ -96,12 +105,11 @@ export async function POST(req: NextRequest) {
     createdAt: new Date().toISOString(),
   };
 
-  const leads = readLeads();
-  leads.push(lead);
-  saveLeads(leads);
-
-  // Email en background, no bloquea la respuesta
-  sendNotificationEmail(lead).catch(() => {});
+  // Ambas operaciones en background, no bloquean la respuesta
+  Promise.all([
+    appendToSheet(lead).catch(() => {}),
+    sendNotificationEmail(lead).catch(() => {}),
+  ]);
 
   return NextResponse.json({ ok: true });
 }
