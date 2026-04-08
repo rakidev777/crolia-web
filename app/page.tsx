@@ -173,8 +173,8 @@ export default function Home() {
             <a href="#contacto" className="rounded-full bg-[color:var(--color-ink)] px-7 py-4 text-center text-sm font-medium text-white transition hover:bg-[color:var(--color-accent)]">
               Agendar diagnóstico gratuito
             </a>
-            <a href="#que-hacemos" className="rounded-full border border-black/10 px-7 py-4 text-center text-sm font-medium text-[color:var(--color-ink)] transition hover:border-black/20 hover:bg-white/70">
-              Ver soluciones
+            <a href="/demo" className="rounded-full border border-[color:var(--color-accent)]/40 bg-[color:var(--color-accent)]/8 px-7 py-4 text-center text-sm font-semibold text-[color:var(--color-accent)] transition hover:bg-[color:var(--color-accent)] hover:text-white">
+              Probar demo en vivo →
             </a>
           </div>
           <div className="grid gap-4 grid-cols-3 reveal delay-400">
@@ -224,6 +224,18 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* ── Demo banner ── */}
+      <section className="section-shell py-6 md:py-8">
+        <a href="/demo" className="demo-banner reveal">
+          <div className="demo-banner-pulse" aria-hidden="true" />
+          <span className="demo-banner-dot" />
+          <span className="demo-banner-text">
+            <strong>Demo en vivo</strong> — Probá ahora cómo atiende un agente de IA real. Peluquería, ventas, seguros o clínica. Sin registro previo.
+          </span>
+          <span className="demo-banner-cta">Empezar →</span>
+        </a>
       </section>
 
       {/* ── What we do ── */}
