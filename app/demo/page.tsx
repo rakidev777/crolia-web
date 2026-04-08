@@ -242,7 +242,7 @@ export default function DemoPage() {
                     color: "var(--color-muted)",
                     lineHeight: 1.6,
                   }}>
-                    <span style={{ fontWeight: 600, color: agent.color }}>Contexto cargado: </span>
+                    <span style={{ fontWeight: 600, color: agent.color }}>Información del negocio:</span>
                     {agent.context}
                   </div>
                   <div style={{ marginTop: "1rem", display: "inline-flex", alignItems: "center", gap: "0.4rem", fontSize: "0.82rem", fontWeight: 600, color: agent.color }}>
@@ -384,7 +384,7 @@ export default function DemoPage() {
                 lineHeight: 1.5,
                 flexShrink: 0,
               }}>
-                <span style={{ fontWeight: 600, color: "var(--color-ink)" }}>Contexto cargado: </span>
+                <span style={{ fontWeight: 600, color: "var(--color-ink)" }}>Información del negocio:</span>
                 {selectedAgent.context}
               </div>
 
