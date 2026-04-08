@@ -67,8 +67,8 @@ const AGENTS = [
     color: "#0284c7",
     bg: "rgba(2, 132, 199, 0.08)",
     border: "rgba(2, 132, 199, 0.25)",
-    welcome: "¡Hola! Soy Sofía de Clínica Integral Salud 🏥 ¿Con qué especialidad querés sacar turno?",
-    context: "Negocio: Clínica Integral Salud · Agente: Sofía · Especialidades: clínica, cardiología, ginecología, pediatría, nutrición, psicología, dermatología · Obras sociales: OSDE, Swiss Medical, Galeno, Medicus, IOMA, Pami",
+    welcome: "¡Hola! Soy Mika de Clínica Integral Salud 🏥 ¿Con qué especialidad querés sacar turno?",
+    context: "Negocio: Clínica Integral Salud · Agente: Mika · Especialidades: clínica, cardiología, ginecología, pediatría, nutrición, psicología, dermatología · Obras sociales: OSDE, Swiss Medical, Galeno, Medicus, IOMA, Pami",
   },
 ];
 
