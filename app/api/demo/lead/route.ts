@@ -3,10 +3,12 @@ import { Resend } from "resend";
 import { google } from "googleapis";
 
 const AGENT_LABELS: Record<string, string> = {
-  peluqueria: "💈 Barbería / Peluquería",
-  ventas:     "🛒 Ventas de productos",
-  seguros:    "🛡️ Productor de seguros",
-  clinica:    "🏥 Clínica / Consultorio",
+  peluqueria:  "💈 Barbería / Peluquería",
+  ventas:      "🛒 Ventas de productos",
+  seguros:     "🛡️ Productor de seguros",
+  clinica:     "🏥 Clínica / Consultorio",
+  restaurante: "🍽️ Restaurante",
+  gimnasio:    "🏋️ Gimnasio / Fitness",
 };
 
 export interface DemoLead {

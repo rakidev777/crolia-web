@@ -78,10 +78,12 @@ function fmtRelative(iso: string | null) {
 }
 
 const AGENT_LABELS: Record<string, string> = {
-  peluqueria: "💈 Peluquería",
-  ventas:     "🛒 Ventas",
-  seguros:    "🛡️ Seguros",
-  clinica:    "🏥 Clínica",
+  peluqueria:  "💈 Peluquería",
+  ventas:      "🛒 Ventas",
+  seguros:     "🛡️ Seguros",
+  clinica:     "🏥 Clínica",
+  restaurante: "🍽️ Restaurante",
+  gimnasio:    "🏋️ Gimnasio",
 };
 
 export default function AdminPanel() {
