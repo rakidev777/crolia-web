@@ -107,8 +107,7 @@ export async function POST(req: NextRequest) {
     createdAt: new Date().toISOString(),
   };
 
-  // Ambas operaciones en background, no bloquean la respuesta
-  Promise.all([
+  await Promise.all([
     appendToSheet(lead).catch(() => {}),
     sendNotificationEmail(lead).catch(() => {}),
   ]);
