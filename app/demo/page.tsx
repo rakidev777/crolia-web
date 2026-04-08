@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 
 const AGENTS = [
   {
@@ -34,7 +35,7 @@ const AGENTS = [
     bg: "rgba(5, 150, 105, 0.08)",
     border: "rgba(5, 150, 105, 0.25)",
     welcome: "¡Hola! Soy Valentina de Seguros Vidal 🛡️ ¿Qué tipo de seguro necesitás cotizar?",
-    context: "Negocio: Seguros Vidal · Agente: Valentina · Productos: auto, hogar, vida, comercios, mala praxis · Cotiza al instante pidiendo datos básicos",
+    context: "Negocio: Seguros Vidal · Agente: Valentina · Nuevos clientes: cotización de auto, hogar, vida, comercios · Clientes existentes: consulta de póliza, denuncia de siniestro, renovación y modificaciones",
   },
   {
     id: "clinica",
@@ -382,9 +383,18 @@ export default function DemoPage() {
                     borderBottomLeftRadius: msg.role === "assistant" ? "0.35rem" : "1.25rem",
                     boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
                   }}>
-                    {msg.content || (
-                      <span style={{ opacity: 0.4 }}>...</span>
-                    )}
+                    {msg.content
+                    ? <ReactMarkdown
+                        components={{
+                          p: ({ children }) => <p style={{ margin: "0 0 0.4em" }}>{children}</p>,
+                          strong: ({ children }) => <strong style={{ fontWeight: 700 }}>{children}</strong>,
+                          ol: ({ children }) => <ol style={{ margin: "0.4em 0", paddingLeft: "1.2em" }}>{children}</ol>,
+                          ul: ({ children }) => <ul style={{ margin: "0.4em 0", paddingLeft: "1.2em" }}>{children}</ul>,
+                          li: ({ children }) => <li style={{ marginBottom: "0.25em" }}>{children}</li>,
+                        }}
+                      >{msg.content}</ReactMarkdown>
+                    : <span style={{ opacity: 0.4 }}>...</span>
+                  }
                   </div>
                 ))}
 
