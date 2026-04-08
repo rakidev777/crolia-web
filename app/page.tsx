@@ -145,6 +145,7 @@ export default function Home() {
           <nav aria-label="Principal" className="hidden items-center gap-7 text-sm text-[color:var(--color-muted)] md:flex">
             <a href="#que-hacemos" className="transition hover:text-[color:var(--color-ink)]">Servicios</a>
             <a href="#proceso" className="transition hover:text-[color:var(--color-ink)]">Proceso</a>
+            <a href="/demo" className="font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-ink)]">Demo IA</a>
             <a href="#contacto" className="transition hover:text-[color:var(--color-ink)]">Contacto</a>
           </nav>
           <a
@@ -350,6 +351,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-6">
             <a href="#que-hacemos" className="transition hover:text-[color:var(--color-ink)]">Servicios</a>
             <a href="#proceso" className="transition hover:text-[color:var(--color-ink)]">Proceso</a>
+            <a href="/demo" className="transition hover:text-[color:var(--color-ink)]">Demo IA</a>
             <a href="#contacto" className="transition hover:text-[color:var(--color-ink)]">Contacto</a>
           </div>
         </div>
