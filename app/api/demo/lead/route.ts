@@ -48,7 +48,11 @@ async function appendToSheet(lead: DemoLead) {
 
 async function sendNotificationEmail(lead: DemoLead) {
   const key = process.env.RESEND_API_KEY;
-  if (!key || key.includes("REEMPLAZAR")) return;
+  console.log("[EMAIL] key presente:", !!key, "| primeros chars:", key?.slice(0, 6));
+  if (!key || key.includes("REEMPLAZAR")) {
+    console.log("[EMAIL] retornando por key inválida");
+    return;
+  }
 
   const resend = new Resend(key);
   const agentLabel = AGENT_LABELS[lead.agentType] ?? lead.agentType;
