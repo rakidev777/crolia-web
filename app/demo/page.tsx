@@ -184,7 +184,7 @@ export default function DemoPage() {
             <span style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-ink)", fontFamily: "var(--font-display)" }}>Crolia</span>
           </a>
           <a
-            href="https://wa.me/5491168556257?text=Hola%20Crolia%2C%20quiero%20info%20sobre%20automatizaci%C3%B3n%20con%20IA"
+            href="https://wa.me/5491173729899?text=Hola%20Crolia%2C%20quiero%20info%20sobre%20automatizaci%C3%B3n%20con%20IA"
             target="_blank" rel="noopener noreferrer"
             style={{
               background: "var(--color-ink)", color: "white",
@@ -495,7 +495,7 @@ export default function DemoPage() {
                 Lo implementamos en días. Sin contrato largo ni grandes inversiones.
               </p>
               <a
-                href="https://wa.me/5491168556257?text=Hola%20Crolia%2C%20probé%20el%20demo%20y%20me%20interesa%20implementarlo%20en%20mi%20negocio"
+                href="https://wa.me/5491173729899?text=Hola%20Crolia%2C%20probé%20el%20demo%20y%20me%20interesa%20implementarlo%20en%20mi%20negocio"
                 target="_blank" rel="noopener noreferrer"
                 style={{
                   display: "inline-flex", alignItems: "center", gap: "0.5rem",

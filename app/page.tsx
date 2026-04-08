@@ -123,7 +123,7 @@ export default function Home() {
 
       {/* Floating WhatsApp */}
       <a
-        href="https://wa.me/5491168556257?text=Hola%20Crolia%2C%20quiero%20info%20sobre%20automatizaci%C3%B3n%20con%20IA"
+        href="https://wa.me/5491173729899?text=Hola%20Crolia%2C%20quiero%20info%20sobre%20automatizaci%C3%B3n%20con%20IA"
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-fab"
@@ -149,7 +149,7 @@ export default function Home() {
             <a href="#contacto" className="transition hover:text-[color:var(--color-ink)]">Contacto</a>
           </nav>
           <a
-            href="https://wa.me/5491168556257?text=Hola%20Crolia%2C%20quiero%20info%20sobre%20automatizaci%C3%B3n%20con%20IA"
+            href="https://wa.me/5491173729899?text=Hola%20Crolia%2C%20quiero%20info%20sobre%20automatizaci%C3%B3n%20con%20IA"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full border border-black/10 bg-[color:var(--color-ink)] px-5 py-3 text-sm font-medium text-white transition hover:bg-[color:var(--color-accent)]"
@@ -341,7 +341,7 @@ export default function Home() {
               Contanos cómo funciona tu negocio y en menos de 24 horas te decimos qué solución te conviene y qué resultado podés esperar.
             </p>
             <div className="mt-10 space-y-3 text-sm text-white/60">
-              <p>WhatsApp: <a href="https://wa.me/5491168556257" target="_blank" rel="noopener noreferrer" className="text-white/90 underline underline-offset-2">+54 9 11 6855-6257</a></p>
+              <p>WhatsApp: <a href="https://wa.me/5491173729899" target="_blank" rel="noopener noreferrer" className="text-white/90 underline underline-offset-2">+54 9 11 7372-9899</a></p>
               <p>Email: <a href="mailto:contacto@crolia.com.ar" className="text-white/90 underline underline-offset-2">contacto@crolia.com.ar</a></p>
               <p>Respuesta dentro del mismo día hábil.</p>
             </div>
