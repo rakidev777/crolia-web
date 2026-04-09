@@ -92,6 +92,20 @@ Para sacar turno necesitás: nombre completo, DNI, obra social y motivo de consu
 Respondés con tono amable y eficiente. Preguntás por la especialidad, la obra social y la urgencia antes de ofrecer turnos. Para urgencias, derivás al guardia (011 4555-1234). Recordás siempre traer el carnet de la obra social.`,
 };
 
+function getContextoFechaHora(): string {
+  const ahora = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" }));
+  const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+  const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+  const diaSemana = dias[ahora.getDay()];
+  const diaMes = ahora.getDate();
+  const mes = meses[ahora.getMonth()];
+  const anio = ahora.getFullYear();
+  const hora = ahora.getHours().toString().padStart(2, "0");
+  const minutos = ahora.getMinutes().toString().padStart(2, "0");
+  const mañana = dias[(ahora.getDay() + 1) % 7];
+  return `\n\nCONTEXTO ACTUAL (hora Argentina, no lo menciones a menos que sea relevante): Hoy es ${diaSemana} ${diaMes} de ${mes} de ${anio}, son las ${hora}:${minutos} hs. Mañana es ${mañana}.`;
+}
+
 const REGLAS_GLOBALES = `
 
 IMPORTANTE — Modismos y lenguaje:
@@ -116,7 +130,7 @@ export async function POST(req: NextRequest) {
   const stream = await client.messages.stream({
     model: "claude-haiku-4-5-20251001",
     max_tokens: 400,
-    system: systemPrompt + REGLAS_GLOBALES,
+    system: systemPrompt + REGLAS_GLOBALES + getContextoFechaHora(),
     messages: messages.map((m: { role: string; content: string }) => ({
       role: m.role,
       content: m.content,
