@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { google } from "googleapis";
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = request.cookies.get("admin_session")?.value;
   const secretToken = process.env.ADMIN_SECRET_TOKEN;
   if (!session || session !== secretToken) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { id } = params;
+  const { id } = await params;
   const credsJson = process.env.GOOGLE_CREDENTIALS_JSON;
   const spreadsheetId = process.env.DEMO_LEADS_SPREADSHEET_ID;
   if (!credsJson || !spreadsheetId) {
