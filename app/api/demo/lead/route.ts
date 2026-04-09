@@ -92,14 +92,14 @@ async function sendNotificationEmail(lead: DemoLead) {
 }
 
 export async function POST(req: NextRequest) {
-  const { nombre, email, telefono, agentType } = await req.json();
+  const { nombre, email, telefono, agentType, id: clientId } = await req.json();
 
   if (!nombre || !email || !telefono || !agentType) {
     return NextResponse.json({ error: "Faltan datos requeridos" }, { status: 400 });
   }
 
   const lead: DemoLead = {
-    id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    id: clientId || `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     nombre: nombre.trim(),
     email: email.trim().toLowerCase(),
     telefono: telefono.trim(),

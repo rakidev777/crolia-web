@@ -258,10 +258,8 @@ export default function AdminPanel() {
             {!leadsLoading && leads.length > 0 && (
               <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                 {leads.map(lead => {
-                  const fecha = new Date(lead.createdAt).toLocaleString("es-AR", {
-                    day: "2-digit", month: "2-digit", year: "numeric",
-                    hour: "2-digit", minute: "2-digit",
-                  });
+                  // createdAt viene del Sheet ya formateado ("09/04/2026, 02:21") — mostrar directo
+                  const fecha = lead.createdAt || "—";
                   return (
                     <div key={lead.id} style={{
                       background: "white",
@@ -280,7 +278,7 @@ export default function AdminPanel() {
                       </div>
                       <div style={{ fontSize: "0.82rem", color: "#6d6057" }}>{lead.email}</div>
                       <div style={{ fontSize: "0.82rem", color: "#6d6057" }}>{lead.telefono}</div>
-                      <div style={{ display: "flex", gap: "0.5rem" }}>
+                      <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                         <a
                           href={`https://wa.me/${lead.telefono.replace(/\D/g, "")}?text=Hola%20${encodeURIComponent(lead.nombre)}%2C%20soy%20Fran%20de%20Crolia.%20Vi%20que%20probaste%20nuestro%20demo%20de%20agentes%20IA%20%F0%9F%A4%96%20%C2%BFTe%20interesa%20implementarlo%20en%20tu%20negocio%3F`}
                           target="_blank" rel="noopener noreferrer"
@@ -294,6 +292,15 @@ export default function AdminPanel() {
                         >
                           ✉️ Email
                         </a>
+                        {lead.id && (
+                          <a
+                            href={`/admin/conversacion/${lead.id}`}
+                            target="_blank" rel="noopener noreferrer"
+                            style={{ background: "#f6f1ea", color: "#221a14", border: "1px solid rgba(34,26,20,0.15)", borderRadius: "0.5rem", padding: "0.4rem 0.85rem", fontSize: "0.75rem", fontWeight: 600, textDecoration: "none" }}
+                          >
+                            🗒 Ver chat
+                          </a>
+                        )}
                       </div>
                     </div>
                   );

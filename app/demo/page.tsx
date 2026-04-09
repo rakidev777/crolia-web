@@ -84,6 +84,7 @@ export default function DemoPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [leadId, setLeadId] = useState<string>("");
   const chatEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -109,11 +110,13 @@ export default function DemoPage() {
     }
     setFormError("");
     setSubmittingForm(true);
+    const newLeadId = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    setLeadId(newLeadId);
     try {
       await fetch("/api/demo/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, agentType: selectedAgent!.id }),
+        body: JSON.stringify({ ...form, agentType: selectedAgent!.id, id: newLeadId }),
       });
     } catch {
       // Lead save failure is non-blocking
@@ -162,6 +165,15 @@ export default function DemoPage() {
         if (done) break;
         assistantText += decoder.decode(value, { stream: true });
         setMessages([...newMessages, { role: "assistant", content: assistantText }]);
+      }
+      // Guardar conversación actualizada en Sheets (fire & forget)
+      if (leadId && assistantText) {
+        const fullMessages = [...newMessages, { role: "assistant", content: assistantText }];
+        fetch("/api/demo/conversacion", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ leadId, messages: fullMessages }),
+        }).catch(() => {});
       }
     } catch {
       setMessages([...newMessages, { role: "assistant", content: "Hubo un error de conexión. Intentá de nuevo." }]);
