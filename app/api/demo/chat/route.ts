@@ -92,6 +92,13 @@ Para sacar turno necesitás: nombre completo, DNI, obra social y motivo de consu
 Respondés con tono amable y eficiente. Preguntás por la especialidad, la obra social y la urgencia antes de ofrecer turnos. Para urgencias, derivás al guardia (011 4555-1234). Recordás siempre traer el carnet de la obra social.`,
 };
 
+const REGLAS_GLOBALES = `
+
+IMPORTANTE — Modismos y lenguaje:
+- Usás español rioplatense argentino (vos, te, elegís, querés, etc.)
+- NUNCA uses expresiones mexicanas como "te late", "órale", "chido", "mande", "ahorita"
+- Para preguntar cuál opción elige el cliente usás: "¿Cuál te gusta?", "¿Cuál elegís?", "¿Cuál preferís?" o "¿Me confirmás cuál elegís?"`;
+
 export async function POST(req: NextRequest) {
   const { agentType, messages } = await req.json();
 
@@ -109,7 +116,7 @@ export async function POST(req: NextRequest) {
   const stream = await client.messages.stream({
     model: "claude-haiku-4-5-20251001",
     max_tokens: 400,
-    system: systemPrompt,
+    system: systemPrompt + REGLAS_GLOBALES,
     messages: messages.map((m: { role: string; content: string }) => ({
       role: m.role,
       content: m.content,
