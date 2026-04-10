@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crolia — Agente IA para WhatsApp</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+
+    /* ── Variables de color ── */
+    :root {
+      --primary: #8a6448;
+      --primary-dark: #6b4d34;
+      --primary-light: #e9ddd1;
+      --accent: #8a6448;
+      --green: #10b981;
+      --dark: #221a14;
+      --gray: #6d6057;
+      --light: #f6f1ea;
+      --border: #e9ddd1;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #221a14 0%, #3a2a1e 50%, #4a3628 100%);
+      color: white;
+      padding: 64px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(138,100,72,0.35) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: 20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(233,221,209,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+    .logo span { color: #e9ddd1; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(138,100,72,0.3);
+      border: 1px solid rgba(233,221,209,0.4);
+      color: #e9ddd1;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, #e9ddd1, #c4a882);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 18px;
+      color: #94a3b8;
+      max-width: 560px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 40px;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-stat strong {
+      display: block;
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -1px;
+    }
+    .hero-stat span {
+      font-size: 13px;
+      color: #a89080;
+    }
+
+    /* ── Secciones ── */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 48px; }
+
+    section { padding: 64px 48px; }
+    section:nth-child(even) { background: var(--light); }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 16px;
+      color: var(--gray);
+      margin-bottom: 48px;
+      max-width: 580px;
+    }
+
+    /* ── Planes ── */
+    .planes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 0;
+    }
+    .plan {
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      background: white;
+      position: relative;
+      transition: box-shadow .2s;
+    }
+    .plan.featured {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+    .plan-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+    .plan-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+    .plan-price {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--dark);
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .plan-price sup {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0;
+      vertical-align: super;
+    }
+    .plan-period {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+    .plan-msgs {
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 600;
+      background: var(--primary-light);
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+    }
+    .plan-setup {
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 24px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .plan-setup strong { color: var(--dark); }
+    .plan-features {
+      list-style: none;
+      margin-bottom: 0;
+    }
+    .plan-features li {
+      font-size: 13px;
+      color: #374151;
+      padding: 6px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      border-bottom: 1px solid #f8fafc;
+    }
+    .plan-features li:last-child { border-bottom: none; }
+    .check { color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .cross { color: #cbd5e1; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Funcionalidades ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .feature-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .feature-icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .feature-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .feature-card p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+    .feature-plan {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+    .fp-todos { background: #dcfce7; color: #15803d; }
+    .fp-pro { background: #dbeafe; color: #1d4ed8; }
+    .fp-elite { background: #ede9fe; color: #6d28d9; }
+
+    /* ── Soporte y tiempos ── */
+    .soporte-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .soporte-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+    .soporte-card .num {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .soporte-card .label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .soporte-card .desc {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 28px;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -25px;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .timeline-item h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .timeline-item p {
+      font-size: 13px;
+      color: var(--gray);
+    }
+    .timeline-item .time {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    /* ── Cambios post-instalación ── */
+    .cambios-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+    }
+    .cambios-table th {
+      background: var(--dark);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 12px 20px;
+      text-align: left;
+    }
+    .cambios-table td {
+      padding: 14px 20px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+      color: var(--dark);
+    }
+    .cambios-table tr:last-child td { border-bottom: none; }
+    .cambios-table tr:nth-child(even) td { background: var(--light); }
+    .free-badge {
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .paid-badge {
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* ── CTA final ── */
+    .cta {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 48px;
+    }
+    .cta h2 {
+      color: white;
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    .cta p {
+      color: #94a3b8;
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+    .cta-steps {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .cta-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cta-step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(99,102,241,0.3);
+      border: 1.5px solid #818cf8;
+      color: #a5b4fc;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cta-step-text {
+      font-size: 13px;
+      color: #cbd5e1;
+      text-align: left;
+    }
+    .cta-arrow {
+      color: #334155;
+      font-size: 20px;
+      padding: 0 16px;
+    }
+    .cta-contact {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .cta-contact a {
+      color: #a5b4fc;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { font-size: 12px; }
+      .hero { padding: 40px 32px 56px; }
+      .hero h1 { font-size: 36px; }
+      section { padding: 40px 32px; }
+      .planes { gap: 12px; }
+      .plan { padding: 20px; }
+      .plan-price { font-size: 32px; }
+      .features-grid { gap: 12px; }
+      .feature-card { padding: 16px; }
+      .cta { padding: 48px 32px; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 32px; }
+      .planes { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .soporte-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-wrap: wrap; gap: 24px; }
+      .cta-steps { flex-direction: column; align-items: center; }
+      .cta-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="logo">crolia<span>.</span></div>
+  <div class="hero-tag">Agente IA para WhatsApp</div>
+  <h1>Tu negocio atendiendo<br><em>24/7, sin parar.</em></h1>
+  <p>Un asistente de inteligencia artificial entrenado para tu negocio que responde, vende y hace seguimiento por vos.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <strong>24/7</strong>
+      <span>Atención continua</span>
+    </div>
+    <div class="hero-stat">
+      <strong>72hs</strong>
+      <span>Para estar activo</span>
+    </div>
+    <div class="hero-stat">
+      <strong>&lt;5s</strong>
+      <span>Tiempo de respuesta</span>
+    </div>
+    <div class="hero-stat">
+      <strong>100%</strong>
+      <span>Personalizado</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── PLANES ── -->
+<section style="background:white">
+  <div class="container">
+    <div class="section-tag">Planes y precios</div>
+    <h2>Elegí el plan que<br>se adapta a tu negocio</h2>
+    <p class="section-sub">Todos los planes incluyen configuración personalizada, catálogo actualizable y soporte técnico.</p>
+
+    <div class="planes">
+
+      <!-- Esencial -->
+      <div class="plan">
+        <div class="plan-name">Esencial</div>
+        <div class="plan-price"><sup>$</sup>130</div>
+        <div class="plan-period">USD / mes</div>
+        <div class="plan-msgs">Hasta 500 consultas/mes</div>
+        <div class="plan-setup">Setup único: <strong>$500 USD</strong> · Excedente: $10 c/500 consultas</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> WhatsApp + Instagram + Facebook</li>
+          <li><span class="check">✓</span> FAQ + información del negocio</li>
+          <li><span class="check">✓</span> Captación de leads y agendamiento</li>
+          <li><span class="check">✓</span> Seguimiento de clientes</li>
+          <li><span class="check">✓</span> Derivación automática a asesor humano</li>
+          <li><span class="check">✓</span> 1 usuario humano en Chatwoot</li>
+          <li><span class="check">✓</span> Ajustes de tono, claridad y precisión</li>
+          <li><span class="check">✓</span> Cambios en FAQs, stock y contenidos</li>
+          <li><span class="cross">✗</span> Audio y mensajes de voz</li>
+          <li><span class="cross">✗</span> Análisis de imágenes</li>
+          <li><span class="cross">✗</span> Integraciones con sistemas</li>
+          <li><span class="cross">✗</span> Dashboard de ventas y métricas</li>
+        </ul>
+      </div>
+
+      <!-- Profesional -->
+      <div class="plan featured">
+        <div class="plan-badge">Más elegido</div>
+        <div class="plan-name">Profesional</div>
+        <div class="plan-price"><sup>$</sup>200</div>
+        <div class="plan-period">USD / mes</div>
+        <div class="plan-msgs">Hasta 2.000 consultas/mes</div>
+        <div class="plan-setup">Setup único: <strong>$800 USD</strong> · Excedente: $10 c/500 consultas · Usuario adicional: $15/mes</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Todo Esencial +</li>
+          <li><span class="check">✓</span> 🎤 Audio y mensajes de voz</li>
+          <li><span class="check">✓</span> 📷 Análisis de imágenes</li>
+          <li><span class="check">✓</span> Integraciones con sistemas del negocio</li>
+          <li><span class="check">✓</span> Reportes mensuales de actividad</li>
+          <li><span class="check">✓</span> Soporte prioritario en horario laboral</li>
+          <li><span class="cross">✗</span> Dashboard de ventas y métricas</li>
+          <li><span class="cross">✗</span> CRM integrado</li>
+        </ul>
+      </div>
+
+      <!-- Escala -->
+      <div class="plan">
+        <div class="plan-name">Escala</div>
+        <div class="plan-price"><sup>$</sup>320</div>
+        <div class="plan-period">USD / mes</div>
+        <div class="plan-msgs">Consultas ilimitadas</div>
+        <div class="plan-setup">Setup único: <strong>$1.000 USD</strong> · Hasta 2 agentes incluidos</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Todo Profesional +</li>
+          <li><span class="check">✓</span> Dashboard: ventas, productos y acciones</li>
+          <li><span class="check">✓</span> CRM integrado</li>
+          <li><span class="check">✓</span> Integraciones avanzadas (APIs custom)</li>
+          <li><span class="check">✓</span> Hasta 2 agentes incluidos</li>
+          <li><span class="check">✓</span> SLA de respuesta en horario laboral</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FUNCIONALIDADES ── -->
+<section>
+  <div class="container">
+    <div class="section-tag">¿Qué hace el agente?</div>
+    <h2>Cada funcionalidad,<br>explicada</h2>
+    <p class="section-sub">El agente hace mucho más que responder mensajes.</p>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>Agente IA 24/7</h3>
+        <p>Responde automáticamente cualquier mensaje en segundos, a cualquier hora. Si llegan varios mensajes seguidos, los agrupa y responde una sola vez de forma coherente.</p>
+        <span class="feature-plan fp-todos">Todos los planes</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Catálogo actualizable</h3>
+        <p>El agente conoce todos tus productos y precios. Cuando hay cambios, se actualiza con un clic desde tu planilla de Google Sheets y entra en vigor de inmediato.</p>
+        <span class="feature-plan fp-todos">Todos los planes</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⏸️</div>
+        <h3>Pausa y reanudación manual</h3>
+        <p>Si querés tomar el chat vos mismo, el agente se pausa solo al detectar que escribiste. Una palabra clave lo reanuda y retoma la conversación desde donde quedó.</p>
+        <span class="feature-plan fp-todos">Todos los planes</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎙️</div>
+        <h3>Audio y mensajes de voz</h3>
+        <p>Cuando un cliente manda un audio, el agente lo transcribe automáticamente con IA y responde en contexto. El cliente no necesita escribir.</p>
+        <span class="feature-plan fp-pro">Profesional y Escala</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🖼️</div>
+        <h3>Análisis de imágenes</h3>
+        <p>El agente interpreta fotos que manda el cliente: comprobantes de pago, fotos de productos, capturas de pantalla. Responde en consecuencia sin intervención humana.</p>
+        <span class="feature-plan fp-pro">Profesional y Escala</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📬</div>
+        <h3>Seguimiento automático de leads</h3>
+        <p>Si un cliente consultó por un producto y no compró, a las 3 horas el agente le manda un mensaje personalizado para retomar la conversación y recuperar la venta.</p>
+        <span class="feature-plan fp-pro">Profesional y Escala</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Dashboard de ventas</h3>
+        <p>Panel visual con ventas generadas por el bot, tasa de conversión, hora pico de consultas, producto más vendido y tasa de recuperación de leads.</p>
+        <span class="feature-plan fp-pro">Profesional y Escala</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Métricas ROI completas</h3>
+        <p>Muestra cuánto revenue generó el bot, cuántos chats resolvió sin intervención humana y cuál es el retorno real de la inversión. Justifica el servicio con números.</p>
+        <span class="feature-plan fp-elite">Solo Escala</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TIEMPOS ── -->
+<section style="background:white">
+  <div class="container">
+    <div class="section-tag">Implementación</div>
+    <h2>De cero a activo<br>en tiempo récord</h2>
+    <p class="section-sub">El proceso es guiado, no requiere conocimientos técnicos y se adapta al ritmo de cada cliente.</p>
+
+    <div class="soporte-grid">
+      <div class="soporte-card">
+        <div class="num">30'</div>
+        <div class="label">Entrevista inicial</div>
+        <div class="desc">Conocemos tu negocio, tus productos y cómo querés que hable el agente</div>
+      </div>
+      <div class="soporte-card">
+        <div class="num">Pocos días</div>
+        <div class="label">Configuración</div>
+        <div class="desc">Armamos el agente, lo entrenamos con tu información y lo conectamos a tus canales</div>
+      </div>
+      <div class="soporte-card">
+        <div class="num">Corto</div>
+        <div class="label">Prueba y ajuste</div>
+        <div class="desc">Probamos juntos, ajustamos tono y respuestas hasta que quede perfecto para tu negocio</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="time">Día 1</div>
+        <h4>Entrevista y onboarding</h4>
+        <p>Reunión de 30 minutos. Nos contás todo sobre tu negocio: productos, precios, horarios, forma de hablar. Nosotros nos encargamos del resto.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="time">Día 1–2</div>
+        <h4>Configuración del agente</h4>
+        <p>Entrenamos el agente con tu catálogo y lo configuramos para que responda exactamente como vos querés. Se conecta a tu WhatsApp existente.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="time">Día 2–3</div>
+        <h4>Semana de ajuste intensivo</h4>
+        <p>Durante la primera semana, hacemos ajustes ilimitados sin costo adicional. Si alguna respuesta no te convence, la corregimos de inmediato.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="time">Día 3+</div>
+        <h4>El agente trabaja por vos</h4>
+        <p>A partir de aquí el agente atiende solo. Vos solo intervenís cuando realmente hace falta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOPORTE Y CAMBIOS ── -->
+<section>
+  <div class="container">
+    <div class="section-tag">Soporte post-instalación</div>
+    <h2>¿Qué pasa después<br>de la puesta en marcha?</h2>
+    <p class="section-sub">El primer mes tenés soporte intensivo incluido. Después, cada cambio tiene un costo claro y predecible.</p>
+
+    <table class="cambios-table">
+      <thead>
+        <tr>
+          <th>Tipo de cambio</th>
+          <th>Cuándo</th>
+          <th>Costo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Ajustes de respuestas y tono</strong><br><span style="font-size:12px;color:#64748b">El agente dice algo que no te gusta, querés cambiar el estilo</span></td>
+          <td>Primera semana post-instalación</td>
+          <td><span class="free-badge">INCLUIDO</span></td>
+        </tr>
+        <tr>
+          <td><strong>Actualización de catálogo / precios</strong><br><span style="font-size:12px;color:#64748b">Cambiaron los precios o agregaste productos</span></td>
+          <td>En cualquier momento</td>
+          <td><span class="free-badge">INCLUIDO</span> (vos mismo con un clic)</td>
+        </tr>
+        <tr>
+          <td><strong>Nueva funcionalidad o integración</strong><br><span style="font-size:12px;color:#64748b">Agregar un flujo nuevo, conectar con otro sistema</span></td>
+          <td>Cuando lo necesitás</td>
+          <td><span class="paid-badge">Cotización a pedido</span></td>
+        </tr>
+        <tr>
+          <td><strong>Reunión de revisión mensual</strong><br><span style="font-size:12px;color:#64748b">Revisamos métricas juntos y optimizamos</span></td>
+          <td>Mensual</td>
+          <td><span class="free-badge">INCLUIDO</span> en plan Élite</td>
+        </tr>
+        <tr>
+          <td><strong>Soporte técnico urgente</strong><br><span style="font-size:12px;color:#64748b">El agente dejó de responder o hay un problema</span></td>
+          <td>Siempre que lo necesitás</td>
+          <td><span class="free-badge">INCLUIDO</span> en todos los planes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:12px;color:#94a3b8;margin-top:16px">
+      * Atendemos en horario laboral. Soporte técnico urgente (agente caído) tiene prioridad máxima independientemente del plan.
+    </p>
+  </div>
+</section>
+
+<!-- ── DIFERENCIAL ── -->
+<section style="background:var(--light)">
+  <div class="container">
+    <div class="section-tag">Nuestro diferencial</div>
+    <h2>Soluciones que se adaptan<br>a tu operación</h2>
+    <p class="section-sub">No ofrecemos templates genéricos. Cada agente se diseña desde cero entendiendo cómo trabaja tu negocio.</p>
+    <div class="features-grid" style="margin-top:0">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Tu lógica, no la nuestra</h3>
+        <p>Mapeamos tu flujo de atención real antes de configurar nada. El agente aprende cómo respondés vos, no cómo responde un bot genérico.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔧</div>
+        <h3>Ajustes continuos incluidos</h3>
+        <p>El negocio cambia y el agente también. Cambios en FAQs, stock, tono y contenidos están incluidos en todos los planes, sin costo adicional.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Acompañamiento real</h3>
+        <p>No desaparecemos después del setup. Atendemos en horario laboral y el soporte técnico urgente tiene prioridad máxima en cualquier plan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta">
+  <h2>¿Empezamos?</h2>
+  <p>Adaptamos el sistema a tu operación — no al revés. Una reunión de 30 minutos es todo lo que necesitamos.</p>
+
+  <div class="cta-steps">
+    <div class="cta-step">
+      <div class="cta-step-num">1</div>
+      <div class="cta-step-text">Reunión inicial<br>30 minutos</div>
+    </div>
+    <div class="cta-arrow">→</div>
+    <div class="cta-step">
+      <div class="cta-step-num">2</div>
+      <div class="cta-step-text">Configuración<br>a medida</div>
+    </div>
+    <div class="cta-arrow">→</div>
+    <div class="cta-step">
+      <div class="cta-step-num">3</div>
+      <div class="cta-step-text">Tu agente<br>activo y vendiendo</div>
+    </div>
+  </div>
+
+  <div class="cta-contact">
+    <a href="mailto:contacto@crolia.com.ar">contacto@crolia.com.ar</a>
+    <a href="https://crolia.com.ar">crolia.com.ar</a>
+  </div>
+</div>
+
+</body>
+</html>
