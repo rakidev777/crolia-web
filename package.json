@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.85.0",
+    "@vercel/blob": "^0.27.0",
     "bootstrap": "^5.3.8",
     "googleapis": "^171.4.0",
     "next": "16.2.2",

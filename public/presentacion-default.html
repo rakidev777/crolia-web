@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crolia — Propuesta Comercial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ─── Crolia Design System ─── */
+:root {
+  --ink:          #221a14;
+  --bg:           #f6f1ea;
+  --surface:      #f8f4ef;
+  --muted:        #6d6057;
+  --accent:       #8a6448;
+  --accent-soft:  #e9ddd1;
+  --white:        #ffffff;
+  --line:         rgba(34, 26, 20, 0.08);
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  font-family: var(--font-body);
+  background: var(--ink);
+}
+
+/* ─── Deck shell ─── */
+.deck {
+  width: 100vw; height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Slides ─── */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5vw 7vw;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(40px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  overflow: hidden;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
+}
+.slide.exit-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* ─── Slide themes ─── */
+.s-dark  { background: var(--ink); color: var(--white); }
+.s-cream { background: var(--bg);  color: var(--ink); }
+.s-light { background: var(--surface); color: var(--ink); }
+.s-accent { background: var(--accent); color: var(--white); }
+
+/* ─── Typography ─── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font-display);
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid;
+  width: fit-content;
+  margin-bottom: 1.5rem;
+}
+.s-dark .eyebrow  { border-color: rgba(255,255,255,.18); color: rgba(255,255,255,.65); background: rgba(255,255,255,.06); }
+.s-cream .eyebrow, .s-light .eyebrow { border-color: var(--line); color: var(--muted); background: rgba(255,255,255,.5); }
+.s-accent .eyebrow { border-color: rgba(255,255,255,.3); color: rgba(255,255,255,.8); background: rgba(255,255,255,.12); }
+
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  line-height: 1.05;
+}
+h1 { font-size: clamp(2.5rem, 5vw, 5rem); }
+h2 { font-size: clamp(1.8rem, 3.5vw, 3.2rem); }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1rem, 1.5vw, 1.4rem); }
+
+.lead {
+  font-size: clamp(.95rem, 1.4vw, 1.2rem);
+  line-height: 1.8;
+  max-width: 60ch;
+}
+.s-dark .lead  { color: rgba(255,255,255,.65); }
+.s-cream .lead, .s-light .lead { color: var(--muted); }
+
+[contenteditable] {
+  outline: none;
+  border-bottom: 2px dashed;
+  min-width: 8ch;
+  display: inline;
+  cursor: text;
+  transition: border-color .2s;
+}
+.s-dark [contenteditable]  { border-color: rgba(138,100,72,.6); }
+.s-cream [contenteditable], .s-light [contenteditable] { border-color: rgba(138,100,72,.5); }
+[contenteditable]:focus { border-color: var(--accent); background: rgba(138,100,72,.08); border-radius: 2px; padding: 0 3px; }
+
+/* ─── Grid layouts ─── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5vw; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5vw; }
+.grid-3-2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5vw; }
+
+/* ─── Cards ─── */
+.card {
+  border-radius: 1.5rem;
+  padding: clamp(1rem, 2vw, 1.75rem);
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.card-white  { background: rgba(255,255,255,.68); border: 1px solid var(--line); box-shadow: 0 8px 32px rgba(34,26,20,.06); }
+.card-dark   { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
+.card-accent-soft { background: rgba(138,100,72,.1); border: 1px solid rgba(138,100,72,.18); }
+.card-inv    { background: var(--ink); border: 1px solid rgba(255,255,255,.1); color: var(--white); }
+
+.card .icon { font-size: 1.8rem; line-height: 1; }
+.card h3 { margin: 0; }
+.card p  { font-size: .82rem; line-height: 1.6; }
+.s-dark .card p  { color: rgba(255,255,255,.6); }
+.s-cream .card p, .s-light .card p { color: var(--muted); }
+
+/* ─── Before/After ─── */
+.before-after { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: center; }
+.ba-arrow { font-size: 2rem; color: var(--accent); font-weight: 700; }
+.ba-col h4 { font-family: var(--font-display); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; font-weight: 700; margin-bottom: .75rem; }
+.ba-before h4 { color: var(--muted); }
+.ba-after h4  { color: var(--accent); }
+.ba-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.ba-list li { font-size: .87rem; line-height: 1.5; display: flex; gap: .5rem; align-items: flex-start; }
+.ba-before li::before { content: "✗"; color: #d4756a; font-weight: 700; flex-shrink: 0; }
+.ba-after  li::before { content: "✓"; color: #4ade80; font-weight: 700; flex-shrink: 0; }
+
+/* ─── Process steps ─── */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5vw; }
+.step-num { font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; line-height: 1; color: rgba(138,100,72,.25); margin-bottom: .5rem; }
+.s-dark .step-num { color: rgba(255,255,255,.12); }
+
+/* ─── Pricing ─── */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1vw; }
+.price-card { border-radius: 1.5rem; padding: clamp(1rem, 2vw, 1.75rem); display: flex; flex-direction: column; gap: .75rem; }
+.price-card.featured { background: var(--ink); color: var(--white); }
+.price-card.standard { background: rgba(255,255,255,.68); border: 1px solid var(--line); color: var(--ink); }
+.price-badge { display: inline-flex; border-radius: 999px; padding: .25rem .75rem; font-size: .65rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; width: fit-content; }
+.price-badge.pop { background: rgba(138,100,72,.15); color: var(--accent); }
+.price-badge.std { background: var(--line); color: var(--muted); }
+.price-badge.pro { background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); }
+.price-name { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; }
+.price-setup { font-size: .78rem; }
+.price-setup strong { font-size: 1.6rem; font-family: var(--font-display); }
+.price-monthly { font-size: .78rem; padding-top: .25rem; border-top: 1px solid var(--line); }
+.price-monthly strong { font-size: 1.1rem; font-family: var(--font-display); }
+.price-card.featured .price-monthly { border-top-color: rgba(255,255,255,.1); }
+.price-items { list-style: none; display: flex; flex-direction: column; gap: .35rem; font-size: .78rem; flex: 1; }
+.price-items li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+.price-card.featured .price-items li::before { color: #4ade80; }
+
+/* ─── ROI ─── */
+.roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw; align-items: center; }
+.roi-stat { text-align: center; padding: 1.5rem; }
+.roi-num { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 700; color: var(--accent); line-height: 1; }
+.roi-label { font-size: .8rem; color: var(--muted); margin-top: .4rem; }
+
+/* ─── Next steps ─── */
+.next-steps { display: flex; flex-direction: column; gap: 1rem; max-width: 50rem; }
+.next-step { display: flex; align-items: flex-start; gap: 1.25rem; }
+.ns-num { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: rgba(255,255,255,.25); flex-shrink: 0; width: 2rem; }
+.ns-content h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: .2rem; }
+.ns-content p  { font-size: .85rem; color: rgba(255,255,255,.6); }
+
+/* ─── Nav ─── */
+#nav {
+  position: fixed;
+  bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  background: rgba(34,26,20,.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 999px;
+  padding: .6rem 1rem;
+}
+#nav button {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,.7);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: .25rem .5rem;
+  border-radius: .5rem;
+  transition: color .2s, background .2s;
+  font-family: var(--font-body);
+}
+#nav button:hover { color: white; background: rgba(255,255,255,.1); }
+#slide-counter { color: rgba(255,255,255,.5); font-size: .75rem; font-family: var(--font-body); min-width: 4ch; text-align: center; }
+.nav-dots { display: flex; gap: .4rem; align-items: center; }
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  transition: all .25s;
+  cursor: pointer;
+}
+.dot.active { background: var(--accent); width: 18px; border-radius: 4px; }
+
+/* ─── Logo ─── */
+.logo { font-family: var(--font-display); font-size: .75rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; }
+.s-dark .logo  { color: rgba(255,255,255,.45); }
+.s-cream .logo, .s-light .logo { color: var(--muted); }
+
+/* ─── Divider ─── */
+.divider { width: 3rem; height: 3px; border-radius: 999px; background: var(--accent); margin: 1rem 0; }
+
+/* ─── Accent text ─── */
+.accent { color: var(--accent); }
+.s-dark .accent { color: #c4976e; }
+.s-accent .accent { color: rgba(255,255,255,.85); }
+
+/* ─── Slide header ─── */
+.slide-header { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; position: absolute; top: 2rem; left: 0; padding: 0 7vw; }
+
+/* ─── Print ─── */
+@media print {
+  html, body { overflow: visible; }
+  .deck { height: auto; overflow: visible; }
+  .slide { position: relative; opacity: 1; pointer-events: all; transform: none; page-break-after: always; height: 100vh; }
+  #nav { display: none; }
+}
+
+/* ─── Slide 1: Cover ─── */
+#s1 .cover-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; align-items: center; width: 100%; }
+#s1 .cover-left { display: flex; flex-direction: column; gap: 1.5rem; }
+#s1 .cover-right { display: flex; flex-direction: column; gap: 1rem; }
+#s1 .client-card { border-radius: 1.75rem; padding: 2.5rem; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06); }
+#s1 .client-label { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: rgba(255,255,255,.4); margin-bottom: .75rem; }
+#s1 .client-name { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 700; line-height: 1.2; }
+#s1 .meta { font-size: .78rem; color: rgba(255,255,255,.4); }
+#s1 .cover-tagline { font-size: clamp(1rem, 1.5vw, 1.3rem); color: rgba(255,255,255,.6); line-height: 1.7; max-width: 40ch; }
+
+/* ─── Highlight box ─── */
+.highlight { background: rgba(138,100,72,.15); border: 1px solid rgba(138,100,72,.3); border-radius: 1rem; padding: .75rem 1.25rem; }
+.s-dark .highlight { background: rgba(138,100,72,.2); }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- ─── SLIDE 1: PORTADA ─── -->
+  <section class="slide s-dark active" id="s1">
+    <div class="slide-header">
+      <span class="logo">Crolia</span>
+      <span class="logo" style="color:rgba(255,255,255,.25)">Propuesta Comercial</span>
+    </div>
+    <div class="cover-layout">
+      <div class="cover-left">
+        <div class="eyebrow">Propuesta de solución</div>
+        <h1>Tecnología que trabaja<br/><span class="accent">por tu negocio.</span></h1>
+        <p class="cover-tagline">Agentes de IA, automatización y desarrollo web para que tu negocio crezca — sin necesitar más equipo.</p>
+      </div>
+      <div class="cover-right">
+        <div class="client-card">
+          <div class="client-label">Preparado para</div>
+          <div class="client-name" contenteditable="true" spellcheck="false">Nombre del cliente</div>
+          <div class="meta" style="margin-top:.75rem" contenteditable="true">Rubro del negocio · Ciudad</div>
+        </div>
+        <div class="client-card">
+          <div class="client-label">Fecha</div>
+          <div id="fecha" style="font-family:var(--font-display);font-size:1rem;font-weight:600;color:rgba(255,255,255,.7)"></div>
+          <div class="meta" style="margin-top:.25rem">Diagnóstico gratuito incluido</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 2: LO QUE ESCUCHAMOS ─── -->
+  <section class="slide s-cream" id="s2">
+    <div class="slide-header"><span class="logo">Crolia</span></div>
+    <div class="eyebrow">Antes de proponer, escuchamos</div>
+    <h2>Lo que entendemos<br/>de tu negocio.</h2>
+    <div class="divider"></div>
+    <div class="grid-3" style="margin-top:1.5vw">
+      <div class="card card-white">
+        <div class="icon">📍</div>
+        <h3>Situación actual</h3>
+        <p contenteditable="true" spellcheck="false">Completá con lo que el cliente describió en la llamada de descubrimiento.</p>
+      </div>
+      <div class="card card-white" style="border:1.5px solid rgba(138,100,72,.3)">
+        <div class="icon">⚡</div>
+        <h3>El problema principal</h3>
+        <p contenteditable="true" spellcheck="false">El dolor más grande que identificaste durante la entrevista.</p>
+      </div>
+      <div class="card card-white">
+        <div class="icon">🎯</div>
+        <h3>Lo que quieren lograr</h3>
+        <p contenteditable="true" spellcheck="false">El objetivo concreto que mencionaron: más ventas, más tiempo, menos errores.</p>
+      </div>
+    </div>
+    <div class="highlight" style="margin-top:1.5vw;max-width:60ch">
+      <p style="font-size:.85rem;color:var(--muted)">💡 <strong style="color:var(--ink)">Nuestra propuesta está diseñada exactamente para esto.</strong> No es una solución genérica — es específica para tu negocio y tu contexto.</p>
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 3: EL COSTO DEL PROBLEMA ─── -->
+  <section class="slide s-dark" id="s3">
+    <div class="slide-header"><span class="logo">Crolia</span></div>
+    <div class="eyebrow">El costo real</div>
+    <h2>¿Cuánto te cuesta<br/><span class="accent">hoy este problema?</span></h2>
+    <div class="divider"></div>
+    <div class="grid-3" style="margin-top:1.5vw">
+      <div class="card card-dark">
+        <div class="icon">⏱️</div>
+        <h3>Tiempo perdido</h3>
+        <p contenteditable="true">Ej: X horas por semana respondiendo siempre las mismas preguntas por WhatsApp.</p>
+      </div>
+      <div class="card card-dark">
+        <div class="icon">💸</div>
+        <h3>Oportunidades perdidas</h3>
+        <p contenteditable="true">Ej: Clientes que preguntan fuera de horario y no reciben respuesta a tiempo.</p>
+      </div>
+      <div class="card card-dark">
+        <div class="icon">📉</div>
+        <h3>Impacto en el negocio</h3>
+        <p contenteditable="true">Ej: Menor conversión, mayor carga de trabajo manual, crecimiento limitado.</p>
+      </div>
+    </div>
+    <div class="card card-dark" style="margin-top:1.5vw;flex-direction:row;align-items:center;gap:1rem;max-width:60rem">
+      <div style="font-size:2rem">🔁</div>
+      <p style="font-size:.9rem;color:rgba(255,255,255,.65)"><strong style="color:white">Si esto sigue 6 meses más:</strong> <span contenteditable="true">Describí la consecuencia de no actuar. Más carga, más clientes perdidos, el equipo más agotado.</span></p>
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 4: ANTES / DESPUÉS ─── -->
+  <section class="slide s-light" id="s4">
+    <div class="slide-header"><span class="logo">Crolia</span></div>
+    <div class="eyebrow">La transformación</div>
+    <h2>De esto <span class="accent">a esto.</span></h2>
+    <div class="before-after" style="margin-top:1.5vw">
+      <div class="ba-col ba-before">
+        <h4>Sin Crolia — hoy</h4>
+        <ul class="ba-list">
+          <li contenteditable="true">Responden WhatsApp manualmente, a cualquier hora</li>
+          <li contenteditable="true">Pierden consultas cuando están ocupados o es tarde</li>
+          <li contenteditable="true">Responden las mismas preguntas todos los días</li>
+          <li contenteditable="true">No tienen visibilidad de cuántas consultas llegan</li>
+          <li contenteditable="true">El dueño o el equipo gasta tiempo en tareas repetitivas</li>
+        </ul>
+      </div>
+      <div class="ba-arrow" style="text-align:center">→</div>
+      <div class="ba-col ba-after">
+        <h4>Con Crolia — desde el día 1</h4>
+        <ul class="ba-list">
+          <li contenteditable="true">El agente responde en segundos, 24/7</li>
+          <li contenteditable="true">Captura consultas a las 3am sin intervención humana</li>
+          <li contenteditable="true">Agenda, informa precios y resuelve FAQs solo</li>
+          <li contenteditable="true">Seguimiento completo de cada conversación</li>
+          <li contenteditable="true">El equipo se enfoca en lo que genera más valor</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 5: QUÉ INCLUYE ─── -->
+  <section class="slide s-cream" id="s5">
+    <div class="slide-header"><span class="logo">Crolia</span></div>
+    <div class="eyebrow">Qué incluye cada agente</div>
+    <h2>No es un chatbot.<br/><span class="accent">Es un agente que trabaja de verdad.</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1vw;margin-top:1.5vw">
+      <div class="card card-white">
+        <div class="icon">🧠</div>
+        <h3 style="font-size:.9rem">Memoria de conversaciones</h3>
+        <p>Recuerda a cada cliente. Sin repetir preguntas.</p>
+      </div>
+      <div class="card card-white">
+        <div class="icon">📚</div>
+        <h3 style="font-size:.9rem">Base de conocimiento propia</h3>
+        <p>Precios, FAQ, menú. Responde con tu info real.</p>
+      </div>
+      <div class="card card-white">
+        <div class="icon">🔄</div>
+        <h3 style="font-size:.9rem">Actualizaciones a demanda</h3>
+        <p>Cambió algo? Lo actualizamos en el momento.</p>
+      </div>
+      <div class="card card-white">
+        <div class="icon">✅</div>
+        <h3 style="font-size:.9rem">Probado antes de lanzar</h3>
+        <p>Todo validado con escenarios reales.</p>
+      </div>
+      <div class="card card-white">
+        <div class="icon">🌐</div>
+        <h3 style="font-size:.9rem">Multi-canal</h3>
+        <p>WhatsApp, Instagram y Facebook.</p>
+      </div>
+      <div class="card card-white">
+        <div class="icon">🔌</div>
+        <h3 style="font-size:.9rem">Integraciones externas</h3>
+        <p>Stock, turnos, cotizaciones en tiempo real.</p>
+      </div>
+      <div class="card card-white">
+        <div class="icon">📊</div>
+        <h3 style="font-size:.9rem">Seguimiento completo</h3>
+        <p>Trazabilidad de cada conversación y resultado.</p>
+      </div>
+      <div class="card card-white" style="border:1.5px solid rgba(138,100,72,.3);background:rgba(138,100,72,.06)">
+        <div class="icon">💬</div>
+        <h3 style="font-size:.9rem">Tono y nombre propio</h3>
+        <p>El agente suena exactamente como tu negocio quiere.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 6: DEMO / CHAT ─── -->
+  <section class="slide s-dark" id="s6">
+    <div class="slide-header"><span class="logo">Crolia</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;width:100%">
+      <div>
+        <div class="eyebrow">Así se ve en la práctica</div>
+        <h2>Tu negocio responde<br/><span class="accent">en 4 segundos.</span><br/>A las 3am.</h2>
+        <div class="divider"></div>
+        <p class="lead">Sin que nadie del equipo esté despierto. Sin perder una consulta. Sin pagar horas extra.</p>
+        <div style="margin-top:2rem;display:flex;flex-direction:column;gap:.75rem">
+          <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem;color:rgba(255,255,255,.6)">
+            <span style="color:#4ade80;font-size:1.1rem">●</span> Respuesta inmediata, cualquier hora
+          </div>
+          <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem;color:rgba(255,255,255,.6)">
+            <span style="color:#4ade80;font-size:1.1rem">●</span> Tono personalizado para tu negocio
+          </div>
+          <div style="display:flex;align-items:center;gap:.75rem;font-size:.85rem;color:rgba(255,255,255,.6)">
+            <span style="color:#4ade80;font-size:1.1rem">●</span> Sin intervención humana para consultas repetitivas
+          </div>
+        </div>
+      </div>
+      <!-- Chat mockup -->
+      <div style="border-radius:2rem;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 80px rgba(0,0,0,.4);background:#f0ebe3;max-width:360px;justify-self:center">
+        <div style="background:var(--ink);padding:1rem 1.25rem;display:flex;align-items:center;gap:.85rem">
+          <div style="width:2.5rem;height:2.5rem;border-radius:50%;background:rgba(138,100,72,.8);display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;flex-shrink:0">🤖</div>
+          <div>
+            <div style="font-size:.85rem;font-weight:600;color:white;font-family:var(--font-display)" contenteditable="true">Agente de tu negocio</div>
+            <div style="font-size:.7rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:.3rem"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#4ade80"></span> En línea ahora</div>
+          </div>
+          <div style="margin-left:auto;font-size:.7rem;color:rgba(255,255,255,.35)">3:18 am</div>
+        </div>
+        <div style="padding:1.25rem 1rem;display:flex;flex-direction:column;gap:.65rem;min-height:220px">
+          <div style="align-self:flex-end;background:white;color:var(--ink);border-radius:1.25rem;border-bottom-right-radius:.35rem;padding:.65rem 1rem;font-size:.83rem;line-height:1.5;max-width:78%;box-shadow:0 2px 8px rgba(0,0,0,.07)" contenteditable="true">Hola! Me pueden dar info sobre precios?</div>
+          <div style="align-self:flex-start;background:var(--accent-soft);color:var(--ink);border-radius:1.25rem;border-bottom-left-radius:.35rem;padding:.65rem 1rem;font-size:.83rem;line-height:1.5;max-width:78%;box-shadow:0 2px 8px rgba(0,0,0,.07)" contenteditable="true">Hola! Claro 😊 Te cuento sobre nuestros servicios. ¿Qué te interesa?</div>
+          <div style="align-self:flex-end;background:white;color:var(--ink);border-radius:1.25rem;border-bottom-right-radius:.35rem;padding:.65rem 1rem;font-size:.83rem;line-height:1.5;max-width:78%;box-shadow:0 2px 8px rgba(0,0,0,.07)" contenteditable="true">El plan básico</div>
+          <div style="align-self:flex-start;background:#dcfce7;color:#166534;border-radius:1.25rem;border-bottom-left-radius:.35rem;padding:.65rem 1rem;font-size:.83rem;line-height:1.5;max-width:78%;font-weight:500" contenteditable="true">✅ Te mando toda la info. ¿Te llamo mañana para contarte más?</div>
+        </div>
+        <div style="background:rgba(255,255,255,.6);border-top:1px solid rgba(0,0,0,.06);padding:.6rem 1.25rem;font-size:.7rem;color:var(--muted);text-align:center">Respondió en <strong>4 segundos</strong> · sin intervención humana</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 7: EL PROCESO ─── -->
+  <section class="slide s-cream" id="s7">
+    <div class="slide-header"><span class="logo">Crolia</span></div>
+    <div class="eyebrow">Cómo funciona</div>
+    <h2>De cero a operando<br/><span class="accent">en días, no meses.</span></h2>
+    <div class="steps" style="margin-top:2vw">
+      <div class="card card-white">
+        <div class="step-num">01</div>
+        <h3>Diagnóstico</h3>
+        <p>Entendemos tu negocio, tus canales y los puntos donde hoy se pierde tiempo o dinero. Diseñamos la solución específica.</p>
+      </div>
+      <div class="card card-white" style="border:1.5px solid rgba(138,100,72,.3)">
+        <div class="step-num">02</div>
+        <h3>Diseño e implementación</h3>
+        <p>Construimos el agente, configuramos integraciones y validamos con escenarios reales antes de que toque un cliente tuyo.</p>
+      </div>
+      <div class="card card-white">
+        <div class="step-num">03</div>
+        <h3>Mejora continua</h3>
+        <p>Una vez en producción, ajustamos y optimizamos según lo que muestran los resultados reales. El agente mejora con el tiempo.</p>
+      </div>
+    </div>
+    <div style="margin-top:1.5vw;padding:1rem 1.5rem;border-radius:1rem;background:var(--ink);color:white;display:inline-flex;align-items:center;gap:.75rem;font-size:.85rem">
+      <span>⚡</span> <span>Primer resultado visible: <strong contenteditable="true">en los primeros 7 días</strong> desde el kickoff.</span>
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 8: INVERSIÓN ─── -->
+  <section class="slide s-light" id="s8">
+    <div class="slide-header"><span class="logo">Crolia</span></div>
+    <div class="eyebrow">Inversión</div>
+    <h2>Precios claros,<br/><span class="accent">sin sorpresas.</span></h2>
+    <div class="pricing-grid" style="margin-top:1.5vw">
+      <div class="price-card standard">
+        <div class="price-badge std">Esencial</div>
+        <div class="price-name">Para comenzar</div>
+        <div class="price-setup">Setup único <strong>$500 USD</strong></div>
+        <div class="price-monthly">Mensual <strong>$130 USD</strong>/mes</div>
+        <ul class="price-items" style="margin-top:.5rem">
+          <li>WhatsApp + Instagram + Facebook</li>
+          <li>FAQ + información del negocio</li>
+          <li>Captación de leads y agendamiento</li>
+          <li>Seguimiento de clientes</li>
+          <li>Hasta 500 consultas/mes</li>
+          <li>Derivación automática a asesor humano</li>
+          <li>1 usuario humano en Chatwoot</li>
+          <li>Ajustes de tono, claridad y precisión</li>
+          <li>Cambios en FAQs, stock y contenidos</li>
+          <li>Hosting incluido</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge pop">Profesional</div>
+        <div class="price-name">El más elegido</div>
+        <div class="price-setup" style="color:rgba(255,255,255,.7)">Setup único <strong style="color:white;font-size:1.6rem;font-family:var(--font-display)">$800 USD</strong></div>
+        <div class="price-monthly" style="border-top-color:rgba(255,255,255,.1);color:rgba(255,255,255,.7)">Mensual <strong style="color:white">$200 USD</strong>/mes</div>
+        <ul class="price-items" style="margin-top:.5rem;color:rgba(255,255,255,.85)">
+          <li>Todo Esencial +</li>
+          <li>🎤 Responde mensajes de voz</li>
+          <li>📷 Entiende fotos enviadas</li>
+          <li>Hasta 2.000 consultas/mes</li>
+          <li>Integraciones con sistemas del negocio</li>
+          <li>Reportes mensuales de actividad</li>
+          <li>Soporte prioritario 48hs</li>
+        </ul>
+      </div>
+      <div class="price-card standard">
+        <div class="price-badge pro">Escala</div>
+        <div class="price-name">Sin límites</div>
+        <div class="price-setup">Setup único <strong>$1.000 USD</strong></div>
+        <div class="price-monthly">Mensual <strong>$320 USD</strong>/mes</div>
+        <ul class="price-items" style="margin-top:.5rem">
+          <li>Todo Profesional +</li>
+          <li>Consultas ilimitadas</li>
+          <li>CRM integrado</li>
+          <li>Dashboard: ventas, productos y acciones</li>
+          <li>Integraciones avanzadas (APIs custom)</li>
+          <li>Hasta 2 agentes incluidos</li>
+          <li>SLA de respuesta 24hs</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem">
+      💡 El plan recomendado para tu negocio es <strong style="color:var(--accent)" contenteditable="true">Profesional</strong> — basado en el volumen y los casos de uso que mencionaste.
+      &nbsp;·&nbsp; Consultas adicionales: <strong>$10 USD</strong> c/ 500 extra &nbsp;·&nbsp; Usuario humano adicional: <strong>$15 USD</strong>/mes
+    </p>
+  </section>
+
+  <!-- ─── SLIDE 9: RETORNO ─── -->
+  <section class="slide s-cream" id="s9">
+    <div class="slide-header"><span class="logo">Crolia</span></div>
+    <div class="eyebrow">Retorno de inversión</div>
+    <h2>¿En cuánto tiempo<br/><span class="accent">se paga solo?</span></h2>
+    <div class="roi-grid" style="margin-top:1.5vw">
+      <div>
+        <div class="grid-2" style="gap:1rem">
+          <div class="card card-white" style="text-align:center;align-items:center">
+            <div class="roi-num" contenteditable="true">5hs</div>
+            <div class="roi-label">ahorradas por semana</div>
+          </div>
+          <div class="card card-white" style="text-align:center;align-items:center">
+            <div class="roi-num" contenteditable="true">+3</div>
+            <div class="roi-label">clientes nuevos por mes</div>
+          </div>
+          <div class="card card-white" style="text-align:center;align-items:center">
+            <div class="roi-num" contenteditable="true">24/7</div>
+            <div class="roi-label">disponibilidad real</div>
+          </div>
+          <div class="card card-white" style="text-align:center;align-items:center;border:1.5px solid rgba(138,100,72,.3)">
+            <div class="roi-num" contenteditable="true">3m</div>
+            <div class="roi-label">para recuperar la inversión</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div class="card card-white">
+          <h3 style="color:var(--accent)">El cálculo simple</h3>
+          <p>Si tu ticket promedio es <strong contenteditable="true">$X</strong> y el agente captura <strong contenteditable="true">3 leads más por mes</strong> que hoy perdés por falta de respuesta, la solución se paga sola en <strong contenteditable="true">2-3 meses</strong>.</p>
+        </div>
+        <div class="card" style="background:var(--ink);color:white;border:none">
+          <p style="color:rgba(255,255,255,.7)"><strong style="color:white">Sin contar</strong> el tiempo que tu equipo recupera para enfocarse en ventas, el crecimiento del negocio y la calidad de atención.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 10: PRÓXIMOS PASOS ─── -->
+  <section class="slide s-dark" id="s10">
+    <div class="slide-header"><span class="logo">Crolia</span></div>
+    <div class="eyebrow">Para arrancar hoy</div>
+    <h2>Tres pasos para<br/><span class="accent">tener el agente activo.</span></h2>
+    <div class="next-steps" style="margin-top:2vw">
+      <div class="next-step">
+        <div class="ns-num">01</div>
+        <div class="ns-content">
+          <h4>Aprobación verbal hoy</h4>
+          <p>Con tu confirmación, te enviamos el contrato de servicios en el transcurso del día.</p>
+        </div>
+      </div>
+      <div style="width:3px;height:1.5rem;background:rgba(255,255,255,.08);margin-left:1rem"></div>
+      <div class="next-step">
+        <div class="ns-num">02</div>
+        <div class="ns-content">
+          <h4>Kickoff — <span contenteditable="true" style="color:#c4976e">Fecha a definir</span></h4>
+          <p>Sesión de onboarding: contás todo sobre tu negocio, cargamos el conocimiento, configuramos el tono y las respuestas.</p>
+        </div>
+      </div>
+      <div style="width:3px;height:1.5rem;background:rgba(255,255,255,.08);margin-left:1rem"></div>
+      <div class="next-step">
+        <div class="ns-num">03</div>
+        <div class="ns-content">
+          <h4>Agente activo — <span contenteditable="true" style="color:#c4976e">dentro de los primeros 7 días</span></h4>
+          <p>Tu agente sale a producción, validado y listo para atender. Incluye 30 días de ajustes sin costo adicional.</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:2vw;display:flex;gap:1rem;flex-wrap:wrap">
+      <div style="border-radius:999px;background:var(--accent);padding:.75rem 2rem;font-size:.85rem;font-weight:600;color:white;display:inline-flex;align-items:center;gap:.5rem">
+        ¿Estás listo para dar este paso? →
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SLIDE 11: CIERRE ─── -->
+  <section class="slide s-accent" id="s11">
+    <div class="slide-header"><span class="logo" style="color:rgba(255,255,255,.5)">Crolia</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;width:100%">
+      <div>
+        <div class="eyebrow">Juntos</div>
+        <h1 style="font-size:clamp(2rem,4vw,4rem);color:white">Tecnología que trabaja para vos.<br/>Resultados que se notan.</h1>
+        <div class="divider" style="background:rgba(255,255,255,.4)"></div>
+        <p style="font-size:1rem;color:rgba(255,255,255,.75);line-height:1.8;max-width:40ch">No estamos vendiendo un producto. Estamos construyendo la herramienta que va a cambiar cómo funciona tu negocio — y eso se siente desde el día uno.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div style="border-radius:1.5rem;padding:2rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)">
+          <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:.75rem">Contacto</div>
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:white;margin-bottom:.5rem">Crolia</div>
+          <div style="font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.8">
+            WhatsApp: +54 9 11 6855-6257<br/>
+            Email: contacto@crolia.com.ar<br/>
+            Respuesta el mismo día hábil.
+          </div>
+        </div>
+        <div style="border-radius:1.5rem;padding:1.5rem;background:rgba(255,255,255,.95)">
+          <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:.5rem">Diagnóstico gratuito incluido</div>
+          <p style="font-size:.85rem;color:var(--ink);line-height:1.6">Contanos cómo funciona tu negocio y en menos de 24 horas te decimos qué solución te conviene y qué resultado podés esperar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── NAV ─── -->
+  <div id="nav">
+    <button onclick="prev()" title="Anterior">←</button>
+    <div class="nav-dots" id="dots"></div>
+    <span id="slide-counter">1 / 11</span>
+    <button onclick="next()" title="Siguiente">→</button>
+    <button onclick="window.print()" title="Exportar PDF" style="font-size:.8rem;padding:.2rem .6rem">⬇ PDF</button>
+  </div>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dotsEl  = document.getElementById('dots');
+const counter = document.getElementById('slide-counter');
+let current = 0;
+
+// Set date
+document.getElementById('fecha').textContent =
+  new Date().toLocaleDateString('es-AR', { day:'numeric', month:'long', year:'numeric' });
+
+// Build dots
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => go(i);
+  dotsEl.appendChild(d);
+});
+
+function go(n) {
+  if (n < 0 || n >= slides.length) return;
+  slides[current].classList.remove('active');
+  slides[current].classList.add('exit-left');
+  setTimeout(() => slides[current].classList.remove('exit-left'), 400);
+  current = n;
+  slides[current].classList.add('active');
+  dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  counter.textContent = (current + 1) + ' / ' + slides.length;
+}
+
+function next() { go(current + 1); }
+function prev() { go(current - 1); }
+
+document.addEventListener('keydown', e => {
+  if (e.target.contentEditable === 'true') return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
+});
+
+// Touch/swipe
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+document.addEventListener('touchend',   e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
+});
+</script>
+</body>
+</html>
