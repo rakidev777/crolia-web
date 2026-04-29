@@ -90,9 +90,11 @@ export default function AdminPanel() {
   const [data, setData] = useState<StatsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
-  const [tab, setTab] = useState<"agentes" | "leads">("agentes");
+  const [tab, setTab] = useState<"agentes" | "leads" | "qr">("agentes");
   const [leads, setLeads] = useState<DemoLead[]>([]);
   const [leadsLoading, setLeadsLoading] = useState(false);
+  const [qrScans, setQrScans] = useState<{ fecha: string; dispositivo: string }[]>([]);
+  const [qrLoading, setQrLoading] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -132,9 +134,25 @@ export default function AdminPanel() {
     return () => clearInterval(interval);
   }, [load]);
 
+  const loadQrScans = useCallback(async () => {
+    setQrLoading(true);
+    try {
+      const res = await fetch("/api/admin/qr-scans");
+      if (res.ok) {
+        const json = await res.json();
+        setQrScans(json.scans ?? []);
+      }
+    } catch {
+      // silenciar
+    } finally {
+      setQrLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (tab === "leads") loadLeads();
-  }, [tab, loadLeads]);
+    if (tab === "qr") loadQrScans();
+  }, [tab, loadLeads, loadQrScans]);
 
   async function handleLogout() {
     await fetch("/api/admin/logout", { method: "POST" });
@@ -168,7 +186,7 @@ export default function AdminPanel() {
           <span style={{ color: "rgba(255,255,255,0.15)", fontSize: "0.8rem" }}>/</span>
           <span style={{ fontSize: "0.85rem", fontWeight: 600, color: "white" }}>Panel Admin</span>
           <div style={{ display: "flex", gap: "0.25rem", marginLeft: "1rem" }}>
-            {(["agentes", "leads"] as const).map(t => (
+            {(["agentes", "leads", "qr"] as const).map(t => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -184,7 +202,7 @@ export default function AdminPanel() {
                   textTransform: "capitalize",
                 }}
               >
-                {t === "agentes" ? "🤖 Agentes" : "🎯 Leads Demo"}
+                {t === "agentes" ? "🤖 Agentes" : t === "leads" ? "🎯 Leads Demo" : "📱 QR Scans"}
               </button>
             ))}
           </div>
@@ -305,6 +323,66 @@ export default function AdminPanel() {
                     </div>
                   );
                 })}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ── TAB: QR SCANS ── */}
+        {tab === "qr" && (
+          <div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
+              <div>
+                <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "#221a14", margin: 0 }}>Escaneos del QR de tarjeta</h2>
+                <p style={{ fontSize: "0.8rem", color: "#6d6057", margin: "0.25rem 0 0" }}>
+                  {qrScans.length > 0 ? `${qrScans.length} escaneo${qrScans.length !== 1 ? "s" : ""} registrado${qrScans.length !== 1 ? "s" : ""}` : "Sin escaneos aún"}
+                </p>
+              </div>
+              <button onClick={loadQrScans} style={{ background: "#221a14", color: "white", border: "none", borderRadius: "0.5rem", padding: "0.5rem 1rem", fontSize: "0.8rem", fontWeight: 600, cursor: "pointer" }}>
+                Actualizar
+              </button>
+            </div>
+
+            {qrLoading ? (
+              <div style={{ textAlign: "center", padding: "3rem", color: "#6d6057" }}>Cargando...</div>
+            ) : qrScans.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "3rem", color: "#6d6057", background: "white", borderRadius: "1rem" }}>
+                <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>📱</div>
+                <p style={{ margin: 0 }}>Nadie escaneó el QR todavía.</p>
+                <p style={{ margin: "0.25rem 0 0", fontSize: "0.8rem" }}>Asegurate de que la tarjeta tiene el QR apuntando a crolia.com.ar/d</p>
+              </div>
+            ) : (
+              <div style={{ background: "white", borderRadius: "1rem", overflow: "hidden" }}>
+                {/* Stats rápidas */}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", borderBottom: "1px solid #f0e8dc" }}>
+                  {[
+                    { label: "Total escaneos", value: qrScans.length },
+                    { label: "Desde móvil", value: qrScans.filter(s => s.dispositivo.includes("Móvil")).length },
+                    { label: "Desde desktop", value: qrScans.filter(s => s.dispositivo.includes("Desktop")).length },
+                  ].map(stat => (
+                    <div key={stat.label} style={{ padding: "1.25rem", textAlign: "center", borderRight: "1px solid #f0e8dc" }}>
+                      <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#221a14" }}>{stat.value}</div>
+                      <div style={{ fontSize: "0.75rem", color: "#6d6057", marginTop: "0.2rem" }}>{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+                {/* Lista */}
+                <div style={{ maxHeight: "420px", overflowY: "auto" }}>
+                  {qrScans.map((scan, i) => (
+                    <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.85rem 1.25rem", borderBottom: i < qrScans.length - 1 ? "1px solid #f6f1ea" : "none" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                        <span style={{ fontSize: "1.1rem" }}>{scan.dispositivo.includes("Móvil") ? "📱" : "💻"}</span>
+                        <div>
+                          <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "#221a14" }}>{scan.fecha}</div>
+                          <div style={{ fontSize: "0.75rem", color: "#6d6057" }}>{scan.dispositivo.replace("📱 ", "").replace("💻 ", "")}</div>
+                        </div>
+                      </div>
+                      <span style={{ fontSize: "0.7rem", color: "#c4a882", background: "#f6f1ea", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>
+                        #{qrScans.length - i}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>

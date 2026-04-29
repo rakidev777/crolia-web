@@ -2,15 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
-  async redirects() {
-    return [
-      {
-        source: "/d",
-        destination: "/demo",
-        permanent: false, // false = 307, fácil de cambiar destino en el futuro
-      },
-    ];
-  },
+  // /d es manejado por app/d/route.ts para loguear escaneos del QR antes de redirigir a /demo
 };
 
 export default nextConfig;
