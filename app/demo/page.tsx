@@ -226,7 +226,7 @@ export default function DemoPage() {
               {/* Aclaración personalización */}
               <div style={{ marginTop: "1.5rem", background: "rgba(138,100,72,0.07)", border: "1px solid rgba(138,100,72,0.18)", borderRadius: "12px", padding: "1rem 1.5rem", maxWidth: 480, margin: "1.5rem auto 0", textAlign: "left" }}>
                 <p style={{ fontSize: "0.82rem", color: "var(--color-ink)", lineHeight: 1.7, margin: 0 }}>
-                  <strong>Esto es solo una muestra.</strong> Tu agente real será construido desde cero para tu negocio — con tu nombre, tus productos, tus procesos y el tono de tu marca. No usamos plantillas.
+                  <strong>Esto es solo una muestra.</strong> Tu agente real será construido desde cero para tu negocio — con tu nombre, tus productos, tus procesos y el tono de tu marca.
                 </p>
               </div>
 
