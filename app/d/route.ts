@@ -2,7 +2,38 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { google } from "googleapis";
 
-async function logToSheet(scan: { fecha: string; dispositivo: string; ip: string }) {
+interface Scan {
+  fecha: string;
+  dispositivo: string;
+  os: string;
+  navegador: string;
+  ubicacion: string;
+  ip: string;
+}
+
+function parseUserAgent(ua: string): { dispositivo: string; os: string; navegador: string } {
+  const isMobile = /mobile|android|iphone|ipad|tablet/i.test(ua);
+  const dispositivo = isMobile ? "📱 Móvil" : "💻 Desktop";
+
+  let os = "Desconocido";
+  if (/iphone/i.test(ua))        os = "iPhone";
+  else if (/ipad/i.test(ua))     os = "iPad";
+  else if (/android/i.test(ua))  os = `Android`;
+  else if (/windows/i.test(ua))  os = "Windows";
+  else if (/mac os/i.test(ua))   os = "macOS";
+  else if (/linux/i.test(ua))    os = "Linux";
+
+  let navegador = "Desconocido";
+  if (/edg\//i.test(ua))         navegador = "Edge";
+  else if (/opr\//i.test(ua))    navegador = "Opera";
+  else if (/chrome/i.test(ua))   navegador = "Chrome";
+  else if (/safari/i.test(ua))   navegador = "Safari";
+  else if (/firefox/i.test(ua))  navegador = "Firefox";
+
+  return { dispositivo, os, navegador };
+}
+
+async function logToSheet(scan: Scan) {
   const credsJson = process.env.GOOGLE_CREDENTIALS_JSON;
   const spreadsheetId = process.env.DEMO_LEADS_SPREADSHEET_ID;
   if (!credsJson || !spreadsheetId || spreadsheetId.includes("REEMPLAZAR")) return;
@@ -16,15 +47,22 @@ async function logToSheet(scan: { fecha: string; dispositivo: string; ip: string
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: "QR Scans!A:C",
+    range: "QR Scans!A:F",
     valueInputOption: "USER_ENTERED",
     requestBody: {
-      values: [[scan.fecha, scan.dispositivo, scan.ip]],
+      values: [[
+        scan.fecha,
+        scan.dispositivo,
+        scan.os,
+        scan.navegador,
+        scan.ubicacion,
+        scan.ip,
+      ]],
     },
   });
 }
 
-async function sendScanEmail(scan: { fecha: string; dispositivo: string }) {
+async function sendScanEmail(scan: Scan) {
   const key = process.env.RESEND_API_KEY;
   if (!key || key.includes("REEMPLAZAR")) return;
 
@@ -48,7 +86,15 @@ async function sendScanEmail(scan: { fecha: string; dispositivo: string }) {
             </tr>
             <tr>
               <td style="padding: 8px 0; font-size: 12px; color: #6d6057; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">Dispositivo</td>
-              <td style="padding: 8px 0; font-size: 15px; color: #221a14;">${scan.dispositivo}</td>
+              <td style="padding: 8px 0; font-size: 15px; color: #221a14;">${scan.dispositivo} · ${scan.os}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-size: 12px; color: #6d6057; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">Navegador</td>
+              <td style="padding: 8px 0; font-size: 15px; color: #221a14;">${scan.navegador}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-size: 12px; color: #6d6057; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">Ubicación</td>
+              <td style="padding: 8px 0; font-size: 15px; color: #221a14;">${scan.ubicacion}</td>
             </tr>
           </table>
           <div style="margin-top: 20px;">
@@ -70,9 +116,12 @@ export async function GET(req: NextRequest) {
     req.headers.get("x-real-ip") ??
     "desconocida";
 
-  const dispositivo = /mobile|android|iphone|ipad|tablet/i.test(ua)
-    ? "📱 Móvil"
-    : "💻 Desktop";
+  // Geo — headers que Vercel inyecta automáticamente
+  const country = req.headers.get("x-vercel-ip-country") ?? "";
+  const city    = req.headers.get("x-vercel-ip-city") ?? "";
+  const ubicacion = [city, country].filter(Boolean).join(" · ") || "Desconocida";
+
+  const { dispositivo, os, navegador } = parseUserAgent(ua);
 
   const fecha = new Date().toLocaleString("es-AR", {
     day: "2-digit",
@@ -83,14 +132,12 @@ export async function GET(req: NextRequest) {
     timeZone: "America/Argentina/Buenos_Aires",
   });
 
-  // No bloquear el redirect — loguear en background
+  const scan: Scan = { fecha, dispositivo, os, navegador, ubicacion, ip };
+
+  // Redirect inmediato — logs corren en background sin bloquear al usuario
   Promise.all([
-    logToSheet({ fecha, dispositivo, ip }).catch((e) =>
-      console.error("[QR SHEET ERROR]", e?.message ?? e)
-    ),
-    sendScanEmail({ fecha, dispositivo }).catch((e) =>
-      console.error("[QR EMAIL ERROR]", e?.message ?? e)
-    ),
+    logToSheet(scan).catch((e) => console.error("[QR SHEET ERROR]", e?.message ?? e)),
+    sendScanEmail(scan).catch((e) => console.error("[QR EMAIL ERROR]", e?.message ?? e)),
   ]);
 
   return NextResponse.redirect(new URL("/demo", req.url));

@@ -93,7 +93,7 @@ export default function AdminPanel() {
   const [tab, setTab] = useState<"agentes" | "leads" | "qr">("agentes");
   const [leads, setLeads] = useState<DemoLead[]>([]);
   const [leadsLoading, setLeadsLoading] = useState(false);
-  const [qrScans, setQrScans] = useState<{ fecha: string; dispositivo: string }[]>([]);
+  const [qrScans, setQrScans] = useState<{ fecha: string; dispositivo: string; os: string; navegador: string; ubicacion: string; ip: string }[]>([]);
   const [qrLoading, setQrLoading] = useState(false);
 
   const load = useCallback(async () => {
@@ -374,7 +374,9 @@ export default function AdminPanel() {
                         <span style={{ fontSize: "1.1rem" }}>{scan.dispositivo.includes("Móvil") ? "📱" : "💻"}</span>
                         <div>
                           <div style={{ fontSize: "0.85rem", fontWeight: 600, color: "#221a14" }}>{scan.fecha}</div>
-                          <div style={{ fontSize: "0.75rem", color: "#6d6057" }}>{scan.dispositivo.replace("📱 ", "").replace("💻 ", "")}</div>
+                          <div style={{ fontSize: "0.75rem", color: "#6d6057" }}>
+                            {scan.os}{scan.navegador ? ` · ${scan.navegador}` : ""}{scan.ubicacion && scan.ubicacion !== "Desconocida" ? ` · ${scan.ubicacion}` : ""}
+                          </div>
                         </div>
                       </div>
                       <span style={{ fontSize: "0.7rem", color: "#c4a882", background: "#f6f1ea", padding: "0.2rem 0.6rem", borderRadius: "999px" }}>
