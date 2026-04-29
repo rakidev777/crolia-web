@@ -40,9 +40,8 @@ export async function PUT(request: NextRequest) {
     await put(BLOB_PATHNAME, html, {
       access: "public",
       addRandomSuffix: false,
-      allowOverwrite: true,
       contentType: "text/html; charset=utf-8",
-    });
+    } as Parameters<typeof put>[2]);
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json(
