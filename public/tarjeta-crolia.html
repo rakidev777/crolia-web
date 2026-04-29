@@ -187,15 +187,44 @@
       pointer-events: none;
     }
 
-    /* Bloque central — todo en columna centrada */
+    /* Bloque central — columna izquierda */
     .back-body {
       position: absolute;
       top: 50%;
       left: 16px;
-      right: 16px;
+      right: 46%;
       transform: translateY(-50%);
       display: flex;
       flex-direction: column;
+    }
+
+    /* QR — columna derecha */
+    .back-qr {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .back-qr img {
+      width: 100px;
+      height: 100px;
+      border-radius: 4px;
+      background: white;
+      padding: 4px;
+    }
+
+    .back-qr-label {
+      font-size: 5.5px;
+      color: var(--brown-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
     }
 
     .back-tagline {
@@ -368,11 +397,10 @@
       .contact-row      { gap: 1.6mm; }
       .contact-row svg  { width: 2.1mm; height: 2.1mm; }
       .contact-row span { font-size: 1.85mm; }
-      .back-demo        { margin-top: 1.8mm; padding-top: 1.6mm; gap: 1.6mm; }
-      .back-demo-robot  { width: 2.6mm; }
-      .back-demo span   { font-size: 2mm; }
-      .back-demo .arrow { font-size: 2.4mm; }
       .front-robot      { width: 3.4mm; }
+      .back-qr          { right: 3.5mm; width: 29mm; gap: 1mm; }
+      .back-qr img      { width: 26mm; height: 26mm; padding: 1mm; }
+      .back-qr-label    { font-size: 1.4mm; }
     }
   </style>
 </head>
@@ -498,6 +526,12 @@
             </div>
           </div>
 
+        </div>
+
+        <!-- QR Code -->
+        <div class="back-qr">
+          <img src="qr-crolia-demo.svg" alt="QR Demo Crolia">
+          <span class="back-qr-label">Demo gratis</span>
         </div>
 
       </div>
