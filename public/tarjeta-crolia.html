@@ -267,6 +267,14 @@
       color: var(--brown-light);
     }
 
+    .back-subitem {
+      display: block;
+      font-size: 6px;
+      color: var(--brown-light);
+      letter-spacing: 0.04em;
+      margin-top: 1.5px;
+    }
+
     /* Contacto */
     .back-contacts {
       display: flex;
@@ -393,6 +401,7 @@
       .back-sep         { margin-bottom: 1.6mm; }
       .back-services    { gap: 0.8mm; margin-bottom: 1.6mm; }
       .back-services li { font-size: 1.85mm; padding-left: 2.4mm; }
+      .back-subitem     { font-size: 1.55mm; margin-top: 0.4mm; }
       .back-contacts    { gap: 0.8mm; }
       .contact-row      { gap: 1.6mm; }
       .contact-row svg  { width: 2.1mm; height: 2.1mm; }
@@ -488,8 +497,10 @@
           <div class="back-sep"></div>
 
           <ul class="back-services">
-            <li>Respuestas automáticas por WhatsApp e Instagram</li>
-            <li>Turnos online, recordatorios automáticos y reportes de tu negocio</li>
+            <li>Atención con IA por WhatsApp e Instagram
+              <span class="back-subitem">ventas · consultas · agenda automática · estadísticas</span>
+            </li>
+            <li>Automatización de procesos y sistemas a medida para tu empresa</li>
             <li>Páginas Web</li>
           </ul>
 
