@@ -222,6 +222,9 @@ export default function DemoPage() {
               <p style={{ marginTop: "1rem", fontSize: "1.05rem", color: "var(--color-muted)", lineHeight: 1.8, maxWidth: 520, margin: "1rem auto 0" }}>
                 Elegí el tipo de negocio y chateá en tiempo real con el agente. Así es exactamente como lo viven tus clientes.
               </p>
+              <p style={{ marginTop: "1rem", fontSize: "0.88rem", color: "var(--color-ink)", lineHeight: 1.6, maxWidth: 480, margin: "1rem auto 0", fontStyle: "italic", opacity: 0.65 }}>
+                Cada agente se desarrolla a medida para tu negocio, tu marca y tus procesos.
+              </p>
             </div>
 
             <div style={{ display: "grid", gap: "1.25rem", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", maxWidth: 900, margin: "0 auto" }}>

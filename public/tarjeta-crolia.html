@@ -179,7 +179,7 @@
 
     .back-watermark {
       position: absolute;
-      right: -18px;
+      left: -18px;
       top: 50%;
       transform: translateY(-50%);
       width: 148px;
@@ -387,7 +387,7 @@
 
       /* Dorso — escalar fuentes a mm */
       .back-top-line    { height: 0.8mm; }
-      .back-watermark   { width: 39mm; right: -4.5mm; top: 50%; transform: translateY(-50%); }
+      .back-watermark   { width: 39mm; left: -4.5mm; right: auto; top: 50%; transform: translateY(-50%); }
       .back-body        { left: 4.2mm; right: 4.2mm; }
       .back-tagline     { font-size: 2.4mm; margin-bottom: 1.3mm; }
       .back-sep         { margin-bottom: 1.6mm; }
@@ -532,6 +532,7 @@
         <div class="back-qr">
           <img src="qr-crolia-demo.svg" alt="QR Demo Crolia">
           <span class="back-qr-label">Demo gratis</span>
+          <span class="back-qr-label" style="opacity:0.6;">a medida para tu empresa</span>
         </div>
 
       </div>
