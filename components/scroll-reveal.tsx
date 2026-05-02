@@ -19,31 +19,6 @@ export function ScrollReveal() {
     );
     for (const el of revealTargets) io.observe(el);
 
-    // ── Ambient cursor glow ──
-    const glow = document.createElement("div");
-    glow.setAttribute("aria-hidden", "true");
-    glow.style.cssText = [
-      "position:fixed", "pointer-events:none", "z-index:9998",
-      "width:520px", "height:520px", "border-radius:50%",
-      "background:radial-gradient(circle, rgba(138,100,72,0.06) 0%, transparent 68%)",
-      "transform:translate(-50%,-50%)",
-      "top:0", "left:0", "will-change:left,top",
-    ].join(";");
-    document.body.appendChild(glow);
-
-    let mx = -1000, my = -1000, gx = -1000, gy = -1000;
-    let glowRaf: number;
-    const onMouseMove = (e: MouseEvent) => { mx = e.clientX; my = e.clientY; };
-    document.addEventListener("mousemove", onMouseMove, { passive: true });
-    const animateGlow = () => {
-      gx += (mx - gx) * 0.07;
-      gy += (my - gy) * 0.07;
-      glow.style.left = `${gx}px`;
-      glow.style.top = `${gy}px`;
-      glowRaf = requestAnimationFrame(animateGlow);
-    };
-    animateGlow();
-
     // ── Magnetic buttons ──
     const magneticBtns = document.querySelectorAll<HTMLElement>(".magnetic-btn");
     const cleanups: (() => void)[] = [];
@@ -90,16 +65,20 @@ export function ScrollReveal() {
       });
     });
 
-    // ── Parallax en chat mockup ──
+    // ── Scroll progress bar + parallax ──
+    const progressBar = document.getElementById("scroll-progress");
     const chatEl = document.querySelector<HTMLElement>(".chat-mockup");
     let ticking = false;
     const onScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
+          if (progressBar) {
+            const total = document.body.scrollHeight - window.innerHeight;
+            progressBar.style.width = `${(window.scrollY / total) * 100}%`;
+          }
           if (chatEl) {
             const rect = chatEl.getBoundingClientRect();
-            const inView = rect.top < window.innerHeight && rect.bottom > 0;
-            if (inView) {
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
               const offset = (rect.top - window.innerHeight / 2) * 0.032;
               chatEl.style.transform = `translateY(${offset}px)`;
             }
@@ -111,13 +90,31 @@ export function ScrollReveal() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    // ── Chat replay cada 10s ──
+    const chatBody = document.querySelector<HTMLElement>(".chat-mockup-body");
+    let replayTimer: ReturnType<typeof setTimeout> | undefined;
+    const replayChat = () => {
+      if (!chatBody) return;
+      const bubbles = chatBody.querySelectorAll<HTMLElement>(".chat-bubble, .chat-typing");
+      bubbles.forEach((b) => { b.style.animation = "none"; b.style.opacity = "0"; });
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          bubbles.forEach((b, i) => {
+            b.style.animation = "";
+            b.style.opacity = "";
+            b.style.animationDelay = `${(i + 1) * 0.28}s`;
+          });
+        });
+      });
+      replayTimer = setTimeout(replayChat, 10000);
+    };
+    replayTimer = setTimeout(replayChat, 10000);
+
     return () => {
       io.disconnect();
-      document.removeEventListener("mousemove", onMouseMove);
-      cancelAnimationFrame(glowRaf);
       window.removeEventListener("scroll", onScroll);
       cleanups.forEach((fn) => fn());
-      if (document.body.contains(glow)) document.body.removeChild(glow);
+      clearTimeout(replayTimer);
     };
   }, []);
 

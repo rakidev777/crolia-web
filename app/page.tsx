@@ -8,7 +8,7 @@ const pillars = [
     label: "Agentes de IA",
     tagline: "Tu negocio trabaja solo, las 24 horas.",
     description: "Agentes conversacionales que venden, agendan y atienden por WhatsApp, Instagram y Facebook — con el tono y el conocimiento de tu negocio.",
-    items: ["Ventas y consultas 24/7", "Seguimiento automático de leads", "Detección de señales de compra", "Panel de tareas para el equipo", "Escalado a colaborador con contexto", "Dashboard de conversiones"],
+    items: ["Ventas y consultas 24/7", "Agendas inteligentes con recordatorios", "Seguimiento automático de leads", "Detección de señales de compra", "Panel de tareas para el equipo", "Escalado a colaborador con contexto", "Dashboard de conversiones"],
     cta: "Quiero un agente",
     featured: true,
   },
@@ -111,9 +111,18 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "24/7", label: "Tu negocio activo siempre" },
-  { value: "×3", label: "Más consultas respondidas" },
-  { value: "Bajo costo", label: "Accesible para cualquier negocio" },
+  {
+    icon: "🕐",
+    value: "24/7",
+    label: "Siempre activo",
+    sub: "Sin días libres, sin feriados, sin demoras",
+  },
+  {
+    icon: "📈",
+    value: "×3",
+    label: "Más consultas respondidas",
+    sub: "Frente a la atención manual promedio",
+  },
 ];
 
 const chatMessages = [
@@ -129,6 +138,10 @@ export default function Home() {
   return (
     <main className="relative overflow-hidden">
       <ScrollReveal />
+      <div className="scroll-progress" id="scroll-progress" aria-hidden="true" />
+      <div className="bg-blob bg-blob-1" aria-hidden="true" />
+      <div className="bg-blob bg-blob-2" aria-hidden="true" />
+      <div className="bg-blob bg-blob-3" aria-hidden="true" />
       <div className="grain-overlay" aria-hidden="true" />
 
       {/* Floating WhatsApp */}
@@ -170,7 +183,9 @@ export default function Home() {
       </header>
 
       {/* ── Hero ── */}
-      <section id="inicio" className="section-shell grid gap-12 py-16 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
+      <section id="inicio" className="relative section-shell grid gap-12 py-16 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
+        <div className="hero-orb hero-orb-1" aria-hidden="true" />
+        <div className="hero-orb hero-orb-2" aria-hidden="true" />
         <div className="space-y-8">
           <div className="eyebrow reveal">Tecnología accesible para negocios que quieren escalar</div>
           <h1 className="display-title max-w-4xl reveal delay-100">
@@ -187,11 +202,15 @@ export default function Home() {
               Probar demo en vivo →
             </a>
           </div>
-          <div className="grid gap-4 grid-cols-3 reveal delay-400">
+          <div className="grid gap-4 grid-cols-2 reveal delay-400">
             {stats.map((stat) => (
-              <div key={stat.label} className="card-surface p-4 sm:p-5 min-w-0">
-                <div className="text-lg sm:text-2xl font-bold leading-tight text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>{stat.value}</div>
-                <p className="mt-1 text-xs leading-4 text-[color:var(--color-muted)]">{stat.label}</p>
+              <div key={stat.label} className="card-surface p-5 sm:p-6 min-w-0 flex flex-col gap-3">
+                <span className="text-2xl">{stat.icon}</span>
+                <div>
+                  <div className="text-2xl sm:text-3xl font-bold leading-tight text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>{stat.value}</div>
+                  <p className="mt-1 text-sm font-semibold text-[color:var(--color-ink)]">{stat.label}</p>
+                  <p className="mt-0.5 text-xs leading-4 text-[color:var(--color-muted)]">{stat.sub}</p>
+                </div>
               </div>
             ))}
           </div>
