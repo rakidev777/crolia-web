@@ -162,7 +162,7 @@ export default function Home() {
             href="https://wa.me/5491173729899?text=Hola%20Crolia%2C%20quiero%20info%20sobre%20automatizaci%C3%B3n%20con%20IA"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-black/10 bg-[color:var(--color-ink)] px-5 py-3 text-sm font-medium text-white transition hover:bg-[color:var(--color-accent)]"
+            className="magnetic-btn rounded-full border border-black/10 bg-[color:var(--color-ink)] px-5 py-3 text-sm font-medium text-white transition hover:bg-[color:var(--color-accent)]"
           >
             Hablar por WhatsApp
           </a>
@@ -180,10 +180,10 @@ export default function Home() {
             Más ventas, más turnos, más tiempo para lo que importa. Soluciones accesibles que se adaptan a cualquier negocio que quiera dar el siguiente paso.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row reveal delay-300">
-            <a href="#contacto" className="rounded-full bg-[color:var(--color-ink)] px-7 py-4 text-center text-sm font-medium text-white transition hover:bg-[color:var(--color-accent)]">
+            <a href="#contacto" className="magnetic-btn rounded-full bg-[color:var(--color-ink)] px-7 py-4 text-center text-sm font-medium text-white transition hover:bg-[color:var(--color-accent)]">
               Agendar diagnóstico gratuito
             </a>
-            <a href="/demo" className="rounded-full border border-[color:var(--color-accent)]/40 bg-[color:var(--color-accent)]/8 px-7 py-4 text-center text-sm font-semibold text-[color:var(--color-accent)] transition hover:bg-[color:var(--color-accent)] hover:text-white">
+            <a href="/demo" className="magnetic-btn rounded-full border border-[color:var(--color-accent)]/40 bg-[color:var(--color-accent)]/8 px-7 py-4 text-center text-sm font-semibold text-[color:var(--color-accent)] transition hover:bg-[color:var(--color-accent)] hover:text-white">
               Probar demo en vivo →
             </a>
           </div>
