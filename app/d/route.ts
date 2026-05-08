@@ -139,5 +139,5 @@ export async function GET(req: NextRequest) {
     sendScanEmail(scan).catch((e) => console.error("[QR EMAIL ERROR]", e?.message ?? e)),
   ]);
 
-  return NextResponse.redirect(new URL("/demo", req.url));
+  return NextResponse.redirect(new URL("/demo?ref=qr", req.url));
 }

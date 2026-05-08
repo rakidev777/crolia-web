@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
 const AGENTS = [
@@ -74,6 +75,31 @@ const AGENTS = [
 
 type Message = { role: "user" | "assistant"; content: string };
 type Step = "select" | "form" | "chat";
+
+function QRBanner() {
+  const params = useSearchParams();
+  if (params.get("ref") !== "qr") return null;
+  return (
+    <div style={{
+      display: "flex", alignItems: "center", gap: "0.75rem",
+      background: "rgba(34,26,20,0.92)", backdropFilter: "blur(12px)",
+      color: "white", borderRadius: "1rem",
+      padding: "0.9rem 1.25rem", marginBottom: "2rem",
+      border: "1px solid rgba(255,255,255,0.08)",
+      maxWidth: 520, margin: "0 auto 2rem",
+    }}>
+      <span style={{ fontSize: "1.5rem", flexShrink: 0 }}>👋</span>
+      <div>
+        <p style={{ margin: 0, fontWeight: 700, fontSize: "0.88rem", fontFamily: "var(--font-display)" }}>
+          Escaneaste nuestra tarjeta
+        </p>
+        <p style={{ margin: 0, fontSize: "0.78rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.5 }}>
+          Bienvenido a la demo en vivo de Crolia. Elegí un rubro y chateá con una IA real.
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export default function DemoPage() {
   const [step, setStep] = useState<Step>("select");
@@ -214,6 +240,9 @@ export default function DemoPage() {
         {/* ── STEP: SELECT AGENT ── */}
         {step === "select" && (
           <div>
+            <Suspense fallback={null}>
+              <QRBanner />
+            </Suspense>
             <div style={{ textAlign: "center", marginBottom: "3rem" }}>
               <span className="eyebrow" style={{ marginBottom: "1rem", display: "inline-flex" }}>Demo online gratuito</span>
               <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--color-ink)", lineHeight: 1.08, marginTop: "1rem" }}>
