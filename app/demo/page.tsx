@@ -263,8 +263,20 @@ export default function DemoPage() {
 
               {/* Aclaración personalización */}
               <div style={{ marginTop: "1.5rem", background: "rgba(138,100,72,0.07)", border: "1px solid rgba(138,100,72,0.18)", borderRadius: "12px", padding: "1rem 1.5rem", maxWidth: 480, margin: "1.5rem auto 0", textAlign: "left" }}>
-                <p style={{ fontSize: "0.82rem", color: "var(--color-ink)", lineHeight: 1.7, margin: 0 }}>
+                <p style={{ fontSize: "0.82rem", color: "var(--color-ink)", lineHeight: 1.7, margin: "0 0 0.6rem" }}>
                   <strong>Esto es solo una muestra.</strong> Tu agente real será construido desde cero para tu negocio — con tu nombre, tus productos, tus procesos y el tono de tu marca.
+                </p>
+                <p style={{ fontSize: "0.82rem", color: "var(--color-muted)", lineHeight: 1.7, margin: "0 0 0.75rem" }}>
+                  ¿Tu rubro no aparece acá?{" "}
+                  <a
+                    href="https://wa.me/5491173729899?text=Hola%20Crolia%2C%20quiero%20una%20demo%20personalizada%20para%20mi%20negocio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "var(--color-accent)", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: "3px" }}
+                  >
+                    Escribinos por WhatsApp
+                  </a>
+                  {" "}y armamos una prueba ajustada a tu negocio.
                 </p>
               </div>
 
