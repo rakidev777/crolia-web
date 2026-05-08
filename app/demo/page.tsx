@@ -81,22 +81,31 @@ function QRBanner() {
   if (params.get("ref") !== "qr") return null;
   return (
     <div style={{
-      display: "flex", alignItems: "center", gap: "0.75rem",
-      background: "rgba(34,26,20,0.92)", backdropFilter: "blur(12px)",
-      color: "white", borderRadius: "1rem",
-      padding: "0.9rem 1.25rem", marginBottom: "2rem",
-      border: "1px solid rgba(255,255,255,0.08)",
-      maxWidth: 520, margin: "0 auto 2rem",
+      background: "linear-gradient(135deg, rgba(34,26,20,0.96), rgba(60,35,15,0.95))",
+      backdropFilter: "blur(16px)",
+      color: "white", borderRadius: "1.5rem",
+      padding: "1.5rem 1.75rem",
+      border: "1px solid rgba(138,100,72,0.35)",
+      maxWidth: 580, margin: "0 auto 2.5rem",
+      boxShadow: "0 12px 48px rgba(0,0,0,0.15)",
+      position: "relative", overflow: "hidden",
     }}>
-      <span style={{ fontSize: "1.5rem", flexShrink: 0 }}>👋</span>
-      <div>
-        <p style={{ margin: 0, fontWeight: 700, fontSize: "0.88rem", fontFamily: "var(--font-display)" }}>
-          Escaneaste nuestra tarjeta
-        </p>
-        <p style={{ margin: 0, fontSize: "0.78rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.5 }}>
-          Bienvenido a la demo en vivo de Crolia. Elegí un rubro y chateá con una IA real.
-        </p>
-      </div>
+      {/* glow sutil */}
+      <div style={{
+        position: "absolute", top: "-40px", right: "-40px",
+        width: 160, height: 160, borderRadius: "50%",
+        background: "radial-gradient(circle, rgba(138,100,72,0.25), transparent 70%)",
+        pointerEvents: "none",
+      }} />
+      <p style={{ margin: "0 0 0.4rem", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)" }}>
+        ¡Gracias por escanear nuestra tarjeta!
+      </p>
+      <p style={{ margin: "0 0 0.6rem", fontWeight: 700, fontSize: "1.1rem", lineHeight: 1.3, fontFamily: "var(--font-display)" }}>
+        Estás a un paso de llevar tu negocio al próximo nivel.
+      </p>
+      <p style={{ margin: 0, fontSize: "0.85rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.6 }}>
+        Probá ahora cómo trabaja un agente de IA real — el mismo que podría estar atendiendo a tus clientes, agendando turnos y cerrando ventas por vos, las 24 horas.
+      </p>
     </div>
   );
 }
