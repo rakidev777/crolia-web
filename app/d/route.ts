@@ -134,8 +134,7 @@ export async function GET(req: NextRequest) {
 
   const scan: Scan = { fecha, dispositivo, os, navegador, ubicacion, ip };
 
-  // Redirect inmediato — logs corren en background sin bloquear al usuario
-  Promise.all([
+  await Promise.all([
     logToSheet(scan).catch((e) => console.error("[QR SHEET ERROR]", e?.message ?? e)),
     sendScanEmail(scan).catch((e) => console.error("[QR EMAIL ERROR]", e?.message ?? e)),
   ]);
