@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Propuesta — JYS Confort × Crolia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:         #221a14;
+  --bg:          #f6f1ea;
+  --surface:     #ede7de;
+  --accent:      #8a6448;
+  --accent-soft: #e9ddd1;
+  --muted:       #6d6057;
+  --line:        rgba(34,26,20,0.10);
+  --font-d:      'Space Grotesk', sans-serif;
+  --font-b:      'Inter', sans-serif;
+}
+
+html, body { font-family: var(--font-b); background: var(--bg); color: var(--ink); }
+
+.page {
+  width: 210mm;
+  margin: 0 auto;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media screen {
+  body { background: #d4cfc8; padding: 24px 0 48px; }
+  .page { box-shadow: 0 8px 40px rgba(34,26,20,0.18); margin-bottom: 32px; }
+}
+@media print {
+  body { background: var(--bg); padding: 0; margin: 0; }
+  .page { box-shadow: none; page-break-after: always; margin: 0; }
+  .page:last-child { page-break-after: avoid; }
+  .print-btn { display: none !important; }
+  @page { size: A4; margin: 0; }
+}
+
+.print-btn {
+  position: fixed; top: 20px; right: 20px;
+  background: var(--ink); color: #f6f1ea;
+  font-family: var(--font-d); font-size: 12px; font-weight: 600; letter-spacing: .08em;
+  border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; z-index: 100;
+}
+.print-btn:hover { background: var(--accent); }
+
+/* Watermark */
+.watermark {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px; height: 320px;
+  opacity: 0.045; pointer-events: none; z-index: 0;
+}
+.page > *:not(.watermark) { position: relative; z-index: 1; }
+
+/* Header */
+.header {
+  background: var(--ink); color: #f6f1ea;
+  padding: 11px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.logo-block { display: flex; align-items: center; gap: 10px; }
+.logo-text { font-family: var(--font-b); font-weight: 600; font-size: 18px; letter-spacing: .04em; color: #f6f1ea; }
+.logo-sub { font-size: 11px; color: rgba(246,241,234,.4); letter-spacing: .03em; margin-top: 1px; }
+.header-contact { text-align: right; }
+.header-contact a { display: block; font-size: 10.5px; color: rgba(246,241,234,.55); text-decoration: none; line-height: 1.7; }
+.header-contact a:first-child { color: rgba(246,241,234,.85); font-weight: 600; font-size: 11.5px; }
+
+/* Footer strip */
+.footer-strip {
+  background: var(--ink); padding: 9px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.footer-strip span { font-size: 9px; color: rgba(246,241,234,.28); letter-spacing: .05em; }
+.footer-strip strong { color: rgba(246,241,234,.5); font-weight: 600; }
+
+/* Section labels */
+.section-label {
+  font-family: var(--font-d); font-size: 8px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+}
+.section-title {
+  font-family: var(--font-d); font-size: 14px; font-weight: 700;
+  color: var(--ink); letter-spacing: -.02em; margin-bottom: 10px;
+}
+
+/* ──────── PÁGINA 1 ──────── */
+.p1-hero {
+  padding: 20px 28px 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.p1-hero-content { flex: 1; }
+.hero-eyebrow {
+  display: inline-block; font-family: var(--font-d);
+  font-size: 8.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-soft);
+  padding: 3px 10px; border-radius: 100px; margin-bottom: 10px;
+}
+.hero-h1 {
+  font-family: var(--font-d); font-weight: 800; font-size: 23px;
+  line-height: 1.1; letter-spacing: -.03em; color: var(--ink); margin-bottom: 10px;
+}
+.hero-h1 em { font-style: normal; color: var(--accent); }
+.hero-sub { font-size: 11px; line-height: 1.65; color: var(--muted); max-width: 440px; }
+
+.client-logos {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 10px;
+}
+.client-logos img {
+  height: 68px; width: auto;
+  mix-blend-mode: multiply;
+}
+.logo-sep {
+  font-family: var(--font-d); font-size: 18px; font-weight: 300;
+  color: rgba(34,26,20,.2); line-height: 1;
+}
+
+/* Problems */
+.p1-problems {
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--line);
+}
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.problem-card {
+  background: white; border: 1px solid var(--line); border-radius: 8px; padding: 13px 15px;
+}
+.problem-card.hl { border-left: 3px solid var(--accent); }
+.pcard-title { font-family: var(--font-d); font-size: 11px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.pcard-desc { font-size: 10px; color: var(--muted); line-height: 1.55; }
+
+/* Solution intro */
+.p1-solution {
+  padding: 18px 28px;
+  background: var(--surface);
+  flex: 1;
+}
+.p1-solution-body { font-size: 11px; line-height: 1.65; color: var(--muted); margin-top: 6px; }
+
+/* Stats row */
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px;
+}
+.stat-cell {
+  background: white; border-radius: 8px; border: 1px solid var(--line);
+  padding: 11px 12px;
+}
+.stat-num {
+  font-family: var(--font-d); font-size: 20px; font-weight: 800;
+  color: var(--accent); letter-spacing: -.03em; line-height: 1;
+}
+.stat-label { font-size: 9.5px; color: var(--muted); margin-top: 2px; }
+
+/* ──────── PÁGINA 2 ──────── */
+.p2-modules {
+  padding: 14px 28px 12px;
+  border-bottom: 1px solid var(--line);
+  flex: 1;
+}
+.modules-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-top: 8px; }
+.module-card {
+  background: white; border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px;
+}
+.mod-num { font-family: var(--font-d); font-size: 7px; font-weight: 700; letter-spacing: .15em; color: var(--accent); margin-bottom: 3px; }
+.mod-title { font-family: var(--font-d); font-size: 10.5px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.mod-desc { font-size: 9.5px; color: var(--muted); line-height: 1.5; }
+
+/* Diferencial */
+.p2-diferencial { padding: 12px 28px; background: var(--surface); }
+.diferencial-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-top: 8px; }
+.dif-card {
+  background: white; border: 1px solid var(--line); border-radius: 8px; padding: 12px 13px;
+}
+.dif-icon { font-size: 15px; margin-bottom: 5px; }
+.dif-title { font-family: var(--font-d); font-size: 10.5px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.dif-desc { font-size: 9.5px; color: var(--muted); line-height: 1.5; }
+
+/* ──────── PÁGINA 3 ──────── */
+.p3-etapas { padding: 14px 28px; border-bottom: 1px solid var(--line); }
+.etapas-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-top: 8px; }
+.etapa {
+  background: white; border: 1px solid var(--line); border-radius: 8px; padding: 12px 13px;
+}
+.etapa-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; gap: 4px; }
+.etapa-badge {
+  font-family: var(--font-d); font-size: 7.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  background: var(--accent); color: #f6f1ea; padding: 2px 9px; border-radius: 100px;
+}
+.etapa-time {
+  font-family: var(--font-d); font-size: 8.5px; font-weight: 600; color: var(--accent);
+  background: var(--accent-soft); padding: 2px 8px; border-radius: 100px;
+}
+.etapa-title { font-family: var(--font-d); font-size: 11px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.etapa-items { list-style: none; }
+.etapa-items li {
+  font-size: 9.5px; color: var(--muted); padding: 2px 0 2px 11px;
+  position: relative; line-height: 1.45;
+}
+.etapa-items li::before { content: '·'; position: absolute; left: 2px; color: var(--accent); font-weight: 700; font-size: 13px; line-height: 1; top: 2px; }
+
+.etapas-meta { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px; }
+.meta-cell { background: var(--surface); border-radius: 7px; padding: 9px 11px; }
+.meta-label { font-family: var(--font-d); font-size: 7px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+.meta-value { font-family: var(--font-d); font-size: 11px; font-weight: 700; color: var(--ink); }
+.meta-desc { font-size: 9px; color: var(--muted); margin-top: 1px; }
+
+/* Pricing */
+.p3-pricing { padding: 12px 28px; border-bottom: 1px solid var(--line); }
+.pricing-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.pricing-table th {
+  background: var(--ink); color: #f6f1ea;
+  font-family: var(--font-d); font-size: 7.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  padding: 8px 12px; text-align: left;
+}
+.pricing-table th:last-child { text-align: right; }
+.pricing-table td { padding: 9px 12px; font-size: 10px; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+.pricing-table td.desc { font-size: 9px; color: var(--muted); }
+.pricing-table td.val { text-align: right; font-family: var(--font-d); font-weight: 700; color: var(--accent); font-size: 10.5px; }
+.pricing-table tr.total td { background: var(--surface); font-family: var(--font-d); font-weight: 700; border-top: 1.5px solid var(--accent); border-bottom: none; font-size: 11px; }
+.pricing-table tr.total td.val { color: var(--accent); font-size: 13px; }
+
+/* Planes */
+.planes-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
+.plan-card {
+  background: white; border: 1.5px solid var(--line); border-radius: 8px; padding: 13px 14px;
+  display: flex; flex-direction: column;
+}
+.plan-card.featured {
+  background: var(--ink); border-color: var(--ink);
+}
+.plan-name {
+  font-family: var(--font-d); font-size: 9px; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+}
+.plan-card.featured .plan-name { color: rgba(246,241,234,.5); }
+.plan-rec {
+  display: inline-block; font-family: var(--font-d); font-size: 7.5px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  background: var(--accent); color: #f6f1ea;
+  padding: 2px 8px; border-radius: 100px; margin-bottom: 4px;
+}
+.plan-price {
+  font-family: var(--font-d); font-size: 19px; font-weight: 800;
+  color: var(--ink); letter-spacing: -.03em; line-height: 1; margin-bottom: 3px;
+}
+.plan-card.featured .plan-price { color: #f6f1ea; }
+.plan-period { font-size: 9.5px; color: var(--muted); margin-bottom: 10px; }
+.plan-card.featured .plan-period { color: rgba(246,241,234,.45); }
+.plan-divider { border: none; border-top: 1px solid var(--line); margin: 8px 0; }
+.plan-card.featured .plan-divider { border-color: rgba(246,241,234,.1); }
+.plan-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.plan-items li {
+  font-size: 9.5px; color: var(--muted); padding-left: 13px; position: relative; line-height: 1.4;
+}
+.plan-items li::before { content: '·'; position: absolute; left: 3px; color: var(--accent); font-weight: 700; font-size: 13px; line-height: 1; top: 1px; }
+.plan-items li.off { color: rgba(34,26,20,.25); }
+.plan-items li.off::before { color: rgba(34,26,20,.2); }
+.plan-card.featured .plan-items li { color: rgba(246,241,234,.65); }
+.plan-card.featured .plan-items li.off { color: rgba(246,241,234,.2); }
+
+/* Expansión */
+.p3-expansion { padding: 12px 28px; border-bottom: 1px solid var(--line); }
+.expansion-label {
+  font-family: var(--font-d); font-size: 8px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; color: #2d7d6e; margin-bottom: 6px;
+}
+.expansion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.exp-card {
+  background: white; border: 1.5px dashed #b0ccc8; border-radius: 8px; padding: 12px 13px;
+}
+.exp-badge {
+  display: inline-block; font-family: var(--font-d); font-size: 7px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  background: #e8f5f3; color: #2d7d6e;
+  padding: 2px 8px; border-radius: 100px; margin-bottom: 6px;
+}
+.exp-badge.infinite {
+  background: var(--accent-soft); color: var(--accent);
+}
+.exp-title { font-family: var(--font-d); font-size: 10.5px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.exp-desc { font-size: 9.5px; color: var(--muted); line-height: 1.5; }
+
+/* CTA footer */
+.cta-footer {
+  background: var(--accent); padding: 18px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex: 1;
+}
+.cta-left h2 {
+  font-family: var(--font-d); font-weight: 800; font-size: 16px;
+  letter-spacing: -.02em; color: #f6f1ea; line-height: 1.2; margin-bottom: 6px;
+}
+.cta-left p { font-size: 11px; color: rgba(246,241,234,.75); line-height: 1.55; max-width: 380px; }
+.cta-right { text-align: right; flex-shrink: 0; }
+.cta-phone { font-family: var(--font-d); font-size: 18px; font-weight: 800; color: #f6f1ea; letter-spacing: -.02em; margin-bottom: 5px; }
+.cta-contact { font-size: 10.5px; color: rgba(246,241,234,.65); line-height: 1.8; }
+
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">⬇ Exportar PDF</button>
+
+
+<!-- ═══════════════════════════ PÁGINA 1 ═══════════════════════════ -->
+<div class="page">
+  <svg class="watermark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" fill="none">
+    <line x1="250" y1="88"  x2="148" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="352" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#8a6448"/>
+    <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+    <circle cx="250" cy="88"  r="13" fill="#8a6448"/>
+    <circle cx="148" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="352" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="250" cy="282" r="13" fill="#8a6448"/>
+  </svg>
+
+  <div class="header">
+    <div class="logo-block">
+      <svg width="34" height="34" viewBox="120 60 260 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <line x1="250" y1="88"  x2="148" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="352" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
+        <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#8a6448"/>
+        <circle cx="250" cy="88"  r="13" fill="#f6f1ea"/>
+        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
+      </svg>
+      <div>
+        <div class="logo-text">CROLIA</div>
+        <div class="logo-sub">Automatización Inteligente</div>
+      </div>
+    </div>
+    <div class="header-contact">
+      <a href="mailto:contacto@crolia.com.ar">contacto@crolia.com.ar</a>
+      <a href="#">+54 9 11 7372-9899 &nbsp;·&nbsp; www.crolia.com.ar</a>
+    </div>
+  </div>
+
+  <div class="p1-hero">
+    <div class="p1-hero-content">
+      <div class="hero-eyebrow">Propuesta de desarrollo — Junio 2026</div>
+      <h1 class="hero-h1">Un sistema hecho<br/><em>especialmente para JYS Confort</em></h1>
+      <p class="hero-sub">Centraliza toda la operación en una sola herramienta accesible desde cualquier lugar: stock, ventas, facturación ARCA, cobranzas automáticas con IA y CRM omnicanal. Con módulos activos desde el primer día y migración del historial completo incluida.</p>
+    </div>
+    <div class="client-logos">
+      <img src="/nuevoLogoJyS.webp" alt="JYS Confort" onerror="this.style.display='none'" />
+      <div class="logo-sep">×</div>
+      <svg width="44" height="44" viewBox="120 60 260 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="250" y1="88"  x2="148" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="352" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#8a6448"/>
+        <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+        <circle cx="250" cy="88"  r="13" fill="#8a6448"/>
+        <circle cx="148" cy="242" r="13" fill="#8a6448"/>
+        <circle cx="352" cy="242" r="13" fill="#8a6448"/>
+        <circle cx="250" cy="282" r="13" fill="#8a6448"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="p1-problems">
+    <div class="section-label">El punto de partida</div>
+    <div class="section-title">Lo que estamos resolviendo</div>
+    <div class="problem-grid">
+      <div class="problem-card hl">
+        <div class="pcard-title">Sistema obsoleto y difícil de usar</div>
+        <div class="pcard-desc">El sistema actual es una aplicación Windows con más de 15 años. Sin acceso remoto, sin soporte para operaciones actuales y con interfaz que frena al equipo.</div>
+      </div>
+      <div class="problem-card hl">
+        <div class="pcard-title">Sin visibilidad en tiempo real</div>
+        <div class="pcard-desc">4 locales y 3 depósitos operan sin información consolidada. No hay forma de ver el stock total, las ventas del día o la situación de caja desde un solo lugar.</div>
+      </div>
+      <div class="problem-card">
+        <div class="pcard-title">Cobranzas y préstamos manuales</div>
+        <div class="pcard-desc">La gestión de cuenta corriente, cuotas y préstamos personales consume horas de trabajo administrativo que hoy no está automatizado.</div>
+      </div>
+      <div class="problem-card">
+        <div class="pcard-title">Operación que no escala</div>
+        <div class="pcard-desc">Cada local, cliente o proceso nuevo suma más trabajo manual. El sistema actual frena el crecimiento en lugar de acompañarlo.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p1-solution">
+    <div class="section-label">La solución</div>
+    <div class="section-title">Un sistema hecho a medida para JYS Confort, ajustado a sus necesidades</div>
+    <p class="p1-solution-body">Desarrollamos el sistema desde cero en base a la operación real de JYS Confort: 4 locales, 3 depósitos, venta de electrodomésticos y muebles, gestión de cuenta corriente y préstamos personales. Cada módulo responde a una necesidad concreta del negocio. La migración del historial completo del sistema actual está incluida — cero pérdida de datos.</p>
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-num">11</div>
+        <div class="stat-label">Módulos incluidos</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Locales y depósitos cubiertos</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Etapas de entrega</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">9</div>
+        <div class="stat-label">Semanas al lanzamiento</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-strip">
+    <span>© 2026 Crolia — <strong>Consultoría en IA y Automatización</strong></span>
+    <span>Argentina &nbsp;·&nbsp; www.crolia.com.ar</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════ PÁGINA 2 ═══════════════════════════ -->
+<div class="page">
+  <svg class="watermark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" fill="none">
+    <line x1="250" y1="88"  x2="148" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="352" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#8a6448"/>
+    <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+    <circle cx="250" cy="88"  r="13" fill="#8a6448"/>
+    <circle cx="148" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="352" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="250" cy="282" r="13" fill="#8a6448"/>
+  </svg>
+
+  <div class="header">
+    <div class="logo-block">
+      <svg width="34" height="34" viewBox="120 60 260 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <line x1="250" y1="88"  x2="148" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="352" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
+        <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#8a6448"/>
+        <circle cx="250" cy="88"  r="13" fill="#f6f1ea"/>
+        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
+      </svg>
+      <div>
+        <div class="logo-text">CROLIA</div>
+        <div class="logo-sub">Sistema de Gestión — JYS Confort</div>
+      </div>
+    </div>
+    <div class="header-contact">
+      <a href="mailto:contacto@crolia.com.ar">contacto@crolia.com.ar</a>
+      <a href="#">+54 9 11 7372-9899 &nbsp;·&nbsp; www.crolia.com.ar</a>
+    </div>
+  </div>
+
+  <div class="p2-modules">
+    <div class="section-label">Módulos incluidos</div>
+    <div class="section-title">Todo lo que necesita JYS Confort en un solo sistema</div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 01</div>
+        <div class="mod-title">Stock Multi-depósito</div>
+        <div class="mod-desc">Inventario por local y depósito, stock mínimo configurable, alertas automáticas y transferencias entre sucursales.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 02</div>
+        <div class="mod-title">Ventas y Punto de Venta</div>
+        <div class="mod-desc">Caja por local: cargás la venta, elegís la forma de pago (efectivo, transferencia, tarjeta, cuenta corriente) y cerrás caja al final del día.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 03</div>
+        <div class="mod-title">Facturación ARCA</div>
+        <div class="mod-desc">Facturas A, B y C electrónicas en tiempo real. Notas de crédito, débito, remitos y presupuestos. Integración nativa con ARCA.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 04</div>
+        <div class="mod-title">Clientes y Cuenta Corriente</div>
+        <div class="mod-desc">Ficha por cliente, historial de compras y pagos, saldo en tiempo real, límite de crédito configurable y resumen exportable.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 05</div>
+        <div class="mod-title">Préstamos Personales</div>
+        <div class="mod-desc">Préstamos en cuotas (productos o efectivo), tabla de amortización automática, registro de pagos y seguimiento de mora.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 06</div>
+        <div class="mod-title">Locales y Depósitos</div>
+        <div class="mod-desc">Alta de los 4 locales y 3 depósitos con usuarios asignados por sucursal y visibilidad centralizada en tiempo real.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 07</div>
+        <div class="mod-title">CRM Inbox Unificado</div>
+        <div class="mod-desc">WhatsApp, Instagram y Facebook en una pantalla con la ficha del cliente al lado: historial, saldo y cuotas pendientes.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 08</div>
+        <div class="mod-title">Agente IA de Cobranzas</div>
+        <div class="mod-desc">Revisa cuentas y cuotas vencidas diariamente y envía mensajes automáticos por WhatsApp. Escala al equipo cuando es necesario.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 09</div>
+        <div class="mod-title">Panel 360° Ejecutivo</div>
+        <div class="mod-desc">Vista centralizada con ventas del día por local, stock crítico, deudores, caja, cuotas vencidas y rendimiento mensual. Todo en una pantalla, en tiempo real.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 10</div>
+        <div class="mod-title">Asistente IA — Consultá a Crolia</div>
+        <div class="mod-desc">Asistente que conoce todo sobre JYS: ventas, stock, clientes, deudas y operación. Apoya decisiones estratégicas, responde consultas del equipo y funciona como manual inteligente del negocio — todo en lenguaje natural.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 11</div>
+        <div class="mod-title">Sincronización Google Sheets</div>
+        <div class="mod-desc">Reporte diario de ventas exportado automáticamente a Sheets. Catálogo, stock crítico y lista de deudores disponibles en tiempo real para el equipo o la contadora.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p2-diferencial">
+    <div class="section-label">Por qué Crolia</div>
+    <div class="section-title">Lo que no encontrás en los sistemas enlatados</div>
+    <div class="diferencial-grid">
+      <div class="dif-card">
+        <div class="dif-icon">⚡</div>
+        <div class="dif-title">A una fracción del costo</div>
+        <div class="dif-desc">Los sistemas establecidos cobran entre ARS 150.000 y 640.000 por mes, implementaciones de más de ARS 3.000.000, licencias anuales y costo adicional por cada usuario. Esta propuesta: USD 2.000 único + desde ARS 230.000/mes. Usuarios ilimitados, sin licencias, sin costos ocultos.</div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">🤝</div>
+        <div class="dif-title">Soporte directo, sin intermediarios</div>
+        <div class="dif-desc">No hay partner de por medio. Hablás directamente con quien desarrolló el sistema. Respuesta el mismo día, urgencias siempre atendidas.</div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">🤖</div>
+        <div class="dif-title">IA integrada desde el día 1</div>
+        <div class="dif-desc">Ningún sistema del mercado incluye cobranzas autónomas por IA ni CRM que unifique todos los canales de comunicación.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-strip">
+    <span>© 2026 Crolia — <strong>Consultoría en IA y Automatización</strong></span>
+    <span>Argentina &nbsp;·&nbsp; www.crolia.com.ar</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════ PÁGINA 3 ═══════════════════════════ -->
+<div class="page">
+  <svg class="watermark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" fill="none">
+    <line x1="250" y1="88"  x2="148" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="352" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#8a6448"/>
+    <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+    <circle cx="250" cy="88"  r="13" fill="#8a6448"/>
+    <circle cx="148" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="352" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="250" cy="282" r="13" fill="#8a6448"/>
+  </svg>
+
+  <div class="header">
+    <div class="logo-block">
+      <svg width="34" height="34" viewBox="120 60 260 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <line x1="250" y1="88"  x2="148" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="352" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
+        <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#8a6448"/>
+        <circle cx="250" cy="88"  r="13" fill="#f6f1ea"/>
+        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
+      </svg>
+      <div>
+        <div class="logo-text">CROLIA</div>
+        <div class="logo-sub">Sistema de Gestión — JYS Confort</div>
+      </div>
+    </div>
+    <div class="header-contact">
+      <a href="mailto:contacto@crolia.com.ar">contacto@crolia.com.ar</a>
+      <a href="#">+54 9 11 7372-9899 &nbsp;·&nbsp; www.crolia.com.ar</a>
+    </div>
+  </div>
+
+  <div class="p3-etapas">
+    <div class="section-label">Plan de implementación</div>
+    <div class="section-title">Desarrollo en 3 etapas — entregas funcionales desde la primera</div>
+    <div class="etapas-grid">
+      <div class="etapa">
+        <div class="etapa-head">
+          <span class="etapa-badge">Etapa 1</span>
+          <span class="etapa-time">3 semanas</span>
+        </div>
+        <div class="etapa-title">Core del sistema</div>
+        <ul class="etapa-items">
+          <li>Autenticación y roles de usuario</li>
+          <li>Productos y categorías</li>
+          <li>Control de stock básico</li>
+          <li>Punto de venta (POS)</li>
+          <li>Facturación ARCA (A, B, C)</li>
+          <li>Alta de clientes</li>
+        </ul>
+      </div>
+      <div class="etapa">
+        <div class="etapa-head">
+          <span class="etapa-badge">Etapa 2</span>
+          <span class="etapa-time">3 semanas</span>
+        </div>
+        <div class="etapa-title">Operaciones y finanzas</div>
+        <ul class="etapa-items">
+          <li>Multi-local y multi-depósito</li>
+          <li>Transferencias entre sucursales</li>
+          <li>Cuenta corriente completa</li>
+          <li>Préstamos y cuotas</li>
+          <li>Presupuestos y remitos</li>
+          <li>Panel 360° Ejecutivo</li>
+        </ul>
+      </div>
+      <div class="etapa">
+        <div class="etapa-head">
+          <span class="etapa-badge">Etapa 3</span>
+          <span class="etapa-time">3 semanas</span>
+        </div>
+        <div class="etapa-title">IA y canales</div>
+        <ul class="etapa-items">
+          <li>CRM inbox (WhatsApp + IG + FB)</li>
+          <li>Agente IA de cobranzas autónomo</li>
+          <li>Alertas automáticas de stock</li>
+          <li>Reportes avanzados y exportación</li>
+          <li>Migración de datos del sistema actual</li>
+        </ul>
+      </div>
+    </div>
+    <div class="etapas-meta">
+      <div class="meta-cell">
+        <div class="meta-label">Entrega total estimada</div>
+        <div class="meta-value">~9 semanas</div>
+        <div class="meta-desc">Desde la confirmación del proyecto</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Metodología</div>
+        <div class="meta-value">Iterativa con revisiones</div>
+        <div class="meta-desc">Revisión al cierre de cada etapa</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Acceso durante el desarrollo</div>
+        <div class="meta-value">Desde la Etapa 1</div>
+        <div class="meta-desc">Ambiente de pruebas desde la primera entrega</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p3-pricing">
+    <div class="section-label">Inversión</div>
+    <div class="section-title">Desarrollo + suscripción mensual</div>
+    <table class="pricing-table" style="margin-bottom:14px;">
+      <thead>
+        <tr>
+          <th>Concepto</th>
+          <th>Descripción</th>
+          <th>Tipo</th>
+          <th>Monto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Desarrollo del sistema</strong></td>
+          <td class="desc">Sistema completo con los 11 módulos incluidos</td>
+          <td class="desc">Pago único</td>
+          <td class="val">USD 2.000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-label" style="margin-top:4px;">Plan mensual — elegí según tus necesidades</div>
+    <div class="planes-grid" style="grid-template-columns:1fr 1fr;">
+
+      <div class="plan-card">
+        <div class="plan-name">Esencial</div>
+        <div class="plan-price">$230.000</div>
+        <div class="plan-period">ARS / mes</div>
+        <hr class="plan-divider"/>
+        <ul class="plan-items">
+          <li>Sistema de gestión completo</li>
+          <li>Hosting, base de datos y backups</li>
+          <li>Soporte y actualizaciones</li>
+          <li>Google Sheets sync</li>
+          <li class="off">CRM inbox omnicanal con IA</li>
+          <li class="off">Agente IA de cobranzas autónomo</li>
+          <li class="off">Asistente IA "Consultá a Crolia"</li>
+        </ul>
+      </div>
+
+      <div class="plan-card featured">
+        <div class="plan-rec">Recomendado</div>
+        <div class="plan-name">Total</div>
+        <div class="plan-price">$300.000</div>
+        <div class="plan-period">ARS / mes</div>
+        <hr class="plan-divider"/>
+        <ul class="plan-items">
+          <li>Todo Esencial +</li>
+          <li>CRM inbox (WhatsApp + IG + FB + IA)</li>
+          <li>Agente IA de cobranzas autónomo</li>
+          <li>Asistente IA "Consultá a Crolia" — conoce todo sobre JYS</li>
+          <li>Decisiones estratégicas, consultas del equipo y manual inteligente del negocio</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="padding: 0 28px 16px;">
+    <div style="background: var(--surface); border-radius: 8px; padding: 14px 18px; border-left: 3px solid var(--accent);">
+      <div style="font-family: var(--font-d); font-size: 7.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;">Condiciones de pago</div>
+      <p style="font-size: 10px; color: var(--muted); line-height: 1.65;">
+        El sistema se entrega completo y en funcionamiento. JYS Confort dispone de <strong style="color:var(--ink);">30 días de uso real</strong>
+        para validar que opera correctamente y aporta valor concreto a la operación.
+        El pago del desarrollo y el inicio de la suscripción mensual se realizan <strong style="color:var(--ink);">únicamente al finalizar ese período</strong>.
+        <span style="display:block; margin-top:6px;">Se ofrece la posibilidad de abonar el desarrollo en <strong style="color:var(--ink);">cuotas</strong> según acuerdo.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="p3-expansion">
+    <div class="expansion-label">Próximas etapas — funcionalidades que se suman cuando el negocio lo pide</div>
+    <div class="section-title" style="color:var(--ink);">El sistema crece con el negocio</div>
+    <div class="expansion-grid">
+      <div class="exp-card">
+        <div class="exp-badge">A cotizar</div>
+        <div class="exp-title">Carga Inteligente de Stock</div>
+        <div class="exp-desc">Lector de código de barras por cámara del celular. Foto de factura o remito del proveedor → IA extrae todos los productos y cantidades automáticamente. Reconocimiento visual para productos sin código de barras.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-badge">A cotizar</div>
+        <div class="exp-title">App Móvil Ejecutiva</div>
+        <div class="exp-desc">Aplicación nativa (iOS y Android) con dashboard de control remoto, alertas push de stock crítico, ventas del día y cobranzas vencidas. El negocio siempre en el bolsillo.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-badge">A cotizar</div>
+        <div class="exp-title">Integración E-commerce</div>
+        <div class="exp-desc">Sincronización bidireccional con Tienda Nube y/o MercadoLibre: venta online → descuenta stock automáticamente. Exportación de catálogo con precios y stock en tiempo real. Actualización masiva de precios en todos los canales.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-badge infinite">∞ Plataforma viva</div>
+        <div class="exp-title">Funcionalidades sin límite</div>
+        <div class="exp-desc">El sistema es una plataforma viva. Cualquier proceso, automatización o integración que el negocio necesite en el futuro se puede construir sobre la misma base — sin empezar de cero, sin cambiar de sistema.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-footer">
+    <div class="cta-left">
+      <h2>¿Arrancamos?</h2>
+      <p>Próximo paso: reunión de relevamiento para definir el scope final y confirmar los tiempos de cada etapa antes de comenzar el desarrollo.</p>
+    </div>
+    <div class="cta-right">
+      <div class="cta-phone">+54 9 11 7372-9899</div>
+      <div class="cta-contact">
+        contacto@crolia.com.ar<br/>
+        www.crolia.com.ar<br/>
+        Propuesta válida por 30 días · Junio 2026
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-strip">
+    <span>© 2026 Crolia — <strong>Consultoría en IA y Automatización</strong></span>
+    <span>Argentina &nbsp;·&nbsp; www.crolia.com.ar</span>
+  </div>
+</div>
+
+</body>
+</html>
