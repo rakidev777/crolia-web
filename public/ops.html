@@ -535,26 +535,30 @@ td.bold{font-weight:700;}
             </div>
             <div class="tokens-row">
               <span class="tokens-label">Modelo en uso</span>
-              <span class="tokens-value">claude-haiku-4-5</span>
+              <span class="tokens-value">claude-haiku-4-5 + prompt caching ✅</span>
             </div>
             <div class="tokens-row">
-              <span class="tokens-label">Tracking implementado</span>
-              <span class="tokens-value" style="color:var(--green);">✓ Tabla token_usage en DB</span>
+              <span class="tokens-label">Costo API este mes</span>
+              <span class="tokens-value" id="tok-costo" style="color:var(--yellow);">Cargando...</span>
             </div>
             <div class="tokens-row">
-              <span class="tokens-label">Columnas guardadas</span>
-              <span class="tokens-value">modelo, input, output, cache_write, cache_read</span>
+              <span class="tokens-label">Tokens entrada / salida</span>
+              <span class="tokens-value" id="tok-tokens">Cargando...</span>
             </div>
             <div class="tokens-row">
-              <span class="tokens-label">Base mensual (desarrollo)</span>
-              <span class="tokens-value">USD 20</span>
+              <span class="tokens-label">Conversaciones este mes</span>
+              <span class="tokens-value" id="tok-convs">Cargando...</span>
             </div>
             <div class="tokens-row">
-              <span class="tokens-label">Estimado tokens JyS/mes</span>
-              <span class="tokens-value" style="color:var(--yellow);">~USD 10–25 variable</span>
+              <span class="tokens-label">Costo por conversación</span>
+              <span class="tokens-value" id="tok-costo-conv">Cargando...</span>
             </div>
-            <div class="tokens-note">
-              💡 Los tokens están guardados en la base de datos del agentkit (<code>token_usage</code>). Próximo paso: agregar endpoint API que consulte esta tabla y muestre el consumo real del mes aquí en tiempo real. También revisar prompt caching para bajar costos 60–80%.
+            <div class="tokens-row">
+              <span class="tokens-label">Última actividad</span>
+              <span class="tokens-value" id="tok-ultima">Cargando...</span>
+            </div>
+            <div class="tokens-note" id="tokens-cache-note">
+              ✅ <strong>Prompt caching activo</strong> — el system prompt ya tiene <code>cache_control: ephemeral</code>. Los tokens de cache hit cuestan 90% menos. Datos actualizándose...
             </div>
           </div>
         </div>
@@ -746,6 +750,32 @@ document.getElementById('login-user').addEventListener('keydown',e=>{if(e.key===
 if(sessionStorage.getItem('crolia-ops')==='1'){
   document.getElementById('login-screen').style.display='none';
   document.getElementById('app').style.display='block';
+  cargarTokens();
+}
+
+async function cargarTokens(){
+  try{
+    const r = await fetch('/api/ops/tokens',{headers:{'x-ops-secret':'ops-crolia-2026'}});
+    if(!r.ok) throw new Error('error');
+    const d = await r.json();
+    document.getElementById('tok-costo').textContent = 'USD ' + (d.costo_usd_mes||0).toFixed(4);
+    document.getElementById('tok-costo').style.color = d.costo_usd_mes > 20 ? 'var(--yellow)' : 'var(--green)';
+    document.getElementById('tok-tokens').textContent = (d.tokens_input_mes||0).toLocaleString() + ' in / ' + (d.tokens_output_mes||0).toLocaleString() + ' out';
+    document.getElementById('tok-convs').textContent = (d.conversaciones_mes||0) + ' mensajes · ' + (d.usuarios_unicos_mes||0) + ' usuarios';
+    document.getElementById('tok-costo-conv').textContent = 'USD ' + (d.costo_por_conversacion||0).toFixed(5);
+    if(d.ultima_actividad){
+      const f = new Date(d.ultima_actividad);
+      document.getElementById('tok-ultima').textContent = f.toLocaleDateString('es-AR') + ' ' + f.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+    }
+    document.getElementById('tokens-cache-note').innerHTML = '✅ <strong>Prompt caching activo</strong> — system prompt con <code>cache_control: ephemeral</code>. Cache hit = 90% más barato. Datos actualizados: ' + new Date().toLocaleTimeString('es-AR');
+  } catch(e){
+    document.getElementById('tok-costo').textContent = 'No disponible';
+    document.getElementById('tok-costo').style.color = 'var(--muted)';
+    ['tok-tokens','tok-convs','tok-costo-conv','tok-ultima'].forEach(id=>{
+      const el=document.getElementById(id); if(el) el.textContent='—';
+    });
+    document.getElementById('tokens-cache-note').innerHTML = '⚠️ Agentkit no conectado. Configurar <code>AGENTKIT_URL</code> y <code>AGENTKIT_ADMIN_KEY</code> en Vercel + <code>OPS_SECRET=ops-crolia-2026</code>.';
+  }
 }
 </script>
 </body>
