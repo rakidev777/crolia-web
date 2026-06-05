@@ -563,7 +563,30 @@ td.bold{font-weight:700;}
           </div>
         </div>
 
-        <!-- META -->
+        <!-- HISTORIA MENSUAL -->
+        <div id="history-section" style="margin-top:12px;display:none;">
+          <div class="section-label" style="margin-bottom:8px;">Historial mensual — últimos 12 meses</div>
+          <div class="table-wrap">
+            <table id="history-table">
+              <thead>
+                <tr>
+                  <th>Mes</th>
+                  <th class="right">Costo USD</th>
+                  <th class="right">Tokens entrada</th>
+                  <th class="right">Tokens salida</th>
+                  <th class="right">Llamadas API</th>
+                  <th class="right">Mensajes usuarios</th>
+                </tr>
+              </thead>
+              <tbody id="history-tbody">
+                <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:16px;">Cargando historial...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    <!-- META -->
         <div>
           <div class="section-label">Meta Business</div>
           <div class="section-title" style="margin-bottom:12px;">Verificación como proveedor</div>
@@ -751,6 +774,31 @@ if(sessionStorage.getItem('crolia-ops')==='1'){
   document.getElementById('login-screen').style.display='none';
   document.getElementById('app').style.display='block';
   cargarTokens();
+  cargarHistorial();
+}
+
+async function cargarHistorial(){
+  try{
+    const r = await fetch('/api/ops/tokens/history',{headers:{'x-ops-secret':'ops-crolia-2026'}});
+    if(!r.ok) return;
+    const d = await r.json();
+    if(!d.meses || d.meses.length === 0) return;
+    document.getElementById('history-section').style.display='block';
+    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const tbody = document.getElementById('history-tbody');
+    tbody.innerHTML = d.meses.map(m => {
+      const [y, mo] = m.mes.split('-');
+      const nombre = meses[parseInt(mo)-1] + ' ' + y;
+      return `<tr>
+        <td><strong>${nombre}</strong></td>
+        <td class="right bold" style="color:var(--accent);">USD ${m.costo_usd.toFixed(4)}</td>
+        <td class="right muted">${(m.tokens_input||0).toLocaleString()}</td>
+        <td class="right muted">${(m.tokens_output||0).toLocaleString()}</td>
+        <td class="right">${m.llamadas_api||0}</td>
+        <td class="right">${m.mensajes_usuarios||0}</td>
+      </tr>`;
+    }).join('');
+  }catch(e){ /* silencioso si falla */ }
 }
 
 async function cargarTokens(){
