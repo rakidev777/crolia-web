@@ -808,7 +808,10 @@ async function cargarTokens(){
     const d = await r.json();
     document.getElementById('tok-costo').textContent = 'USD ' + (d.costo_usd_mes||0).toFixed(4);
     document.getElementById('tok-costo').style.color = d.costo_usd_mes > 20 ? 'var(--yellow)' : 'var(--green)';
-    document.getElementById('tok-tokens').textContent = (d.tokens_input_mes||0).toLocaleString() + ' in / ' + (d.tokens_output_mes||0).toLocaleString() + ' out';
+    const cacheRead = d.cache_read_mes||0;
+    const cacheWrite = d.cache_creation_mes||0;
+    const cacheInfo = (cacheRead > 0 || cacheWrite > 0) ? ` · cache: ${cacheWrite.toLocaleString()} write / ${cacheRead.toLocaleString()} read` : '';
+    document.getElementById('tok-tokens').textContent = (d.tokens_input_mes||0).toLocaleString() + ' in / ' + (d.tokens_output_mes||0).toLocaleString() + ' out' + cacheInfo;
     document.getElementById('tok-convs').textContent = (d.conversaciones_mes||0) + ' mensajes · ' + (d.usuarios_unicos_mes||0) + ' usuarios';
     document.getElementById('tok-costo-conv').textContent = 'USD ' + (d.costo_por_conversacion||0).toFixed(5);
     if(d.ultima_actividad){
