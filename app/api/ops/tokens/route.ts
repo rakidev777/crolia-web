@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const agentUrl = process.env.AGENTKIT_URL;
+  const agentUrl = process.env.AGENTKIT_URL?.replace(/\/$/, "");
   const adminKey = process.env.AGENTKIT_ADMIN_KEY;
 
   if (!agentUrl || !adminKey) {
