@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Crolia — Centro de Operaciones</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#221a14;--bg:#f6f1ea;--surface:#ede7de;--accent:#8a6448;
+  --accent-soft:#e9ddd1;--muted:#6d6057;--line:rgba(34,26,20,0.10);
+  --green:#16a34a;--green-bg:#dcfce7;--yellow:#d97706;--yellow-bg:#fef3c7;
+  --red:#dc2626;--red-bg:#fee2e2;--blue:#1d6b8f;--blue-bg:#dbeafe;
+  --font-d:'Space Grotesk',sans-serif;--font-b:'Inter',sans-serif;
+}
+body{font-family:var(--font-b);background:var(--surface);color:var(--ink);min-height:100vh;}
+
+/* ── LOGIN ── */
+#login-screen{
+  position:fixed;inset:0;background:var(--ink);
+  display:flex;align-items:center;justify-content:center;z-index:1000;
+}
+.login-box{
+  background:#2a1f16;border:1px solid rgba(138,100,72,.3);border-radius:16px;
+  padding:40px;width:360px;
+}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:32px;justify-content:center;}
+.login-logo-text{font-family:var(--font-d);font-size:22px;font-weight:700;color:#f6f1ea;letter-spacing:.04em;}
+.login-sub{font-size:11px;color:rgba(246,241,234,.4);text-align:center;margin-top:4px;}
+.login-label{font-size:11px;font-weight:600;color:rgba(246,241,234,.5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+.login-input{
+  width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(138,100,72,.3);
+  border-radius:8px;padding:10px 14px;font-size:14px;color:#f6f1ea;margin-bottom:16px;
+  font-family:var(--font-b);outline:none;
+}
+.login-input:focus{border-color:var(--accent);}
+.login-btn{
+  width:100%;background:var(--accent);color:#f6f1ea;border:none;border-radius:8px;
+  padding:12px;font-family:var(--font-d);font-size:14px;font-weight:700;cursor:pointer;
+  letter-spacing:.04em;transition:background .2s;
+}
+.login-btn:hover{background:#6b4d34;}
+.login-error{color:#f87171;font-size:12px;text-align:center;margin-top:10px;display:none;}
+
+/* ── APP ── */
+#app{display:none;}
+
+/* ── HEADER ── */
+.header{
+  background:var(--ink);color:#f6f1ea;padding:12px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.header-logo{display:flex;align-items:center;gap:10px;}
+.header-title{font-family:var(--font-d);font-size:16px;font-weight:700;color:#f6f1ea;}
+.header-sub{font-size:10px;color:rgba(246,241,234,.4);margin-top:1px;}
+.header-right{display:flex;align-items:center;gap:16px;}
+.header-date{font-size:11px;color:rgba(246,241,234,.4);}
+.logout-btn{
+  font-size:11px;color:rgba(246,241,234,.5);background:none;border:none;
+  cursor:pointer;font-family:var(--font-b);padding:4px 8px;border-radius:4px;
+}
+.logout-btn:hover{background:rgba(255,255,255,.08);color:#f6f1ea;}
+
+/* ── LAYOUT ── */
+.main{max-width:1200px;margin:0 auto;padding:24px 28px 48px;}
+
+/* ── STATS BAR ── */
+.stats-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px;}
+.stat-card{background:white;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
+.stat-label{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.stat-value{font-family:var(--font-d);font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1;}
+.stat-sub{font-size:10px;color:var(--muted);margin-top:4px;}
+.stat-positive{color:var(--green);}
+.stat-warning{color:var(--yellow);}
+
+/* ── SECTION ── */
+.section{margin-bottom:24px;}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.section-title{font-family:var(--font-d);font-size:13px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
+.section-label{font-size:9px;font-weight:700;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px;}
+
+/* ── BADGE ── */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase;}
+.badge-green{background:var(--green-bg);color:var(--green);}
+.badge-yellow{background:var(--yellow-bg);color:var(--yellow);}
+.badge-red{background:var(--red-bg);color:var(--red);}
+.badge-blue{background:var(--blue-bg);color:var(--blue);}
+.badge-gray{background:var(--surface);color:var(--muted);}
+.badge-brown{background:var(--accent-soft);color:var(--accent);}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+
+/* ── CLIENTS GRID ── */
+.clients-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.client-card{background:white;border:1px solid var(--line);border-radius:10px;padding:18px 20px;}
+.client-card.featured{border-color:var(--accent);border-width:1.5px;}
+.client-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:12px;}
+.client-name{font-family:var(--font-d);font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.client-rubro{font-size:10.5px;color:var(--muted);}
+.client-body{display:flex;flex-direction:column;gap:8px;}
+.client-row{display:flex;align-items:center;justify-content:space-between;font-size:11px;}
+.client-row-label{color:var(--muted);}
+.client-row-value{font-weight:600;color:var(--ink);}
+.client-row-value.green{color:var(--green);}
+.client-row-value.yellow{color:var(--yellow);}
+.client-divider{border:none;border-top:1px solid var(--line);margin:8px 0;}
+.client-note{font-size:10px;color:var(--muted);line-height:1.5;background:var(--bg);border-radius:6px;padding:8px 10px;margin-top:6px;}
+
+/* ── TABLE ── */
+.table-wrap{background:white;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+th{background:var(--ink);color:#f6f1ea;font-family:var(--font-d);font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:9px 14px;text-align:left;}
+td{padding:9px 14px;font-size:11.5px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:var(--bg);}
+td.right{text-align:right;}
+td.muted{color:var(--muted);}
+td.bold{font-weight:700;}
+.total-row td{background:var(--surface);font-family:var(--font-d);font-weight:700;font-size:12px;border-top:1.5px solid var(--accent);}
+
+/* ── REPOS ── */
+.repos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.repo-card{background:white;border:1px solid var(--line);border-radius:8px;padding:13px 14px;}
+.repo-name{font-family:var(--font-d);font-size:12px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.repo-desc{font-size:10px;color:var(--muted);line-height:1.5;margin-bottom:8px;}
+.repo-link{font-size:10px;color:var(--accent);text-decoration:none;font-weight:600;}
+.repo-link:hover{text-decoration:underline;}
+.repo-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;}
+.repo-tag{font-size:9px;background:var(--surface);color:var(--muted);padding:2px 7px;border-radius:100px;font-weight:600;}
+
+/* ── URLS ── */
+.urls-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.url-card{background:white;border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.url-info{}
+.url-label{font-size:10px;color:var(--muted);margin-bottom:2px;}
+.url-href{font-size:11.5px;font-weight:600;color:var(--accent);text-decoration:none;}
+.url-href:hover{text-decoration:underline;}
+
+/* ── ROADMAP ── */
+.roadmap-list{background:white;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+.roadmap-item{display:flex;align-items:flex-start;gap:14px;padding:13px 16px;border-bottom:1px solid var(--line);}
+.roadmap-item:last-child{border-bottom:none;}
+.roadmap-num{
+  width:24px;height:24px;border-radius:50%;background:var(--accent);color:#f6f1ea;
+  font-family:var(--font-d);font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+}
+.roadmap-title{font-family:var(--font-d);font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.roadmap-desc{font-size:10.5px;color:var(--muted);line-height:1.5;}
+
+/* ── META STATUS ── */
+.meta-card{background:white;border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:flex;align-items:center;gap:20px;}
+.meta-icon{font-size:32px;flex-shrink:0;}
+.meta-title{font-family:var(--font-d);font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.meta-desc{font-size:11px;color:var(--muted);line-height:1.6;}
+.meta-benefits{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+
+/* ── TOKENS ── */
+.tokens-card{background:white;border:1px solid var(--line);border-radius:10px;padding:18px 20px;}
+.tokens-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:11.5px;}
+.tokens-row:last-child{border-bottom:none;}
+.tokens-label{color:var(--muted);}
+.tokens-value{font-weight:600;color:var(--ink);}
+.tokens-note{font-size:10px;color:var(--accent);background:var(--accent-soft);padding:8px 12px;border-radius:6px;margin-top:12px;line-height:1.6;}
+
+/* ── TWO COL ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <svg width="32" height="32" viewBox="120 60 260 240" fill="none">
+        <line x1="250" y1="88" x2="148" y2="242" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="250" y1="88" x2="352" y2="242" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="250" y1="88" x2="250" y2="210" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
+        <circle cx="250" cy="88" r="13" fill="#f6f1ea"/>
+        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
+      </svg>
+      <div>
+        <div class="login-logo-text">CROLIA</div>
+        <div class="login-sub">Centro de Operaciones</div>
+      </div>
+    </div>
+    <div class="login-label">Usuario</div>
+    <input class="login-input" id="login-user" type="text" placeholder="usuario" autocomplete="username"/>
+    <div class="login-label">Contraseña</div>
+    <input class="login-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password"/>
+    <button class="login-btn" onclick="doLogin()">Ingresar</button>
+    <div class="login-error" id="login-error">Usuario o contraseña incorrectos</div>
+  </div>
+</div>
+
+<!-- ═══ APP ═══ -->
+<div id="app">
+
+  <div class="header">
+    <div class="header-logo">
+      <svg width="28" height="28" viewBox="120 60 260 240" fill="none">
+        <line x1="250" y1="88" x2="148" y2="242" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="250" y1="88" x2="352" y2="242" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="250" y1="88" x2="250" y2="210" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
+        <circle cx="250" cy="88" r="13" fill="#f6f1ea"/>
+        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
+      </svg>
+      <div>
+        <div class="header-title">CROLIA — Operaciones</div>
+        <div class="header-sub">Panel interno · Solo uso de Fran</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="header-date" id="current-date"></span>
+      <button class="logout-btn" onclick="doLogout()">Salir →</button>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-label">MRR actual</div>
+        <div class="stat-value stat-positive">USD 200</div>
+        <div class="stat-sub">Solo JyS bot activo</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Costos fijos/mes</div>
+        <div class="stat-value">~USD 113</div>
+        <div class="stat-sub">Whapi + Anthropic + servicios</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Margen neto</div>
+        <div class="stat-value stat-positive">~USD 87</div>
+        <div class="stat-sub">Con JyS como único cliente</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pipeline MRR</div>
+        <div class="stat-value stat-warning">+ARS 550K</div>
+        <div class="stat-sub">JyS sistema + IES mensual</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Clientes activos</div>
+        <div class="stat-value">3</div>
+        <div class="stat-sub">JyS · IES · BVGS</div>
+      </div>
+    </div>
+
+    <!-- CLIENTES -->
+    <div class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Clientes</div>
+          <div class="section-title">Estado de cuenta por cliente</div>
+        </div>
+      </div>
+      <div class="clients-grid">
+
+        <!-- JyS -->
+        <div class="client-card featured">
+          <div class="client-header">
+            <div>
+              <div class="client-name">JYS Confort</div>
+              <div class="client-rubro">Electrodomésticos y muebles · 4 locales · 3 depósitos</div>
+            </div>
+            <span class="badge badge-green"><span class="dot"></span>ACTIVO</span>
+          </div>
+          <div class="client-body">
+            <div class="client-row">
+              <span class="client-row-label">Contacto</span>
+              <span class="client-row-value">Ignacio Fornes (Nacho)</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Agente WhatsApp IA</span>
+              <span class="client-row-value green">USD 200/mes ✓</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Whapi JyS (costo Crolia)</span>
+              <span class="client-row-value">USD 35/mes</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Sistema de gestión</span>
+              <span class="client-row-value" style="color:var(--yellow);">En desarrollo — USD 2.000 dev</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Mensual sistema (post 30d prueba)</span>
+              <span class="client-row-value">ARS 300.000/mes</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Comisión por cliente referido</span>
+              <span class="client-row-value">30% impl. + 10% mensual</span>
+            </div>
+          </div>
+          <div class="client-note">⚡ Propuesta aceptada. Sistema en desarrollo. Cobro dev + mensual después de 30 días de prueba funcional.</div>
+        </div>
+
+        <!-- IES -->
+        <div class="client-card">
+          <div class="client-header">
+            <div>
+              <div class="client-name">IES Seguros</div>
+              <div class="client-rubro">Seguros · Córdoba · via referido Pablo</div>
+            </div>
+            <span class="badge badge-green"><span class="dot"></span>ACTIVO</span>
+          </div>
+          <div class="client-body">
+            <div class="client-row">
+              <span class="client-row-label">Contacto</span>
+              <span class="client-row-value">ies.seguros.arg@gmail.com</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">URL producción</span>
+              <span class="client-row-value"><a href="https://ies-seguros.crolia.com.ar" target="_blank" style="color:var(--accent);">ies-seguros.crolia.com.ar</a></span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Implementación</span>
+              <span class="client-row-value green">USD 2.800 (Mayo 2026) ✓</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Mensual</span>
+              <span class="client-row-value" style="color:var(--red);">ARS 300.000/mes — cobro post prueba</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Zoho Mail (3 lic.)</span>
+              <span class="client-row-value">USD 36/año — BNA Julio</span>
+            </div>
+          </div>
+          <div class="client-note">📋 Sistema: Landing + cotizador + referidos + reclamos + siniestros + admin CRM. Stack: Next.js + Supabase + Resend. ⏳ Implementación USD 2.800 → cobro Julio. Mensual ARS 300.000 arranca después de implementar multicotizador + APIs pendientes + 1 mes de prueba.</div>
+        </div>
+
+        <!-- BVGS -->
+        <div class="client-card">
+          <div class="client-header">
+            <div>
+              <div class="client-name">BVGS</div>
+              <div class="client-rubro">Bomberos Voluntarios de General Sarmiento</div>
+            </div>
+            <span class="badge badge-gray">PRO BONO</span>
+          </div>
+          <div class="client-body">
+            <div class="client-row">
+              <span class="client-row-label">Servicio</span>
+              <span class="client-row-value">Sitio web institucional</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Facturación</span>
+              <span class="client-row-value" style="color:var(--muted);">Sin cobro — donación</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Costo para Crolia</span>
+              <span class="client-row-value">USD 0 (Vercel free)</span>
+            </div>
+          </div>
+          <div class="client-note">🤝 Proyecto pro bono. Bajo mantenimiento. Valor: referencia y portfolio en rubro institucional.</div>
+        </div>
+
+        <!-- Trillini -->
+        <div class="client-card">
+          <div class="client-header">
+            <div>
+              <div class="client-name">Administraciones Trillini</div>
+              <div class="client-rubro">Administración de consorcios · 22 propiedades</div>
+            </div>
+            <span class="badge badge-yellow"><span class="dot"></span>PENDIENTE</span>
+          </div>
+          <div class="client-body">
+            <div class="client-row">
+              <span class="client-row-label">Propuesta enviada</span>
+              <span class="client-row-value">Web + Sistema expensas</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Probable decisión</span>
+              <span class="client-row-value" style="color:var(--yellow);">Solo web — USD 500 dev</span>
+            </div>
+            <div class="client-row">
+              <span class="client-row-label">Mantenimiento mínimo</span>
+              <span class="client-row-value">USD 300/año (USD 25/mes)</span>
+            </div>
+          </div>
+          <div class="client-note">⏳ Esperando confirmación. Si solo toman web: cobrar USD 500 dev + USD 300/año mantenimiento mínimo para cubrir dominio, soporte y updates.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- INFRAESTRUCTURA -->
+    <div class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Infraestructura</div>
+          <div class="section-title">Servicios activos y costos mensuales</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Servicio</th>
+              <th>Para qué</th>
+              <th>Quién paga</th>
+              <th>Facturación</th>
+              <th class="right">Costo/mes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Whapi — JyS</strong></td>
+              <td class="muted">WhatsApp bot JyS Confort</td>
+              <td><span class="badge badge-brown">Crolia → JyS</span></td>
+              <td class="muted">Mensual</td>
+              <td class="right bold" style="color:var(--accent);">USD 35</td>
+            </tr>
+            <tr>
+              <td><strong>Whapi — Crolia test</strong></td>
+              <td class="muted">Número de prueba y desarrollo</td>
+              <td><span class="badge badge-gray">Crolia</span></td>
+              <td class="muted">Mensual</td>
+              <td class="right bold">USD 35</td>
+            </tr>
+            <tr>
+              <td><strong>Anthropic API</strong></td>
+              <td class="muted">IA — bot JyS + desarrollo</td>
+              <td><span class="badge badge-gray">Crolia</span></td>
+              <td class="muted">Por uso (base USD 20)</td>
+              <td class="right bold">~USD 30–45</td>
+            </tr>
+            <tr>
+              <td><strong>Hostinger</strong></td>
+              <td class="muted">Servidor VPS donde corre Easypanel</td>
+              <td><span class="badge badge-gray">Crolia</span></td>
+              <td class="muted">Anual — ARS 34.899</td>
+              <td class="right bold">~ARS 2.908</td>
+            </tr>
+            <tr>
+              <td><strong>Canva Pro</strong></td>
+              <td class="muted">Diseño, posts, materiales</td>
+              <td><span class="badge badge-gray">Crolia</span></td>
+              <td class="muted">Mensual</td>
+              <td class="right bold">ARS 12.000</td>
+            </tr>
+            <tr>
+              <td><strong>NIC Argentina</strong></td>
+              <td class="muted">Dominio crolia.com.ar</td>
+              <td><span class="badge badge-gray">Crolia</span></td>
+              <td class="muted">Anual — ARS 9.000</td>
+              <td class="right bold">~ARS 750</td>
+            </tr>
+            <tr>
+              <td><strong>Zoho Mail — IES</strong></td>
+              <td class="muted">3 casillas de mail IES Seguros</td>
+              <td><span class="badge badge-blue">IES → BNA Julio</span></td>
+              <td class="muted">Anual — USD 36</td>
+              <td class="right bold">~USD 3</td>
+            </tr>
+            <tr>
+              <td><strong>Vercel</strong></td>
+              <td class="muted">Deploy frontends (crolia-web, ies-web, bvgs)</td>
+              <td><span class="badge badge-green">Gratis</span></td>
+              <td class="muted">—</td>
+              <td class="right" style="color:var(--green);">USD 0</td>
+            </tr>
+            <tr>
+              <td><strong>Supabase</strong></td>
+              <td class="muted">DB + Auth + Storage IES Seguros</td>
+              <td><span class="badge badge-green">Gratis</span></td>
+              <td class="muted">Free tier</td>
+              <td class="right" style="color:var(--green);">USD 0</td>
+            </tr>
+            <tr>
+              <td><strong>Resend</strong></td>
+              <td class="muted">Emails transaccionales</td>
+              <td><span class="badge badge-green">Gratis</span></td>
+              <td class="muted">Free tier</td>
+              <td class="right" style="color:var(--green);">USD 0</td>
+            </tr>
+            <tr>
+              <td><strong>GitHub</strong></td>
+              <td class="muted">Repositorios privados</td>
+              <td><span class="badge badge-green">Gratis</span></td>
+              <td class="muted">—</td>
+              <td class="right" style="color:var(--green);">USD 0</td>
+            </tr>
+            <tr>
+              <td><strong>Cloudflare</strong></td>
+              <td class="muted">DNS y protección</td>
+              <td><span class="badge badge-green">Gratis</span></td>
+              <td class="muted">—</td>
+              <td class="right" style="color:var(--green);">USD 0</td>
+            </tr>
+            <tr>
+              <td><strong>Easypanel</strong></td>
+              <td class="muted">Panel de deploy backends (corre en Hostinger)</td>
+              <td><span class="badge badge-green">Gratis</span></td>
+              <td class="muted">—</td>
+              <td class="right" style="color:var(--green);">USD 0</td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4"><strong>Total fijo estimado</strong></td>
+              <td class="right"><strong>~USD 113 + ARS 16K</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TOKENS ANTHROPIC -->
+    <div class="section">
+      <div class="two-col">
+        <div>
+          <div class="section-label">Anthropic API</div>
+          <div class="section-title" style="margin-bottom:12px;">Consumo de tokens por agente</div>
+          <div class="tokens-card">
+            <div class="tokens-row">
+              <span class="tokens-label">Agente activo</span>
+              <span class="tokens-value">Bot WhatsApp — JyS Confort</span>
+            </div>
+            <div class="tokens-row">
+              <span class="tokens-label">Modelo en uso</span>
+              <span class="tokens-value">claude-haiku-4-5</span>
+            </div>
+            <div class="tokens-row">
+              <span class="tokens-label">Tracking implementado</span>
+              <span class="tokens-value" style="color:var(--green);">✓ Tabla token_usage en DB</span>
+            </div>
+            <div class="tokens-row">
+              <span class="tokens-label">Columnas guardadas</span>
+              <span class="tokens-value">modelo, input, output, cache_write, cache_read</span>
+            </div>
+            <div class="tokens-row">
+              <span class="tokens-label">Base mensual (desarrollo)</span>
+              <span class="tokens-value">USD 20</span>
+            </div>
+            <div class="tokens-row">
+              <span class="tokens-label">Estimado tokens JyS/mes</span>
+              <span class="tokens-value" style="color:var(--yellow);">~USD 10–25 variable</span>
+            </div>
+            <div class="tokens-note">
+              💡 Los tokens están guardados en la base de datos del agentkit (<code>token_usage</code>). Próximo paso: agregar endpoint API que consulte esta tabla y muestre el consumo real del mes aquí en tiempo real. También revisar prompt caching para bajar costos 60–80%.
+            </div>
+          </div>
+        </div>
+
+        <!-- META -->
+        <div>
+          <div class="section-label">Meta Business</div>
+          <div class="section-title" style="margin-bottom:12px;">Verificación como proveedor</div>
+          <div class="meta-card" style="flex-direction:column;align-items:flex-start;">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;">
+              <div class="meta-icon">🔵</div>
+              <div>
+                <div class="meta-title">Meta Business Verification</div>
+                <div style="margin-top:4px;"><span class="badge badge-yellow"><span class="dot"></span>EN PROCESO</span></div>
+              </div>
+            </div>
+            <div class="meta-desc">Verificación de empresa en Meta para registrarse como proveedor oficial de WhatsApp Business API. Permite acceso a mayores límites de mensajes y funcionalidades avanzadas.</div>
+            <div class="meta-benefits">
+              <span class="badge badge-blue">Mayor límite de mensajes/día</span>
+              <span class="badge badge-blue">Badge verificado ✓</span>
+              <span class="badge badge-blue">Mensajes de marketing</span>
+              <span class="badge badge-blue">Templates aprobados</span>
+              <span class="badge badge-blue">API directa sin intermediarios</span>
+            </div>
+            <div class="tokens-note" style="margin-top:12px;width:100%;">
+              📋 Próximos pasos: completar el proceso de verificación en business.facebook.com. Una vez aprobado: migrar JyS a Meta Cloud API directo y reducir costo de Whapi (USD 35/mes).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPOSITORIOS -->
+    <div class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Repositorios</div>
+          <div class="section-title">GitHub — rakidev777</div>
+        </div>
+        <a href="https://github.com/rakidev777" target="_blank" style="font-size:11px;color:var(--accent);font-weight:600;text-decoration:none;">Ver todos en GitHub →</a>
+      </div>
+      <div class="repos-grid">
+        <div class="repo-card">
+          <div class="repo-name">crolia-web</div>
+          <div class="repo-desc">Landing + demo chatbot + admin dashboard de Crolia</div>
+          <div class="repo-tags"><span class="repo-tag">Next.js</span><span class="repo-tag">Vercel</span><span class="repo-tag">Producción</span></div>
+          <a href="https://github.com/rakidev777/crolia-web" target="_blank" class="repo-link">github.com/rakidev777/crolia-web</a>
+        </div>
+        <div class="repo-card">
+          <div class="repo-name">whatsapp-agentkit</div>
+          <div class="repo-desc">Framework agentes WhatsApp con IA. Corre el bot de JyS</div>
+          <div class="repo-tags"><span class="repo-tag">Python</span><span class="repo-tag">FastAPI</span><span class="repo-tag">Easypanel</span></div>
+          <a href="https://github.com/rakidev777/whatsapp-agentkit" target="_blank" class="repo-link">github.com/rakidev777/whatsapp-agentkit</a>
+        </div>
+        <div class="repo-card">
+          <div class="repo-name">ies-seguros</div>
+          <div class="repo-desc">Sistema completo IES: web + CRM + cotizador + siniestros</div>
+          <div class="repo-tags"><span class="repo-tag">Next.js</span><span class="repo-tag">Supabase</span><span class="repo-tag">Producción</span></div>
+          <a href="https://github.com/rakidev777/ies-seguros" target="_blank" class="repo-link">github.com/rakidev777/ies-seguros</a>
+        </div>
+        <div class="repo-card">
+          <div class="repo-name">crolia-ventas</div>
+          <div class="repo-desc">Sales playbook, propuestas comerciales y assets de venta</div>
+          <div class="repo-tags"><span class="repo-tag">HTML</span><span class="repo-tag">Interno</span></div>
+          <a href="https://github.com/rakidev777/crolia-ventas" target="_blank" class="repo-link">github.com/rakidev777/crolia-ventas</a>
+        </div>
+        <div class="repo-card">
+          <div class="repo-name">bvgs-web</div>
+          <div class="repo-desc">Sitio institucional BVGS — Bomberos Voluntarios</div>
+          <div class="repo-tags"><span class="repo-tag">HTML</span><span class="repo-tag">Vercel</span><span class="repo-tag">Pro bono</span></div>
+          <a href="https://github.com/rakidev777/bvgs-web" target="_blank" class="repo-link">github.com/rakidev777/bvgs-web</a>
+        </div>
+        <div class="repo-card">
+          <div class="repo-name">jys-gestion <span style="font-size:9px;color:var(--yellow);font-weight:700;">PRÓXIMO</span></div>
+          <div class="repo-desc">Sistema de gestión JyS — stock, ventas, ARCA, CRM, préstamos</div>
+          <div class="repo-tags"><span class="repo-tag">FastAPI</span><span class="repo-tag">Next.js</span><span class="repo-tag">PostgreSQL</span></div>
+          <span style="font-size:10px;color:var(--muted);">A crear al iniciar el desarrollo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- URLS IMPORTANTES -->
+    <div class="section">
+      <div class="section-label">URLs importantes</div>
+      <div class="section-title" style="margin-bottom:12px;">Accesos rápidos</div>
+      <div class="urls-grid">
+        <div class="url-card"><div class="url-info"><div class="url-label">Crolia — web pública</div><a href="https://crolia.com.ar" target="_blank" class="url-href">crolia.com.ar</a></div><span class="badge badge-green">Online</span></div>
+        <div class="url-card"><div class="url-info"><div class="url-label">IES Seguros — producción</div><a href="https://ies-seguros.crolia.com.ar" target="_blank" class="url-href">ies-seguros.crolia.com.ar</a></div><span class="badge badge-green">Online</span></div>
+        <div class="url-card"><div class="url-info"><div class="url-label">Crolia — demo chatbot</div><a href="https://crolia.com.ar/demo" target="_blank" class="url-href">crolia.com.ar/demo</a></div><span class="badge badge-green">Online</span></div>
+        <div class="url-card"><div class="url-info"><div class="url-label">Propuesta JyS</div><a href="https://crolia.com.ar/propuesta-jys" target="_blank" class="url-href">crolia.com.ar/propuesta-jys</a></div><span class="badge badge-green">Online</span></div>
+        <div class="url-card"><div class="url-info"><div class="url-label">Easypanel — deploy backends</div><a href="#" class="url-href">easypanel (Hostinger VPS)</a></div><span class="badge badge-green">Activo</span></div>
+        <div class="url-card"><div class="url-info"><div class="url-label">Vercel — frontends</div><a href="https://vercel.com" target="_blank" class="url-href">vercel.com</a></div><span class="badge badge-green">Activo</span></div>
+        <div class="url-card"><div class="url-info"><div class="url-label">Crolia admin</div><a href="https://crolia.com.ar/admin" target="_blank" class="url-href">crolia.com.ar/admin</a></div><span class="badge badge-green">Online</span></div>
+        <div class="url-card"><div class="url-info"><div class="url-label">IES admin</div><a href="https://ies-seguros.crolia.com.ar/admin" target="_blank" class="url-href">ies-seguros.crolia.com.ar/admin</a></div><span class="badge badge-green">Online</span></div>
+      </div>
+    </div>
+
+    <!-- ROADMAP -->
+    <div class="section">
+      <div class="section-label">Hoja de ruta</div>
+      <div class="section-title" style="margin-bottom:12px;">Crolia SaaS — próximos pasos</div>
+      <div class="roadmap-list">
+        <div class="roadmap-item">
+          <div class="roadmap-num">1</div>
+          <div>
+            <div class="roadmap-title">Iniciar desarrollo sistema JyS Confort <span class="badge badge-yellow" style="margin-left:6px;">EN CURSO</span></div>
+            <div class="roadmap-desc">Crear repo jys-gestion. Arrancar Etapa 1: auth, productos, stock, POS, ARCA. 9 semanas estimadas. USD 2.000 + ARS 300K/mes post prueba.</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">2</div>
+          <div>
+            <div class="roadmap-title">Cerrar mensual IES Seguros <span class="badge badge-red" style="margin-left:6px;">URGENTE</span></div>
+            <div class="roadmap-desc">Proponer ARS 300.000/mes.por mantenimiento y evolución del sistema. Sistema ya está en producción — es el momento de formalizar el recurrente.</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">3</div>
+          <div>
+            <div class="roadmap-title">Implementar prompt caching en el bot JyS</div>
+            <div class="roadmap-desc">El system prompt del agente es largo y se envía en cada mensaje. Con prompt caching (ya soportado por el SDK) se pueden bajar los costos de Anthropic 60–80%.</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">4</div>
+          <div>
+            <div class="roadmap-title">Dashboard de tokens Anthropic en tiempo real</div>
+            <div class="roadmap-desc">La tabla token_usage ya está siendo poblada en la DB del agentkit. Crear endpoint API que la consulte y mostrar el consumo real del mes en este panel.</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">5</div>
+          <div>
+            <div class="roadmap-title">Completar verificación Meta Business</div>
+            <div class="roadmap-desc">Verificar empresa en business.facebook.com. Una vez aprobado: migrar JyS a Meta Cloud API directo y eliminar costo Whapi (ahorro USD 35/mes por número).</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">6</div>
+          <div>
+            <div class="roadmap-title">Organizar estructura de repositorios</div>
+            <div class="roadmap-desc">Crear carpetas clientes/ y crolia/ en disco. Renombrar whatsapp-agentkit a jys-bot. Centralizar credenciales en Bitwarden.</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">7</div>
+          <div>
+            <div class="roadmap-title">Cerrar Trillini</div>
+            <div class="roadmap-desc">Respuesta pendiente. Si solo toman web: USD 500 dev + USD 300/año mantenimiento. Si toman sistema de expensas: USD 2.400 dev + USD 90/mes.</div>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-num">8</div>
+          <div>
+            <div class="roadmap-title">Estandarizar sistema JyS como SaaS vendible</div>
+            <div class="roadmap-desc">Multi-tenant desde el día 1. Al terminar el desarrollo de JyS, armar el producto para venderlo a otros comercios del rubro. Nacho como socio comercial con 30% implementación + 10% mensual por referidos.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<script>
+// Fecha actual
+document.getElementById('current-date').textContent = new Date().toLocaleDateString('es-AR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+function doLogin(){
+  const u=document.getElementById('login-user').value.trim();
+  const p=document.getElementById('login-pass').value.trim();
+  if(u==='iferrari'&&p==='fiesta32'){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    sessionStorage.setItem('crolia-ops','1');
+  } else {
+    document.getElementById('login-error').style.display='block';
+  }
+}
+function doLogout(){
+  sessionStorage.removeItem('crolia-ops');
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-user').value='';
+  document.getElementById('login-pass').value='';
+}
+document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+document.getElementById('login-user').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('login-pass').focus();});
+if(sessionStorage.getItem('crolia-ops')==='1'){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+}
+</script>
+</body>
+</html>
