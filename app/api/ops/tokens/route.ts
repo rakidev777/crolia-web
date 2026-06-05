@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   }
 
   const agentUrl = process.env.AGENTKIT_URL?.replace(/\/$/, "");
-  const adminKey = process.env.AGENTKIT_ADMIN_KEY;
+  const adminKey = process.env.AGENTKIT_ADMIN_KEY ?? process.env.ADMIN_API_KEY;
 
   if (!agentUrl || !adminKey) {
     return NextResponse.json({ error: "Agentkit not configured" }, { status: 503 });
