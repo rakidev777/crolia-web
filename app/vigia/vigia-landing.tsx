@@ -327,7 +327,7 @@ export default function VigiaLanding() {
                   <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.4)" }}>🔍</span>
                   <span style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.3)" }}>Buscar producto — Enter para agregar</span>
                 </div>
-                <div style={{ space: 8 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   {[
                     { code: "ANF-0005", name: "Anafe Star Track Doble", price: "$72.000", qty: 1, color: "#22c55e" },
                     { code: "TEM-0017", name: "Bolso Matero Impermeable", price: "$17.939", qty: 2, color: null },
