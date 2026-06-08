@@ -360,6 +360,107 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Vigía showcase ── */}
+      <section className="section-shell py-16 md:py-24">
+        <div className="rounded-[2rem] overflow-hidden reveal" style={{ background: "linear-gradient(135deg, #3a251c 0%, #5d3e2e 50%, #4a3025 100%)" }}>
+          <div className="grid gap-0 lg:grid-cols-[1fr_1fr]">
+            {/* Text side */}
+            <div className="p-8 md:p-12 flex flex-col justify-center">
+              <div className="flex items-center gap-3 mb-6">
+                <svg width="28" height="40" viewBox="0 0 36 52" fill="none">
+                  <line x1="18" y1="6" x2="18" y2="0" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.6"/>
+                  <line x1="18" y1="6" x2="28" y2="1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.4"/>
+                  <line x1="18" y1="6" x2="8" y2="1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.4"/>
+                  <path d="M12 12 L18 6 L24 12 Z" fill="white" fillOpacity="0.9"/>
+                  <rect x="11" y="12" width="14" height="7" rx="0.5" fill="white"/>
+                  <path d="M13 19 L11 42 L25 42 L23 19 Z" fill="white" fillOpacity="0.75"/>
+                  <rect x="8" y="42" width="20" height="5" rx="1" fill="white" fillOpacity="0.9"/>
+                  <rect x="5" y="47" width="26" height="3" rx="1" fill="white" fillOpacity="0.5"/>
+                </svg>
+                <div>
+                  <span className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>Vigía</span>
+                  <span className="text-white/40 text-sm ml-2">by Crolia</span>
+                </div>
+                <span className="ml-2 flex items-center gap-1.5 text-xs text-white/60 bg-white/10 border border-white/15 rounded-full px-3 py-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-green-400 inline-block" style={{ boxShadow: "0 0 6px #4ade80" }} />
+                  En producción
+                </span>
+              </div>
+              <h2 className="text-3xl font-bold text-white leading-tight mb-4 md:text-4xl" style={{ fontFamily: "var(--font-display)" }}>
+                El sistema de gestión que construimos para comercios reales.
+              </h2>
+              <p className="text-white/60 text-base leading-7 mb-8 max-w-lg">
+                Vigía es un sistema completo de gestión para comercios: POS, stock, clientes, cuotas, caja, presupuestos, facturación y agente IA — todo integrado en una plataforma moderna y accesible desde cualquier dispositivo.
+              </p>
+              <div className="grid grid-cols-2 gap-2 mb-8">
+                {[
+                  "Punto de Venta (POS)", "Cuotas automáticas", "Control de stock multi-local",
+                  "Cuenta corriente", "Dashboard en tiempo real", "Agente IA integrado",
+                  "Facturación ARCA", "CRM WhatsApp",
+                ].map((f) => (
+                  <div key={f} className="flex items-center gap-2 text-sm text-white/70">
+                    <span className="text-[#c4a882] font-bold text-xs">✓</span>
+                    {f}
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <a href="/vigia" className="rounded-full px-6 py-3 text-sm font-semibold text-white transition" style={{ background: "#8a6448" }}>
+                  Ver Vigía completo →
+                </a>
+                <a href="#contacto" className="rounded-full px-6 py-3 text-sm font-semibold text-white/70 border border-white/15 transition hover:border-white/30">
+                  Quiero esto para mi negocio
+                </a>
+              </div>
+            </div>
+
+            {/* Dashboard mockup side */}
+            <div className="hidden lg:flex items-center justify-center p-8" style={{ background: "rgba(0,0,0,0.2)" }}>
+              <div className="w-full max-w-sm rounded-2xl overflow-hidden" style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.4)", background: "#f5f3f0" }}>
+                <div className="bg-white border-b border-gray-100 px-4 py-3 flex items-center justify-between">
+                  <span className="text-sm font-bold text-gray-900" style={{ fontFamily: "var(--font-display)" }}>Dashboard</span>
+                  <span className="text-xs text-gray-400">Bella Vista · hoy</span>
+                </div>
+                <div className="p-4 space-y-3">
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { label: "Ventas hoy", value: "$896.272", color: "#22c55e" },
+                      { label: "Préstamos activos", value: "4", color: "#8b5cf6" },
+                      { label: "Stock alertas", value: "3 ítems", color: "#f59e0b" },
+                      { label: "Esta semana", value: "$2.7M", color: "#3b82f6" },
+                    ].map(k => (
+                      <div key={k.label} className="bg-white rounded-xl p-3" style={{ borderLeft: `3px solid ${k.color}`, boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
+                        <div className="text-xs text-gray-400 mb-1">{k.label}</div>
+                        <div className="text-base font-bold text-gray-900">{k.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="bg-white rounded-xl p-3" style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
+                    <div className="text-xs text-gray-400 mb-2 font-semibold uppercase tracking-wide">Formas de pago</div>
+                    <div className="h-2 rounded-full overflow-hidden flex" style={{ background: "#f0ede8" }}>
+                      {[["56%","#8a6448"],["24%","#3b82f6"],["12%","#22c55e"],["8%","#f59e0b"]].map(([w,c],i)=>(
+                        <div key={i} style={{ width: w, background: c, height: "100%" }} />
+                      ))}
+                    </div>
+                    <div className="flex gap-3 mt-2">
+                      {[["Cuotas","56%","#8a6448"],["Cta.Cte","24%","#3b82f6"],["Efec.","12%","#22c55e"]].map(([l,p,c])=>(
+                        <div key={l as string} className="flex items-center gap-1">
+                          <div style={{ width:6, height:6, borderRadius:"50%", background: c as string }} />
+                          <span className="text-xs text-gray-500">{l} {p}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="bg-amber-50 rounded-xl p-3 border border-amber-100 text-xs text-amber-700 flex items-center gap-2">
+                    <span>⚠️</span> 2 cuotas vencidas — ver préstamos
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Contact ── */}
       <section id="contacto" className="section-shell py-16 md:py-24">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
