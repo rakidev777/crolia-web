@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   description:
     "Agentes de IA, automatización de procesos, sitios web y sistemas a medida para negocios que quieren crecer. Tecnología accesible para cualquier empresa.",
   icons: {
-    icon: "/crolia-icon.png",
+    icon: "/favicon.svg",
     apple: "/crolia-icon.png",
   },
 };
