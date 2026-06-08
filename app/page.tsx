@@ -162,8 +162,11 @@ export default function Home() {
       <header className="sticky top-0 z-30 border-b border-black/6 bg-[color:var(--color-surface-soft)]/85 backdrop-blur-xl">
         <div className="section-shell flex items-center justify-between py-4">
           <a href="#inicio" className="flex items-center gap-3">
-            <img src="/crolia-logo.png" alt="Crolia" className="h-9 w-9 rounded-full" />
-            <span className="text-sm font-semibold tracking-[0.22em] text-[color:var(--color-ink)] uppercase" style={{ fontFamily: "var(--font-display)" }}>Crolia</span>
+            <img src="/crolia-icon-1024.png" alt="Crolia" className="h-12 w-12" />
+            <div className="flex flex-col leading-tight">
+              <span className="text-sm font-semibold tracking-[0.22em] text-[color:var(--color-ink)] uppercase" style={{ fontFamily: "var(--font-display)" }}>Crolia</span>
+              <span className="text-[10px] tracking-[0.12em] text-[color:var(--color-muted)] uppercase" style={{ fontFamily: "var(--font-display)" }}>Automatización Inteligente</span>
+            </div>
           </a>
           <nav aria-label="Principal" className="hidden items-center gap-7 text-sm text-[color:var(--color-muted)] md:flex">
             <a href="#que-hacemos" className="transition hover:text-[color:var(--color-ink)]">Servicios</a>
