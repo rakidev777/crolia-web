@@ -607,8 +607,8 @@ html, body { font-family: var(--font-b); background: var(--bg); color: var(--ink
         <ul class="etapa-items">
           <li>Factura electrónica AFIP con CAE en tiempo real</li>
           <li>Panel de cobros del día</li>
-          <li>Mercado Pago: pago confirmado por webhook automático</li>
-          <li>BNA y Galicia: validación por parseo de email</li>
+          <li>Mercado Pago: el pago aparece confirmado solo, en segundos</li>
+          <li>BNA y Galicia: el sistema lee el aviso del banco y lo registra automáticamente</li>
           <li>Registra quién pagó, cuándo y por qué canal</li>
         </ul>
       </div>
@@ -623,7 +623,7 @@ html, body { font-family: var(--font-b); background: var(--bg); color: var(--ink
           <li>Checklist operativo diario con historial de cumplimiento</li>
           <li>Dashboard: cobros, pedidos, stock crítico en tiempo real</li>
           <li>Informes: ganancia filet vs congelados, resumen mensual</li>
-          <li>Balanza electrónica integrada por TCP-IP</li>
+          <li>Balanza electrónica conectada al sistema — el peso pasa solo, sin tipear nada</li>
         </ul>
       </div>
       <div class="etapa" style="border-left:3px solid var(--accent);grid-column:1/-1;">
@@ -711,29 +711,35 @@ html, body { font-family: var(--font-b); background: var(--bg); color: var(--ink
       </tbody>
     </table>
 
-    <div style="margin-top:10px;">
-      <div class="plan-card featured" style="width:100%;">
-        <div class="plan-rec">Kit completo — todo incluido en un solo pago</div>
-        <div class="plan-name">Suscripción mensual única</div>
-        <div class="plan-price">ARS 380.000</div>
-        <div class="plan-period">por mes · sistema + agente IA + soporte + todo</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+      <div class="plan-card">
+        <div class="plan-name">Sistema</div>
+        <div class="plan-price">$200.000</div>
+        <div class="plan-period">ARS / mes</div>
         <hr class="plan-divider"/>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px;">
-          <ul class="plan-items">
-            <li>Sistema completo en producción</li>
-            <li>Hosting, base de datos y backups diarios</li>
-            <li>Soporte directo — respuesta el mismo día</li>
-            <li>Actualizaciones y correcciones incluidas</li>
-            <li>Usuarios ilimitados, sin costo adicional</li>
-          </ul>
-          <ul class="plan-items">
-            <li>Agente IA — WhatsApp, Instagram y Facebook</li>
-            <li>Presupuestos automáticos por foto o mensaje</li>
-            <li>Responde con precios y stock en tiempo real, 24/7</li>
-            <li>10 horas de ajustes incluidas los primeros 6 meses</li>
-            <li>Nuevas funcionalidades: USD 50/hr</li>
-          </ul>
-        </div>
+        <ul class="plan-items">
+          <li>Sistema completo funcionando</li>
+          <li>Servidor, base de datos y respaldo diario</li>
+          <li>Soporte directo — respuesta el mismo día</li>
+          <li>Actualizaciones y mejoras incluidas</li>
+          <li>Usuarios ilimitados, sin costo adicional</li>
+          <li>10 horas de ajustes incluidas los primeros 6 meses</li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-rec">Recomendado</div>
+        <div class="plan-name">Sistema + Agente IA</div>
+        <div class="plan-price">$380.000</div>
+        <div class="plan-period">ARS / mes · todo incluido</div>
+        <hr class="plan-divider"/>
+        <ul class="plan-items">
+          <li>Todo lo del plan Sistema +</li>
+          <li>Agente IA en WhatsApp, Instagram y Facebook</li>
+          <li>Genera presupuestos solos a partir de mensajes o fotos</li>
+          <li>Responde clientes y confirma pedidos las 24 horas</li>
+          <li>Consulta de saldo de cuenta corriente por mensaje</li>
+          <li>Un solo pago mensual, sin sorpresas</li>
+        </ul>
       </div>
     </div>
   </div>
