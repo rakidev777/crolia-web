@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Propuesta — Cangrejo Cascarudo × Crolia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:         #221a14;
+  --bg:          #f6f1ea;
+  --surface:     #ede7de;
+  --accent:      #8a6448;
+  --accent-soft: #e9ddd1;
+  --muted:       #6d6057;
+  --line:        rgba(34,26,20,0.10);
+  --font-d:      'Space Grotesk', sans-serif;
+  --font-b:      'Inter', sans-serif;
+}
+
+html, body { font-family: var(--font-b); background: var(--bg); color: var(--ink); }
+
+.page {
+  width: 210mm;
+  margin: 0 auto;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media screen {
+  body { background: #d4cfc8; padding: 24px 0 48px; }
+  .page { box-shadow: 0 8px 40px rgba(34,26,20,0.18); margin-bottom: 32px; }
+}
+@media print {
+  body { background: var(--bg); padding: 0; margin: 0; }
+  .page { box-shadow: none; page-break-after: always; margin: 0; }
+  .page:last-child { page-break-after: avoid; }
+  .print-btn { display: none !important; }
+  @page { size: A4; margin: 0; }
+}
+
+.print-btn {
+  position: fixed; top: 20px; right: 20px;
+  background: var(--ink); color: #f6f1ea;
+  font-family: var(--font-d); font-size: 12px; font-weight: 600; letter-spacing: .08em;
+  border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; z-index: 100;
+}
+.print-btn:hover { background: var(--accent); }
+
+.watermark {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px; height: 320px;
+  opacity: 0.045; pointer-events: none; z-index: 0;
+}
+.page > *:not(.watermark) { position: relative; z-index: 1; }
+
+.header {
+  background: var(--ink); color: #f6f1ea;
+  padding: 11px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.logo-block { display: flex; align-items: center; gap: 10px; }
+.logo-text { font-family: var(--font-b); font-weight: 600; font-size: 18px; letter-spacing: .04em; color: #f6f1ea; }
+.logo-sub { font-size: 11px; color: rgba(246,241,234,.4); letter-spacing: .03em; margin-top: 1px; }
+.header-contact { text-align: right; }
+.header-contact a { display: block; font-size: 10.5px; color: rgba(246,241,234,.55); text-decoration: none; line-height: 1.7; }
+.header-contact a:first-child { color: rgba(246,241,234,.85); font-weight: 600; font-size: 11.5px; }
+
+.footer-strip {
+  background: var(--ink); padding: 9px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.footer-strip span { font-size: 9px; color: rgba(246,241,234,.28); letter-spacing: .05em; }
+.footer-strip strong { color: rgba(246,241,234,.5); font-weight: 600; }
+
+.section-label {
+  font-family: var(--font-d); font-size: 8px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+}
+.section-title {
+  font-family: var(--font-d); font-size: 14px; font-weight: 700;
+  color: var(--ink); letter-spacing: -.02em; margin-bottom: 10px;
+}
+
+/* PÁGINA 1 */
+.p1-hero {
+  padding: 20px 28px 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.p1-hero-content { flex: 1; }
+.hero-eyebrow {
+  display: inline-block; font-family: var(--font-d);
+  font-size: 8.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-soft);
+  padding: 3px 10px; border-radius: 100px; margin-bottom: 10px;
+}
+.hero-h1 {
+  font-family: var(--font-d); font-weight: 800; font-size: 23px;
+  line-height: 1.1; letter-spacing: -.03em; color: var(--ink); margin-bottom: 10px;
+}
+.hero-h1 em { font-style: normal; color: var(--accent); }
+.hero-sub { font-size: 11px; line-height: 1.65; color: var(--muted); max-width: 440px; }
+
+.client-logos {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 10px;
+}
+.logo-sep {
+  font-family: var(--font-d); font-size: 18px; font-weight: 300;
+  color: rgba(34,26,20,.2); line-height: 1;
+}
+
+.p1-problems { padding: 18px 28px; border-bottom: 1px solid var(--line); }
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.problem-card {
+  background: white; border: 1px solid var(--line); border-radius: 8px; padding: 13px 15px;
+}
+.problem-card.hl { border-left: 3px solid var(--accent); }
+.pcard-title { font-family: var(--font-d); font-size: 11px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.pcard-desc { font-size: 10px; color: var(--muted); line-height: 1.55; }
+
+.p1-solution { padding: 18px 28px; background: var(--surface); flex: 1; }
+.p1-solution-body { font-size: 11px; line-height: 1.65; color: var(--muted); margin-top: 6px; }
+
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+.stat-cell { background: white; border-radius: 8px; border: 1px solid var(--line); padding: 11px 12px; }
+.stat-num { font-family: var(--font-d); font-size: 20px; font-weight: 800; color: var(--accent); letter-spacing: -.03em; line-height: 1; }
+.stat-label { font-size: 9.5px; color: var(--muted); margin-top: 2px; }
+
+/* PÁGINA 2 */
+.p2-modules { padding: 14px 28px 12px; border-bottom: 1px solid var(--line); flex: 1; }
+.modules-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-top: 8px; }
+.module-card { background: white; border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; }
+.mod-num { font-family: var(--font-d); font-size: 7px; font-weight: 700; letter-spacing: .15em; color: var(--accent); margin-bottom: 3px; }
+.mod-title { font-family: var(--font-d); font-size: 10.5px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.mod-desc { font-size: 9.5px; color: var(--muted); line-height: 1.5; }
+
+.p2-diferencial { padding: 12px 28px; background: var(--surface); }
+.diferencial-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-top: 8px; }
+.dif-card { background: white; border: 1px solid var(--line); border-radius: 8px; padding: 12px 13px; }
+.dif-icon { font-size: 15px; margin-bottom: 5px; }
+.dif-title { font-family: var(--font-d); font-size: 10.5px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.dif-desc { font-size: 9.5px; color: var(--muted); line-height: 1.5; }
+
+/* PÁGINA 3 */
+.p3-etapas { padding: 14px 28px; border-bottom: 1px solid var(--line); }
+.etapas-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-top: 8px; }
+.etapa { background: white; border: 1px solid var(--line); border-radius: 8px; padding: 12px 13px; }
+.etapa-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; gap: 4px; }
+.etapa-badge {
+  font-family: var(--font-d); font-size: 7.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  background: var(--accent); color: #f6f1ea; padding: 2px 9px; border-radius: 100px;
+}
+.etapa-time {
+  font-family: var(--font-d); font-size: 8.5px; font-weight: 600; color: var(--accent);
+  background: var(--accent-soft); padding: 2px 8px; border-radius: 100px;
+}
+.etapa-title { font-family: var(--font-d); font-size: 11px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.etapa-items { list-style: none; }
+.etapa-items li {
+  font-size: 9.5px; color: var(--muted); padding: 2px 0 2px 11px;
+  position: relative; line-height: 1.45;
+}
+.etapa-items li::before { content: '·'; position: absolute; left: 2px; color: var(--accent); font-weight: 700; font-size: 13px; line-height: 1; top: 2px; }
+
+.etapas-meta { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px; }
+.meta-cell { background: var(--surface); border-radius: 7px; padding: 9px 11px; }
+.meta-label { font-family: var(--font-d); font-size: 7px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+.meta-value { font-family: var(--font-d); font-size: 11px; font-weight: 700; color: var(--ink); }
+.meta-desc { font-size: 9px; color: var(--muted); margin-top: 1px; }
+
+.p3-pricing { padding: 12px 28px; border-bottom: 1px solid var(--line); }
+.pricing-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.pricing-table th {
+  background: var(--ink); color: #f6f1ea;
+  font-family: var(--font-d); font-size: 7.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  padding: 8px 12px; text-align: left;
+}
+.pricing-table th:last-child { text-align: right; }
+.pricing-table td { padding: 9px 12px; font-size: 10px; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+.pricing-table td.desc { font-size: 9px; color: var(--muted); }
+.pricing-table td.val { text-align: right; font-family: var(--font-d); font-weight: 700; color: var(--accent); font-size: 10.5px; }
+.pricing-table tr.total td { background: var(--surface); font-family: var(--font-d); font-weight: 700; border-top: 1.5px solid var(--accent); border-bottom: none; font-size: 11px; }
+.pricing-table tr.total td.val { color: var(--accent); font-size: 13px; }
+
+.plan-card {
+  background: white; border: 1.5px solid var(--line); border-radius: 8px; padding: 13px 14px;
+  display: flex; flex-direction: column;
+}
+.plan-card.featured { background: var(--ink); border-color: var(--ink); }
+.plan-name { font-family: var(--font-d); font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.plan-card.featured .plan-name { color: rgba(246,241,234,.5); }
+.plan-rec {
+  display: inline-block; font-family: var(--font-d); font-size: 7.5px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  background: var(--accent); color: #f6f1ea;
+  padding: 2px 8px; border-radius: 100px; margin-bottom: 4px;
+}
+.plan-price { font-family: var(--font-d); font-size: 19px; font-weight: 800; color: var(--ink); letter-spacing: -.03em; line-height: 1; margin-bottom: 3px; }
+.plan-card.featured .plan-price { color: #f6f1ea; }
+.plan-period { font-size: 9.5px; color: var(--muted); margin-bottom: 10px; }
+.plan-card.featured .plan-period { color: rgba(246,241,234,.45); }
+.plan-divider { border: none; border-top: 1px solid var(--line); margin: 8px 0; }
+.plan-card.featured .plan-divider { border-color: rgba(246,241,234,.1); }
+.plan-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.plan-items li { font-size: 9.5px; color: var(--muted); padding-left: 13px; position: relative; line-height: 1.4; }
+.plan-items li::before { content: '·'; position: absolute; left: 3px; color: var(--accent); font-weight: 700; font-size: 13px; line-height: 1; top: 1px; }
+.plan-card.featured .plan-items li { color: rgba(246,241,234,.65); }
+
+.p3-expansion { padding: 12px 28px; border-bottom: 1px solid var(--line); }
+.expansion-label { font-family: var(--font-d); font-size: 8px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #2d7d6e; margin-bottom: 6px; }
+.expansion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.exp-card { background: white; border: 1.5px dashed #b0ccc8; border-radius: 8px; padding: 12px 13px; }
+.exp-badge {
+  display: inline-block; font-family: var(--font-d); font-size: 7px; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  background: #e8f5f3; color: #2d7d6e;
+  padding: 2px 8px; border-radius: 100px; margin-bottom: 6px;
+}
+.exp-badge.infinite { background: var(--accent-soft); color: var(--accent); }
+.exp-title { font-family: var(--font-d); font-size: 10.5px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.exp-desc { font-size: 9.5px; color: var(--muted); line-height: 1.5; }
+
+.cta-footer {
+  background: var(--accent); padding: 18px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex: 1;
+}
+.cta-left h2 { font-family: var(--font-d); font-weight: 800; font-size: 16px; letter-spacing: -.02em; color: #f6f1ea; line-height: 1.2; margin-bottom: 6px; }
+.cta-left p { font-size: 11px; color: rgba(246,241,234,.75); line-height: 1.55; max-width: 380px; }
+.cta-right { text-align: right; flex-shrink: 0; }
+.cta-phone { font-family: var(--font-d); font-size: 18px; font-weight: 800; color: #f6f1ea; letter-spacing: -.02em; margin-bottom: 5px; }
+.cta-contact { font-size: 10.5px; color: rgba(246,241,234,.65); line-height: 1.8; }
+
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">⬇ Exportar PDF</button>
+
+<!-- ═══════════════════════════ PÁGINA 1 ═══════════════════════════ -->
+<div class="page">
+  <svg class="watermark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" fill="none">
+    <line x1="250" y1="88"  x2="148" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="352" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#8a6448"/>
+    <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+    <circle cx="250" cy="88"  r="13" fill="#8a6448"/>
+    <circle cx="148" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="352" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="250" cy="282" r="13" fill="#8a6448"/>
+  </svg>
+
+  <div class="header">
+    <div class="logo-block">
+      <svg width="34" height="34" viewBox="120 60 260 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <line x1="250" y1="88"  x2="148" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="352" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
+        <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#8a6448"/>
+        <circle cx="250" cy="88"  r="13" fill="#f6f1ea"/>
+        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
+      </svg>
+      <div>
+        <div class="logo-text">CROLIA</div>
+        <div class="logo-sub">Automatización Inteligente</div>
+      </div>
+    </div>
+    <div class="header-contact">
+      <a href="mailto:contacto@crolia.com.ar">contacto@crolia.com.ar</a>
+      <a href="#">+54 9 11 7372-9899 &nbsp;·&nbsp; www.crolia.com.ar</a>
+    </div>
+  </div>
+
+  <div class="p1-hero">
+    <div class="p1-hero-content">
+      <div class="hero-eyebrow">Propuesta de desarrollo — Junio 2026</div>
+      <h1 class="hero-h1">El sistema que<br/><em>trabaja mientras vos repartís</em></h1>
+      <p class="hero-sub">Hoy Cangrejo Cascarudo opera con un sistema Windows desactualizado y un Excel de 50 hojas que hay que mantener a mano. Cada cambio de precio toma horas. Cada transferencia hay que verificarla en el celular. El reparto se coordina de memoria. Todo eso se puede eliminar — en un mes, sin perder un solo dato.</p>
+    </div>
+    <div class="client-logos">
+      <div style="font-family:var(--font-d);font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1;text-align:center;">🦀<br/><span style="font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.02em;">CANGREJO<br/>CASCARUDO</span></div>
+      <div class="logo-sep">×</div>
+      <svg width="44" height="44" viewBox="120 60 260 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="250" y1="88"  x2="148" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="352" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#8a6448"/>
+        <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+        <circle cx="250" cy="88"  r="13" fill="#8a6448"/>
+        <circle cx="148" cy="242" r="13" fill="#8a6448"/>
+        <circle cx="352" cy="242" r="13" fill="#8a6448"/>
+        <circle cx="250" cy="282" r="13" fill="#8a6448"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="p1-problems">
+    <div class="section-label">El punto de partida</div>
+    <div class="section-title">Lo que estamos resolviendo</div>
+    <div class="problem-grid">
+      <div class="problem-card hl">
+        <div class="pcard-title">Sistema Windows + Excel en paralelo</div>
+        <div class="pcard-desc">Hoy operan con dos herramientas que no se hablan. El sistema Windows no tiene acceso remoto y el Excel con ~50 hojas de clientes se actualiza a mano. Cada cambio de precio hay que replicarlo en todas las hojas.</div>
+      </div>
+      <div class="problem-card hl">
+        <div class="pcard-title">Cobros sin visibilidad en tiempo real</div>
+        <div class="pcard-desc">Las transferencias de Mercado Pago, BNA y Galicia se verifican manualmente. No hay forma de saber en el momento si un cliente pagó sin revisar el celular o el homebanking.</div>
+      </div>
+      <div class="problem-card">
+        <div class="pcard-title">Stock y merma sin control preciso</div>
+        <div class="pcard-desc">La merma del pescado fresco (cabeza, espinas, descartes) no se registra sistemáticamente. Esto distorsiona el costo real del producto y afecta la ganancia calculada.</div>
+      </div>
+      <div class="problem-card">
+        <div class="pcard-title">Reparto y distribución a mano</div>
+        <div class="pcard-desc">La planilla de entregas del día, la cuenta corriente de cada cliente y el seguimiento de quién pagó y quién debe se gestionan de forma manual sin centralización.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p1-solution">
+    <div class="section-label">La solución</div>
+    <div class="section-title">Un sistema hecho a medida para Cangrejo Cascarudo</div>
+    <p class="p1-solution-body">Un sistema construido sobre la operación real de Cangrejo Cascarudo. No hay que adaptarlo ni configurarlo para que encaje — ya nace con la merma, los 50 clientes de reparto, los precios por kg y por caja, la validación de transferencias y el agente de IA que responde clientes en redes sociales. El Excel y el sistema Windows se reemplazan por completo en un mes. Los datos migran sin perder nada.</p>
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-num">14</div>
+        <div class="stat-label">Módulos disponibles</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">~50</div>
+        <div class="stat-label">Clientes de reparto</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Etapas de entrega</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Mes al lanzamiento</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-strip">
+    <span>© 2026 Crolia — <strong>Consultoría en IA y Automatización</strong></span>
+    <span>Argentina &nbsp;·&nbsp; www.crolia.com.ar</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════ PÁGINA 2 ═══════════════════════════ -->
+<div class="page">
+  <svg class="watermark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" fill="none">
+    <line x1="250" y1="88"  x2="148" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="352" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#8a6448"/>
+    <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+    <circle cx="250" cy="88"  r="13" fill="#8a6448"/>
+    <circle cx="148" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="352" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="250" cy="282" r="13" fill="#8a6448"/>
+  </svg>
+
+  <div class="header">
+    <div class="logo-block">
+      <svg width="34" height="34" viewBox="120 60 260 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <line x1="250" y1="88"  x2="148" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="352" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
+        <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#8a6448"/>
+        <circle cx="250" cy="88"  r="13" fill="#f6f1ea"/>
+        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
+      </svg>
+      <div>
+        <div class="logo-text">CROLIA</div>
+        <div class="logo-sub">Sistema de Gestión — Cangrejo Cascarudo</div>
+      </div>
+    </div>
+    <div class="header-contact">
+      <a href="mailto:contacto@crolia.com.ar">contacto@crolia.com.ar</a>
+      <a href="#">+54 9 11 7372-9899 &nbsp;·&nbsp; www.crolia.com.ar</a>
+    </div>
+  </div>
+
+  <div class="p2-modules">
+    <div class="section-label">Módulos incluidos</div>
+    <div class="section-title">Todo lo que necesita Cangrejo Cascarudo en un solo sistema</div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 01</div>
+        <div class="mod-title">Productos y Lista de Precios</div>
+        <div class="mod-desc">Catálogo con precio/kg y precio/caja (costo y venta). Actualización masiva de precios: un cambio se refleja en todos los clientes al instante.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 02</div>
+        <div class="mod-title">Clientes y Cuenta Corriente</div>
+        <div class="mod-desc">Ficha por cada uno de los ~50 clientes de reparto: historial de pedidos, saldo actual, pagos recibidos y deuda acumulada.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 03</div>
+        <div class="mod-title">Pedidos y Reparto</div>
+        <div class="mod-desc">Carga de pedido por cliente, planilla de entregas del día ordenada por zona o cliente, estado de cada entrega (pendiente / entregado / parcial).</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 04</div>
+        <div class="mod-title">Stock y Control de Merma</div>
+        <div class="mod-desc">Ingreso de mercadería con registro de merma: kg comprados → kg de desecho → kg vendibles → costo real ajustado automáticamente.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 05</div>
+        <div class="mod-title">Cotizaciones en PDF</div>
+        <div class="mod-desc">Generación de cotización para cada cliente con productos, precios y saldo. PDF listo para enviar por WhatsApp en segundos.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 06</div>
+        <div class="mod-title">Facturación Electrónica AFIP</div>
+        <div class="mod-desc">Facturas B, remitos y notas de crédito con CAE en tiempo real. Integración nativa con ARCA/AFIP.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 07</div>
+        <div class="mod-title">Cobros y Pagos Digitales</div>
+        <div class="mod-desc">Panel de cobros del día. Validación automática de transferencias: Mercado Pago (webhook), BNA y Galicia (parseo de email). Quién pagó aparece solo.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 08</div>
+        <div class="mod-title">Caja Diaria</div>
+        <div class="mod-desc">Apertura y cierre de caja, resumen por forma de pago (efectivo, transferencia, tarjeta), movimientos del día y balance final.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 09</div>
+        <div class="mod-title">Compras a Proveedores</div>
+        <div class="mod-desc">Registro de compras a Artico, INAL, Solimeno, MC Cain, Vidal y otros. Actualiza el stock automáticamente al confirmar la compra.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 10</div>
+        <div class="mod-title">Checklist Operativo Diario</div>
+        <div class="mod-desc">Tareas fijas configurables que se resetean cada día. Cada usuario marca las que completó con hora. Historial de cumplimiento por fecha.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 11</div>
+        <div class="mod-title">Panel de Control</div>
+        <div class="mod-desc">Vista del día: cobros recibidos, pedidos pendientes de entrega, stock crítico, clientes con deuda vencida y ganancia del día en tiempo real.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 12</div>
+        <div class="mod-title">Usuarios y Accesos</div>
+        <div class="mod-desc">3 usuarios con roles diferenciados. Cada uno accede solo a lo que le corresponde según su rol en el negocio.</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">MÓDULO 13</div>
+        <div class="mod-title">Balanza Electrónica</div>
+        <div class="mod-desc">Integración por TCP-IP con la balanza. La venta se genera desde la pesa: el cliente paga y el sistema registra el cobro automáticamente. Sin doble carga.</div>
+      </div>
+      <div class="module-card" style="border-left:3px solid var(--accent);">
+        <div class="mod-num">MÓDULO 14 — ETAPA 4</div>
+        <div class="mod-title">Agente IA — Redes Sociales</div>
+        <div class="mod-desc">Atiende clientes por WhatsApp, Instagram y Facebook. Genera presupuestos automáticos con precios actuales, consulta saldos y toma pedidos. Disponible 24/7 sin intervención del equipo.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p2-diferencial">
+    <div class="section-label">Por qué Crolia</div>
+    <div class="section-title">Lo que no encontrás en los sistemas del mercado</div>
+    <div class="diferencial-grid">
+      <div class="dif-card">
+        <div class="dif-icon">⚡</div>
+        <div class="dif-title">El costo de no cambiar nada</div>
+        <div class="dif-desc">Cada semana que el equipo actualiza precios en 50 hojas de Excel, verifica transferencias a mano y coordina el reparto de memoria, son horas perdidas que no vuelven. El sistema no es un gasto — es lo que devuelve ese tiempo y convierte la operación en algo que escala sin agregar personas.</div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">🤝</div>
+        <div class="dif-title">Soporte directo, sin intermediarios</div>
+        <div class="dif-desc">No hay partner, no hay mesa de ayuda con tickets. Hablás con quien desarrolló el sistema. Respuesta el mismo día. El sistema se construye sobre la operación real de Cangrejo Cascarudo — no es un genérico adaptado.</div>
+      </div>
+      <div class="dif-card">
+        <div class="dif-icon">📱</div>
+        <div class="dif-title">Web, sin instalar nada</div>
+        <div class="dif-desc">Accesible desde cualquier dispositivo con navegador. No requiere Windows, no requiere instalación. El equipo puede consultar stock, pedidos y cobros desde el celular mientras hacen el reparto.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-strip">
+    <span>© 2026 Crolia — <strong>Consultoría en IA y Automatización</strong></span>
+    <span>Argentina &nbsp;·&nbsp; www.crolia.com.ar</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════ PÁGINA 3 ═══════════════════════════ -->
+<div class="page">
+  <svg class="watermark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" fill="none">
+    <line x1="250" y1="88"  x2="148" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="352" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#8a6448"/>
+    <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+    <circle cx="250" cy="88"  r="13" fill="#8a6448"/>
+    <circle cx="148" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="352" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="250" cy="282" r="13" fill="#8a6448"/>
+  </svg>
+
+  <div class="header">
+    <div class="logo-block">
+      <svg width="34" height="34" viewBox="120 60 260 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <line x1="250" y1="88"  x2="148" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="352" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
+        <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#8a6448"/>
+        <circle cx="250" cy="88"  r="13" fill="#f6f1ea"/>
+        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
+      </svg>
+      <div>
+        <div class="logo-text">CROLIA</div>
+        <div class="logo-sub">Sistema de Gestión — Cangrejo Cascarudo</div>
+      </div>
+    </div>
+    <div class="header-contact">
+      <a href="mailto:contacto@crolia.com.ar">contacto@crolia.com.ar</a>
+      <a href="#">+54 9 11 7372-9899 &nbsp;·&nbsp; www.crolia.com.ar</a>
+    </div>
+  </div>
+
+  <div class="p3-etapas">
+    <div class="section-label">Plan de implementación</div>
+    <div class="section-title">6 etapas — cada una entrega valor inmediato y se puede contratar por separado</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px;">
+      <div class="etapa">
+        <div class="etapa-head">
+          <span class="etapa-badge">Etapa 1</span>
+          <span class="etapa-time">Días 1–5</span>
+        </div>
+        <div class="etapa-title">Productos y clientes</div>
+        <ul class="etapa-items">
+          <li>Catálogo con precio/kg y precio/caja</li>
+          <li>~50 clientes con cuenta corriente</li>
+          <li>Usuarios y roles (3 accesos)</li>
+          <li>Migración del Excel — cero pérdida de datos</li>
+        </ul>
+      </div>
+      <div class="etapa">
+        <div class="etapa-head">
+          <span class="etapa-badge">Etapa 2</span>
+          <span class="etapa-time">Días 5–10</span>
+        </div>
+        <div class="etapa-title">Pedidos, reparto y caja</div>
+        <ul class="etapa-items">
+          <li>Carga de pedidos por cliente</li>
+          <li>Planilla de reparto del día</li>
+          <li>Estado de entrega en tiempo real</li>
+          <li>Caja diaria (apertura y cierre)</li>
+        </ul>
+      </div>
+      <div class="etapa">
+        <div class="etapa-head">
+          <span class="etapa-badge">Etapa 3</span>
+          <span class="etapa-time">Días 10–15</span>
+        </div>
+        <div class="etapa-title">Stock y merma</div>
+        <ul class="etapa-items">
+          <li>Control de stock en tiempo real</li>
+          <li>Registro de merma: kg comprados → kg vendibles</li>
+          <li>Costo real ajustado automáticamente</li>
+          <li>Compras a proveedores (Artico, INAL, MC Cain…)</li>
+        </ul>
+      </div>
+      <div class="etapa">
+        <div class="etapa-head">
+          <span class="etapa-badge">Etapa 4</span>
+          <span class="etapa-time">Días 15–20</span>
+        </div>
+        <div class="etapa-title">Facturación y cobros digitales</div>
+        <ul class="etapa-items">
+          <li>Factura electrónica AFIP (CAE en tiempo real)</li>
+          <li>Panel de cobros del día</li>
+          <li>Validación MP (webhook automático)</li>
+          <li>Validación BNA y Galicia (parseo de email)</li>
+        </ul>
+      </div>
+      <div class="etapa">
+        <div class="etapa-head">
+          <span class="etapa-badge">Etapa 5</span>
+          <span class="etapa-time">Días 20–28</span>
+        </div>
+        <div class="etapa-title">Productividad y balanza</div>
+        <ul class="etapa-items">
+          <li>Cotizaciones en PDF automáticas por WhatsApp</li>
+          <li>Checklist operativo diario con historial</li>
+          <li>Dashboard: cobros, pedidos, stock crítico</li>
+          <li>Balanza electrónica integrada (TCP-IP)</li>
+        </ul>
+      </div>
+      <div class="etapa" style="border-left:3px solid var(--accent);">
+        <div class="etapa-head">
+          <span class="etapa-badge">Etapa 6</span>
+          <span class="etapa-time">A acordar</span>
+        </div>
+        <div class="etapa-title">Agente IA — Redes Sociales</div>
+        <ul class="etapa-items">
+          <li>Respuestas automáticas en WhatsApp, IG y FB</li>
+          <li>Presupuestos automáticos según precios actuales</li>
+          <li>Consulta de saldo y pedidos por mensaje</li>
+          <li>Derivación al equipo cuando es necesario</li>
+        </ul>
+      </div>
+    </div>
+    <div class="etapas-meta" style="margin-top:8px;">
+      <div class="meta-cell">
+        <div class="meta-label">Etapas 1–5</div>
+        <div class="meta-value">~1 mes</div>
+        <div class="meta-desc">Sistema completo operativo</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Acceso</div>
+        <div class="meta-value">Desde Etapa 1</div>
+        <div class="meta-desc">Ambiente de pruebas desde el día 5</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Migración de datos</div>
+        <div class="meta-value">Incluida</div>
+        <div class="meta-desc">Excel + sistema Windows sin pérdida</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p3-pricing">
+    <div class="section-label">Inversión</div>
+    <div class="section-title">Desarrollo por etapas — cada una tiene valor independiente</div>
+
+    <table class="pricing-table" style="margin-bottom:14px;">
+      <thead>
+        <tr>
+          <th>Etapa</th>
+          <th>Qué incluye</th>
+          <th>Tipo</th>
+          <th>Inversión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Etapa 1 — Productos y clientes</strong></td>
+          <td class="desc">Catálogo, ~50 clientes con ctacte, usuarios y roles, migración del Excel</td>
+          <td class="desc">Pago único</td>
+          <td class="val">USD 800</td>
+        </tr>
+        <tr>
+          <td><strong>Etapa 2 — Pedidos, reparto y caja</strong></td>
+          <td class="desc">Pedidos por cliente, planilla de reparto, estado de entrega, apertura y cierre de caja</td>
+          <td class="desc">Pago único</td>
+          <td class="val">USD 800</td>
+        </tr>
+        <tr>
+          <td><strong>Etapa 3 — Stock y merma</strong></td>
+          <td class="desc">Stock en tiempo real, registro de merma con costo real ajustado, compras a proveedores</td>
+          <td class="desc">Pago único</td>
+          <td class="val">USD 900</td>
+        </tr>
+        <tr>
+          <td><strong>Etapa 4 — Facturación y cobros digitales</strong></td>
+          <td class="desc">Factura electrónica AFIP (CAE), validación MP/BNA/Galicia automática, panel de cobros del día</td>
+          <td class="desc">Pago único</td>
+          <td class="val">USD 1.200</td>
+        </tr>
+        <tr>
+          <td><strong>Etapa 5 — Productividad y balanza</strong></td>
+          <td class="desc">Cotizaciones PDF, checklist operativo, dashboard, informes de ganancia, balanza electrónica TCP-IP</td>
+          <td class="desc">Pago único</td>
+          <td class="val">USD 1.100</td>
+        </tr>
+        <tr>
+          <td><strong>Etapa 6 — Agente IA Redes Sociales</strong></td>
+          <td class="desc">WhatsApp, Instagram y Facebook: respuestas automáticas, presupuestos, consulta de saldo, derivación al equipo</td>
+          <td class="desc">Dev + mensual</td>
+          <td class="val">USD 1.200<br/><span style="font-size:9px;color:var(--muted);">+ USD 300/mes</span></td>
+        </tr>
+        <tr class="total">
+          <td colspan="2"><strong>Total sistema completo — 6 etapas</strong></td>
+          <td class="desc">Etapas 1 a 6 · suscripción desde Etapa 1</td>
+          <td class="val">USD 6.000 + mensual</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:10px;">
+      <div class="plan-card featured" style="width:100%;">
+        <div class="plan-rec">Kit completo — todo incluido en un solo pago</div>
+        <div class="plan-name">Suscripción mensual única</div>
+        <div class="plan-price">ARS 380.000</div>
+        <div class="plan-period">por mes · sistema + agente IA + soporte + todo</div>
+        <hr class="plan-divider"/>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px;">
+          <ul class="plan-items">
+            <li>Sistema completo en producción</li>
+            <li>Hosting, base de datos y backups diarios</li>
+            <li>Soporte directo — respuesta el mismo día</li>
+            <li>Actualizaciones y correcciones incluidas</li>
+            <li>Usuarios ilimitados, sin costo adicional</li>
+          </ul>
+          <ul class="plan-items">
+            <li>Agente IA — WhatsApp, Instagram y Facebook</li>
+            <li>Presupuestos automáticos por foto o mensaje</li>
+            <li>Responde con precios y stock en tiempo real, 24/7</li>
+            <li>10 horas de ajustes incluidas los primeros 6 meses</li>
+            <li>Nuevas funcionalidades: USD 50/hr</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 0 28px 12px;">
+    <div style="background: var(--surface); border-radius: 8px; padding: 12px 18px; border-left: 3px solid var(--accent);">
+      <div style="font-family: var(--font-d); font-size: 7.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px;">Condiciones de pago y propiedad</div>
+      <p style="font-size: 9.5px; color: var(--muted); line-height: 1.65;">
+        El sistema se entrega completo y en funcionamiento. Cangrejo Cascarudo dispone de <strong style="color:var(--ink);">15 días de prueba real</strong> para validar que opera correctamente. Si está conforme, se abona el desarrollo (en las cuotas acordadas) y se inicia la suscripción mensual. Los <strong style="color:var(--ink);">datos son propiedad exclusiva del cliente</strong> y pueden exportarse en cualquier momento en formatos estándar. El código del sistema es propiedad de Crolia — el cliente adquiere una licencia de uso activa mientras mantenga la suscripción.
+      </p>
+    </div>
+  </div>
+
+  <div class="p3-expansion">
+    <div class="expansion-label">Próximas etapas — el sistema crece con el negocio</div>
+    <div class="section-title" style="color:var(--ink);">Funcionalidades que se suman cuando el negocio lo pide</div>
+    <div class="expansion-grid">
+      <div class="exp-card">
+        <div class="exp-badge">A cotizar</div>
+        <div class="exp-title">Agente IA por WhatsApp</div>
+        <div class="exp-desc">Un agente que atiende a los clientes por WhatsApp: recibe pedidos, genera y envía la cotización automáticamente según el precio actual de cada producto, consulta el saldo de cuenta corriente y confirma el pedido para el reparto del día. Sin intervención humana.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-badge">A cotizar</div>
+        <div class="exp-title">Precios por Mayor y Rangos</div>
+        <div class="exp-desc">Reglas de precio automáticas por volumen: quien compra más de X cajas paga precio mayorista. Diferentes listas por tipo de cliente (minorista, mayorista, revendedor). El sistema aplica el precio correcto solo, sin que el vendedor calcule nada.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-badge">A cotizar</div>
+        <div class="exp-title">Tienda Online y MercadoLibre</div>
+        <div class="exp-desc">Sincronización del catálogo con TiendaNube y MercadoLibre. Pedido online → descuenta stock automáticamente. Actualización masiva de precios en todos los canales desde el sistema con un clic.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-badge">A cotizar</div>
+        <div class="exp-title">Módulo de Producción / Enlatado</div>
+        <div class="exp-desc">Materia prima (pescado fresco comprado) → proceso de producción → producto terminado (filete, conserva). Calcula el rendimiento real, el costo de producción y actualiza el stock de productos terminados automáticamente.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-footer">
+    <div class="cta-left">
+      <h2>¿Arrancamos la semana que viene?</h2>
+      <p>15 días de prueba real sin comprometer nada. Si el sistema no cumple lo prometido, no pagás. Si cumple — y va a cumplir — arranca la suscripción y el negocio nunca más depende de un Excel.</p>
+    </div>
+    <div class="cta-right">
+      <div class="cta-phone">+54 9 11 7372-9899</div>
+      <div class="cta-contact">
+        contacto@crolia.com.ar<br/>
+        www.crolia.com.ar<br/>
+        Propuesta válida por 30 días · Junio 2026
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-strip">
+    <span>© 2026 Crolia — <strong>Consultoría en IA y Automatización</strong></span>
+    <span>Argentina &nbsp;·&nbsp; www.crolia.com.ar</span>
+  </div>
+</div>
+
+</body>
+</html>
