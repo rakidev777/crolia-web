@@ -168,6 +168,42 @@ td.bold{font-weight:700;}
 /* ── TWO COL ── */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+
+/* ── VIGÍA ── */
+.vigia-key-row{display:flex;gap:8px;align-items:center;margin-bottom:14px;}
+.vigia-key-input{flex:1;background:#f8f4ef;border:1px solid var(--line);border-radius:6px;padding:7px 10px;font-size:11px;font-family:monospace;color:var(--ink);outline:none;}
+.vigia-key-input:focus{border-color:var(--accent);}
+.vigia-kpi-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px;}
+.vigia-kpi{background:white;border:1px solid var(--line);border-radius:8px;padding:12px 14px;}
+.vigia-kpi-val{font-family:var(--font-d);font-size:20px;font-weight:800;color:var(--ink);line-height:1;}
+.vigia-kpi-lbl{font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;}
+.vtable{width:100%;border-collapse:collapse;font-size:11.5px;}
+.vtable th{text-align:left;padding:7px 10px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);background:#f8f4ef;border-bottom:1px solid var(--line);}
+.vtable td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle;}
+.vtable tr:last-child td{border-bottom:none;}
+.vtable tr:hover td{background:#faf7f3;}
+.vbadge{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.04em;}
+.vbadge-green{background:#dcfce7;color:#15803d;}
+.vbadge-red{background:#fee2e2;color:#991b1b;}
+.vbadge-blue{background:#dbeafe;color:#1d4ed8;}
+.vbadge-amber{background:#fef3c7;color:#92400e;}
+.vbadge-gray{background:#f1f5f9;color:#475569;}
+.vtoggle{font-size:10px;padding:3px 8px;border-radius:4px;border:1px solid var(--line);background:white;cursor:pointer;color:var(--muted);}
+.vtoggle:hover{border-color:var(--accent);color:var(--accent);}
+.vigia-new{background:#f8f4ef;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:12px;}
+.vigia-new h4{font-size:11px;font-weight:700;color:var(--ink);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;}
+.vigia-form-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
+.vigia-input{width:100%;background:white;border:1px solid var(--line);border-radius:6px;padding:7px 10px;font-size:12px;font-family:var(--font-b);color:var(--ink);outline:none;}
+.vigia-input:focus{border-color:var(--accent);}
+.vigia-submit{background:var(--accent);color:white;border:none;border-radius:6px;padding:8px 18px;font-size:12px;font-weight:700;font-family:var(--font-d);cursor:pointer;}
+.vigia-submit:hover{background:var(--accent-dark,#6b4d34);}
+.vigia-submit:disabled{opacity:.5;cursor:not-allowed;}
+.vigia-result{font-size:11px;margin-top:8px;padding:8px 12px;border-radius:6px;display:none;}
+.vigia-result.ok{background:#dcfce7;color:#15803d;}
+.vigia-result.err{background:#fee2e2;color:#991b1b;}
+.dias-inactivo-ok{color:var(--green);}
+.dias-inactivo-warn{color:var(--yellow);}
+.dias-inactivo-bad{color:var(--red);}
 </style>
 </head>
 <body>
@@ -262,6 +298,118 @@ td.bold{font-weight:700;}
         <div class="stat-label">Clientes activos</div>
         <div class="stat-value">3</div>
         <div class="stat-sub">JyS · IES · BVGS</div>
+      </div>
+    </div>
+
+    <!-- FINANZAS -->
+    <div class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Finanzas</div>
+          <div class="section-title">Ingresos y gastos mensuales</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <select id="fin-mes" style="font-family:var(--font-b);font-size:11px;border:1px solid var(--line);border-radius:6px;padding:5px 10px;background:white;color:var(--ink);cursor:pointer;" onchange="renderFinanzas()"></select>
+        </div>
+      </div>
+
+      <!-- Resumen -->
+      <div class="stats-bar" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px;" id="fin-resumen">
+        <div class="stat-card">
+          <div class="stat-label">Ingresos del mes</div>
+          <div class="stat-value stat-positive" id="fin-total-ingresos">$ 0</div>
+          <div class="stat-sub" id="fin-ingresos-sub">Sin registros</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Gastos del mes</div>
+          <div class="stat-value" id="fin-total-gastos">$ 0</div>
+          <div class="stat-sub" id="fin-gastos-sub">Sin registros</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Margen neto</div>
+          <div class="stat-value" id="fin-margen">$ 0</div>
+          <div class="stat-sub" id="fin-margen-sub">—</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+
+        <!-- INGRESOS -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+            <div style="font-family:var(--font-d);font-size:11px;font-weight:700;color:var(--green);">↑ INGRESOS</div>
+            <button onclick="abrirModal('ingreso')" style="font-family:var(--font-d);font-size:10px;font-weight:700;background:var(--green);color:white;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;">+ Agregar</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Fecha</th><th>Cliente / Concepto</th><th>Moneda</th><th class="right">Monto</th><th class="right">Estado</th><th></th></tr></thead>
+              <tbody id="fin-ingresos-tbody"><tr><td colspan="6" style="text-align:center;color:var(--muted);padding:16px;">Sin ingresos registrados</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- GASTOS -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+            <div style="font-family:var(--font-d);font-size:11px;font-weight:700;color:var(--red);">↓ GASTOS</div>
+            <button onclick="abrirModal('gasto')" style="font-family:var(--font-d);font-size:10px;font-weight:700;background:var(--accent);color:white;border:none;border-radius:6px;padding:4px 12px;cursor:pointer;">+ Agregar</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Servicio</th><th>Moneda</th><th class="right">Monto</th><th></th></tr></thead>
+              <tbody id="fin-gastos-tbody"><tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px;">Sin gastos registrados</td></tr></tbody>
+            </table>
+          </div>
+          <div style="margin-top:8px;">
+            <button onclick="cargarGastosFijos()" style="font-size:10px;color:var(--accent);background:var(--accent-soft);border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-family:var(--font-b);font-weight:600;">⚡ Pre-cargar gastos fijos de infraestructura</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL FINANZAS -->
+    <div id="fin-modal" style="display:none;position:fixed;inset:0;background:rgba(34,26,20,.6);z-index:200;align-items:center;justify-content:center;">
+      <div style="background:white;border-radius:12px;padding:28px;width:380px;box-shadow:0 20px 60px rgba(0,0,0,.2);">
+        <div style="font-family:var(--font-d);font-size:15px;font-weight:700;color:var(--ink);margin-bottom:20px;" id="modal-titulo">Nuevo ingreso</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div>
+            <div style="font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">Fecha</div>
+            <input type="date" id="fin-fecha" style="width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13px;font-family:var(--font-b);">
+          </div>
+          <div id="fin-campo-cliente">
+            <div style="font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">Cliente / Concepto</div>
+            <input type="text" id="fin-cliente" placeholder="ej: JyS Confort — bot WA" style="width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13px;font-family:var(--font-b);">
+          </div>
+          <div id="fin-campo-servicio" style="display:none;">
+            <div style="font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">Servicio</div>
+            <input type="text" id="fin-servicio" placeholder="ej: Whapi JyS" style="width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13px;font-family:var(--font-b);">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <div style="font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">Moneda</div>
+              <select id="fin-moneda" style="width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13px;font-family:var(--font-b);">
+                <option value="USD">USD</option>
+                <option value="ARS">ARS</option>
+              </select>
+            </div>
+            <div>
+              <div style="font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">Monto</div>
+              <input type="number" id="fin-monto" step="0.01" placeholder="0.00" style="width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13px;font-family:var(--font-b);">
+            </div>
+          </div>
+          <div id="fin-campo-estado">
+            <div style="font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;">Estado</div>
+            <select id="fin-estado" style="width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13px;font-family:var(--font-b);">
+              <option value="cobrado">Cobrado ✓</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="parcial">Parcial</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px;">
+          <button onclick="guardarEntrada()" style="flex:1;background:var(--ink);color:#f6f1ea;border:none;border-radius:8px;padding:10px;font-family:var(--font-d);font-size:13px;font-weight:700;cursor:pointer;">Guardar</button>
+          <button onclick="cerrarModal()" style="flex:1;background:var(--surface);color:var(--ink);border:none;border-radius:8px;padding:10px;font-family:var(--font-d);font-size:13px;font-weight:600;cursor:pointer;">Cancelar</button>
+        </div>
       </div>
     </div>
 
@@ -679,6 +827,105 @@ td.bold{font-weight:700;}
       </div>
     </div>
 
+    <!-- VIGÍA SaaS -->
+    <div class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Vigía by Crolia</div>
+          <div class="section-title">Tenants activos y métricas de uso</div>
+        </div>
+        <button onclick="loadVigiaTenants()" style="font-size:11px;padding:5px 12px;background:var(--accent-soft);border:1px solid var(--line);border-radius:6px;cursor:pointer;color:var(--accent);font-weight:600;">↺ Actualizar</button>
+      </div>
+
+      <!-- Config key -->
+      <div class="vigia-key-row">
+        <span style="font-size:10px;color:var(--muted);white-space:nowrap;">API URL:</span>
+        <input class="vigia-key-input" id="vigia-api-url" placeholder="https://api.vigia-jys.crolia.com.ar" />
+        <span style="font-size:10px;color:var(--muted);white-space:nowrap;">Admin Key:</span>
+        <input class="vigia-key-input" id="vigia-admin-key" type="password" placeholder="CROLIA_ADMIN_KEY" />
+        <button onclick="saveVigiaConfig()" style="font-size:10px;padding:5px 10px;background:var(--ink);color:white;border:none;border-radius:5px;cursor:pointer;">Guardar</button>
+      </div>
+
+      <!-- KPIs -->
+      <div class="vigia-kpi-bar" id="vigia-kpis">
+        <div class="vigia-kpi"><div class="vigia-kpi-val" id="vk-tenants">—</div><div class="vigia-kpi-lbl">Tenants</div></div>
+        <div class="vigia-kpi"><div class="vigia-kpi-val" id="vk-activos">—</div><div class="vigia-kpi-lbl">Activos</div></div>
+        <div class="vigia-kpi"><div class="vigia-kpi-val" id="vk-ventas30">—</div><div class="vigia-kpi-lbl">Ventas 30d</div></div>
+        <div class="vigia-kpi"><div class="vigia-kpi-val" id="vk-ai-cost">—</div><div class="vigia-kpi-lbl">IA este mes</div></div>
+        <div class="vigia-kpi"><div class="vigia-kpi-val" id="vk-mrr">—</div><div class="vigia-kpi-lbl">MRR estimado</div></div>
+      </div>
+
+      <!-- Tabla tenants -->
+      <div style="background:white;border:1px solid var(--line);border-radius:10px;overflow:hidden;">
+        <table class="vtable">
+          <thead>
+            <tr>
+              <th>Empresa</th>
+              <th>Plan</th>
+              <th>Ventas 30d</th>
+              <th>Productos</th>
+              <th>Clientes</th>
+              <th>Usuarios</th>
+              <th>IA / mes</th>
+              <th>Última actividad</th>
+              <th>Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="vigia-tenants-tbody">
+            <tr><td colspan="10" style="text-align:center;color:var(--muted);padding:20px;">Cargando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Crear nuevo tenant -->
+      <div style="margin-top:10px;">
+        <button onclick="toggleNewTenant()" style="font-size:11px;padding:6px 14px;background:var(--ink);color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;">+ Nuevo tenant</button>
+      </div>
+      <div class="vigia-new" id="vigia-new-form" style="display:none;">
+        <h4>Crear nuevo tenant</h4>
+        <div class="vigia-form-grid">
+          <div>
+            <div style="font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Empresa *</div>
+            <input class="vigia-input" id="vn-nombre" placeholder="Ej: Ferretería Don José" />
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Slug * (URL)</div>
+            <input class="vigia-input" id="vn-slug" placeholder="ej: donjose → vigia-donjose.crolia.com.ar" />
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Plan</div>
+            <select class="vigia-input" id="vn-plan">
+              <option value="starter">Starter</option>
+              <option value="pro" selected>Pro</option>
+              <option value="total">Total</option>
+            </select>
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Nombre dueño *</div>
+            <input class="vigia-input" id="vn-owner-nombre" placeholder="Ej: José García" />
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Email dueño *</div>
+            <input class="vigia-input" id="vn-owner-email" type="email" placeholder="jose@ferreteria.com" />
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Contraseña inicial *</div>
+            <input class="vigia-input" id="vn-owner-pass" type="text" placeholder="Mínimo 8 caracteres" />
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Nombre del local</div>
+            <input class="vigia-input" id="vn-local" placeholder="Local principal" />
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <button class="vigia-submit" id="vn-submit-btn" onclick="crearTenant()">Crear tenant</button>
+          <button onclick="toggleNewTenant()" style="font-size:11px;padding:6px 10px;background:none;border:1px solid var(--line);border-radius:5px;cursor:pointer;color:var(--muted);">Cancelar</button>
+        </div>
+        <div class="vigia-result" id="vn-result"></div>
+      </div>
+    </div>
+
     <!-- ROADMAP -->
     <div class="section">
       <div class="section-label">Hoja de ruta</div>
@@ -747,6 +994,150 @@ td.bold{font-weight:700;}
 </div><!-- /app -->
 
 <script>
+// ── FINANZAS ──────────────────────────────────────
+let finTipo = 'ingreso';
+let finEditId = null;
+
+function initMeses(){
+  const sel = document.getElementById('fin-mes');
+  const hoy = new Date();
+  for(let i=0;i<12;i++){
+    const d = new Date(hoy.getFullYear(), hoy.getMonth()-i, 1);
+    const val = d.toISOString().slice(0,7);
+    const label = d.toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+    const opt = document.createElement('option');
+    opt.value = val; opt.textContent = label.charAt(0).toUpperCase()+label.slice(1);
+    if(i===0) opt.selected = true;
+    sel.appendChild(opt);
+  }
+}
+
+function getKey(tipo){ return 'crolia-fin-'+tipo+'-'+document.getElementById('fin-mes').value; }
+
+function getData(tipo){ return JSON.parse(localStorage.getItem(getKey(tipo))||'[]'); }
+
+function saveData(tipo, data){ localStorage.setItem(getKey(tipo), JSON.stringify(data)); }
+
+function fmtMonto(m, mon){ return mon==='USD' ? 'USD '+Number(m).toLocaleString('es-AR',{minimumFractionDigits:2}) : 'ARS '+Number(m).toLocaleString('es-AR',{minimumFractionDigits:0}); }
+
+function renderFinanzas(){
+  const ingresos = getData('ingreso');
+  const gastos = getData('gasto');
+
+  // Tabla ingresos
+  const tbody_i = document.getElementById('fin-ingresos-tbody');
+  if(ingresos.length===0){
+    tbody_i.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:16px;">Sin ingresos registrados</td></tr>';
+  } else {
+    tbody_i.innerHTML = ingresos.map((r,i)=>`
+      <tr>
+        <td class="muted" style="font-size:10.5px;">${r.fecha||'—'}</td>
+        <td><strong style="font-size:11px;">${r.cliente}</strong></td>
+        <td style="font-size:10.5px;">${r.moneda}</td>
+        <td class="right bold" style="color:var(--green);font-size:11px;">${fmtMonto(r.monto,r.moneda)}</td>
+        <td class="right"><span class="badge ${r.estado==='cobrado'?'badge-green':r.estado==='parcial'?'badge-yellow':'badge-red'}">${r.estado}</span></td>
+        <td class="right"><button onclick="eliminar('ingreso',${i})" style="font-size:10px;background:none;border:none;color:var(--muted);cursor:pointer;">✕</button></td>
+      </tr>`).join('');
+  }
+
+  // Tabla gastos
+  const tbody_g = document.getElementById('fin-gastos-tbody');
+  if(gastos.length===0){
+    tbody_g.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px;">Sin gastos registrados</td></tr>';
+  } else {
+    tbody_g.innerHTML = gastos.map((r,i)=>`
+      <tr>
+        <td style="font-size:11px;">${r.servicio}</td>
+        <td class="muted" style="font-size:10.5px;">${r.moneda}</td>
+        <td class="right bold" style="color:var(--accent);font-size:11px;">${fmtMonto(r.monto,r.moneda)}</td>
+        <td class="right"><button onclick="eliminar('gasto',${i})" style="font-size:10px;background:none;border:none;color:var(--muted);cursor:pointer;">✕</button></td>
+      </tr>`).join('');
+  }
+
+  // Resumen — solo USD para margen (ARS separado)
+  const totalUSD_i = ingresos.filter(r=>r.moneda==='USD'&&r.estado==='cobrado').reduce((s,r)=>s+Number(r.monto),0);
+  const totalARS_i = ingresos.filter(r=>r.moneda==='ARS'&&r.estado==='cobrado').reduce((s,r)=>s+Number(r.monto),0);
+  const totalUSD_g = gastos.filter(r=>r.moneda==='USD').reduce((s,r)=>s+Number(r.monto),0);
+  const totalARS_g = gastos.filter(r=>r.moneda==='ARS').reduce((s,r)=>s+Number(r.monto),0);
+
+  const ti = document.getElementById('fin-total-ingresos');
+  ti.textContent = (totalUSD_i>0?'USD '+totalUSD_i.toFixed(2):'') + (totalUSD_i>0&&totalARS_i>0?' + ':'') + (totalARS_i>0?'ARS '+totalARS_i.toLocaleString('es-AR'):'') || '$ 0';
+  ti.style.color = 'var(--green)';
+  document.getElementById('fin-ingresos-sub').textContent = ingresos.length+' registros · '+ingresos.filter(r=>r.estado==='pendiente').length+' pendientes';
+
+  const tg = document.getElementById('fin-total-gastos');
+  tg.textContent = (totalUSD_g>0?'USD '+totalUSD_g.toFixed(2):'') + (totalUSD_g>0&&totalARS_g>0?' + ':'') + (totalARS_g>0?'ARS '+totalARS_g.toLocaleString('es-AR'):'') || '$ 0';
+  document.getElementById('fin-gastos-sub').textContent = gastos.length+' servicios';
+
+  const margenUSD = totalUSD_i - totalUSD_g;
+  const m = document.getElementById('fin-margen');
+  m.textContent = 'USD '+margenUSD.toFixed(2) + (totalARS_i>0||totalARS_g>0?' (+ ARS)':'');
+  m.style.color = margenUSD >= 0 ? 'var(--green)' : 'var(--red)';
+  document.getElementById('fin-margen-sub').textContent = margenUSD>=0 ? 'Positivo ✓' : 'Negativo ⚠';
+}
+
+function abrirModal(tipo){
+  finTipo = tipo; finEditId = null;
+  document.getElementById('fin-modal').style.display='flex';
+  document.getElementById('modal-titulo').textContent = tipo==='ingreso' ? 'Nuevo ingreso' : 'Nuevo gasto';
+  document.getElementById('fin-campo-cliente').style.display = tipo==='ingreso'?'block':'none';
+  document.getElementById('fin-campo-servicio').style.display = tipo==='gasto'?'block':'none';
+  document.getElementById('fin-campo-estado').style.display = tipo==='ingreso'?'block':'none';
+  document.getElementById('fin-fecha').value = new Date().toISOString().slice(0,10);
+  document.getElementById('fin-cliente').value='';
+  document.getElementById('fin-servicio').value='';
+  document.getElementById('fin-monto').value='';
+  document.getElementById('fin-moneda').value='USD';
+  document.getElementById('fin-estado').value='cobrado';
+}
+
+function cerrarModal(){ document.getElementById('fin-modal').style.display='none'; }
+
+function guardarEntrada(){
+  const monto = parseFloat(document.getElementById('fin-monto').value);
+  if(!monto) return alert('Ingresá un monto válido');
+  const data = getData(finTipo);
+  if(finTipo==='ingreso'){
+    const cliente = document.getElementById('fin-cliente').value.trim();
+    if(!cliente) return alert('Ingresá cliente/concepto');
+    data.push({ fecha: document.getElementById('fin-fecha').value, cliente, moneda: document.getElementById('fin-moneda').value, monto, estado: document.getElementById('fin-estado').value });
+  } else {
+    const servicio = document.getElementById('fin-servicio').value.trim();
+    if(!servicio) return alert('Ingresá el servicio');
+    data.push({ servicio, moneda: document.getElementById('fin-moneda').value, monto });
+  }
+  saveData(finTipo, data);
+  cerrarModal();
+  renderFinanzas();
+}
+
+function eliminar(tipo, idx){
+  const data = getData(tipo);
+  data.splice(idx,1);
+  saveData(tipo, data);
+  renderFinanzas();
+}
+
+function cargarGastosFijos(){
+  const mes = document.getElementById('fin-mes').value;
+  const existentes = getData('gasto');
+  const fijos = [
+    { servicio:'Whapi — JyS', moneda:'USD', monto:35 },
+    { servicio:'Whapi — Crolia test', moneda:'USD', monto:35 },
+    { servicio:'Anthropic API (base)', moneda:'USD', monto:20 },
+    { servicio:'Canva Pro', moneda:'ARS', monto:12000 },
+    { servicio:'Hostinger VPS (mensual)', moneda:'ARS', monto:2908 },
+    { servicio:'NIC Argentina (mensual)', moneda:'ARS', monto:750 },
+    { servicio:'Zoho Mail IES', moneda:'USD', monto:3 },
+  ];
+  const nuevos = fijos.filter(f => !existentes.some(e=>e.servicio===f.servicio));
+  saveData('gasto', [...existentes, ...nuevos]);
+  renderFinanzas();
+}
+
+document.getElementById('fin-modal').addEventListener('click', function(e){ if(e.target===this) cerrarModal(); });
+// ── FIN FINANZAS ──────────────────────────────────
+
 // Fecha actual
 document.getElementById('current-date').textContent = new Date().toLocaleDateString('es-AR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 
@@ -757,6 +1148,7 @@ function doLogin(){
     document.getElementById('login-screen').style.display='none';
     document.getElementById('app').style.display='block';
     sessionStorage.setItem('crolia-ops','1');
+    loadVigiaTenants();
   } else {
     document.getElementById('login-error').style.display='block';
   }
@@ -773,6 +1165,7 @@ document.getElementById('login-user').addEventListener('keydown',e=>{if(e.key===
 if(sessionStorage.getItem('crolia-ops')==='1'){
   document.getElementById('login-screen').style.display='none';
   document.getElementById('app').style.display='block';
+  loadVigiaTenants();
   cargarTokens();
   cargarHistorial();
 }
@@ -799,6 +1192,177 @@ async function cargarHistorial(){
       </tr>`;
     }).join('');
   }catch(e){ /* silencioso si falla */ }
+}
+
+// ── VIGÍA SaaS ────────────────────────────────────
+const PLAN_PRECIOS = { starter: 130000, pro: 220000, total: 320000 };
+
+function getVigiaConfig(){
+  return {
+    url: localStorage.getItem('vigia-api-url') || 'https://api.vigia-jys.crolia.com.ar',
+    key: localStorage.getItem('vigia-admin-key') || '',
+  };
+}
+
+function saveVigiaConfig(){
+  const url = document.getElementById('vigia-api-url').value.trim().replace(/\/$/, '');
+  const key = document.getElementById('vigia-admin-key').value.trim();
+  if(url) localStorage.setItem('vigia-api-url', url);
+  if(key) localStorage.setItem('vigia-admin-key', key);
+  loadVigiaTenants();
+}
+
+function toggleNewTenant(){
+  const f = document.getElementById('vigia-new-form');
+  f.style.display = f.style.display === 'none' ? 'block' : 'none';
+}
+
+function diasLabel(dias){
+  if(dias === null || dias === undefined) return '<span class="muted">Sin actividad</span>';
+  if(dias === 0) return '<span class="dias-inactivo-ok">Hoy</span>';
+  if(dias <= 1) return `<span class="dias-inactivo-ok">Ayer</span>`;
+  if(dias <= 7) return `<span class="dias-inactivo-ok">${dias}d</span>`;
+  if(dias <= 30) return `<span class="dias-inactivo-warn">${dias}d</span>`;
+  return `<span class="dias-inactivo-bad">${dias}d ⚠️</span>`;
+}
+
+function planBadge(plan){
+  const colors = { starter:'vbadge-gray', pro:'vbadge-blue', total:'vbadge-amber' };
+  return `<span class="vbadge ${colors[plan]||'vbadge-gray'}">${plan.toUpperCase()}</span>`;
+}
+
+async function loadVigiaTenants(){
+  const cfg = getVigiaConfig();
+  document.getElementById('vigia-api-url').value = cfg.url;
+  if(cfg.key) document.getElementById('vigia-admin-key').value = '●'.repeat(8);
+
+  if(!cfg.key){
+    document.getElementById('vigia-tenants-tbody').innerHTML =
+      '<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:20px;">Configurá la API URL y el Admin Key para conectar</td></tr>';
+    return;
+  }
+
+  document.getElementById('vigia-tenants-tbody').innerHTML =
+    '<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:20px;">Cargando…</td></tr>';
+
+  try{
+    const r = await fetch(cfg.url + '/api/v1/admin/tenants', {
+      headers: { 'x-admin-key': cfg.key }
+    });
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    const tenants = await r.json();
+
+    // KPIs globales
+    const totalTenants = tenants.length;
+    const activos = tenants.filter(t => t.active).length;
+    const ventas30 = tenants.reduce((s, t) => s + (t.metricas?.ventas_30d || 0), 0);
+    const aiCost = tenants.reduce((s, t) => s + (t.metricas?.ai_cost_mes_usd || 0), 0);
+    const mrr = tenants.reduce((s, t) => s + (t.active ? (PLAN_PRECIOS[t.plan] || 0) : 0), 0);
+
+    document.getElementById('vk-tenants').textContent = totalTenants;
+    document.getElementById('vk-activos').textContent = activos;
+    document.getElementById('vk-ventas30').textContent = ventas30;
+    document.getElementById('vk-ai-cost').textContent = 'USD ' + aiCost.toFixed(2);
+    document.getElementById('vk-mrr').textContent = 'ARS ' + (mrr/1000).toFixed(0) + 'K';
+
+    // Tabla
+    if(tenants.length === 0){
+      document.getElementById('vigia-tenants-tbody').innerHTML =
+        '<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:20px;">Sin tenants registrados</td></tr>';
+      return;
+    }
+
+    document.getElementById('vigia-tenants-tbody').innerHTML = tenants.map(t => {
+      const m = t.metricas || {};
+      const estadoBadge = t.active
+        ? '<span class="vbadge vbadge-green">Activo</span>'
+        : '<span class="vbadge vbadge-red">Inactivo</span>';
+      const toggleLabel = t.active ? 'Desactivar' : 'Activar';
+      return `<tr>
+        <td>
+          <div style="font-weight:700;font-size:12px;">${t.name}</div>
+          <div style="font-size:9px;color:var(--muted);">${t.slug}</div>
+        </td>
+        <td>${planBadge(t.plan)}</td>
+        <td style="font-weight:600;">${(m.ventas_30d||0).toLocaleString('es-AR')}</td>
+        <td>${m.productos||0}</td>
+        <td>${m.clientes||0}</td>
+        <td>${m.usuarios||0} / ${m.locales||0}L</td>
+        <td style="font-size:10px;color:var(--muted);">USD ${(m.ai_cost_mes_usd||0).toFixed(4)}</td>
+        <td style="font-size:10px;">${diasLabel(m.dias_inactivo)}<br><span style="font-size:9px;color:var(--muted);">${m.ultima_actividad||'—'}</span></td>
+        <td>${estadoBadge}</td>
+        <td>
+          <button class="vtoggle" onclick="toggleTenant('${t.id}', ${t.active})">${toggleLabel}</button>
+        </td>
+      </tr>`;
+    }).join('');
+
+  } catch(e){
+    document.getElementById('vigia-tenants-tbody').innerHTML =
+      `<tr><td colspan="10" style="text-align:center;color:var(--red);padding:20px;">Error al conectar: ${e.message}</td></tr>`;
+  }
+}
+
+async function toggleTenant(id, currentActive){
+  const cfg = getVigiaConfig();
+  if(!cfg.key) return;
+  const ok = confirm(currentActive ? '¿Desactivar este tenant?' : '¿Activar este tenant?');
+  if(!ok) return;
+  await fetch(cfg.url + '/api/v1/admin/tenants/' + id + '/active', {
+    method: 'PATCH', headers: { 'x-admin-key': cfg.key }
+  });
+  loadVigiaTenants();
+}
+
+async function crearTenant(){
+  const cfg = getVigiaConfig();
+  const btn = document.getElementById('vn-submit-btn');
+  const result = document.getElementById('vn-result');
+  result.style.display = 'none';
+
+  const body = {
+    nombre: document.getElementById('vn-nombre').value.trim(),
+    slug: document.getElementById('vn-slug').value.trim().toLowerCase().replace(/\s+/g,'-'),
+    plan: document.getElementById('vn-plan').value,
+    owner_nombre: document.getElementById('vn-owner-nombre').value.trim(),
+    owner_email: document.getElementById('vn-owner-email').value.trim(),
+    owner_password: document.getElementById('vn-owner-pass').value.trim(),
+    local_nombre: document.getElementById('vn-local').value.trim() || 'Local principal',
+  };
+
+  if(!body.nombre || !body.slug || !body.owner_nombre || !body.owner_email || !body.owner_password){
+    result.textContent = 'Completá todos los campos obligatorios.';
+    result.className = 'vigia-result err'; result.style.display='block';
+    return;
+  }
+
+  btn.disabled = true; btn.textContent = 'Creando…';
+  try{
+    const r = await fetch(cfg.url + '/api/v1/admin/tenants', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-key': cfg.key },
+      body: JSON.stringify(body),
+    });
+    const d = await r.json();
+    if(r.ok){
+      result.innerHTML = `✅ Tenant creado · URL: <strong>${d.url}</strong> · Email: <strong>${d.owner_email}</strong><br>Próximo paso: crear subdominio en Vercel/Easypanel.`;
+      result.className = 'vigia-result ok'; result.style.display='block';
+      document.getElementById('vn-nombre').value='';
+      document.getElementById('vn-slug').value='';
+      document.getElementById('vn-owner-nombre').value='';
+      document.getElementById('vn-owner-email').value='';
+      document.getElementById('vn-owner-pass').value='';
+      loadVigiaTenants();
+    } else {
+      result.textContent = '❌ Error: ' + (d.detail || JSON.stringify(d));
+      result.className = 'vigia-result err'; result.style.display='block';
+    }
+  } catch(e){
+    result.textContent = '❌ Error de conexión: ' + e.message;
+    result.className = 'vigia-result err'; result.style.display='block';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Crear tenant';
+  }
 }
 
 async function cargarTokens(){
