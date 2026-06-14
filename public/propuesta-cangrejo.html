@@ -575,101 +575,91 @@ html, body { font-family: var(--font-b); background: var(--bg); color: var(--ink
 
   <div class="p3-etapas">
     <div class="section-label">Plan de implementación</div>
-    <div class="section-title">6 etapas — cada una entrega valor inmediato y se puede contratar por separado</div>
+    <div class="section-title">4 etapas — cada una opera de forma independiente sobre la anterior</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px;">
-      <div class="etapa">
+      <div class="etapa" style="border-left:3px solid var(--accent); grid-column: 1 / -1;">
         <div class="etapa-head">
           <span class="etapa-badge">Etapa 1</span>
-          <span class="etapa-time">Días 1–5</span>
+          <span class="etapa-time">Semana 1–2 · USD 2.200</span>
         </div>
-        <div class="etapa-title">Productos y clientes</div>
-        <ul class="etapa-items">
-          <li>Catálogo con precio/kg y precio/caja</li>
-          <li>~50 clientes con cuenta corriente</li>
-          <li>Usuarios y roles (3 accesos)</li>
-          <li>Migración del Excel — cero pérdida de datos</li>
-        </ul>
+        <div class="etapa-title">Sistema operativo completo — reemplaza el Excel y el sistema Windows</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;margin-top:4px;">
+          <ul class="etapa-items">
+            <li>Catálogo con precio/kg y precio/caja por marca</li>
+            <li>~50 clientes con cuenta corriente individual</li>
+            <li>Pedidos por cliente y planilla de reparto del día</li>
+            <li>Estado de entrega (pendiente / entregado / parcial)</li>
+          </ul>
+          <ul class="etapa-items">
+            <li>Stock en tiempo real + control de merma</li>
+            <li>Compras a proveedores (actualiza stock automático)</li>
+            <li>Caja diaria (apertura, cierre y movimientos)</li>
+            <li>Usuarios y roles · migración completa del Excel</li>
+          </ul>
+        </div>
       </div>
       <div class="etapa">
         <div class="etapa-head">
           <span class="etapa-badge">Etapa 2</span>
-          <span class="etapa-time">Días 5–10</span>
+          <span class="etapa-time">Semana 2–3 · USD 1.500</span>
         </div>
-        <div class="etapa-title">Pedidos, reparto y caja</div>
+        <div class="etapa-title">Facturación y cobros digitales</div>
         <ul class="etapa-items">
-          <li>Carga de pedidos por cliente</li>
-          <li>Planilla de reparto del día</li>
-          <li>Estado de entrega en tiempo real</li>
-          <li>Caja diaria (apertura y cierre)</li>
+          <li>Factura electrónica AFIP con CAE en tiempo real</li>
+          <li>Panel de cobros del día</li>
+          <li>Mercado Pago: pago confirmado por webhook automático</li>
+          <li>BNA y Galicia: validación por parseo de email</li>
+          <li>Registra quién pagó, cuándo y por qué canal</li>
         </ul>
       </div>
       <div class="etapa">
         <div class="etapa-head">
           <span class="etapa-badge">Etapa 3</span>
-          <span class="etapa-time">Días 10–15</span>
-        </div>
-        <div class="etapa-title">Stock y merma</div>
-        <ul class="etapa-items">
-          <li>Control de stock en tiempo real</li>
-          <li>Registro de merma: kg comprados → kg vendibles</li>
-          <li>Costo real ajustado automáticamente</li>
-          <li>Compras a proveedores (Artico, INAL, MC Cain…)</li>
-        </ul>
-      </div>
-      <div class="etapa">
-        <div class="etapa-head">
-          <span class="etapa-badge">Etapa 4</span>
-          <span class="etapa-time">Días 15–20</span>
-        </div>
-        <div class="etapa-title">Facturación y cobros digitales</div>
-        <ul class="etapa-items">
-          <li>Factura electrónica AFIP (CAE en tiempo real)</li>
-          <li>Panel de cobros del día</li>
-          <li>Validación MP (webhook automático)</li>
-          <li>Validación BNA y Galicia (parseo de email)</li>
-        </ul>
-      </div>
-      <div class="etapa">
-        <div class="etapa-head">
-          <span class="etapa-badge">Etapa 5</span>
-          <span class="etapa-time">Días 20–28</span>
+          <span class="etapa-time">Semana 3–4 · USD 1.100</span>
         </div>
         <div class="etapa-title">Productividad y balanza</div>
         <ul class="etapa-items">
-          <li>Cotizaciones en PDF automáticas por WhatsApp</li>
-          <li>Checklist operativo diario con historial</li>
-          <li>Dashboard: cobros, pedidos, stock crítico</li>
-          <li>Balanza electrónica integrada (TCP-IP)</li>
+          <li>Cotizaciones en PDF listas para enviar por WhatsApp</li>
+          <li>Checklist operativo diario con historial de cumplimiento</li>
+          <li>Dashboard: cobros, pedidos, stock crítico en tiempo real</li>
+          <li>Informes: ganancia filet vs congelados, resumen mensual</li>
+          <li>Balanza electrónica integrada por TCP-IP</li>
         </ul>
       </div>
-      <div class="etapa" style="border-left:3px solid var(--accent);">
+      <div class="etapa" style="border-left:3px solid var(--accent);grid-column:1/-1;">
         <div class="etapa-head">
-          <span class="etapa-badge">Etapa 6</span>
-          <span class="etapa-time">A acordar</span>
+          <span class="etapa-badge">Etapa 4</span>
+          <span class="etapa-time">A acordar · USD 1.200 dev + USD 300/mes</span>
         </div>
-        <div class="etapa-title">Agente IA — Redes Sociales</div>
-        <ul class="etapa-items">
-          <li>Respuestas automáticas en WhatsApp, IG y FB</li>
-          <li>Presupuestos automáticos según precios actuales</li>
-          <li>Consulta de saldo y pedidos por mensaje</li>
-          <li>Derivación al equipo cuando es necesario</li>
-        </ul>
+        <div class="etapa-title">Agente IA — WhatsApp, Instagram y Facebook</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;margin-top:4px;">
+          <ul class="etapa-items">
+            <li>Atiende clientes 24/7 en las tres redes</li>
+            <li>Genera y envía presupuestos con precios actuales</li>
+            <li>Procesa fotos: interpreta pedidos escritos a mano, facturas y mercadería</li>
+          </ul>
+          <ul class="etapa-items">
+            <li>Consulta saldo de cuenta corriente por mensaje</li>
+            <li>Confirma pedidos para el reparto del día</li>
+            <li>Deriva al equipo cuando la situación lo requiere</li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="etapas-meta" style="margin-top:8px;">
       <div class="meta-cell">
-        <div class="meta-label">Etapas 1–5</div>
+        <div class="meta-label">Etapas 1 a 3</div>
         <div class="meta-value">~1 mes</div>
         <div class="meta-desc">Sistema completo operativo</div>
       </div>
       <div class="meta-cell">
-        <div class="meta-label">Acceso</div>
-        <div class="meta-value">Desde Etapa 1</div>
-        <div class="meta-desc">Ambiente de pruebas desde el día 5</div>
+        <div class="meta-label">Desde la Etapa 1</div>
+        <div class="meta-value">Ya operativo</div>
+        <div class="meta-desc">Reemplaza el Excel desde el día 1</div>
       </div>
       <div class="meta-cell">
         <div class="meta-label">Migración de datos</div>
-        <div class="meta-value">Incluida</div>
+        <div class="meta-value">Incluida en E1</div>
         <div class="meta-desc">Excel + sistema Windows sin pérdida</div>
       </div>
     </div>
@@ -690,44 +680,32 @@ html, body { font-family: var(--font-b); background: var(--bg); color: var(--ink
       </thead>
       <tbody>
         <tr>
-          <td><strong>Etapa 1 — Productos y clientes</strong></td>
-          <td class="desc">Catálogo, ~50 clientes con ctacte, usuarios y roles, migración del Excel</td>
+          <td><strong>Etapa 1 — Sistema operativo completo</strong></td>
+          <td class="desc">Productos, clientes+ctacte, pedidos, reparto, caja, stock+merma, compras a proveedores, usuarios, migración del Excel</td>
           <td class="desc">Pago único</td>
-          <td class="val">USD 800</td>
+          <td class="val">USD 2.200</td>
         </tr>
         <tr>
-          <td><strong>Etapa 2 — Pedidos, reparto y caja</strong></td>
-          <td class="desc">Pedidos por cliente, planilla de reparto, estado de entrega, apertura y cierre de caja</td>
+          <td><strong>Etapa 2 — Facturación y cobros digitales</strong></td>
+          <td class="desc">Factura electrónica AFIP con CAE, panel de cobros, validación MP/BNA/Galicia automática</td>
           <td class="desc">Pago único</td>
-          <td class="val">USD 800</td>
+          <td class="val">USD 1.500</td>
         </tr>
         <tr>
-          <td><strong>Etapa 3 — Stock y merma</strong></td>
-          <td class="desc">Stock en tiempo real, registro de merma con costo real ajustado, compras a proveedores</td>
-          <td class="desc">Pago único</td>
-          <td class="val">USD 900</td>
-        </tr>
-        <tr>
-          <td><strong>Etapa 4 — Facturación y cobros digitales</strong></td>
-          <td class="desc">Factura electrónica AFIP (CAE), validación MP/BNA/Galicia automática, panel de cobros del día</td>
-          <td class="desc">Pago único</td>
-          <td class="val">USD 1.200</td>
-        </tr>
-        <tr>
-          <td><strong>Etapa 5 — Productividad y balanza</strong></td>
+          <td><strong>Etapa 3 — Productividad y balanza</strong></td>
           <td class="desc">Cotizaciones PDF, checklist operativo, dashboard, informes de ganancia, balanza electrónica TCP-IP</td>
           <td class="desc">Pago único</td>
           <td class="val">USD 1.100</td>
         </tr>
         <tr>
-          <td><strong>Etapa 6 — Agente IA Redes Sociales</strong></td>
-          <td class="desc">WhatsApp, Instagram y Facebook: respuestas automáticas, presupuestos, consulta de saldo, derivación al equipo</td>
+          <td><strong>Etapa 4 — Agente IA redes sociales</strong></td>
+          <td class="desc">WhatsApp, Instagram y Facebook: respuestas 24/7, presupuestos por foto, consulta de saldo, confirmación de pedidos</td>
           <td class="desc">Dev + mensual</td>
           <td class="val">USD 1.200<br/><span style="font-size:9px;color:var(--muted);">+ USD 300/mes</span></td>
         </tr>
         <tr class="total">
-          <td colspan="2"><strong>Total sistema completo — 6 etapas</strong></td>
-          <td class="desc">Etapas 1 a 6 · suscripción desde Etapa 1</td>
+          <td colspan="2"><strong>Total sistema completo — 4 etapas</strong></td>
+          <td class="desc">Suscripción mensual única desde Etapa 1</td>
           <td class="val">USD 6.000 + mensual</td>
         </tr>
       </tbody>
