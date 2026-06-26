@@ -170,6 +170,10 @@ export default function Home() {
           </a>
           <nav aria-label="Principal" className="hidden items-center gap-7 text-sm text-[color:var(--color-muted)] md:flex">
             <a href="#que-hacemos" className="transition hover:text-[color:var(--color-ink)]">Servicios</a>
+            <a href="/vigia" className="font-medium text-[color:var(--color-ink)] transition hover:text-[color:var(--color-accent)] flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-green-500 inline-block" style={{ boxShadow: "0 0 5px #22c55e" }} />
+              Vigía
+            </a>
             <a href="#proceso" className="transition hover:text-[color:var(--color-ink)]">Proceso</a>
             <a href="/demo" className="font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-ink)]">Demo IA</a>
             <a href="#contacto" className="transition hover:text-[color:var(--color-ink)]">Contacto</a>
@@ -323,45 +327,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Agent features ── */}
-      <section id="incluye" className="section-shell py-16 md:py-24">
-        <div className="section-heading reveal">
-          <div className="eyebrow">Qué incluye cada agente</div>
-          <h2 className="section-title mt-4">No es un chatbot. Es un agente que trabaja de verdad.</h2>
-          <p className="section-copy">
-            Cada implementación incluye todo lo necesario para operar desde el día uno, con seguimiento real y capacidad de actualización permanente.
-          </p>
-        </div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {agentFeatures.map((f, i) => (
-            <div key={f.title} className={`card-surface p-7 reveal delay-${Math.min((i % 3 + 1) * 100, 400)}`}>
-              <div className="text-3xl mb-4">{f.icon}</div>
-              <h3 className="text-lg font-bold tracking-tight text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>{f.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-[color:var(--color-muted)]">{f.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Process ── */}
-      <section id="proceso" className="section-shell py-16 md:py-24">
-        <div className="section-heading reveal">
-          <div className="eyebrow">Cómo funciona</div>
-          <h2 className="section-title mt-4">De cero a operando en días.</h2>
-        </div>
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {processSteps.map((item, i) => (
-            <article key={item.step} className={`card-surface p-7 reveal delay-${(i + 1) * 150}`}>
-              <div className="text-5xl font-bold text-[color:var(--color-accent)]/20" style={{ fontFamily: "var(--font-display)" }}>{item.step}</div>
-              <h3 className="mt-4 text-xl font-bold tracking-tight text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>{item.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-[color:var(--color-muted)]">{item.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       {/* ── Vigía showcase ── */}
-      <section className="section-shell py-16 md:py-24">
+      <section id="vigia" className="section-shell py-16 md:py-24">
         <div className="rounded-[2rem] overflow-hidden reveal" style={{ background: "linear-gradient(135deg, #3a251c 0%, #5d3e2e 50%, #4a3025 100%)" }}>
           <div className="grid gap-0 lg:grid-cols-[1fr_1fr]">
             {/* Text side */}
@@ -461,6 +428,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Agent features ── */}
+      <section id="incluye" className="section-shell py-16 md:py-24">
+        <div className="section-heading reveal">
+          <div className="eyebrow">Qué incluye cada agente</div>
+          <h2 className="section-title mt-4">No es un chatbot. Es un agente que trabaja de verdad.</h2>
+          <p className="section-copy">
+            Cada implementación incluye todo lo necesario para operar desde el día uno, con seguimiento real y capacidad de actualización permanente.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {agentFeatures.map((f, i) => (
+            <div key={f.title} className={`card-surface p-7 reveal delay-${Math.min((i % 3 + 1) * 100, 400)}`}>
+              <div className="text-3xl mb-4">{f.icon}</div>
+              <h3 className="text-lg font-bold tracking-tight text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>{f.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-[color:var(--color-muted)]">{f.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Process ── */}
+      <section id="proceso" className="section-shell py-16 md:py-24">
+        <div className="section-heading reveal">
+          <div className="eyebrow">Cómo funciona</div>
+          <h2 className="section-title mt-4">De cero a operando en días.</h2>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {processSteps.map((item, i) => (
+            <article key={item.step} className={`card-surface p-7 reveal delay-${(i + 1) * 150}`}>
+              <div className="text-5xl font-bold text-[color:var(--color-accent)]/20" style={{ fontFamily: "var(--font-display)" }}>{item.step}</div>
+              <h3 className="mt-4 text-xl font-bold tracking-tight text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>{item.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-[color:var(--color-muted)]">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* ── Contact ── */}
       <section id="contacto" className="section-shell py-16 md:py-24">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
@@ -495,6 +499,7 @@ export default function Home() {
           </div>
           <div className="flex flex-wrap gap-6">
             <a href="#que-hacemos" className="transition hover:text-[color:var(--color-ink)]">Servicios</a>
+            <a href="/vigia" className="transition hover:text-[color:var(--color-ink)]">Vigía</a>
             <a href="#proceso" className="transition hover:text-[color:var(--color-ink)]">Proceso</a>
             <a href="/demo" className="transition hover:text-[color:var(--color-ink)]">Demo IA</a>
             <a href="#contacto" className="transition hover:text-[color:var(--color-ink)]">Contacto</a>
