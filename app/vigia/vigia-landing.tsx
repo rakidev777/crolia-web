@@ -35,16 +35,21 @@ function StatCard({ value, suffix, label, trigger }: { value: number; suffix: st
 
 const MODULES = [
   { icon: "🛒", title: "Punto de Venta (POS)", desc: "Buscador instantáneo, cuotas, split de pago, descuentos y comprobante en segundos.", color: "#22c55e" },
-  { icon: "👥", title: "Clientes y Cta. Corriente", desc: "Ficha completa, historial, saldo en tiempo real y contacto directo por WhatsApp.", color: "#3b82f6" },
-  { icon: "🏦", title: "Préstamos y Cuotas", desc: "Control de cuotas con vencimientos, alertas automáticas y registro de pagos.", color: "#8b5cf6" },
-  { icon: "📦", title: "Stock e Inventario", desc: "Stock por local, transferencias, ingresos y alertas de mínimo en el POS.", color: "#f59e0b" },
-  { icon: "📊", title: "Dashboard en tiempo real", desc: "Ventas, métodos de pago, top productos, deudores y comparativo semanal.", color: "#ec4899" },
-  { icon: "💰", title: "Caja diaria", desc: "Apertura, cierre y arqueo de efectivo por local con historial completo.", color: "#10b981" },
-  { icon: "📋", title: "Presupuestos", desc: "Creá, enviá por WhatsApp y convertí a venta con un solo clic.", color: "#f97316" },
-  { icon: "🧾", title: "Facturación ARCA", desc: "Facturas A, B y C con CAE en tiempo real integradas al flujo de venta.", color: "#06b6d4" },
+  { icon: "👥", title: "Clientes y Cta. Corriente", desc: "Ficha completa, historial de compras, saldo en tiempo real y contacto directo por WhatsApp.", color: "#3b82f6" },
+  { icon: "🏦", title: "Créditos y Cuotas", desc: "Control de cuotas con vencimientos, alertas automáticas y registro de pagos. Cupón imprimible por cuota.", color: "#8b5cf6" },
+  { icon: "📦", title: "Stock e Inventario", desc: "Stock por local, transferencias entre locales, ingresos, escaneo EAN y alertas de mínimo en el POS.", color: "#f59e0b" },
+  { icon: "📊", title: "Dashboard en tiempo real", desc: "Ventas, métodos de pago, top productos, deudores, comparativo semanal y estado de caja por local.", color: "#ec4899" },
+  { icon: "💰", title: "Caja diaria y Gastos", desc: "Apertura, cierre y arqueo de efectivo por local. Registro de gastos con categorías y historial completo.", color: "#10b981" },
+  { icon: "🚚", title: "Seguimiento de Envíos", desc: "Registro de envíos por venta, estados (pendiente, en camino, entregado, no entregado) y control de quién entregó.", color: "#0ea5e9" },
+  { icon: "📋", title: "Presupuestos", desc: "Creá, enviá por WhatsApp, editá y convertí a venta con un solo clic. Comprobante imprimible.", color: "#f97316" },
+  { icon: "🧾", title: "Facturación ARCA", desc: "Facturas A, B y C con CAE en tiempo real, integradas al flujo de venta sin salir del sistema.", color: "#06b6d4" },
+  { icon: "📈", title: "Rentabilidad", desc: "Análisis de margen por venta, costo en pesos y USD, rentabilidad por período y producto.", color: "#84cc16" },
+  { icon: "🏆", title: "Métricas de equipo", desc: "Performance de cada vendedor: ventas, ticket promedio y comparativo entre operadores.", color: "#f59e0b" },
+  { icon: "🏭", title: "Compras y Proveedores", desc: "Órdenes de compra, cuenta corriente con proveedores y control de deuda de tu comercio.", color: "#78716c" },
+  { icon: "↩️", title: "Devoluciones", desc: "Registro y control de devoluciones con ajuste automático de stock e impacto en caja.", color: "#ef4444" },
   { icon: "💬", title: "CRM + Agente IA WhatsApp", desc: "Agente IA que atiende, vende y cobra por WhatsApp 24/7, con bandeja centralizada y conexión total al sistema.", color: "#a855f7" },
-  { icon: "👤", title: "Usuarios y Permisos", desc: "5 roles, permisos por acción, auditoría completa de quién hizo qué.", color: "#64748b" },
-  { icon: "🤖", title: "Asistente IA Crolia", desc: "Consultá datos del negocio en lenguaje natural. Respuestas con tus propios datos.", color: "#7c3aed" },
+  { icon: "🤖", title: "Asistente IA Crolia", desc: "Consultá datos del negocio en lenguaje natural. 'Qué vendí esta semana', 'quién debe más', respuestas en segundos.", color: "#7c3aed" },
+  { icon: "👤", title: "Usuarios y Permisos", desc: "5 roles, permisos granulares por acción, auditoría completa de quién hizo qué y cuándo.", color: "#64748b" },
   { icon: "📈", title: "Google Sheets Sync", desc: "Actualizá precios y stock desde tu planilla de Google automáticamente.", color: "#16a34a" },
 ];
 
@@ -149,7 +154,7 @@ export default function VigiaLanding() {
               necesitaba
             </h1>
             <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.1rem", lineHeight: 1.7, marginBottom: 36, maxWidth: 480 }}>
-              Vigía unifica ventas, stock, clientes, cuotas, caja y más en una sola plataforma. Rápido, moderno y accesible desde cualquier dispositivo.
+              Vigía unifica ventas, stock, clientes, créditos, caja, envíos, compras, asistente IA y más en una sola plataforma. Rápido, moderno y accesible desde cualquier dispositivo.
             </p>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
               <a href="#contacto" style={{
@@ -170,7 +175,7 @@ export default function VigiaLanding() {
               </a>
             </div>
             <div style={{ display: "flex", gap: 28, marginTop: 36, flexWrap: "wrap" }}>
-              {[["Punto de Venta", "✓"], ["Cuotas automáticas", "✓"], ["Multi-local", "✓"], ["IA integrada", "✓"]].map(([label, check]) => (
+              {[["Punto de Venta", "✓"], ["Cuotas automáticas", "✓"], ["Multi-local", "✓"], ["Seguimiento de envíos", "✓"], ["IA integrada", "✓"]].map(([label, check]) => (
                 <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
                   <span style={{ color: "#22c55e", fontWeight: 700 }}>{check}</span>
                   <span style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.85rem" }}>{label}</span>
@@ -191,7 +196,7 @@ export default function VigiaLanding() {
                   {["#ff5f57","#febc2e","#28c840"].map(c => <div key={c} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
                 </div>
                 <div style={{ flex: 1, background: "rgba(255,255,255,0.06)", borderRadius: 6, height: 22, display: "flex", alignItems: "center", paddingLeft: 10 }}>
-                  <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.72rem" }}>vigia-jys.crolia.com.ar/dashboard</span>
+                  <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.72rem" }}>vigia.crolia.com.ar/dashboard</span>
                 </div>
               </div>
               {/* Dashboard UI */}
@@ -199,8 +204,8 @@ export default function VigiaLanding() {
                 {/* Header */}
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
                   <div>
-                    <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "#333" }}>Buenos días, Nacho 👋</div>
-                    <div style={{ fontSize: "0.68rem", color: "#aaa" }}>Lunes, 8 de junio</div>
+                    <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "#333" }}>Buenos días, Pablo 👋</div>
+                    <div style={{ fontSize: "0.68rem", color: "#aaa" }}>Lunes, 8 de junio · Local Centro</div>
                   </div>
                   <div style={{ display: "flex", gap: 6 }}>
                     <div style={{ background: BRAND, borderRadius: 8, padding: "4px 10px" }}>
@@ -266,7 +271,7 @@ export default function VigiaLanding() {
         <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 40, textAlign: "center" }}>
           <StatCard value={1087} suffix="+" label="Productos cargados" trigger={statsVisible} />
           <StatCard value={6} suffix="" label="Formas de pago" trigger={statsVisible} />
-          <StatCard value={12} suffix="" label="Módulos incluidos" trigger={statsVisible} />
+          <StatCard value={17} suffix="" label="Módulos incluidos" trigger={statsVisible} />
           <StatCard value={5} suffix="" label="Locales gestionados" trigger={statsVisible} />
         </div>
       </section>
@@ -279,10 +284,10 @@ export default function VigiaLanding() {
               Todo incluido
             </div>
             <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 800, color: "#1a1a1a", marginBottom: 16 }}>
-              12 módulos integrados
+              17 módulos integrados
             </h2>
             <p style={{ color: "#888", fontSize: "1.05rem", maxWidth: 520, margin: "0 auto" }}>
-              No es un software genérico. Vigía fue construido para la operación real de un comercio.
+              No es un software genérico. Vigía fue construido para la operación real de un comercio, y crece con cada necesidad real que aparece.
             </p>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 20 }}>
@@ -329,9 +334,9 @@ export default function VigiaLanding() {
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   {[
-                    { code: "ANF-0005", name: "Anafe Star Track Doble", price: "$72.000", qty: 1, color: "#22c55e" },
-                    { code: "TEM-0017", name: "Bolso Matero Impermeable", price: "$17.939", qty: 2, color: null },
-                    { code: "AML850", name: "Amoladora Lusqtoff 850W", price: "$55.493", qty: 3, color: null },
+                    { code: "LAV-0012", name: "Lavarropas 8kg Carga Front.", price: "$222.000", qty: 1, color: "#22c55e" },
+                    { code: "MIC-0034", name: "Microondas 20L Digital", price: "$48.000", qty: 1, color: null },
+                    { code: "FRE-0008", name: "Freidora de Aire 5.5L", price: "$55.493", qty: 2, color: null },
                   ].map((item, i) => (
                     <div key={item.code} style={{
                       background: item.color ? `${item.color}15` : "rgba(255,255,255,0.04)",
@@ -480,10 +485,10 @@ export default function VigiaLanding() {
               </div>
             </div>
             {[
-              { name: "Franco Colapinto", amount: "$37.972", cuota: "$6.000/mes", status: "vencida", n: "0/12" },
-              { name: "Ignacio Ferrari", amount: "$72.000", cuota: "$6.000/mes", status: "activa", n: "0/12" },
-              { name: "María González", amount: "$456.500", cuota: "$76.083/mes", status: "activa", n: "1/6" },
-              { name: "Carlos Rodríguez", amount: "$70.000", cuota: "$7.778/mes", status: "proxima", n: "0/9" },
+              { name: "Lucas Pereyra", amount: "$37.972", cuota: "$6.000/mes", status: "vencida", n: "0/12" },
+              { name: "Marta Giménez", amount: "$72.000", cuota: "$6.000/mes", status: "activa", n: "0/12" },
+              { name: "Diego Fernández", amount: "$456.500", cuota: "$76.083/mes", status: "activa", n: "1/6" },
+              { name: "Ana Torres", amount: "$70.000", cuota: "$7.778/mes", status: "proxima", n: "0/9" },
             ].map(loan => (
               <div key={loan.name} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #f5f3f0" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -507,6 +512,80 @@ export default function VigiaLanding() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ENVÍOS FEATURE */}
+      <section style={{ padding: "80px 5%", background: "#f0f7ff" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
+          {/* Mockup envíos */}
+          <div style={{ background: "white", borderRadius: 20, padding: 24, boxShadow: "0 20px 60px rgba(0,0,0,0.08)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+              <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "1rem", color: "#1a1a1a" }}>Envíos pendientes</div>
+              <div style={{ background: "#0ea5e915", color: "#0284c7", padding: "4px 10px", borderRadius: 20, fontSize: "0.68rem", fontWeight: 600 }}>3 hoy</div>
+            </div>
+            {[
+              { venta: "#1042", cliente: "Laura Méndez", dir: "Av. San Martín 1234", estado: "en_camino", monto: "$48.000" },
+              { venta: "#1039", cliente: "Roberto Díaz", dir: "Sarmiento 567, Piso 2", estado: "pendiente", monto: "$126.500" },
+              { venta: "#1035", cliente: "Sofía Romero", dir: "Belgrano 890", estado: "entregado", monto: "$72.000" },
+              { venta: "#1031", cliente: "Martín Leal", dir: "Hipólito Yrigoyen 231", estado: "no_entregado", monto: "$94.000" },
+            ].map(e => (
+              <div key={e.venta} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #f5f3f0" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{
+                    width: 32, height: 32, borderRadius: 8,
+                    background: e.estado === "entregado" ? "#dcfce7" : e.estado === "en_camino" ? "#dbeafe" : e.estado === "no_entregado" ? "#fee2e2" : "#fef3c7",
+                    display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.9rem",
+                  }}>
+                    {e.estado === "entregado" ? "✅" : e.estado === "en_camino" ? "🚚" : e.estado === "no_entregado" ? "❌" : "📦"}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "#1a1a1a" }}>{e.cliente}</div>
+                    <div style={{ fontSize: "0.65rem", color: "#aaa" }}>{e.venta} · {e.dir}</div>
+                  </div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: "0.82rem", fontWeight: 700, color: "#1a1a1a" }}>{e.monto}</div>
+                  <div style={{
+                    fontSize: "0.6rem", fontWeight: 600, padding: "2px 8px", borderRadius: 20,
+                    background: e.estado === "entregado" ? "#dcfce7" : e.estado === "en_camino" ? "#dbeafe" : e.estado === "no_entregado" ? "#fee2e2" : "#fef9c3",
+                    color: e.estado === "entregado" ? "#16a34a" : e.estado === "en_camino" ? "#1d4ed8" : e.estado === "no_entregado" ? "#dc2626" : "#92400e",
+                  }}>
+                    {e.estado === "entregado" ? "Entregado" : e.estado === "en_camino" ? "En camino" : e.estado === "no_entregado" ? "No entregado" : "Pendiente"}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Text */}
+          <div>
+            <div style={{ display: "inline-block", background: "#0ea5e915", color: "#0284c7", padding: "5px 14px", borderRadius: 999, fontSize: "0.8rem", fontWeight: 600, marginBottom: 20, border: "1px solid #0ea5e930" }}>
+              🚚 Seguimiento de Envíos
+            </div>
+            <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 800, color: "#1a1a1a", lineHeight: 1.2, marginBottom: 20 }}>
+              Sabés exactamente dónde<br />
+              <span style={{ color: "#0284c7" }}>está cada entrega.</span>
+            </h2>
+            <p style={{ color: "#666", fontSize: "0.95rem", lineHeight: 1.8, marginBottom: 28 }}>
+              Desde que se genera la venta, Vigía registra el envío y te permite seguir su estado en tiempo real. Cada entrega tiene trazabilidad completa.
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              {[
+                ["📦", "Envío automático desde la venta"],
+                ["🚚", "Estados: pendiente, en camino, entregado"],
+                ["❌", "Registro de no entregados con motivo"],
+                ["👤", "Control de quién realizó la entrega"],
+                ["📍", "Dirección y observaciones por envío"],
+                ["📊", "Vista consolidada de todos los envíos"],
+              ].map(([icon, text]) => (
+                <div key={String(text)} style={{ display: "flex", alignItems: "center", gap: 8, background: "white", borderRadius: 10, padding: "10px 14px", boxShadow: "0 1px 6px rgba(0,0,0,0.06)" }}>
+                  <span style={{ fontSize: "1rem" }}>{icon}</span>
+                  <span style={{ fontSize: "0.82rem", fontWeight: 500, color: "#444" }}>{text}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -547,9 +626,9 @@ export default function VigiaLanding() {
           <div style={{ background: "white", borderRadius: 20, padding: 24, maxWidth: 560, margin: "0 auto", boxShadow: "0 20px 60px rgba(124,58,237,0.1)", border: "1px solid #7c3aed20" }}>
             {[
               { from: "user", text: "¿Cuánto vendimos esta semana?" },
-              { from: "bot", text: "Esta semana llevan $2.7M en ventas, un 12% más que la semana pasada. El producto más vendido fue la Amoladora Lusqtoff 850W con 15 unidades." },
+              { from: "bot", text: "Esta semana llevan $2.7M en ventas, un 12% más que la semana pasada. El producto más vendido fue el lavarropas 8kg con 15 unidades." },
               { from: "user", text: "¿Qué clientes deben más?" },
-              { from: "bot", text: "Los 3 principales deudores son: Franco Colapinto ($37.972), Carlos Rodríguez ($70.000) y María González ($456.500). ¿Querés que te muestre el detalle de cuotas?" },
+              { from: "bot", text: "Los 3 principales deudores son: Lucas Pereyra ($37.972), Ana Torres ($70.000) y Diego Fernández ($456.500). ¿Querés que te muestre el detalle de cuotas?" },
             ].map((msg, i) => (
               <div key={i} style={{ display: "flex", justifyContent: msg.from === "user" ? "flex-end" : "flex-start", marginBottom: 12 }}>
                 <div style={{
@@ -638,19 +717,19 @@ export default function VigiaLanding() {
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
                 <div style={{ width: 40, height: 40, borderRadius: "50%", background: "linear-gradient(135deg, #a855f7, #7c3aed)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem" }}>🤖</div>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: "0.9rem", color: "#1a1a1a" }}>Agente Vigía — JyS Confort</div>
+                  <div style={{ fontWeight: 700, fontSize: "0.9rem", color: "#1a1a1a" }}>Agente Vigía</div>
                   <div style={{ fontSize: "0.65rem", color: "#22c55e", fontWeight: 600 }}>● En línea</div>
                 </div>
               </div>
               {/* Messages */}
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {[
-                  { from: "client", text: "Hola, quería saber el precio del Anafe Star Track a 12 cuotas" },
-                  { from: "agent", text: "¡Hola! El Anafe Star Track Doble está a $6.000 por mes en 12 cuotas (total $72.000). ¿Te lo reservo? 🔥" },
-                  { from: "client", text: "Sí, me interesa. ¿Puedo pagarlo con tarjeta?" },
-                  { from: "agent", text: "¡Claro! Aceptamos débito, transferencia y Mercado Pago. ¿Querés que te arme el presupuesto con tu nombre para que lo puedas mostrar en el local?" },
-                  { from: "client", text: "Perfecto, soy Franco Colapinto" },
-                  { from: "agent", text: "Ya te encontré en el sistema, Franco 👋 Te tengo el historial completo. Te mando el presupuesto ahora mismo." },
+                  { from: "client", text: "Hola, quería saber el precio del lavarropas 8kg a 12 cuotas" },
+                  { from: "agent", text: "¡Hola! El lavarropas 8kg está a $18.500 por mes en 12 cuotas (total $222.000). ¿Te lo reservo? 🔥" },
+                  { from: "client", text: "Sí, me interesa. ¿Puedo pagarlo con transferencia?" },
+                  { from: "agent", text: "¡Claro! Aceptamos transferencia, débito y Mercado Pago. ¿Querés que te arme el presupuesto para mostrarlo en el local?" },
+                  { from: "client", text: "Perfecto, soy Lucas Pereyra" },
+                  { from: "agent", text: "Ya te encontré en el sistema, Lucas 👋 Te tengo el historial completo. Te mando el presupuesto ahora mismo." },
                 ].map((msg, i) => (
                   <div key={i} style={{ display: "flex", justifyContent: msg.from === "client" ? "flex-end" : "flex-start" }}>
                     <div style={{

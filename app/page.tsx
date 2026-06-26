@@ -357,13 +357,13 @@ export default function Home() {
                 El sistema de gestión que construimos para comercios reales.
               </h2>
               <p className="text-white/60 text-base leading-7 mb-8 max-w-lg">
-                Vigía es un sistema completo de gestión para comercios: POS, stock, clientes, cuotas, caja, presupuestos, facturación y agente IA — todo integrado en una plataforma moderna y accesible desde cualquier dispositivo.
+                Vigía es un sistema completo de gestión para comercios: POS, stock, clientes, créditos, caja, envíos, compras, rentabilidad, facturación ARCA y agente IA — todo integrado en una plataforma moderna y accesible desde cualquier dispositivo.
               </p>
               <div className="grid grid-cols-2 gap-2 mb-8">
                 {[
-                  "Punto de Venta (POS)", "Cuotas automáticas", "Control de stock multi-local",
-                  "Cuenta corriente", "Dashboard en tiempo real", "Agente IA integrado",
-                  "Facturación ARCA", "CRM WhatsApp",
+                  "Punto de Venta (POS)", "Créditos y cuotas", "Stock multi-local",
+                  "Seguimiento de envíos", "Dashboard en tiempo real", "Asistente IA",
+                  "Facturación ARCA", "Compras y proveedores", "Rentabilidad", "CRM WhatsApp",
                 ].map((f) => (
                   <div key={f} className="flex items-center gap-2 text-sm text-white/70">
                     <span className="text-[#c4a882] font-bold text-xs">✓</span>
