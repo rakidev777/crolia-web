@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bot WhatsApp — Mejoras · JyS Confort</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --brand-50:  #fdf8f5;
+    --brand-100: #f5ebe1;
+    --brand-200: #e8d0bb;
+    --brand-300: #d4a982;
+    --brand-400: #b8805a;
+    --brand-500: #8a6448;
+    --brand-600: #74503a;
+    --brand-700: #5d3e2e;
+    --brand-800: #4a3025;
+    --brand-900: #3a251c;
+    --surface:   #faf9f7;
+    --border:    #e8e2d9;
+    --text:      #1a1a1a;
+    --muted:     #9b8d82;
+    --wa-green:  #25D366;
+    --wa-dark:   #075E54;
+    --wa-bg:     #E5DDD5;
+    --wa-bot:    #DCF8C6;
+    --wa-client: #FFFFFF;
+    --wa-text:   #111B21;
+    --wa-time:   #667781;
+    --pri-high-bg:  #fdf3e7;
+    --pri-high-c:   #92400e;
+    --pri-high-b:   #fcd9a3;
+    --pri-med-bg:   #eef4ff;
+    --pri-med-c:    #1d4ed8;
+    --pri-med-b:    #c0d4fb;
+    --pri-proj-bg:  #f3f0fe;
+    --pri-proj-c:   #5b21b6;
+    --pri-proj-b:   #d4c9fc;
+    --tag-v-bg:  #d1fae5; --tag-v-c:  #065f46;
+    --tag-a-bg:  #fee2e2; --tag-a-c:  #991b1b;
+    --tag-n-bg:  #dbeafe; --tag-n-c:  #1e40af;
+    --tag-m-bg:  #fef3c7; --tag-m-c:  #92400e;
+  }
+
+  body {
+    background: var(--surface);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── HEADER ─────────────────────────────────── */
+  .header {
+    background: var(--brand-900);
+    padding: 48px 24px 44px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% -10%, rgba(212,169,130,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.14);
+    color: var(--brand-300);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 5px 13px;
+    border-radius: 99px;
+    margin-bottom: 18px;
+  }
+  .header h1 {
+    color: var(--brand-100);
+    font-size: clamp(22px, 5vw, 36px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    margin-bottom: 12px;
+  }
+  .header p {
+    color: var(--brand-300);
+    font-size: 14.5px;
+    max-width: 460px;
+    margin: 0 auto;
+    line-height: 1.65;
+  }
+
+  /* ─── LAYOUT ─────────────────────────────────── */
+  .wrap {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 0 20px 64px;
+  }
+
+  /* ─── SECTION LABEL ──────────────────────────── */
+  .section-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 40px 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ─── CARD ───────────────────────────────────── */
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+  @media (max-width: 600px) { .card { grid-template-columns: 1fr; } }
+  .card-full { grid-template-columns: 1fr; }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-bottom: 9px;
+    flex-wrap: wrap;
+  }
+  .card-title {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--text);
+    flex: 1;
+    min-width: 140px;
+    line-height: 1.3;
+  }
+  .priority {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 99px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border: 1px solid;
+  }
+  .p-high { background: var(--pri-high-bg); color: var(--pri-high-c); border-color: var(--pri-high-b); }
+  .p-med  { background: var(--pri-med-bg);  color: var(--pri-med-c);  border-color: var(--pri-med-b); }
+  .p-proj { background: var(--pri-proj-bg); color: var(--pri-proj-c); border-color: var(--pri-proj-b); }
+
+  .card-desc {
+    color: var(--muted);
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+  .card-desc + .card-desc { margin-top: 7px; }
+  .card-desc strong { color: var(--text); }
+  .note {
+    font-size: 12px;
+    color: #74503a;
+    background: var(--brand-100);
+    border: 1px solid var(--brand-200);
+    border-radius: 7px;
+    padding: 8px 12px;
+    margin-top: 11px;
+    line-height: 1.55;
+  }
+
+  /* ─── WA MOCK ────────────────────────────────── */
+  .wa {
+    background: var(--wa-bg);
+    border-radius: 11px;
+    padding: 12px 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .wa-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid rgba(0,0,0,.09);
+    margin-bottom: 2px;
+  }
+  .wa-av {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--wa-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .wa-name { font-size: 13px; font-weight: 600; color: var(--wa-text); }
+  .wa-sub  { font-size: 11px; color: var(--wa-time); }
+
+  .b {
+    max-width: 88%;
+    padding: 7px 10px 4px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--wa-text);
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  }
+  .bc { background: var(--wa-client); align-self: flex-start; border-top-left-radius: 2px; }
+  .bb { background: var(--wa-bot);    align-self: flex-end;   border-top-right-radius: 2px; }
+  .bt { font-size: 10px; color: var(--wa-time); text-align: right; margin-top: 2px; }
+
+  .wa-btns {
+    margin-top: 4px;
+    border-top: 1px solid rgba(0,0,0,.08);
+    padding-top: 3px;
+    display: flex;
+    flex-direction: column;
+  }
+  .wa-btn {
+    color: #00A5F4;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 4px;
+    text-align: center;
+  }
+  .wa-btn + .wa-btn { border-top: 1px solid rgba(0,0,0,.07); }
+
+  /* image card */
+  .wa-imgcard {
+    background: var(--wa-bot);
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 88%;
+    align-self: flex-end;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  }
+  .wa-imgph {
+    background: linear-gradient(135deg, var(--brand-800) 0%, var(--brand-600) 100%);
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .wa-imgph svg { width: 34px; height: 34px; fill: rgba(255,255,255,.45); }
+  .wa-imgph span { font-size: 11px; color: rgba(255,255,255,.55); }
+  .wa-imgcap { padding: 7px 10px 5px; font-size: 13px; color: var(--wa-text); }
+
+  /* list btn */
+  .wa-listcard {
+    background: var(--wa-bot);
+    border-radius: 8px;
+    max-width: 88%;
+    align-self: flex-end;
+    overflow: hidden;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  }
+  .wa-listbody { padding: 7px 10px; font-size: 13px; color: var(--wa-text); }
+  .wa-listfoot {
+    border-top: 1px solid rgba(0,0,0,.09);
+    padding: 7px 10px;
+    color: #00A5F4;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  /* tags */
+  .wa-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+  .wa-tag {
+    font-size: 10px; font-weight: 600;
+    padding: 2px 7px; border-radius: 99px; letter-spacing: .02em;
+  }
+  .tv { background: var(--tag-v-bg); color: var(--tag-v-c); }
+  .ta { background: var(--tag-a-bg); color: var(--tag-a-c); }
+  .tn { background: var(--tag-n-bg); color: var(--tag-n-c); }
+  .tm { background: var(--tag-m-bg); color: var(--tag-m-c); }
+
+  /* chat list */
+  .chat-list { display: flex; flex-direction: column; gap: 1px; }
+  .chat-item {
+    background: #fff;
+    padding: 9px 11px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border-radius: 5px;
+  }
+  .ci-name { font-size: 13px; font-weight: 600; color: var(--wa-text); }
+  .ci-prev { font-size: 11px; color: var(--wa-time); margin-top: 1px; }
+  .ci-right { margin-left: auto; text-align: right; display: flex; flex-direction: column; gap: 3px; align-items: flex-end; }
+  .ci-time { font-size: 10px; color: var(--wa-time); }
+
+  /* typing */
+  .typing { display: inline-flex; gap: 3px; align-items: center; padding: 3px 2px; }
+  .typing span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--wa-time);
+    animation: blink 1.2s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: .2s; }
+  .typing span:nth-child(3) { animation-delay: .4s; }
+  @keyframes blink {
+    0%,80%,100% { opacity: .3; transform: scale(.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) { .typing span { animation: none; opacity: .6; } }
+
+  /* ─── RECOVERY TIMELINE ──────────────────────── */
+  .tl { display: flex; flex-direction: column; position: relative; }
+  .tl::before {
+    content: '';
+    position: absolute;
+    left: 14px; top: 20px; bottom: 24px;
+    width: 2px;
+    background: var(--border);
+  }
+  .tl-item { display: flex; gap: 12px; padding-bottom: 18px; position: relative; }
+  .tl-dot {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    position: relative; z-index: 1;
+  }
+  .tl-dot-on { border-color: var(--wa-green); background: var(--wa-green); }
+  .tl-content { padding-top: 3px; }
+  .tl-time {
+    font-size: 10.5px; font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase; letter-spacing: .06em;
+    margin-bottom: 4px;
+  }
+  .tl-msg {
+    font-size: 12.5px;
+    color: var(--wa-text);
+    background: var(--wa-bot);
+    padding: 6px 10px;
+    border-radius: 7px;
+    display: inline-block;
+    max-width: 230px;
+    line-height: 1.45;
+    box-shadow: 0 1px 1px rgba(0,0,0,.09);
+  }
+  .tl-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* ─── SUMMARY TABLE ──────────────────────────── */
+  .summary {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 36px;
+  }
+  .sum-head {
+    background: var(--brand-900);
+    padding: 16px 22px;
+    color: var(--brand-100);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .sum-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 22px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sum-row:last-child { border-bottom: none; }
+  .sum-row:hover { background: var(--brand-50); }
+  .sum-name { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
+  .sum-sub  { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+
+  /* ─── FOOTER ─────────────────────────────────── */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+  }
+  .footer a { color: var(--brand-500); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">JyS Confort · Bot WhatsApp</div>
+  <h1>Mejoras disponibles para el bot</h1>
+  <p>Todo lo que se puede agregar para que el bot venda más, se organice solo y recupere clientes.</p>
+</div>
+
+<div class="wrap">
+
+  <!-- MENSAJES ENRIQUECIDOS -->
+  <div class="section-label">Mensajes más ricos</div>
+
+  <!-- Fotos -->
+  <div class="card">
+    <div>
+      <div class="card-header">
+        <div class="card-title">📸 Fotos de productos</div>
+        <span class="priority p-high">Alta</span>
+      </div>
+      <p class="card-desc">Cuando el cliente elige un producto específico, el bot manda la foto automáticamente. No en listados largos — solo cuando el cliente ya sabe qué quiere.</p>
+      <p class="card-desc"><strong>Las fotos ya están en Vigia</strong>, solo hay que hacer públicas las URLs.</p>
+    </div>
+    <div class="wa">
+      <div class="wa-bar">
+        <div class="wa-av">J</div>
+        <div><div class="wa-name">JyS Confort</div><div class="wa-sub">en línea</div></div>
+      </div>
+      <div class="b bc">Quiero la heladera Lacar 273L<div class="bt">10:22</div></div>
+      <div class="wa-imgcard">
+        <div class="wa-imgph">
+          <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          <span>Heladera Lacar 273L</span>
+        </div>
+        <div class="wa-imgcap">Lacar 273L — $XXX.XXX<br><span style="font-size:10px;color:var(--wa-time)">10:22 ✓✓</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botones -->
+  <div class="card">
+    <div>
+      <div class="card-header">
+        <div class="card-title">🔘 Botones de respuesta rápida</div>
+        <span class="priority p-high">Alta</span>
+      </div>
+      <p class="card-desc">En lugar de escribir "envío" o "retiro", el cliente toca un botón. <strong>Elimina errores de interpretación</strong> y acelera el cierre.</p>
+      <p class="card-desc">Ideal para: ¿Envío o retiro? · ¿Cómo pagás? · Confirmar compra.</p>
+    </div>
+    <div class="wa">
+      <div class="wa-bar">
+        <div class="wa-av">J</div>
+        <div><div class="wa-name">JyS Confort</div></div>
+      </div>
+      <div class="b bb">
+        ¡Perfecto! La TV 55" Kanji en efectivo te sale $XXX.XXX. ¿Cómo la querés recibir?
+        <div class="wa-btns">
+          <div class="wa-btn">🚚 Me la envían a casa</div>
+          <div class="wa-btn">🏪 La retiro en un local</div>
+        </div>
+        <div class="bt">14:31</div>
+      </div>
+      <div class="b bc">🚚 Me la envían a casa<div class="bt">14:31</div></div>
+    </div>
+  </div>
+
+  <!-- Lista interactiva -->
+  <div class="card">
+    <div>
+      <div class="card-header">
+        <div class="card-title">📋 Listas interactivas</div>
+        <span class="priority p-med">Media</span>
+      </div>
+      <p class="card-desc">Para categorías con muchos productos, el bot manda un menú scrolleable en lugar de un listado largo. El cliente toca para elegir.</p>
+      <p class="card-desc">Útil también para elegir local de retiro o forma de pago.</p>
+    </div>
+    <div class="wa">
+      <div class="wa-bar">
+        <div class="wa-av">J</div>
+        <div><div class="wa-name">JyS Confort</div></div>
+      </div>
+      <div class="b bc">Quiero retirar en un local<div class="bt">15:04</div></div>
+      <div class="wa-listcard">
+        <div class="wa-listbody">¿En cuál de nuestros locales te queda mejor?<div class="bt">15:04</div></div>
+        <div class="wa-listfoot">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+          Ver locales
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORGANIZACIÓN -->
+  <div class="section-label">Organización automática</div>
+
+  <!-- Tags -->
+  <div class="card">
+    <div>
+      <div class="card-header">
+        <div class="card-title">🏷️ Tags automáticos en los chats</div>
+        <span class="priority p-high">Alta</span>
+      </div>
+      <p class="card-desc">El bot etiqueta cada conversación automáticamente. Desde WhatsApp ves de un vistazo qué chats necesitan atención, cuáles ya tienen venta registrada y cuáles estás atendiendo vos.</p>
+      <div class="note">Fácil de implementar. No cambia nada del flujo actual.</div>
+    </div>
+    <div class="wa">
+      <div class="wa-bar">
+        <div class="wa-av">J</div>
+        <div><div class="wa-name">Chats</div><div class="wa-sub">filtrar por etiqueta</div></div>
+      </div>
+      <div class="chat-list">
+        <div class="chat-item">
+          <div class="wa-av" style="background:#E53E3E;font-size:11px;">MG</div>
+          <div style="flex:1;min-width:0;">
+            <div class="ci-name">María González</div>
+            <div class="ci-prev">Genial! Te mando el comprobante...</div>
+          </div>
+          <div class="ci-right">
+            <div class="ci-time">10:47</div>
+            <div class="wa-tags"><span class="wa-tag tv">✅ venta registrada</span></div>
+          </div>
+        </div>
+        <div class="chat-item">
+          <div class="wa-av" style="background:#3182CE;font-size:11px;">CP</div>
+          <div style="flex:1;min-width:0;">
+            <div class="ci-name">Carlos Pérez</div>
+            <div class="ci-prev">Consulté por el lavarropas...</div>
+          </div>
+          <div class="ci-right">
+            <div class="ci-time">09:12</div>
+            <div class="wa-tags"><span class="wa-tag tn">👤 cliente nuevo</span></div>
+          </div>
+        </div>
+        <div class="chat-item">
+          <div class="wa-av" style="background:#D69E2E;font-size:11px;">RD</div>
+          <div style="flex:1;min-width:0;">
+            <div class="ci-name">Rosa Díaz</div>
+            <div class="ci-prev">no me da la plata ahora...</div>
+          </div>
+          <div class="ci-right">
+            <div class="ci-time">08:33</div>
+            <div class="wa-tags"><span class="wa-tag ta">🔴 requiere atención</span></div>
+          </div>
+        </div>
+        <div class="chat-item">
+          <div class="wa-av" style="background:#2F855A;font-size:11px;">PR</div>
+          <div style="flex:1;min-width:0;">
+            <div class="ci-name">Pablo Romero</div>
+            <div class="ci-prev">dale barbaro pame</div>
+          </div>
+          <div class="ci-right">
+            <div class="ci-time">08:19</div>
+            <div class="wa-tags"><span class="wa-tag tm">💬 atención manual</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Typing -->
+  <div class="card">
+    <div>
+      <div class="card-header">
+        <div class="card-title">⌨️ "Escribiendo…" mientras procesa</div>
+        <span class="priority p-high">Alta</span>
+      </div>
+      <p class="card-desc">Hoy cuando el cliente manda un mensaje, el bot tarda 1–3 segundos en responder sin ninguna señal. Con este cambio el cliente ve "escribiendo…" igual que con un humano. <strong>Reduce abandonos por creer que el bot no funciona.</strong></p>
+    </div>
+    <div class="wa">
+      <div class="wa-bar">
+        <div class="wa-av">J</div>
+        <div>
+          <div class="wa-name">JyS Confort</div>
+          <div class="wa-sub" style="color:var(--wa-green);">escribiendo…</div>
+        </div>
+      </div>
+      <div class="b bc">Quiero ver las heladeras que tienen<div class="bt">11:05</div></div>
+      <div class="b bb" style="padding:10px 14px;">
+        <div class="typing"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECUPERACIÓN -->
+  <div class="section-label">Recuperación de clientes</div>
+
+  <div class="card card-full">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start;">
+      <div>
+        <div class="card-header">
+          <div class="card-title">🔄 Seguimiento de consultas sin cierre</div>
+          <span class="priority p-high">Alta</span>
+        </div>
+        <p class="card-desc">Cuando un cliente consulta por un producto pero no compra, el bot lo recuerda y manda un mensaje de seguimiento automático. El sistema detecta intención de compra sin venta registrada y activa una secuencia:</p>
+        <ul style="color:var(--muted);font-size:13.5px;margin-top:10px;padding-left:16px;display:flex;flex-direction:column;gap:6px;">
+          <li><strong style="color:var(--text);">A las 4 horas:</strong> recordatorio suave del producto</li>
+          <li><strong style="color:var(--text);">Al día siguiente:</strong> ofrece responder dudas</li>
+          <li><strong style="color:var(--text);">A los 3 días:</strong> mensaje final, cierra el ciclo</li>
+        </ul>
+        <div class="note">📌 Hay algo desarrollado que no funcionaba bien — se puede mejorar para que sea confiable y configurable.</div>
+      </div>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-dot tl-dot-on">🛒</div>
+          <div class="tl-content">
+            <div class="tl-time">Día 0 — consultó sin comprar</div>
+            <div class="tl-msg">¿Cuánto sale la heladera Lacar 273?</div>
+            <div class="tl-sub">El bot respondió pero no hubo venta</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot tl-dot-on">💬</div>
+          <div class="tl-content">
+            <div class="tl-time">4 horas después</div>
+            <div class="tl-msg">Hola! Por si te quedó la duda — la Lacar 273L está en $XXX.XXX con envío incluido 😊</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">📅</div>
+          <div class="tl-content">
+            <div class="tl-time">Día siguiente</div>
+            <div class="tl-msg">¿Quedaste con alguna duda sobre la heladera? Acá estamos 👍</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">⏰</div>
+          <div class="tl-content">
+            <div class="tl-time">3 días después</div>
+            <div class="tl-msg">Última vez que te escribo por esto — si te interesa todavía avisame y la reservamos 🙌</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFICACIONES -->
+  <div class="section-label">Notificaciones automáticas desde Vigia</div>
+
+  <div class="card">
+    <div>
+      <div class="card-header">
+        <div class="card-title">🚚 Aviso de entrega automático</div>
+        <span class="priority p-med">Media</span>
+      </div>
+      <p class="card-desc">Cuando confirmás una venta en Vigia y la marcás como "en camino", el bot manda automáticamente el mensaje al cliente. No tenés que escribirlo vos.</p>
+    </div>
+    <div class="wa">
+      <div class="wa-bar">
+        <div class="wa-av">J</div>
+        <div><div class="wa-name">JyS Confort</div></div>
+      </div>
+      <div class="b bb">
+        🚚 ¡Tu pedido está en camino! La heladera Lacar 273L sale del depósito hoy. Te avisamos cuando llegue 👍
+        <div class="bt">hoy 09:15</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div>
+      <div class="card-header">
+        <div class="card-title">⭐ Encuesta post-entrega</div>
+        <span class="priority p-med">Media</span>
+      </div>
+      <p class="card-desc">48 horas después de marcar una entrega como completada, el bot escribe al cliente para pedir feedback. Sirve para detectar problemas y para pedir reseñas de Google, sin que nadie tenga que acordarse.</p>
+    </div>
+    <div class="wa">
+      <div class="wa-bar">
+        <div class="wa-av">J</div>
+        <div><div class="wa-name">JyS Confort</div></div>
+      </div>
+      <div class="b bb">
+        Hola María! ¿Cómo llegó la heladera? 😊
+        <div class="wa-btns">
+          <div class="wa-btn">⭐⭐⭐⭐⭐ Todo perfecto</div>
+          <div class="wa-btn">⚠️ Tuve un problema</div>
+        </div>
+        <div class="bt">sáb. 10:00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div>
+      <div class="card-header">
+        <div class="card-title">📅 Recordatorio de cuota</div>
+        <span class="priority p-proj">Proyecto</span>
+      </div>
+      <p class="card-desc">Para clientes con cuotas, el bot manda un recordatorio 2 días antes del vencimiento. Reduce la mora sin que nadie tenga que hacer nada.</p>
+      <div class="note">Requiere tener las fechas de vencimiento de cuotas en Vigia.</div>
+    </div>
+    <div class="wa">
+      <div class="wa-bar">
+        <div class="wa-av">J</div>
+        <div><div class="wa-name">JyS Confort</div></div>
+      </div>
+      <div class="b bb">
+        Hola Carlos! El jueves vence tu cuota 3/6 del lavarropas ($XX.XXX). Podés pagar por transferencia o en cualquier local 👍
+        <div class="bt">mar. 09:00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESUMEN -->
+  <div class="summary">
+    <div class="sum-head">Resumen de mejoras</div>
+    <div class="sum-row">
+      <div><div class="sum-name">⌨️ "Escribiendo…" mientras procesa</div><div class="sum-sub">Mejor experiencia inmediata para el cliente</div></div>
+      <span class="priority p-high">Alta</span>
+    </div>
+    <div class="sum-row">
+      <div><div class="sum-name">🏷️ Tags automáticos en chats</div><div class="sum-sub">Organización sin esfuerzo extra</div></div>
+      <span class="priority p-high">Alta</span>
+    </div>
+    <div class="sum-row">
+      <div><div class="sum-name">📸 Fotos de productos</div><div class="sum-sub">URLs públicas en Vigia → listo para activar</div></div>
+      <span class="priority p-high">Alta</span>
+    </div>
+    <div class="sum-row">
+      <div><div class="sum-name">🔘 Botones de respuesta rápida</div><div class="sum-sub">Menos errores en el cierre de venta</div></div>
+      <span class="priority p-high">Alta</span>
+    </div>
+    <div class="sum-row">
+      <div><div class="sum-name">🔄 Seguimiento de consultas sin cierre</div><div class="sum-sub">Recupera clientes que se fueron sin comprar</div></div>
+      <span class="priority p-high">Alta</span>
+    </div>
+    <div class="sum-row">
+      <div><div class="sum-name">🚚 Aviso de entrega automático</div><div class="sum-sub">Menos mensajes manuales</div></div>
+      <span class="priority p-med">Media</span>
+    </div>
+    <div class="sum-row">
+      <div><div class="sum-name">⭐ Encuesta post-entrega</div><div class="sum-sub">Feedback y reseñas automáticas</div></div>
+      <span class="priority p-med">Media</span>
+    </div>
+    <div class="sum-row">
+      <div><div class="sum-name">📋 Listas interactivas de productos</div><div class="sum-sub">Más cómodo para elegir</div></div>
+      <span class="priority p-med">Media</span>
+    </div>
+    <div class="sum-row">
+      <div><div class="sum-name">📅 Recordatorio de cuotas</div><div class="sum-sub">Reduce mora en clientes financiados</div></div>
+      <span class="priority p-proj">Proyecto</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Desarrollado por <a href="https://crolia.com.ar">Crolia</a> para JyS Confort
+</div>
+
+</body>
+</html>
