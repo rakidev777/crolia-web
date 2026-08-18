@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Colaborador Oficial — Propuesta BVGS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --primary: hsl(0 85% 45%);
+    --primary-dark: hsl(0 85% 38%);
+    --dark: hsl(0 0% 10%);
+    --ink: hsl(0 0% 12%);
+    --ink-soft: hsl(0 0% 42%);
+    --line: hsl(0 0% 88%);
+    --paper: hsl(0 0% 97%);
+    --green: hsl(150 45% 32%);
+    --green-soft: hsl(150 45% 94%);
+    --gold: hsl(38 75% 40%);
+    --gold-soft: hsl(38 75% 95%);
+    --font-display: "Oswald", sans-serif;
+    --font-body: "Open Sans", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--font-body); color: var(--ink); background: var(--paper); line-height: 1.6; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  header.hero {
+    background: var(--dark);
+    background-image: radial-gradient(ellipse 900px 460px at 50% 0%, hsl(0 70% 20% / 0.55), transparent 70%);
+    color: #fff;
+    padding: 56px 0 70px;
+    text-align: center;
+  }
+  header.hero .badge {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: hsl(0 0% 100% / 0.1);
+    border: 1px solid hsl(0 0% 100% / 0.2);
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+  }
+  header.hero .eyebrow {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: hsl(0 85% 68%);
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+  header.hero h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(30px, 5vw, 46px);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+  }
+  header.hero p.lead { font-size: 17px; color: hsl(0 0% 85%); max-width: 60ch; margin: 0 auto; }
+
+  section { padding: 48px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    color: var(--dark);
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2 .n {
+    font-family: var(--font-display);
+    color: var(--primary);
+    font-size: 15px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-sub { color: var(--ink-soft); font-size: 15px; margin: 0 0 24px; max-width: 68ch; }
+
+  .callout {
+    background: var(--gold-soft);
+    border: 1px solid hsl(38 75% 75%);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 20px 0;
+  }
+  .callout strong { color: hsl(38 75% 25%); }
+  .callout.rojo { background: hsl(0 85% 96%); border-color: hsl(0 85% 80%); border-left-color: var(--primary); }
+  .callout.rojo strong { color: var(--primary-dark); }
+  .callout.verde { background: var(--green-soft); border-color: hsl(150 45% 70%); border-left-color: var(--green); }
+  .callout.verde strong { color: var(--green); }
+
+  .flow { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; margin: 20px 0; }
+  .flow-step { display: grid; grid-template-columns: 42px 1fr; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-step .num {
+    font-family: var(--font-display); font-weight: 700; color: var(--primary);
+    border: 2px solid var(--primary); border-radius: 50%; width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center; font-size: 14px;
+  }
+  .flow-step .t { font-weight: 700; font-family: var(--font-display); text-transform: uppercase; font-size: 14px; letter-spacing: 0.01em; margin-bottom: 3px; color: var(--dark); }
+  .flow-step .d { font-size: 14px; color: var(--ink-soft); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 20px;
+  }
+  .card h3 { font-family: var(--font-display); text-transform: uppercase; font-size: 15px; margin: 0 0 8px; color: var(--dark); }
+  .card p { font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-family: var(--font-display); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); background: var(--paper); }
+
+  .pill { display: inline-block; font-family: var(--font-display); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; padding: 3px 10px; border-radius: 100px; font-weight: 600; }
+  .pill.ok { background: var(--green-soft); color: var(--green); }
+  .pill.pend { background: var(--gold-soft); color: var(--gold); }
+
+  ul.check-list { list-style: none; padding: 0; margin: 16px 0; }
+  ul.check-list li { padding: 10px 0 10px 30px; border-bottom: 1px solid var(--line); position: relative; font-size: 14.5px; }
+  ul.check-list li:last-child { border-bottom: none; }
+  ul.check-list li::before { content: "☐"; position: absolute; left: 0; top: 10px; color: var(--gold); font-size: 15px; }
+
+  footer { background: var(--dark); color: hsl(0 0% 65%); text-align: center; padding: 32px 0; font-size: 13px; }
+  footer strong { color: #fff; }
+
+  a { color: var(--primary); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">Documento de trabajo — no compartir públicamente todavía</span>
+    <p class="eyebrow">Bomberos Voluntarios de General Sarmiento</p>
+    <h1>Programa Colaborador Oficial</h1>
+    <p class="lead">Propuesta para la Comisión Directiva: una segunda fuente de financiamiento propia, mensual y transparente, con tecnología ya construida y probada.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2><span class="n">1</span> ¿Qué es esto?</h2>
+    <p class="section-sub">
+      Un sistema para que cualquier vecino pueda convertirse en <strong>Colaborador Oficial</strong> de BVGS
+      con un aporte mensual voluntario de $5.000 o $10.000, cobrado automáticamente por Mercado Pago,
+      sin que nadie de la institución tenga que hacer seguimiento manual mes a mes.
+    </p>
+    <div class="callout">
+      <strong>Por qué importa:</strong> hoy BVGS recibe una parte importante de su financiamiento a través
+      de un tercero (la rifera), que se queda con una comisión. Este programa es una fuente propia,
+      recurrente y con mucho menor costo operativo — no reemplaza lo existente, lo complementa.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="n">2</span> Cómo funciona, paso a paso</h2>
+    <p class="section-sub">De punta a punta, sin intervención manual una vez que está andando.</p>
+    <div class="flow">
+      <div class="flow-step"><div class="num">1</div><div><div class="t">El vecino entra al formulario</div><div class="d">Landing propia con la identidad de BVGS — completa nombre, DNI, WhatsApp y email.</div></div></div>
+      <div class="flow-step"><div class="num">2</div><div><div class="t">Elige su aporte</div><div class="d">$5.000 o $10.000 por mes.</div></div></div>
+      <div class="flow-step"><div class="num">3</div><div><div class="t">Paga en Mercado Pago</div><div class="d">Tarjeta de débito o crédito, sin necesitar cuenta de Mercado Pago.</div></div></div>
+      <div class="flow-step"><div class="num">4</div><div><div class="t">Queda activo automáticamente</div><div class="d">Mercado Pago le avisa al sistema, el colaborador pasa a "activo" solo, sin que nadie lo cargue a mano.</div></div></div>
+      <div class="flow-step"><div class="num">5</div><div><div class="t">Cobro todos los meses, solo</div><div class="d">Mismo monto, mismo día, cada mes — automático.</div></div></div>
+      <div class="flow-step"><div class="num">6</div><div><div class="t">La Comisión ve todo en un panel</div><div class="d">Colaboradores activos, cobros del mes, altas y bajas — en tiempo real, sin pedirle nada a nadie.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="n">3</span> Qué está probado y qué falta</h2>
+    <p class="section-sub">Ya construimos y probamos con pagos reales de punta a punta. Lo que falta es exclusivamente institucional, no técnico.</p>
+
+    <table>
+      <tr><th>Parte</th><th>Estado</th></tr>
+      <tr><td>Formulario de alta</td><td><span class="pill ok">Probado</span></td></tr>
+      <tr><td>Cobro recurrente por Mercado Pago</td><td><span class="pill ok">Probado con pagos reales</span></td></tr>
+      <tr><td>Activación automática (sin intervención manual)</td><td><span class="pill ok">Probado</span></td></tr>
+      <tr><td>Panel de control para la Comisión</td><td><span class="pill ok">Funcionando</span></td></tr>
+      <tr><td>Reglamento y términos del programa</td><td><span class="pill pend">Borrador, pendiente de aprobación</span></td></tr>
+      <tr><td>Conexión a la cuenta oficial de Mercado Pago de BVGS</td><td><span class="pill pend">Pendiente</span></td></tr>
+      <tr><td>Revisión legal/contable</td><td><span class="pill pend">Pendiente</span></td></tr>
+    </table>
+
+    <div class="callout rojo">
+      <strong>Importante sobre el pago:</strong> mientras esto esté en revisión, el sistema está conectado
+      a una cuenta de <strong>prueba</strong> de Mercado Pago, no a la cuenta oficial de BVGS. Ningún pago
+      real se procesa todavía. Para que la plata se acredite en la cuenta del cuartel, alguien con acceso
+      a la cuenta oficial de Mercado Pago de BVGS tiene que generar sus propias credenciales — es un paso
+      de 10 minutos, pero es institucional, no algo que yo pueda resolver solo.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="n">4</span> Beneficios para los colaboradores</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>Credencial digital</h3>
+        <p>Cada colaborador recibe su credencial de Colaborador Oficial.</p>
+      </div>
+      <div class="card">
+        <h3>Red de Beneficios</h3>
+        <p>Sorteo mensual y descuentos en comercios adheridos, financiados por convenios — sin costo para BVGS.</p>
+      </div>
+      <div class="card">
+        <h3>Portal propio</h3>
+        <p>Ve su historial de aportes y puede darse de baja cuando quiera, sin trámites.</p>
+      </div>
+      <div class="card">
+        <h3>Transparencia</h3>
+        <p>BVGS puede publicar periódicamente en qué se usan los aportes — equipamiento, capacitación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="n">5</span> Qué necesitamos de la Comisión Directiva</h2>
+    <ul class="check-list">
+      <li>Aprobar el concepto general del programa y el nombre "Colaborador Oficial".</li>
+      <li>Designar quién de la institución tiene (o va a crear) la cuenta oficial de Mercado Pago de BVGS.</li>
+      <li>Revisar el reglamento y los términos con abogado/contador antes de publicarlo.</li>
+      <li>Definir quién va a tener acceso al panel de control (recomendado: al menos 2 personas).</li>
+      <li>Dar el visto bueno para pasar de "modo prueba" a producción real.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Documento preparado por <strong>Crolia</strong> para la Comisión Directiva de BVGS · uso interno, no distribuir públicamente todavía.
+  </div>
+</footer>
+
+</body>
+</html>
