@@ -50,7 +50,8 @@ const MODULES = [
   { icon: "💬", title: "CRM + Agente IA WhatsApp", desc: "Agente IA que atiende, vende y cobra por WhatsApp 24/7, con bandeja centralizada y conexión total al sistema.", color: "#a855f7" },
   { icon: "🤖", title: "Asistente IA Crolia", desc: "Consultá datos del negocio en lenguaje natural. 'Qué vendí esta semana', 'quién debe más', respuestas en segundos.", color: "#7c3aed" },
   { icon: "👤", title: "Usuarios y Permisos", desc: "5 roles, permisos granulares por acción, auditoría completa de quién hizo qué y cuándo.", color: "#64748b" },
-  { icon: "📈", title: "Google Sheets Sync", desc: "Actualizá precios y stock desde tu planilla de Google automáticamente.", color: "#16a34a" },
+  { icon: "📈", title: "Sincronización externa", desc: "¿Todavía manejás datos en una planilla u otro sistema? Vigía los sincroniza automáticamente hasta que todo viva 100% en la plataforma.", color: "#16a34a" },
+  { icon: "🔗", title: "Agente IA por WhatsApp", desc: "Conectá 1 o más números: el agente gestiona por vos las 24 horas, ve el stock real y crea la venta, el envío y el préstamo solo, sin carga manual.", color: "#22c55e" },
 ];
 
 export default function VigiaLanding() {
@@ -271,7 +272,7 @@ export default function VigiaLanding() {
         <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 40, textAlign: "center" }}>
           <StatCard value={1087} suffix="+" label="Productos cargados" trigger={statsVisible} />
           <StatCard value={6} suffix="" label="Formas de pago" trigger={statsVisible} />
-          <StatCard value={17} suffix="" label="Módulos incluidos" trigger={statsVisible} />
+          <StatCard value={18} suffix="" label="Módulos incluidos" trigger={statsVisible} />
           <StatCard value={5} suffix="" label="Locales gestionados" trigger={statsVisible} />
         </div>
       </section>
@@ -284,7 +285,7 @@ export default function VigiaLanding() {
               Todo incluido
             </div>
             <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 800, color: "#1a1a1a", marginBottom: 16 }}>
-              17 módulos integrados
+              18 módulos integrados
             </h2>
             <p style={{ color: "#888", fontSize: "1.05rem", maxWidth: 520, margin: "0 auto" }}>
               No es un software genérico. Vigía fue construido para la operación real de un comercio, y crece con cada necesidad real que aparece.
@@ -765,6 +766,83 @@ export default function VigiaLanding() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AGENTE IA WHATSAPP + VIGÍA */}
+      <section style={{ padding: "100px 5%", background: `linear-gradient(160deg, #0f1f17 0%, ${BRAND_DARK} 100%)`, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, opacity: 0.03, backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "26px 26px", pointerEvents: "none" }} />
+        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.3)", padding: "6px 18px", borderRadius: 999, fontSize: "0.82rem", fontWeight: 600, marginBottom: 24, color: "#4ade80" }}>
+              🔗 Integración avanzada
+            </div>
+            <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(1.9rem, 3.8vw, 3rem)", fontWeight: 800, color: "white", lineHeight: 1.2, marginBottom: 20 }}>
+              Conectá WhatsApp<br />
+              <span style={{ color: BRAND_LIGHT }}>y dejá que la venta se cierre sola</span>
+            </h2>
+            <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1.05rem", lineHeight: 1.8, maxWidth: 640, margin: "0 auto" }}>
+              Vigía se integra con WhatsApp Web en uno o más números — el mismo motor de agentes IA que ofrecemos como servicio independiente, ahora incorporado directo al sistema. El agente consulta el stock real cargado en Vigía y, cuando cierra una venta, la carga solo: crea la venta, genera el envío, arma el préstamo en cuotas si corresponde, y actualiza la cuenta corriente del cliente. Sin doble carga, sin planillas paralelas.
+            </p>
+          </div>
+
+          {/* Flow steps */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20, position: "relative", marginBottom: 56 }}>
+            <div style={{ position: "absolute", top: 32, left: "10%", right: "10%", height: 2, background: "linear-gradient(90deg, #22c55e, #3b82f6, #f59e0b, #8b5cf6)", zIndex: 0, opacity: 0.4 }} />
+            {[
+              { icon: "💬", color: "#22c55e", title: "Cliente escribe", desc: "Por WhatsApp, a uno de los números conectados." },
+              { icon: "📦", color: "#3b82f6", title: "Agente consulta stock real", desc: "Precios, cuotas y disponibilidad directo desde Vigía, sin demoras." },
+              { icon: "💳", color: "#f59e0b", title: "Cierra y cobra", desc: "Arma el presupuesto, confirma el pago y la forma de entrega." },
+              { icon: "⚡", color: "#8b5cf6", title: "Vigía carga todo solo", desc: "Venta, envío y préstamo se crean automáticamente en el sistema." },
+            ].map((s, i) => (
+              <div key={s.title} style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
+                <div style={{
+                  width: 64, height: 64, borderRadius: "50%", margin: "0 auto 16px",
+                  background: `${s.color}20`, border: `2px solid ${s.color}50`,
+                  display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.4rem",
+                }}>{s.icon}</div>
+                <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "white", marginBottom: 6 }}>{s.title}</div>
+                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.82rem", lineHeight: 1.6 }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* What gets created automatically */}
+          <div style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "36px 32px" }}>
+            <div style={{ fontSize: "0.78rem", fontWeight: 700, color: "rgba(255,255,255,0.5)", textTransform: "uppercase", letterSpacing: 1, marginBottom: 20, textAlign: "center" }}>
+              Todo lo que Vigía genera automáticamente al cerrar la venta
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
+              {[
+                ["🛒", "Venta cargada en el sistema", "Con productos, precios y forma de pago exactos."],
+                ["🚚", "Envío generado", "Listo para seguimiento, con estado y dirección."],
+                ["🏦", "Préstamo y cuotas", "Vencimientos y recordatorios armados solos si es en cuotas."],
+                ["👥", "Cuenta corriente al día", "Historial y saldo del cliente actualizados en tiempo real."],
+              ].map(([icon, title, desc]) => (
+                <div key={title} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                  <span style={{ fontSize: "1.3rem" }}>{icon}</span>
+                  <div>
+                    <div style={{ color: "white", fontWeight: 700, fontSize: "0.88rem", marginBottom: 3 }}>{title}</div>
+                    <div style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.8rem", lineHeight: 1.5 }}>{desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: 48 }}>
+            <a href="https://wa.me/5491173729899?text=Hola%2C%20quiero%20sumar%20el%20Agente%20IA%20por%20WhatsApp%20a%20Vig%C3%ADa"
+              target="_blank" rel="noopener noreferrer"
+              style={{
+                background: `linear-gradient(135deg, ${BRAND} 0%, ${BRAND_DARK} 100%)`,
+                color: "white", padding: "14px 32px", borderRadius: 12,
+                textDecoration: "none", fontWeight: 700, fontSize: "1rem",
+                boxShadow: `0 8px 30px ${BRAND}50`,
+                display: "inline-flex", alignItems: "center", gap: 8,
+              }}>
+              Quiero sumar el Agente IA →
+            </a>
           </div>
         </div>
       </section>
