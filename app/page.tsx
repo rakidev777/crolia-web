@@ -470,6 +470,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Social proof ── */}
+      <section className="section-shell py-6 md:py-8">
+        <div className="reveal flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-center sm:gap-6 sm:text-left">
+          <p className="text-sm text-[color:var(--color-muted)] sm:shrink-0">
+            Negocios que ya escalan su atención y operación con Crolia:
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:justify-start">
+            {["JyS Confort", "IES Seguros", "Bomberos Voluntarios de General Sarmiento"].map((cliente, i) => (
+              <span key={cliente} className="flex items-center gap-3">
+                {i > 0 && <span className="h-1 w-1 rounded-full bg-[color:var(--color-accent)]/40" aria-hidden="true" />}
+                <span className="text-sm font-semibold tracking-tight text-[color:var(--color-ink)]" style={{ fontFamily: "var(--font-display)" }}>
+                  {cliente}
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Contact ── */}
       <section id="contacto" className="section-shell py-16 md:py-24">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
