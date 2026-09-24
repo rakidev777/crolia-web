@@ -1,5 +1,6 @@
 import { ContactForm } from "@/components/contact-form";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { DiagnosticoWidget, DiagnosticoSeccion, OpenDiagnosticoButton } from "@/components/diagnostic-wizard";
 
 const pillars = [
   {
@@ -136,8 +137,9 @@ const chatMessages = [
 
 export default function Home() {
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative overflow-hidden pt-10">
       <ScrollReveal />
+      <DiagnosticoWidget />
       <div className="scroll-progress" id="scroll-progress" aria-hidden="true" />
       <div className="bg-blob bg-blob-1" aria-hidden="true" />
       <div className="bg-blob bg-blob-2" aria-hidden="true" />
@@ -159,10 +161,10 @@ export default function Home() {
       </a>
 
       {/* ── Header ── */}
-      <header className="sticky top-0 z-30 border-b border-black/6 bg-[color:var(--color-surface-soft)]/85 backdrop-blur-xl">
+      <header className="sticky top-10 z-30 border-b border-black/6 bg-[color:var(--color-surface-soft)]/85 backdrop-blur-xl">
         <div className="section-shell flex items-center justify-between py-4">
           <a href="#inicio" className="flex items-center gap-2">
-            <img src="/crolia-icon.png" alt="Crolia" className="h-10 w-10 rounded-xl flex-shrink-0" />
+            <img src="/crolia-icon.png" alt="Crolia" className="h-10 w-10 object-contain flex-shrink-0" />
             <div className="flex flex-col leading-tight">
               <span className="text-base font-semibold tracking-[0.22em] text-[color:var(--color-ink)] uppercase" style={{ fontFamily: "var(--font-display)" }}>Crolia</span>
               <span className="text-[11px] tracking-[0.12em] text-[color:var(--color-muted)] uppercase" style={{ fontFamily: "var(--font-display)" }}>Automatización Inteligente</span>
@@ -174,6 +176,7 @@ export default function Home() {
               <span className="h-1.5 w-1.5 rounded-full bg-green-500 inline-block" style={{ boxShadow: "0 0 5px #22c55e" }} />
               Vigía
             </a>
+            <a href="#diagnostico" className="transition hover:text-[color:var(--color-ink)]">Diagnóstico</a>
             <a href="#proceso" className="transition hover:text-[color:var(--color-ink)]">Proceso</a>
             <a href="/demo" className="font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-ink)]">Demo IA</a>
             <a href="#contacto" className="transition hover:text-[color:var(--color-ink)]">Contacto</a>
@@ -202,9 +205,9 @@ export default function Home() {
             Más ventas, más turnos, más tiempo para lo que importa. Soluciones accesibles que se adaptan a cualquier negocio que quiera dar el siguiente paso.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row reveal delay-300">
-            <a href="#contacto" className="magnetic-btn rounded-full bg-[color:var(--color-ink)] px-7 py-4 text-center text-sm font-medium text-white transition hover:bg-[color:var(--color-accent)]">
-              Agendar diagnóstico gratuito
-            </a>
+            <OpenDiagnosticoButton className="magnetic-btn rounded-full bg-[color:var(--color-ink)] px-7 py-4 text-center text-sm font-medium text-white transition hover:bg-[color:var(--color-accent)]">
+              Generar mi diagnóstico gratis
+            </OpenDiagnosticoButton>
             <a href="/demo" className="magnetic-btn rounded-full border border-[color:var(--color-accent)]/40 bg-[color:var(--color-accent)]/8 px-7 py-4 text-center text-sm font-semibold text-[color:var(--color-accent)] transition hover:bg-[color:var(--color-accent)] hover:text-white">
               Probar demo en vivo →
             </a>
@@ -448,6 +451,8 @@ export default function Home() {
         </div>
       </section>
 
+      <DiagnosticoSeccion />
+
       {/* ── Process ── */}
       <section id="proceso" className="section-shell py-16 md:py-24">
         <div className="section-heading reveal">
@@ -469,14 +474,17 @@ export default function Home() {
       <section id="contacto" className="section-shell py-16 md:py-24">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[2.5rem] border border-black/7 bg-[color:var(--color-ink)] p-8 text-white md:p-12 reveal-left">
-            <img src="/crolia-logo.png" alt="Crolia" className="h-20 w-20 rounded-full mb-6 opacity-90" />
+            <img src="/crolia-icon.png" alt="Crolia" className="h-16 w-16 object-contain mb-6 opacity-90" />
             <div className="eyebrow !border-white/12 !bg-white/8 !text-white/70">Contacto</div>
             <h2 className="mt-6 max-w-lg text-4xl font-bold tracking-tight md:text-5xl" style={{ fontFamily: "var(--font-display)" }}>
-              Empezá con un diagnóstico gratuito.
+              Empezá con tu diagnóstico gratuito.
             </h2>
             <p className="mt-6 max-w-xl text-base leading-7 text-white/70">
-              Contanos cómo funciona tu negocio y en menos de 24 horas te decimos qué solución te conviene y qué resultado podés esperar.
+              Respondé unas preguntas rápidas y en 2 minutos te decimos qué conviene automatizar primero en tu negocio y qué resultado podés esperar.
             </p>
+            <OpenDiagnosticoButton className="mt-8 inline-block rounded-full bg-[color:var(--color-accent)] px-7 py-4 text-sm font-semibold text-white transition hover:opacity-90">
+              Generar mi diagnóstico gratis →
+            </OpenDiagnosticoButton>
             <div className="mt-10 space-y-3 text-sm text-white/60">
               <p>WhatsApp: <a href="https://wa.me/5491173729899" target="_blank" rel="noopener noreferrer" className="text-white/90 underline underline-offset-2">+54 9 11 7372-9899</a></p>
               <p>Email: <a href="mailto:contacto@crolia.com.ar" className="text-white/90 underline underline-offset-2">contacto@crolia.com.ar</a></p>
@@ -493,16 +501,18 @@ export default function Home() {
       <footer className="border-t border-black/6">
         <div className="section-shell flex flex-col gap-6 py-8 text-sm text-[color:var(--color-muted)] md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
-            <img src="/crolia-logo.png" alt="Crolia" className="h-9 w-9 rounded-full opacity-80" />
+            <img src="/crolia-icon.png" alt="Crolia" className="h-9 w-9 object-contain opacity-80" />
             <span className="font-semibold text-[color:var(--color-ink)]">Crolia</span>
             <span>— tecnología accesible para negocios que quieren avanzar.</span>
           </div>
           <div className="flex flex-wrap gap-6">
             <a href="#que-hacemos" className="transition hover:text-[color:var(--color-ink)]">Servicios</a>
             <a href="/vigia" className="transition hover:text-[color:var(--color-ink)]">Vigía</a>
+            <a href="#diagnostico" className="transition hover:text-[color:var(--color-ink)]">Diagnóstico</a>
             <a href="#proceso" className="transition hover:text-[color:var(--color-ink)]">Proceso</a>
             <a href="/demo" className="transition hover:text-[color:var(--color-ink)]">Demo IA</a>
             <a href="#contacto" className="transition hover:text-[color:var(--color-ink)]">Contacto</a>
+            <a href="https://instagram.com/crolia_" target="_blank" rel="noopener noreferrer" className="transition hover:text-[color:var(--color-ink)]">Instagram</a>
           </div>
         </div>
       </footer>

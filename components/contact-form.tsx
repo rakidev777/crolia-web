@@ -32,11 +32,11 @@ export function ContactForm() {
 
   return (
     <div className="card-surface p-8 md:p-10">
-      <div className="eyebrow">Diagnóstico inicial</div>
-      <h3 className="mt-6 text-3xl font-semibold tracking-tight text-[color:var(--color-ink)]">
-        Cuéntanos tu operación y abrimos el contacto por WhatsApp.
+      <div className="eyebrow">¿Preferís hablar directo?</div>
+      <h3 className="mt-6 text-2xl font-semibold tracking-tight text-[color:var(--color-ink)]">
+        Contanos tu operación y abrimos el contacto por WhatsApp.
       </h3>
-      <p className="mt-4 max-w-xl text-base leading-7 text-[color:var(--color-muted)]">
+      <p className="mt-4 max-w-xl text-sm leading-6 text-[color:var(--color-muted)]">
         Este formulario genera un mensaje listo para enviar con el contexto mínimo necesario para evaluar el caso.
       </p>
 

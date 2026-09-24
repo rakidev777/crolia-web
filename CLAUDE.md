@@ -34,11 +34,13 @@ app/
     │   ├── stats/route.ts
     │   ├── demo-leads/route.ts
     │   └── conversacion/[id]/route.ts
-    └── demo/
-        ├── chat/route.ts            # Streaming con Claude
-        ├── conversacion/route.ts
-        └── lead/route.ts
-components/                          # contact-form, scroll-reveal
+    ├── demo/
+    │   ├── chat/route.ts            # Streaming con Claude
+    │   ├── conversacion/route.ts
+    │   └── lead/route.ts
+    └── diagnostico/route.ts         # Diagnóstico gratis con IA (streaming), guarda en Sheet "Diagnosticos"
+components/                          # contact-form, scroll-reveal, diagnostic-wizard
+lib/                                 # sheets.ts — helper reutilizable de Google Sheets
 config/                              # agents.example.json
 data/                                # Archivos de datos estáticos
 ```

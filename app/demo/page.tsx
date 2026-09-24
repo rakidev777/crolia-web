@@ -227,7 +227,7 @@ export default function DemoPage() {
       }}>
         <div className="section-shell" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1rem 0" }}>
           <a href="/" style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-            <img src="/crolia-logo.png" alt="Crolia" style={{ height: 36, width: 36, borderRadius: "50%" }} />
+            <img src="/crolia-icon.png" alt="Crolia" style={{ height: 36, width: 36, objectFit: "contain" }} />
             <span style={{ fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-ink)", fontFamily: "var(--font-display)" }}>Crolia</span>
           </a>
           <a
