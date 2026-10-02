@@ -1,11 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-  const secret = req.headers.get("x-ops-secret");
-  if (secret !== process.env.OPS_SECRET) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
+export async function GET() {
   const agentUrl = process.env.AGENTKIT_URL?.replace(/\/$/, "");
   const adminKey = process.env.AGENTKIT_ADMIN_KEY ?? process.env.ADMIN_API_KEY;
 

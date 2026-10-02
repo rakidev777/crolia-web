@@ -17,35 +17,8 @@
 }
 body{font-family:var(--font-b);background:var(--surface);color:var(--ink);min-height:100vh;}
 
-/* ── LOGIN ── */
-#login-screen{
-  position:fixed;inset:0;background:var(--ink);
-  display:flex;align-items:center;justify-content:center;z-index:1000;
-}
-.login-box{
-  background:#2a1f16;border:1px solid rgba(138,100,72,.3);border-radius:16px;
-  padding:40px;width:360px;
-}
-.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:32px;justify-content:center;}
-.login-logo-text{font-family:var(--font-d);font-size:22px;font-weight:700;color:#f6f1ea;letter-spacing:.04em;}
-.login-sub{font-size:11px;color:rgba(246,241,234,.4);text-align:center;margin-top:4px;}
-.login-label{font-size:11px;font-weight:600;color:rgba(246,241,234,.5);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
-.login-input{
-  width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(138,100,72,.3);
-  border-radius:8px;padding:10px 14px;font-size:14px;color:#f6f1ea;margin-bottom:16px;
-  font-family:var(--font-b);outline:none;
-}
-.login-input:focus{border-color:var(--accent);}
-.login-btn{
-  width:100%;background:var(--accent);color:#f6f1ea;border:none;border-radius:8px;
-  padding:12px;font-family:var(--font-d);font-size:14px;font-weight:700;cursor:pointer;
-  letter-spacing:.04em;transition:background .2s;
-}
-.login-btn:hover{background:#6b4d34;}
-.login-error{color:#f87171;font-size:12px;text-align:center;margin-top:10px;display:none;}
-
 /* ── APP ── */
-#app{display:none;}
+#app{display:block;}
 
 /* ── HEADER ── */
 .header{
@@ -170,9 +143,6 @@ td.bold{font-weight:700;}
 .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
 
 /* ── VIGÍA ── */
-.vigia-key-row{display:flex;gap:8px;align-items:center;margin-bottom:14px;}
-.vigia-key-input{flex:1;background:#f8f4ef;border:1px solid var(--line);border-radius:6px;padding:7px 10px;font-size:11px;font-family:monospace;color:var(--ink);outline:none;}
-.vigia-key-input:focus{border-color:var(--accent);}
 .vigia-kpi-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px;}
 .vigia-kpi{background:white;border:1px solid var(--line);border-radius:8px;padding:12px 14px;}
 .vigia-kpi-val{font-family:var(--font-d);font-size:20px;font-weight:800;color:var(--ink);line-height:1;}
@@ -207,38 +177,6 @@ td.bold{font-weight:700;}
 </style>
 </head>
 <body>
-
-<!-- ═══ LOGIN ═══ -->
-<div id="login-screen">
-  <div class="login-box">
-    <div class="login-logo">
-      <svg width="32" height="32" viewBox="120 60 260 240" fill="none">
-        <line x1="250" y1="88" x2="148" y2="242" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
-        <line x1="250" y1="88" x2="352" y2="242" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
-        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
-        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
-        <line x1="250" y1="88" x2="250" y2="210" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
-        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
-        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="9" stroke-linecap="round"/>
-        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
-        <circle cx="250" cy="88" r="13" fill="#f6f1ea"/>
-        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
-        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
-        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
-      </svg>
-      <div>
-        <div class="login-logo-text">CROLIA</div>
-        <div class="login-sub">Centro de Operaciones</div>
-      </div>
-    </div>
-    <div class="login-label">Usuario</div>
-    <input class="login-input" id="login-user" type="text" placeholder="usuario" autocomplete="username"/>
-    <div class="login-label">Contraseña</div>
-    <input class="login-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password"/>
-    <button class="login-btn" onclick="doLogin()">Ingresar</button>
-    <div class="login-error" id="login-error">Usuario o contraseña incorrectos</div>
-  </div>
-</div>
 
 <!-- ═══ APP ═══ -->
 <div id="app">
@@ -837,15 +775,6 @@ td.bold{font-weight:700;}
         <button onclick="loadVigiaTenants()" style="font-size:11px;padding:5px 12px;background:var(--accent-soft);border:1px solid var(--line);border-radius:6px;cursor:pointer;color:var(--accent);font-weight:600;">↺ Actualizar</button>
       </div>
 
-      <!-- Config key -->
-      <div class="vigia-key-row">
-        <span style="font-size:10px;color:var(--muted);white-space:nowrap;">API URL:</span>
-        <input class="vigia-key-input" id="vigia-api-url" placeholder="https://api.vigia-jys.crolia.com.ar" />
-        <span style="font-size:10px;color:var(--muted);white-space:nowrap;">Admin Key:</span>
-        <input class="vigia-key-input" id="vigia-admin-key" type="password" placeholder="CROLIA_ADMIN_KEY" />
-        <button onclick="saveVigiaConfig()" style="font-size:10px;padding:5px 10px;background:var(--ink);color:white;border:none;border-radius:5px;cursor:pointer;">Guardar</button>
-      </div>
-
       <!-- KPIs -->
       <div class="vigia-kpi-bar" id="vigia-kpis">
         <div class="vigia-kpi"><div class="vigia-kpi-val" id="vk-tenants">—</div><div class="vigia-kpi-lbl">Tenants</div></div>
@@ -896,6 +825,7 @@ td.bold{font-weight:700;}
           <div>
             <div style="font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Plan</div>
             <select class="vigia-input" id="vn-plan">
+              <option value="lite">Lite</option>
               <option value="starter">Starter</option>
               <option value="pro" selected>Pro</option>
               <option value="total">Total</option>
@@ -1141,38 +1071,17 @@ document.getElementById('fin-modal').addEventListener('click', function(e){ if(e
 // Fecha actual
 document.getElementById('current-date').textContent = new Date().toLocaleDateString('es-AR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 
-function doLogin(){
-  const u=document.getElementById('login-user').value.trim();
-  const p=document.getElementById('login-pass').value.trim();
-  if(u==='iferrari'&&p==='fiesta32'){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('app').style.display='block';
-    sessionStorage.setItem('crolia-ops','1');
-    loadVigiaTenants();
-  } else {
-    document.getElementById('login-error').style.display='block';
-  }
+async function doLogout(){
+  await fetch('/api/ops/logout', { method: 'POST' });
+  window.location.href = '/ops/login';
 }
-function doLogout(){
-  sessionStorage.removeItem('crolia-ops');
-  document.getElementById('login-screen').style.display='flex';
-  document.getElementById('app').style.display='none';
-  document.getElementById('login-user').value='';
-  document.getElementById('login-pass').value='';
-}
-document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-document.getElementById('login-user').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('login-pass').focus();});
-if(sessionStorage.getItem('crolia-ops')==='1'){
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('app').style.display='block';
-  loadVigiaTenants();
-  cargarTokens();
-  cargarHistorial();
-}
+loadVigiaTenants();
+cargarTokens();
+cargarHistorial();
 
 async function cargarHistorial(){
   try{
-    const r = await fetch('/api/ops/tokens/history',{headers:{'x-ops-secret':'ops-crolia-2026'}});
+    const r = await fetch('/api/ops/tokens/history');
     if(!r.ok) return;
     const d = await r.json();
     if(!d.meses || d.meses.length === 0) return;
@@ -1195,22 +1104,7 @@ async function cargarHistorial(){
 }
 
 // ── VIGÍA SaaS ────────────────────────────────────
-const PLAN_PRECIOS = { starter: 180000, pro: 250000, full: 390000, total: 390000 };
-
-function getVigiaConfig(){
-  return {
-    url: localStorage.getItem('vigia-api-url') || 'https://api.vigia-jys.crolia.com.ar',
-    key: localStorage.getItem('vigia-admin-key') || '',
-  };
-}
-
-function saveVigiaConfig(){
-  const url = document.getElementById('vigia-api-url').value.trim().replace(/\/$/, '');
-  const key = document.getElementById('vigia-admin-key').value.trim();
-  if(url) localStorage.setItem('vigia-api-url', url);
-  if(key) localStorage.setItem('vigia-admin-key', key);
-  loadVigiaTenants();
-}
+const PLAN_PRECIOS = { lite: 40000, starter: 180000, pro: 250000, full: 390000, total: 390000 };
 
 function toggleNewTenant(){
   const f = document.getElementById('vigia-new-form');
@@ -1227,28 +1121,16 @@ function diasLabel(dias){
 }
 
 function planBadge(plan){
-  const colors = { starter:'vbadge-gray', pro:'vbadge-blue', total:'vbadge-amber' };
+  const colors = { lite:'vbadge-gray', starter:'vbadge-gray', pro:'vbadge-blue', total:'vbadge-amber' };
   return `<span class="vbadge ${colors[plan]||'vbadge-gray'}">${plan.toUpperCase()}</span>`;
 }
 
 async function loadVigiaTenants(){
-  const cfg = getVigiaConfig();
-  document.getElementById('vigia-api-url').value = cfg.url;
-  if(cfg.key) document.getElementById('vigia-admin-key').value = '●'.repeat(8);
-
-  if(!cfg.key){
-    document.getElementById('vigia-tenants-tbody').innerHTML =
-      '<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:20px;">Configurá la API URL y el Admin Key para conectar</td></tr>';
-    return;
-  }
-
   document.getElementById('vigia-tenants-tbody').innerHTML =
     '<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:20px;">Cargando…</td></tr>';
 
   try{
-    const r = await fetch(cfg.url + '/api/v1/admin/tenants', {
-      headers: { 'x-admin-key': cfg.key }
-    });
+    const r = await fetch('/api/ops/vigia/tenants');
     if(!r.ok) throw new Error('HTTP ' + r.status);
     const tenants = await r.json();
 
@@ -1304,18 +1186,13 @@ async function loadVigiaTenants(){
 }
 
 async function toggleTenant(id, currentActive){
-  const cfg = getVigiaConfig();
-  if(!cfg.key) return;
   const ok = confirm(currentActive ? '¿Desactivar este tenant?' : '¿Activar este tenant?');
   if(!ok) return;
-  await fetch(cfg.url + '/api/v1/admin/tenants/' + id + '/active', {
-    method: 'PATCH', headers: { 'x-admin-key': cfg.key }
-  });
+  await fetch('/api/ops/vigia/tenants/' + id + '/active', { method: 'PATCH' });
   loadVigiaTenants();
 }
 
 async function crearTenant(){
-  const cfg = getVigiaConfig();
   const btn = document.getElementById('vn-submit-btn');
   const result = document.getElementById('vn-result');
   result.style.display = 'none';
@@ -1338,9 +1215,9 @@ async function crearTenant(){
 
   btn.disabled = true; btn.textContent = 'Creando…';
   try{
-    const r = await fetch(cfg.url + '/api/v1/admin/tenants', {
+    const r = await fetch('/api/ops/vigia/tenants', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-admin-key': cfg.key },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
     const d = await r.json();
@@ -1367,7 +1244,7 @@ async function crearTenant(){
 
 async function cargarTokens(){
   try{
-    const r = await fetch('/api/ops/tokens',{headers:{'x-ops-secret':'ops-crolia-2026'}});
+    const r = await fetch('/api/ops/tokens');
     if(!r.ok) throw new Error('error');
     const d = await r.json();
     document.getElementById('tok-costo').textContent = 'USD ' + (d.costo_usd_mes||0).toFixed(4);
@@ -1389,7 +1266,7 @@ async function cargarTokens(){
     ['tok-tokens','tok-convs','tok-costo-conv','tok-ultima'].forEach(id=>{
       const el=document.getElementById(id); if(el) el.textContent='—';
     });
-    document.getElementById('tokens-cache-note').innerHTML = '⚠️ Agentkit no conectado. Configurar <code>AGENTKIT_URL</code> y <code>AGENTKIT_ADMIN_KEY</code> en Vercel + <code>OPS_SECRET=ops-crolia-2026</code>.';
+    document.getElementById('tokens-cache-note').innerHTML = '⚠️ Agentkit no conectado. Configurar <code>AGENTKIT_URL</code> y <code>AGENTKIT_ADMIN_KEY</code> en Vercel.';
   }
 }
 </script>
