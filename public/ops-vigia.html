@@ -124,12 +124,13 @@ body{font-family:var(--font-b);background:var(--surface);color:var(--ink);min-he
             <th>Usuarios</th>
             <th>IA / mes</th>
             <th>Última actividad</th>
+            <th>Trial</th>
             <th>Estado</th>
             <th></th>
           </tr>
         </thead>
         <tbody id="vigia-tenants-tbody">
-          <tr><td colspan="10" style="text-align:center;color:var(--muted);padding:20px;">Cargando…</td></tr>
+          <tr><td colspan="11" style="text-align:center;color:var(--muted);padding:20px;">Cargando…</td></tr>
         </tbody>
       </table>
     </div>
@@ -217,6 +218,17 @@ function planBadge(plan){
   return `<span class="vbadge ${colors[plan]||'vbadge-gray'}">${plan.toUpperCase()}</span>`;
 }
 
+function trialCell(trialExpiresAt){
+  if(!trialExpiresAt) return '<span style="color:var(--muted);font-size:10px;">—</span>';
+  const vence = new Date(trialExpiresAt);
+  const diasRestantes = Math.ceil((vence - new Date()) / 86400000);
+  const fecha = vence.toLocaleDateString('es-AR');
+  if(diasRestantes < 0) return `<span class="vbadge vbadge-red">Vencido ${fecha}</span>`;
+  if(diasRestantes <= 2) return `<span class="vbadge vbadge-red">⚠️ ${diasRestantes}d (${fecha})</span>`;
+  if(diasRestantes <= 4) return `<span class="vbadge vbadge-amber">${diasRestantes}d (${fecha})</span>`;
+  return `<span class="vbadge vbadge-gray">${diasRestantes}d (${fecha})</span>`;
+}
+
 async function loadVigiaTenants(){
   document.getElementById('vigia-tenants-tbody').innerHTML =
     '<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:20px;">Cargando…</td></tr>';
@@ -240,7 +252,7 @@ async function loadVigiaTenants(){
 
     if(tenants.length === 0){
       document.getElementById('vigia-tenants-tbody').innerHTML =
-        '<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:20px;">Sin tenants registrados</td></tr>';
+        '<tr><td colspan="11" style="text-align:center;color:var(--muted);padding:20px;">Sin tenants registrados</td></tr>';
       return;
     }
 
@@ -262,9 +274,12 @@ async function loadVigiaTenants(){
         <td>${m.usuarios||0} / ${m.locales||0}L</td>
         <td style="font-size:10px;color:var(--muted);">USD ${(m.ai_cost_mes_usd||0).toFixed(4)}</td>
         <td style="font-size:10px;">${diasLabel(m.dias_inactivo)}<br><span style="font-size:9px;color:var(--muted);">${m.ultima_actividad||'—'}</span></td>
+        <td>${trialCell(t.trial_expires_at)}</td>
         <td>${estadoBadge}</td>
-        <td>
+        <td style="white-space:nowrap;">
           <button class="vtoggle" onclick="toggleTenant('${t.id}', ${t.active})">${toggleLabel}</button>
+          ${t.trial_expires_at ? `<button class="vtoggle" onclick="convertirTenant('${t.id}', '${t.name.replace(/'/g,"\\'")}')">Convertir</button>` : ''}
+          <button class="vtoggle" onclick="resetPassword('${t.id}', '${t.name.replace(/'/g,"\\'")}')">Resetear pass</button>
         </td>
       </tr>`;
     }).join('');
@@ -280,6 +295,44 @@ async function toggleTenant(id, currentActive){
   if(!ok) return;
   await fetch('/api/ops/vigia/tenants/' + id + '/active', { method: 'PATCH' });
   loadVigiaTenants();
+}
+
+async function convertirTenant(id, nombre){
+  const opciones = {
+    '1': 'lite_tier1', '2': 'lite_tier2', '3': 'lite_tier3', '4': 'full',
+  };
+  const elegido = prompt(
+    `Convertir trial de "${nombre}" a plan pago.\n\n` +
+    `1 = Lite Tier 1 ($40K/mes)\n2 = Lite Tier 2 ($60K/mes)\n` +
+    `3 = Lite Tier 3 ($90K/mes)\n4 = Full ($300K/mes)\n\nElegí 1, 2, 3 o 4:`
+  );
+  const target = opciones[(elegido || '').trim()];
+  if(!target) return;
+
+  const r = await fetch('/api/ops/vigia/tenants/' + id + '/convert', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ target }),
+  });
+  const d = await r.json();
+  if(r.ok){
+    alert(`✅ ${nombre} convertido a ${target}. El trial ya no tiene fecha de vencimiento.`);
+    loadVigiaTenants();
+  } else {
+    alert('❌ Error: ' + (d.detail || JSON.stringify(d)));
+  }
+}
+
+async function resetPassword(id, nombre){
+  const ok = confirm(`¿Generar una contraseña nueva para "${nombre}" y mandársela por mail?`);
+  if(!ok) return;
+  const r = await fetch('/api/ops/vigia/tenants/' + id + '/reset-password', { method: 'POST' });
+  const d = await r.json();
+  if(r.ok){
+    alert(`✅ Contraseña nueva enviada a ${d.sent_to}`);
+  } else {
+    alert('❌ Error: ' + (d.detail || JSON.stringify(d)));
+  }
 }
 
 async function crearTenant(){
