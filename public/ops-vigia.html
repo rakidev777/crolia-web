@@ -316,8 +316,10 @@ async function convertirTenant(id, nombre){
   };
   const elegido = prompt(
     `Convertir trial de "${nombre}" a plan pago.\n\n` +
-    `1 = Lite Tier 1 ($40K/mes)\n2 = Lite Tier 2 ($60K/mes)\n` +
-    `3 = Lite Tier 3 ($90K/mes)\n4 = Full ($300K/mes)\n\nElegí 1, 2, 3 o 4:`
+    `1 = Lite Categoría 1 — hasta 30 ventas/mes ($45K/mes)\n` +
+    `2 = Lite Categoría 2 — hasta 75 ventas/mes ($75K/mes)\n` +
+    `3 = Lite Categoría 3 — hasta 200 ventas/mes ($95K/mes)\n` +
+    `4 = Vigía Full — más de 200 operaciones/mes ($300K/mes)\n\nElegí 1, 2, 3 o 4:`
   );
   const target = opciones[(elegido || '').trim()];
   if(!target) return;
