@@ -67,7 +67,7 @@ export default function VigiaLiteLanding() {
           El sistema de gestión para tu comercio, <span style={{ color: "#e3c9a8" }}>sin pagar de más</span>
         </h1>
         <p style={{ fontSize: "1.1rem", color: "rgba(255,255,255,0.75)", maxWidth: 620, margin: "0 auto 32px", lineHeight: 1.6 }}>
-          Vigía Lite es la misma tecnología de Vigía, con los módulos que un comercio chico
+          Vigía Lite es la misma tecnología de Vigía, con los módulos que un comercio en crecimiento
           realmente usa todos los días: ventas, clientes, créditos, stock y caja.
         </p>
         <Link href="/vigia-lite/registro" style={{
