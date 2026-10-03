@@ -208,9 +208,7 @@ export default function VigiaLiteLanding() {
         </div>
 
         <div style={{ textAlign: "center", fontSize: "0.82rem", color: "#888", marginBottom: 32, lineHeight: 1.7 }}>
-          + implementación única de <strong>$400.000</strong> — pagando de contado, la licencia
-          anual ($200.000) queda <strong>bonificada el primer año</strong>. Financiado, implementación
-          + licencia año 1 se abonan en 3 cuotas de $200.000.
+          + implementación única de <strong>$400.000</strong> — de una vez o en 3 cuotas de $133.300.
         </div>
 
         {/* CATEGORÍA FULL — color diferenciado */}
