@@ -93,7 +93,7 @@ export default function VigiaLiteLanding() {
             Todo lo esencial para operar hoy mismo
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(175px, 1fr))", gap: 16 }}>
           {MODULOS_LITE.map((m) => (
             <div key={m.title} style={{ background: "white", border: "1px solid rgba(138,100,72,0.12)", borderRadius: 14, padding: "22px 20px" }}>
               <div style={{ fontSize: "1.8rem", marginBottom: 10 }}>{m.icon}</div>
@@ -106,17 +106,35 @@ export default function VigiaLiteLanding() {
 
       {/* ACLARACIÓN DE LÍMITES */}
       <section style={{ padding: "24px 5% 64px", maxWidth: 1000, margin: "0 auto" }}>
-        <div style={{ background: "#f8f4ef", border: "1px solid rgba(138,100,72,0.15)", borderRadius: 14, padding: "20px 24px" }}>
-          <div style={{ fontWeight: 700, fontSize: "0.88rem", marginBottom: 8 }}>¿Qué es una "operación"?</div>
-          <p style={{ fontSize: "0.85rem", color: "#666", lineHeight: 1.7, marginBottom: 10 }}>
-            Cada <strong>venta</strong> o <strong>crédito</strong> que creás cuenta como una operación del mes.
-            Eso es lo único que define tu categoría — todo lo demás se usa libremente.
-          </p>
-          <p style={{ fontSize: "0.85rem", color: "#666", lineHeight: 1.7 }}>
-            <strong>Clientes: siempre ilimitados</strong>, en cualquier categoría. Los productos cargados
-            tienen un límite generoso que crece con cada categoría (desde 150 hasta 800), pensado para que
-            jamás te quede corto en el uso normal del día a día.
-          </p>
+        <div style={{ textAlign: "center", marginBottom: 24 }}>
+          <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.2rem", fontWeight: 800 }}>
+            ¿Qué cuenta como "operación"?
+          </h3>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
+          <div style={{ background: "#f8f4ef", borderRadius: 14, padding: "20px 22px" }}>
+            <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>🛒</div>
+            <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: 6 }}>Solo las ventas</div>
+            <div style={{ fontSize: "0.83rem", color: "#777", lineHeight: 1.6 }}>
+              Cada venta que registrás cuenta una vez — sea en efectivo o en cuotas. Vender en
+              cuotas no suma doble, aunque esa venta genere un crédito automáticamente.
+            </div>
+          </div>
+          <div style={{ background: "#f8f4ef", borderRadius: 14, padding: "20px 22px" }}>
+            <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>👥</div>
+            <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: 6 }}>Clientes: ilimitados</div>
+            <div style={{ fontSize: "0.83rem", color: "#777", lineHeight: 1.6 }}>
+              Sin tope, en cualquier categoría. Cargá todos los clientes que necesites, siempre.
+            </div>
+          </div>
+          <div style={{ background: "#f8f4ef", borderRadius: 14, padding: "20px 22px" }}>
+            <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>📦</div>
+            <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: 6 }}>Productos: límite amplio</div>
+            <div style={{ fontSize: "0.83rem", color: "#777", lineHeight: 1.6 }}>
+              Crece con cada categoría (150 a 800 productos cargados) — pensado para que no te
+              quede corto en el uso normal del día a día.
+            </div>
+          </div>
         </div>
       </section>
 
@@ -187,6 +205,12 @@ export default function VigiaLiteLanding() {
               <div style={{ fontSize: "0.82rem", opacity: 0.8 }}>{c.detalle}</div>
             </div>
           ))}
+        </div>
+
+        <div style={{ textAlign: "center", fontSize: "0.82rem", color: "#888", marginBottom: 32, lineHeight: 1.7 }}>
+          + implementación única de <strong>$400.000</strong> — pagando de contado, la licencia
+          anual ($200.000) queda <strong>bonificada el primer año</strong>. Financiado, implementación
+          + licencia año 1 se abonan en 3 cuotas de $200.000.
         </div>
 
         {/* CATEGORÍA FULL — color diferenciado */}
