@@ -174,6 +174,10 @@ body{font-family:var(--font-b);background:var(--surface);color:var(--ink);min-he
           <div style="font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Nombre del local</div>
           <input class="vigia-input" id="vn-local" placeholder="Local principal" />
         </div>
+        <div>
+          <div style="font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">Logo (URL, opcional)</div>
+          <input class="vigia-input" id="vn-logo" placeholder="https://... (se ve en su pantalla de login)" />
+        </div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;">
         <button class="vigia-submit" id="vn-submit-btn" onclick="crearTenant()">Crear tenant</button>
@@ -291,6 +295,7 @@ async function crearTenant(){
     owner_email: document.getElementById('vn-owner-email').value.trim(),
     owner_password: document.getElementById('vn-owner-pass').value.trim(),
     local_nombre: document.getElementById('vn-local').value.trim() || 'Local principal',
+    logo_url: document.getElementById('vn-logo').value.trim() || null,
   };
 
   if(!body.nombre || !body.slug || !body.owner_nombre || !body.owner_email || !body.owner_password){
@@ -308,13 +313,14 @@ async function crearTenant(){
     });
     const d = await r.json();
     if(r.ok){
-      result.innerHTML = `✅ Tenant creado · URL: <strong>${d.url}</strong> · Email: <strong>${d.owner_email}</strong><br>Próximo paso: crear subdominio en Vercel/Easypanel.`;
+      result.innerHTML = `✅ URL: <strong><a href="${d.url}" target="_blank">${d.url}</a></strong> · Email: <strong>${d.owner_email}</strong><br>${d.message || ''}`;
       result.className = 'vigia-result ok'; result.style.display='block';
       document.getElementById('vn-nombre').value='';
       document.getElementById('vn-slug').value='';
       document.getElementById('vn-owner-nombre').value='';
       document.getElementById('vn-owner-email').value='';
       document.getElementById('vn-owner-pass').value='';
+      document.getElementById('vn-logo').value='';
       loadVigiaTenants();
     } else {
       result.textContent = '❌ Error: ' + (d.detail || JSON.stringify(d));
