@@ -105,37 +105,12 @@ export default function VigiaLiteLanding() {
       </section>
 
       {/* ACLARACIÓN DE LÍMITES */}
-      <section style={{ padding: "24px 5% 64px", maxWidth: 1000, margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: 24 }}>
-          <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.2rem", fontWeight: 800 }}>
-            ¿Qué cuenta como "operación"?
-          </h3>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
-          <div style={{ background: "#f8f4ef", borderRadius: 14, padding: "20px 22px" }}>
-            <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>🛒</div>
-            <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: 6 }}>Solo las ventas</div>
-            <div style={{ fontSize: "0.83rem", color: "#777", lineHeight: 1.6 }}>
-              Cada venta que registrás cuenta una vez — sea en efectivo o en cuotas. Vender en
-              cuotas no suma doble, aunque esa venta genere un crédito automáticamente.
-            </div>
-          </div>
-          <div style={{ background: "#f8f4ef", borderRadius: 14, padding: "20px 22px" }}>
-            <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>👥</div>
-            <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: 6 }}>Clientes: ilimitados</div>
-            <div style={{ fontSize: "0.83rem", color: "#777", lineHeight: 1.6 }}>
-              Sin tope, en cualquier categoría. Cargá todos los clientes que necesites, siempre.
-            </div>
-          </div>
-          <div style={{ background: "#f8f4ef", borderRadius: 14, padding: "20px 22px" }}>
-            <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>📦</div>
-            <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: 6 }}>Productos: límite amplio</div>
-            <div style={{ fontSize: "0.83rem", color: "#777", lineHeight: 1.6 }}>
-              Crece con cada categoría (150 a 800 productos cargados) — pensado para que no te
-              quede corto en el uso normal del día a día.
-            </div>
-          </div>
-        </div>
+      <section style={{ padding: "8px 5% 48px", maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
+        <p style={{ fontSize: "0.9rem", color: "#777", lineHeight: 1.7 }}>
+          <strong style={{ color: "#444" }}>Clientes y productos, siempre ilimitados</strong> — en
+          cualquier categoría. Lo único que define tu categoría son las ventas que generás por mes;
+          vender en cuotas no suma doble, aunque esa venta cree un crédito automáticamente.
+        </p>
       </section>
 
       {/* UPSELL FULL — grilla de módulos bloqueados */}
@@ -261,7 +236,7 @@ export default function VigiaLiteLanding() {
           <a href={waAddon} target="_blank" rel="noreferrer" style={{
             display: "inline-block", background: BRAND, color: "white", padding: "11px 26px",
             borderRadius: 999, textDecoration: "none", fontSize: "0.85rem", fontWeight: 700,
-          }}>Contactanos, podemos ofrecerte algo más →</a>
+          }}>Quiero sumar esa función a mi plan →</a>
         </div>
       </section>
     </div>
