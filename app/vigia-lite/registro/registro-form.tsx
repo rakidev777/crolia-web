@@ -31,6 +31,8 @@ export default function RegistroForm() {
   const [nombreContacto, setNombreContacto] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
+  const [ventasMensuales, setVentasMensuales] = useState("");
+  const [categoriaInteres, setCategoriaInteres] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultado, setResultado] = useState<Resultado | null>(null);
@@ -64,6 +66,8 @@ export default function RegistroForm() {
           nombre_contacto: nombreContacto.trim(),
           email: email.trim(),
           whatsapp: whatsapp.trim(),
+          ventas_mensuales_promedio: ventasMensuales.trim() ? parseInt(ventasMensuales, 10) : null,
+          categoria_interes: categoriaInteres || null,
         }),
       });
       const data = await r.json();
@@ -148,6 +152,33 @@ export default function RegistroForm() {
 
           <Label text="WhatsApp *" />
           <Input value={whatsapp} onChange={setWhatsapp} placeholder="11 2233-4455" />
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div>
+              <Label text="Ventas por mes (aprox.)" />
+              <input
+                value={ventasMensuales}
+                type="number"
+                min={0}
+                onChange={(e) => setVentasMensuales(e.target.value)}
+                placeholder="Ej: 50"
+                style={{ ...inputStyle, marginBottom: 16 }}
+              />
+            </div>
+            <div>
+              <Label text="¿Qué categoría te interesa?" />
+              <select
+                value={categoriaInteres}
+                onChange={(e) => setCategoriaInteres(e.target.value)}
+                style={{ ...inputStyle, marginBottom: 16 }}
+              >
+                <option value="">No estoy seguro</option>
+                <option value="cat1">Categoría 1</option>
+                <option value="cat2">Categoría 2</option>
+                <option value="cat3">Categoría 3</option>
+              </select>
+            </div>
+          </div>
 
           {error && (
             <div style={{ background: "#fee2e2", color: "#991b1b", fontSize: "0.85rem", padding: "10px 14px", borderRadius: 8, marginBottom: 16 }}>

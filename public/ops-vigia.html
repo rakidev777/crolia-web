@@ -118,6 +118,7 @@ body{font-family:var(--font-b);background:var(--surface);color:var(--ink);min-he
           <tr>
             <th>Empresa</th>
             <th>Contacto</th>
+            <th>Perfil del lead</th>
             <th>Plan</th>
             <th>Ventas 30d</th>
             <th>Productos</th>
@@ -131,7 +132,7 @@ body{font-family:var(--font-b);background:var(--surface);color:var(--ink);min-he
           </tr>
         </thead>
         <tbody id="vigia-tenants-tbody">
-          <tr><td colspan="12" style="text-align:center;color:var(--muted);padding:20px;">Cargando…</td></tr>
+          <tr><td colspan="13" style="text-align:center;color:var(--muted);padding:20px;">Cargando…</td></tr>
         </tbody>
       </table>
     </div>
@@ -230,6 +231,8 @@ function trialCell(trialExpiresAt){
   return `<span class="vbadge vbadge-gray">${diasRestantes}d (${fecha})</span>`;
 }
 
+const CATEGORIA_INTERES_LABELS = { cat1: 'Categoría 1', cat2: 'Categoría 2', cat3: 'Categoría 3', no_se: 'No sabe' };
+
 function contactoCell(email, whatsapp){
   if(!email && !whatsapp) return '<span style="color:var(--muted);">—</span>';
   const partes = [];
@@ -238,6 +241,14 @@ function contactoCell(email, whatsapp){
     const limpio = whatsapp.replace(/\D/g,'');
     partes.push(`<a href="https://wa.me/${limpio}" target="_blank" style="color:var(--accent);text-decoration:none;">📱 ${whatsapp}</a>`);
   }
+  return partes.join('<br>');
+}
+
+function perfilCell(ventasMensuales, categoriaInteres){
+  const partes = [];
+  if(ventasMensuales !== null && ventasMensuales !== undefined) partes.push(`${ventasMensuales} ventas/mes`);
+  if(categoriaInteres) partes.push(CATEGORIA_INTERES_LABELS[categoriaInteres] || categoriaInteres);
+  if(partes.length === 0) return '<span style="color:var(--muted);">—</span>';
   return partes.join('<br>');
 }
 
@@ -264,7 +275,7 @@ async function loadVigiaTenants(){
 
     if(tenants.length === 0){
       document.getElementById('vigia-tenants-tbody').innerHTML =
-        '<tr><td colspan="12" style="text-align:center;color:var(--muted);padding:20px;">Sin tenants registrados</td></tr>';
+        '<tr><td colspan="13" style="text-align:center;color:var(--muted);padding:20px;">Sin tenants registrados</td></tr>';
       return;
     }
 
@@ -280,6 +291,7 @@ async function loadVigiaTenants(){
           <div style="font-size:9px;color:var(--muted);">${t.slug}</div>
         </td>
         <td style="font-size:10px;">${contactoCell(t.contact_email, t.contact_whatsapp)}</td>
+        <td style="font-size:10px;">${perfilCell(t.ventas_mensuales_promedio, t.categoria_interes)}</td>
         <td>${planBadge(t.plan)}</td>
         <td style="font-weight:600;">${(m.ventas_30d||0).toLocaleString('es-AR')}</td>
         <td>${m.productos||0}</td>
