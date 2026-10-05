@@ -124,7 +124,11 @@ export default function RegistroForm() {
           <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1.5rem", fontWeight: 800, marginTop: 10 }}>
             Creá tu cuenta de prueba
           </h1>
-          <p style={{ color: "#777", fontSize: "0.88rem", marginTop: 6 }}>7 días gratis, acceso inmediato, sin tarjeta.</p>
+          <p style={{ color: "#777", fontSize: "0.88rem", marginTop: 6, lineHeight: 1.6, maxWidth: 400, marginLeft: "auto", marginRight: "auto" }}>
+            Al completar este formulario se crea automáticamente tu cuenta de Vigía Lite, lista
+            para operar — con usuario, contraseña y el link de acceso. Te mandamos todo por mail
+            junto con una guía de primeros pasos, para que no se pierda nada.
+          </p>
         </div>
 
         <form onSubmit={onSubmit} style={{ background: "white", borderRadius: 18, padding: "28px 26px", boxShadow: "0 12px 40px rgba(0,0,0,0.06)" }}>
@@ -173,9 +177,9 @@ export default function RegistroForm() {
                 style={{ ...inputStyle, marginBottom: 16 }}
               >
                 <option value="">No estoy seguro</option>
-                <option value="cat1">Categoría 1</option>
-                <option value="cat2">Categoría 2</option>
-                <option value="cat3">Categoría 3</option>
+                <option value="cat1">Categoría 1 (hasta 30 ventas/mes)</option>
+                <option value="cat2">Categoría 2 (hasta 75 ventas/mes)</option>
+                <option value="cat3">Categoría 3 (hasta 200 ventas/mes)</option>
               </select>
             </div>
           </div>

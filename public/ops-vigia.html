@@ -112,8 +112,8 @@ body{font-family:var(--font-b);background:var(--surface);color:var(--ink);min-he
     </div>
 
     <!-- Tabla tenants -->
-    <div style="background:white;border:1px solid var(--line);border-radius:10px;overflow:hidden;">
-      <table class="vtable">
+    <div style="background:white;border:1px solid var(--line);border-radius:10px;overflow-x:auto;">
+      <table class="vtable" style="min-width:1400px;">
         <thead>
           <tr>
             <th>Empresa</th>
@@ -124,6 +124,7 @@ body{font-family:var(--font-b);background:var(--surface);color:var(--ink);min-he
             <th>Productos</th>
             <th>Clientes</th>
             <th>Usuarios</th>
+            <th>Logins</th>
             <th>IA / mes</th>
             <th>Última actividad</th>
             <th>Trial</th>
@@ -132,7 +133,7 @@ body{font-family:var(--font-b);background:var(--surface);color:var(--ink);min-he
           </tr>
         </thead>
         <tbody id="vigia-tenants-tbody">
-          <tr><td colspan="13" style="text-align:center;color:var(--muted);padding:20px;">Cargando…</td></tr>
+          <tr><td colspan="14" style="text-align:center;color:var(--muted);padding:20px;">Cargando…</td></tr>
         </tbody>
       </table>
     </div>
@@ -275,7 +276,7 @@ async function loadVigiaTenants(){
 
     if(tenants.length === 0){
       document.getElementById('vigia-tenants-tbody').innerHTML =
-        '<tr><td colspan="13" style="text-align:center;color:var(--muted);padding:20px;">Sin tenants registrados</td></tr>';
+        '<tr><td colspan="14" style="text-align:center;color:var(--muted);padding:20px;">Sin tenants registrados</td></tr>';
       return;
     }
 
@@ -297,6 +298,7 @@ async function loadVigiaTenants(){
         <td>${m.productos||0}</td>
         <td>${m.clientes||0}</td>
         <td>${m.usuarios||0} / ${m.locales||0}L</td>
+        <td style="font-weight:600;">${m.logins_total||0}</td>
         <td style="font-size:10px;color:var(--muted);">USD ${(m.ai_cost_mes_usd||0).toFixed(4)}</td>
         <td style="font-size:10px;">${diasLabel(m.dias_inactivo)}<br><span style="font-size:9px;color:var(--muted);">${m.ultima_actividad||'—'}</span></td>
         <td>${trialCell(t.trial_expires_at)}</td>
@@ -351,12 +353,19 @@ async function convertirTenant(id, nombre){
 }
 
 async function resetPassword(id, nombre){
-  const ok = confirm(`¿Generar una contraseña nueva para "${nombre}" y mandársela por mail?`);
+  const ok = confirm(`¿Generar una contraseña nueva para "${nombre}"? Se la mandamos por mail y también la vas a ver acá para entrar vos si querés.`);
   if(!ok) return;
   const r = await fetch('/api/ops/vigia/tenants/' + id + '/reset-password', { method: 'POST' });
   const d = await r.json();
   if(r.ok){
-    alert(`✅ Contraseña nueva enviada a ${d.sent_to}`);
+    const avisoMail = d.mail_enviado ? `enviada a ${d.sent_to}` : `⚠️ no se pudo enviar el mail a ${d.sent_to} — copiá los datos de acá`;
+    alert(
+      `✅ Contraseña nueva ${avisoMail}\n\n` +
+      `URL: ${d.url}\n` +
+      `Email: ${d.email}\n` +
+      `Contraseña: ${d.password}\n\n` +
+      `Guardala ahora — no se vuelve a mostrar.`
+    );
   } else {
     alert('❌ Error: ' + (d.detail || JSON.stringify(d)));
   }
