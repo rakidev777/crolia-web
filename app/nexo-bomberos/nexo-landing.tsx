@@ -25,12 +25,14 @@ const EXTRA = [
   { icon: "🧰", title: "Control de materiales y unidades", desc: "Inventario, mantenimiento preventivo y vencimientos de equipamiento y móviles.", color: "#8b5cf6" },
 ];
 
+
 const PLANES = [
   {
     nombre: "Solo Sistema",
-    etapa: "Fase de Crecimiento",
     precio: "15%",
-    sub: "de lo recaudado por mes · costo del sistema con límite de $1.200.000",
+    explicacion: "Es lo que Nexo cobra sobre lo que tu institución recauda cada mes a través de los colaboradores.",
+    tope: "Tope mensual de comisión: $1.200.000, sin importar cuánto sea tu recaudación total.",
+    limite: "Superado ese tope, Nexo no comisiona más: todo lo que sigue queda 100% para tu institución.",
     features: [
       "Página de colaboradores con tu marca y tu dominio",
       "Conexión a tu cuenta de Mercado Pago",
@@ -42,9 +44,10 @@ const PLANES = [
   },
   {
     nombre: "Sistema + Edición",
-    etapa: "Fase de Crecimiento",
     precio: "35%",
-    sub: "de lo recaudado por mes · costo del sistema con límite de $2.800.000",
+    explicacion: "Es lo que Nexo cobra sobre lo que tu institución recauda cada mes a través de los colaboradores.",
+    tope: "Tope mensual de comisión: $2.800.000, sin importar cuánto sea tu recaudación total.",
+    limite: "Superado ese tope, Nexo no comisiona más: todo lo que sigue queda 100% para tu institución.",
     destacado: true,
     features: [
       "Todo lo del plan Solo Sistema",
@@ -52,18 +55,6 @@ const PLANES = [
       "Editamos el contenido del mes y te entregamos un calendario de publicación",
       "La publicación y gestión de tus redes la hace la institución (sin pauta ni publicidad incluida)",
       "Soporte prioritario por WhatsApp",
-    ],
-  },
-  {
-    nombre: "Fase Consolidada",
-    etapa: "Desde los 18 meses",
-    precio: "10%",
-    sub: "de lo recaudado por mes · costo del sistema con límite de $800.000",
-    features: [
-      "Se activa sola al cumplir 18 meses y $4.000.000/mes de bruto sostenido",
-      "Mantiene todo lo del sistema",
-      "Porcentaje fijo de por vida, nunca vuelve a subir",
-      "La edición de contenido para redes pasa a presupuestarse aparte, a demanda, si la siguen necesitando",
     ],
   },
 ];
@@ -605,33 +596,43 @@ export default function NexoLanding() {
               Precios
             </h2>
             <p style={{ color: "#888", fontSize: "1.05rem", maxWidth: 620, margin: "0 auto" }}>
-              Creemos en darte una herramienta para la autosustentabilidad de tu institución, no en quedarnos
-              con tu crecimiento. Por eso nuestro acompañamiento siempre tiene un límite mensual claro y un
-              porcentaje que baja con el tiempo.
+              Te damos una herramienta para la autosustentabilidad de tu institución, no un socio que se
+              queda con tu crecimiento. Por eso nuestro acompañamiento siempre tiene un límite mensual
+              claro y un porcentaje que baja con el tiempo.
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }} className="pasos-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }} className="stack-mobile">
             {PLANES.map((p) => (
               <div key={p.nombre} style={
                 p.destacado
-                  ? { background: `linear-gradient(160deg, ${BRAND_DARK} 0%, #2a0a0a 100%)`, borderRadius: 18, padding: "26px 24px", display: "flex", flexDirection: "column", gap: 12, position: "relative", boxShadow: `0 16px 50px ${BRAND}30` }
-                  : { background: "#fafafa", border: "1.5px solid #eee", borderRadius: 18, padding: "26px 24px", display: "flex", flexDirection: "column", gap: 12 }
+                  ? { background: `linear-gradient(160deg, ${BRAND_DARK} 0%, #2a0a0a 100%)`, borderRadius: 18, padding: "30px 28px", display: "flex", flexDirection: "column", gap: 14, position: "relative", boxShadow: `0 16px 50px ${BRAND}30` }
+                  : { background: "#fafafa", border: "1.5px solid #eee", borderRadius: 18, padding: "30px 28px", display: "flex", flexDirection: "column", gap: 14 }
               }>
                 {p.destacado && (
                   <div style={{ position: "absolute", top: -12, left: 24, background: BRAND, color: "white", fontFamily: "'Oswald', sans-serif", fontSize: "0.66rem", textTransform: "uppercase", letterSpacing: 0.5, padding: "4px 12px", borderRadius: 999, fontWeight: 700 }}>Más elegido</div>
                 )}
-                <div style={{ fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: 0.5, fontWeight: 700, color: p.destacado ? BRAND_LIGHT : "#aaa" }}>{p.etapa}</div>
-                <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.95rem", fontWeight: 700, color: p.destacado ? "white" : "#1a1a1a" }}>{p.nombre}</div>
+                <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "1.05rem", fontWeight: 700, color: p.destacado ? "white" : "#1a1a1a" }}>{p.nombre}</div>
                 <div>
-                  <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "2.1rem", fontWeight: 800, color: p.destacado ? "white" : "#1a1a1a" }}>{p.precio}</div>
-                  <div style={{ fontSize: "0.76rem", color: p.destacado ? "rgba(255,255,255,0.55)" : "#888", marginTop: 2 }}>{p.sub}</div>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+                    <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "2.4rem", fontWeight: 800, color: p.destacado ? "white" : "#1a1a1a" }}>{p.precio}</div>
+                    <div style={{ fontSize: "0.85rem", color: p.destacado ? "rgba(255,255,255,0.65)" : "#888" }}>de tu recaudación mensual</div>
+                  </div>
+                  <div style={{ fontSize: "0.84rem", color: p.destacado ? "rgba(255,255,255,0.75)" : "#555", marginTop: 8, lineHeight: 1.6 }}>{p.explicacion}</div>
+                  <div style={{
+                    marginTop: 10, borderRadius: 10, padding: "12px 14px",
+                    background: p.destacado ? "rgba(34,197,94,0.12)" : "#dcfce7",
+                    border: p.destacado ? "1px solid rgba(34,197,94,0.3)" : "1px solid #bbf7d0",
+                  }}>
+                    <div style={{ fontSize: "0.82rem", lineHeight: 1.6, fontWeight: 700, color: p.destacado ? "#86efac" : "#15803d" }}>{p.tope}</div>
+                    <div style={{ fontSize: "0.78rem", lineHeight: 1.6, color: p.destacado ? "rgba(255,255,255,0.75)" : "#2d6a4f", marginTop: 6 }}>{p.limite}</div>
+                  </div>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 9, marginTop: 4 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 6 }}>
                   {p.features.map((f) => (
                     <div key={f} style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
-                      <span style={{ color: GREEN, fontWeight: 700, fontSize: "0.82rem", marginTop: 1 }}>✓</span>
-                      <span style={{ fontSize: "0.78rem", color: p.destacado ? "rgba(255,255,255,0.75)" : "#555", lineHeight: 1.5 }}>{f}</span>
+                      <span style={{ color: GREEN, fontWeight: 700, fontSize: "0.85rem", marginTop: 1 }}>✓</span>
+                      <span style={{ fontSize: "0.82rem", color: p.destacado ? "rgba(255,255,255,0.75)" : "#555", lineHeight: 1.6 }}>{f}</span>
                     </div>
                   ))}
                 </div>
@@ -639,13 +640,46 @@ export default function NexoLanding() {
             ))}
           </div>
 
-          <div style={{ textAlign: "center", marginTop: 18, color: "#999", fontSize: "0.82rem" }}>
-            El límite se activa, en los tres planes, a los $8.000.000 de recaudación mensual: unos 533
-            colaboradores con un aporte promedio de $15.000.
+          <div style={{ textAlign: "center", marginTop: 24, background: "#fafafa", border: "1px dashed #ddd", borderRadius: 14, padding: "18px 24px", maxWidth: 560, marginLeft: "auto", marginRight: "auto" }}>
+            <div style={{ fontSize: "0.9rem", color: "#1a1a1a", fontWeight: 700, marginBottom: 4 }}>Instalación y puesta en marcha: $400.000 único pago</div>
+            <div style={{ fontSize: "0.82rem", color: "#888" }}>
+              Incluye conexión de tu cuenta de Mercado Pago, página de colaboradores con tu marca,
+              configuración del panel y capacitación al Consejo Directivo, mismo precio para los dos planes.
+            </div>
+          </div>
+
+          <div style={{ height: 1, background: "#eee", margin: "80px 0 50px" }} />
+
+          <div style={{ textAlign: "center", marginBottom: 36 }}>
+            <div style={{ display: "inline-block", background: "#dcfce7", color: "#16a34a", padding: "5px 14px", borderRadius: 999, fontSize: "0.8rem", fontWeight: 600, marginBottom: 18, border: "1px solid #bbf7d0" }}>
+              Se activa solo, no hace falta pedirlo
+            </div>
+            <h3 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.4rem, 2.6vw, 1.8rem)", fontWeight: 800, maxWidth: 700, margin: "0 auto" }}>
+              ¿Qué pasa cuando tu institución logra crecer con ingresos fuertes a lo largo del tiempo?
+            </h3>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 0, maxWidth: 760, margin: "0 auto 24px" }} className="stack-mobile">
+            <div style={{ flex: 1, background: "#fafafa", border: "1px solid #eee", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
+              <div style={{ fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: 0.5, color: "#aaa", fontWeight: 700, marginBottom: 8 }}>Hoy</div>
+              <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: "1rem" }}>Fase de Crecimiento</div>
+              <div style={{ fontSize: "0.8rem", color: "#888", marginTop: 6, lineHeight: 1.6 }}>Nexo cobra 15% o 35% de tu recaudación mensual, según el plan elegido, cada uno con su propio tope.</div>
+            </div>
+            <div style={{ padding: "0 16px", color: "#ccc", fontSize: "1.4rem" }}>→</div>
+            <div style={{ flex: 1, background: `linear-gradient(160deg, ${BRAND_DARK} 0%, #2a0a0a 100%)`, borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
+              <div style={{ fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: 0.5, color: BRAND_LIGHT, fontWeight: 700, marginBottom: 8 }}>18 meses + $4.000.000/mes sostenido</div>
+              <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: "1rem", color: "white" }}>Fase Consolidada</div>
+              <div style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.6)", marginTop: 6, lineHeight: 1.6 }}>Nexo pasa a cobrar un 10% fijo de tu recaudación mensual, de por vida, con tope de $800.000.</div>
+            </div>
+          </div>
+
+          <div style={{ textAlign: "center", color: "#999", fontSize: "0.82rem", maxWidth: 620, margin: "0 auto 50px" }}>
+            Se activa sola, sin que tengas que pedirlo, cuando se cumplen las dos condiciones a la vez. La
+            edición de contenido para redes pasa a presupuestarse aparte, a demanda, si la seguís necesitando.
           </div>
 
           <div style={{
-            marginTop: 28, background: `linear-gradient(150deg, ${BRAND_DARK} 0%, #2a0a0a 100%)`,
+            background: `linear-gradient(150deg, ${BRAND_DARK} 0%, #2a0a0a 100%)`,
             borderRadius: 18, padding: "32px 30px", maxWidth: 720, marginLeft: "auto", marginRight: "auto",
             textAlign: "center", boxShadow: `0 16px 50px ${BRAND}20`,
           }}>
@@ -661,14 +695,6 @@ export default function NexoLanding() {
               que destinar dinero propio a sostener el sistema; son las propias suscripciones de tus
               colaboradores las que lo sostienen de forma autónoma, y además te generan un ingreso mensual
               sostenido para la institución.
-            </div>
-          </div>
-
-          <div style={{ textAlign: "center", marginTop: 20, background: "#fafafa", border: "1px dashed #ddd", borderRadius: 14, padding: "18px 24px", maxWidth: 560, marginLeft: "auto", marginRight: "auto" }}>
-            <div style={{ fontSize: "0.9rem", color: "#1a1a1a", fontWeight: 700, marginBottom: 4 }}>Instalación y puesta en marcha: $400.000 único pago</div>
-            <div style={{ fontSize: "0.82rem", color: "#888" }}>
-              Incluye conexión de tu cuenta de Mercado Pago, página de colaboradores con tu marca, configuración del panel
-              y capacitación al Consejo Directivo, mismo precio para los dos planes de arranque.
             </div>
           </div>
         </div>
