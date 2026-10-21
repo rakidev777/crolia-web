@@ -94,7 +94,7 @@ const FAQS = [
   },
   {
     q: "¿Necesitamos saber de tecnología?",
-    a: "No. Nosotros configuramos todo y capacitamos a la Comisión Directiva para usar el panel.",
+    a: "No. Nosotros configuramos todo y capacitamos al Consejo Directivo para usar el panel.",
   },
   {
     q: "¿Qué pasa si ya tenemos página web institucional, o si no tenemos dominio propio?",
@@ -298,7 +298,7 @@ export default function NexoLanding() {
                 Sin intermediarios en el medio. Crolia no administra ni retiene fondos en ningún momento,
                 solo te damos la herramienta. Eso genera una confianza mayor y un vínculo directo con el
                 vecino, asegurando su colaboración mes a mes, con visibilidad constante y transparencia
-                contable para la Comisión Directiva.
+                contable para el Consejo Directivo.
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -483,7 +483,7 @@ export default function NexoLanding() {
               <span style={{ color: BRAND_LIGHT }}>sin pedirle nada a nadie.</span>
             </h2>
             <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1rem", lineHeight: 1.8, marginBottom: 28 }}>
-              La Comisión Directiva entra y ve en tiempo real cuánto entró, quién paga, quién se dio de baja y
+              El Consejo Directivo entra y ve en tiempo real cuánto entró, quién paga, quién se dio de baja y
               cuánto queda neto después de la comisión de Mercado Pago. Nada que armar a mano en Excel.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -666,7 +666,7 @@ export default function NexoLanding() {
             <div style={{ fontSize: "0.9rem", color: "#1a1a1a", fontWeight: 700, marginBottom: 4 }}>Instalación y puesta en marcha: $400.000 único pago</div>
             <div style={{ fontSize: "0.82rem", color: "#888" }}>
               Incluye conexión de tu cuenta de Mercado Pago, página de colaboradores con tu marca, configuración del panel
-              y capacitación a la Comisión Directiva, mismo precio para los dos planes de arranque.
+              y capacitación al Consejo Directivo, mismo precio para los dos planes de arranque.
             </div>
           </div>
         </div>
@@ -914,7 +914,7 @@ export default function NexoLanding() {
               Preguntas frecuentes
             </h2>
             <p style={{ color: "#888", fontSize: "1.05rem" }}>
-              Lo que suele preguntar una Comisión Directiva antes de decidir.
+              Lo que suele preguntar un Consejo Directivo antes de decidir.
             </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
