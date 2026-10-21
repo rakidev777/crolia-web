@@ -12,9 +12,9 @@ const DEMO_LINK = "https://colaboradores.bvgssanmiguel.org.ar/colaborador-oficia
 const MODULOS = [
   { icon: "🖥️", title: "Página de colaboradores propia", desc: "Formulario de inscripción con el nombre, logo y colores de tu institución, en tu propio dominio.", color: BRAND },
   { icon: "🔄", title: "Cobro automático", desc: "Suscripción recurrente por Mercado Pago, se cobra solo, todos los meses, sin que nadie lo cargue a mano.", color: GREEN },
-  { icon: "📊", title: "Panel para la Comisión", desc: "Activos, altas, bajas, ingresos del mes, comisión de MP y neto disponible, en tiempo real.", color: "#3b82f6" },
+  { icon: "📊", title: "Panel para el Consejo Directivo", desc: "Activos, altas, bajas, ingresos del mes, comisión de MP y neto disponible, en tiempo real.", color: "#3b82f6" },
   { icon: "💵", title: "Pagos manuales", desc: "Para quien colabora en efectivo o transferencia. Queda registrado y filtrable igual que el resto.", color: "#f59e0b" },
-  { icon: "🧾", title: "Historial por colaborador", desc: "Cada vecino ve sus propios aportes; la Comisión ve el historial completo de cada uno.", color: "#8b5cf6" },
+  { icon: "🧾", title: "Historial por colaborador", desc: "Cada vecino ve sus propios aportes; el Consejo Directivo ve el historial completo de cada uno.", color: "#8b5cf6" },
   { icon: "✅", title: "Chequeos diarios recurrentes", desc: "El sistema se sincroniza todos los días con Mercado Pago para que la información que ves esté siempre al día.", color: "#06b6d4" },
 ];
 
@@ -34,7 +34,7 @@ const PLANES = [
     features: [
       "Página de colaboradores con tu marca y tu dominio",
       "Conexión a tu cuenta de Mercado Pago",
-      "Panel para la Comisión",
+      "Panel para el Consejo Directivo",
       "Pagos manuales + reportes",
       "Recordatorio automático a quien no paga",
       "Soporte por email (48hs)",
@@ -443,7 +443,7 @@ export default function NexoLanding() {
               Qué incluye
             </div>
             <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 800, color: "#1a1a1a", marginBottom: 16 }}>
-              Todo lo que necesita tu Comisión
+              Todo lo que necesita tu Consejo Directivo
             </h2>
             <p style={{ color: "#888", fontSize: "1.05rem", maxWidth: 540, margin: "0 auto" }}>
               No es un formulario suelto. Es un sistema completo, probado con pagos reales de punta a punta.
@@ -476,7 +476,7 @@ export default function NexoLanding() {
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }} className="stack-mobile">
           <div>
             <div style={{ display: "inline-block", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", padding: "5px 14px", borderRadius: 999, fontSize: "0.8rem", color: "rgba(255,255,255,0.6)", marginBottom: 24 }}>
-              📊 Panel para la Comisión
+              📊 Panel para el Consejo Directivo
             </div>
             <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 800, color: "white", lineHeight: 1.2, marginBottom: 20 }}>
               Visibilidad total,<br />
