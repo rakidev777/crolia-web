@@ -215,7 +215,7 @@ export default function NexoLanding() {
               </a>
             </div>
             <div style={{ display: "flex", gap: 24, marginTop: 36, flexWrap: "wrap" }}>
-              {[["Aportes directo a la institución", "✓"], ["Porcentaje con límite mensual claro", "✓"], ["Sin recorridas puerta a puerta", "✓"]].map(([label, check]) => (
+              {[["Aportes directo a la institución", "✓"], ["Porcentaje con límite mensual claro", "✓"], ["Alternativa más fácil y rápida que recorrer puerta a puerta", "✓"]].map(([label, check]) => (
                 <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
                   <span style={{ color: GREEN, fontWeight: 700 }}>{check}</span>
                   <span style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.85rem" }}>{label}</span>
@@ -549,9 +549,11 @@ export default function NexoLanding() {
             La difusión también te la facilitamos
           </h2>
           <p style={{ color: "#666", fontSize: "1rem", lineHeight: 1.8, maxWidth: 620, margin: "0 auto 28px" }}>
-            No hace falta golpear puertas: con un posteo en Instagram o Facebook compartiendo el link de
-            inscripción, la campaña se mueve sola. El vecino ve el posteo, entra, se suscribe; la página de colaboradores
-            está pensada para convertir directo desde esa visita.
+            Instagram y Facebook te dan el alcance, pero no cobran ni hacen seguimiento por vos. Nexo es el
+            complemento que convierte ese alcance en colaboradores reales: con un posteo compartiendo el
+            link de inscripción, la campaña ya tiene a dónde llevar a la gente, una página pensada para
+            convertir, con cobro automático y sin que nadie tenga que hacer seguimiento manual después. No
+            reemplaza tus redes, las potencia.
           </p>
           <div style={{ background: "#fafafa", border: "1px dashed #ddd", borderRadius: 14, padding: "20px 26px", maxWidth: 560, margin: "0 auto", textAlign: "left" }}>
             <div style={{ fontSize: "0.9rem", color: "#1a1a1a", fontWeight: 700, marginBottom: 6 }}>¿No tenés quién arme esos posteos?</div>
