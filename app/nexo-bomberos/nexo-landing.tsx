@@ -659,23 +659,38 @@ export default function NexoLanding() {
             </h3>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 0, maxWidth: 760, margin: "0 auto 24px" }} className="stack-mobile">
-            <div style={{ flex: 1, background: "#fafafa", border: "1px solid #eee", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
-              <div style={{ fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: 0.5, color: "#aaa", fontWeight: 700, marginBottom: 8 }}>Hoy</div>
-              <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: "1rem" }}>Fase de Crecimiento</div>
-              <div style={{ fontSize: "0.8rem", color: "#888", marginTop: 6, lineHeight: 1.6 }}>Nexo cobra 15% o 35% de tu recaudación mensual, según el plan elegido, cada uno con su propio tope.</div>
+          <div style={{ maxWidth: 560, margin: "0 auto 50px", background: "#fafafa", border: "1px solid #eee", borderRadius: 16, padding: "28px 26px" }}>
+            <div style={{ fontSize: "0.85rem", color: "#444", lineHeight: 1.6, marginBottom: 18 }}>
+              Nexo cobra 15% o 35% de tu recaudación mensual, según el plan elegido, cada uno con su propio tope.
             </div>
-            <div style={{ padding: "0 16px", color: "#ccc", fontSize: "1.4rem" }}>→</div>
-            <div style={{ flex: 1, background: `linear-gradient(160deg, ${BRAND_DARK} 0%, #2a0a0a 100%)`, borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
-              <div style={{ fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: 0.5, color: BRAND_LIGHT, fontWeight: 700, marginBottom: 8 }}>18 meses + $4.000.000/mes sostenido</div>
-              <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: "1rem", color: "white" }}>Fase Consolidada</div>
-              <div style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.6)", marginTop: 6, lineHeight: 1.6 }}>Nexo pasa a cobrar un 10% fijo de tu recaudación mensual, de por vida, con tope de $800.000.</div>
+
+            <div style={{ fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: 0.5, color: "#aaa", fontWeight: 700, marginBottom: 10 }}>
+              Cuando se cumplen estas dos condiciones
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 18 }}>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
+                <span style={{ color: GREEN, fontWeight: 700, fontSize: "0.85rem" }}>✓</span>
+                <span style={{ fontSize: "0.85rem", color: "#444" }}>Pasaron 18 meses desde que empezaste</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
+                <span style={{ color: GREEN, fontWeight: 700, fontSize: "0.85rem" }}>✓</span>
+                <span style={{ fontSize: "0.85rem", color: "#444" }}>Tu institución recauda $4.000.000 o más por mes de forma sostenida</span>
+              </div>
+            </div>
+
+            <div style={{ background: `linear-gradient(160deg, ${BRAND_DARK} 0%, #2a0a0a 100%)`, borderRadius: 12, padding: "18px 20px" }}>
+              <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "white", marginBottom: 6 }}>
+                Pasás automáticamente a la Fase Consolidada
+              </div>
+              <div style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.6 }}>
+                Nexo pasa a cobrar un 10% fijo de tu recaudación mensual, de por vida, con tope de $800.000.
+              </div>
             </div>
           </div>
 
           <div style={{ textAlign: "center", color: "#999", fontSize: "0.82rem", maxWidth: 620, margin: "0 auto 50px" }}>
-            Se activa sola, sin que tengas que pedirlo, cuando se cumplen las dos condiciones a la vez. La
-            edición de contenido para redes pasa a presupuestarse aparte, a demanda, si la seguís necesitando.
+            Se activa sola, sin que tengas que pedirlo, apenas se cumplen las dos condiciones. La edición de
+            contenido para redes pasa a presupuestarse aparte, a demanda, si la seguís necesitando.
           </div>
 
           <div style={{
