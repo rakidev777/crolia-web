@@ -353,7 +353,7 @@ export default function NexoLanding() {
                   "Porcentaje con límite mensual claro, siempre transparente",
                   "Los datos de tus colaboradores son 100% tuyos, en tu propio panel",
                   "Tu nombre, tu institución, tu campaña",
-                  "El porcentaje baja con el tiempo, hasta un 10% fijo de por vida",
+                  "El porcentaje baja con el tiempo, hasta un 10% fijo de forma estable",
                 ].map((t) => (
                   <div key={t} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
                     <span style={{ color: GREEN, fontWeight: 700, fontSize: "0.85rem", marginTop: 1 }}>✓</span>
@@ -683,7 +683,7 @@ export default function NexoLanding() {
                 Pasás automáticamente a la Fase Consolidada
               </div>
               <div style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.6 }}>
-                Nexo pasa a cobrar un 10% fijo de tu recaudación mensual, de por vida, con tope de $800.000.
+                Nexo pasa a cobrar un 10% fijo de tu recaudación mensual, de forma estable, con tope de $800.000.
               </div>
             </div>
           </div>
