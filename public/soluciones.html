@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Soluciones — Crolia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:         #221a14;
+  --bg:          #f6f1ea;
+  --surface:     #ede7de;
+  --accent:      #8a6448;
+  --accent-soft: #e9ddd1;
+  --muted:       #6d6057;
+  --line:        rgba(34,26,20,0.10);
+  --font-d:      'Space Grotesk', sans-serif;
+  --font-b:      'Inter', sans-serif;
+}
+
+html, body { font-family: var(--font-b); background: var(--bg); color: var(--ink); }
+
+.page {
+  width: 210mm;
+  margin: 0 auto;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media screen {
+  body { background: #d4cfc8; padding: 24px 0 48px; }
+  .page { box-shadow: 0 8px 40px rgba(34,26,20,0.18); margin-bottom: 32px; }
+}
+@media print {
+  body { background: var(--bg); padding: 0; margin: 0; }
+  .page { box-shadow: none; page-break-after: always; margin: 0; }
+  .page:last-child { page-break-after: avoid; }
+  .print-btn { display: none !important; }
+  @page { size: A4; margin: 0; }
+}
+
+.print-btn {
+  position: fixed; top: 20px; right: 20px;
+  background: var(--ink); color: #f6f1ea;
+  font-family: var(--font-d); font-size: 12px; font-weight: 600; letter-spacing: .08em;
+  border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; z-index: 100;
+}
+.print-btn:hover { background: var(--accent); }
+
+.watermark {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px; height: 320px;
+  opacity: 0.045; pointer-events: none; z-index: 0;
+}
+.page > *:not(.watermark) { position: relative; z-index: 1; }
+
+.header {
+  background: var(--ink); color: #f6f1ea;
+  padding: 11px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+@media screen { .header { padding-right: 150px; } }
+.logo-block { display: flex; align-items: center; gap: 10px; }
+.logo-text { font-family: var(--font-d); font-weight: 700; font-size: 17px; letter-spacing: .05em; color: #f6f1ea; }
+.logo-sub { font-size: 10px; color: rgba(246,241,234,.4); letter-spacing: .03em; margin-top: 1px; }
+.header-contact { text-align: right; }
+.header-contact a { display: block; font-size: 10.5px; color: rgba(246,241,234,.55); text-decoration: none; line-height: 1.7; }
+.header-contact a:first-child { color: rgba(246,241,234,.85); font-weight: 600; font-size: 11.5px; }
+
+.footer-strip {
+  background: var(--ink); padding: 9px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.footer-strip span { font-size: 9px; color: rgba(246,241,234,.28); letter-spacing: .05em; }
+.footer-strip strong { color: rgba(246,241,234,.5); font-weight: 600; }
+
+.section-label {
+  font-family: var(--font-d); font-size: 8px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+}
+.section-title {
+  font-family: var(--font-d); font-size: 14px; font-weight: 700;
+  color: var(--ink); letter-spacing: -.02em; margin-bottom: 10px;
+}
+
+/* ──────── PÁGINA 1 ──────── */
+.p1-hero { padding: 22px 28px 18px; border-bottom: 1px solid var(--line); }
+.hero-eyebrow {
+  display: inline-block; font-family: var(--font-d);
+  font-size: 8.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-soft);
+  padding: 3px 10px; border-radius: 100px; margin-bottom: 10px;
+}
+.hero-h1 {
+  font-family: var(--font-d); font-weight: 800; font-size: 27px;
+  line-height: 1.1; letter-spacing: -.03em; color: var(--ink); margin-bottom: 10px;
+}
+.hero-h1 em { font-style: normal; color: var(--accent); }
+.hero-sub { font-size: 11.5px; line-height: 1.65; color: var(--muted); max-width: 520px; }
+
+.proof-row {
+  display: flex; align-items: center; gap: 18px; margin-top: 18px;
+  padding-top: 16px; border-top: 1px solid var(--line);
+}
+.proof-label { font-family: var(--font-d); font-size: 8px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+.proof-logos { display: flex; align-items: center; gap: 16px; }
+.proof-logos img { height: 30px; width: auto; opacity: .85; }
+
+/* Pilares grandes */
+.p1-pilares { padding: 18px 28px; border-bottom: 1px solid var(--line); }
+.pilares-grid-big { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.pilar-big { background: white; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.pilar-big-num { font-family: var(--font-d); font-size: 8px; font-weight: 700; letter-spacing: .15em; color: var(--accent); margin-bottom: 5px; }
+.pilar-big-title { font-family: var(--font-d); font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.pilar-big-desc { font-size: 10px; color: var(--muted); line-height: 1.55; }
+
+/* Problemas */
+.p1-problems { padding: 18px 28px; background: var(--surface); flex: 1; }
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-top: 10px; }
+.problem-card { background: white; border: 1px solid var(--line); border-radius: 8px; padding: 12px 13px; }
+.pcard-title { font-family: var(--font-d); font-size: 10.5px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.pcard-desc { font-size: 9.5px; color: var(--muted); line-height: 1.5; }
+
+/* ──────── PÁGINA 2 ──────── */
+.p2-modules { padding: 18px 28px 12px; border-bottom: 1px solid var(--line); }
+.modules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.module-card { background: white; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+.mod-icon { font-size: 15px; margin-bottom: 5px; }
+.mod-title { font-family: var(--font-d); font-size: 11px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.mod-desc { font-size: 9.5px; color: var(--muted); line-height: 1.55; margin-bottom: 7px; }
+.mod-items { list-style: none; }
+.mod-items li { font-size: 9px; color: var(--muted); padding: 1.5px 0 1.5px 11px; position: relative; line-height: 1.5; }
+.mod-items li::before { content: '·'; position: absolute; left: 1px; color: var(--accent); font-weight: 700; font-size: 13px; line-height: 1; top: 1px; }
+
+/* APIs */
+.p2-apis { padding: 16px 28px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.apis-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-top: 10px; }
+.api-chip {
+  background: white; border: 1px solid var(--line); border-radius: 100px;
+  padding: 8px 6px; text-align: center; font-size: 9.5px; font-weight: 600; color: var(--ink);
+}
+
+/* Stats */
+.p2-stats { padding: 14px 28px; border-bottom: 1px solid var(--line); }
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+.stat-cell { background: white; border-radius: 8px; border: 1px solid var(--line); padding: 11px 12px; }
+.stat-num { font-family: var(--font-d); font-size: 20px; font-weight: 800; color: var(--accent); letter-spacing: -.03em; line-height: 1; }
+.stat-label { font-size: 9.5px; color: var(--muted); margin-top: 2px; }
+
+/* CTA footer */
+.cta-footer {
+  background: var(--accent); padding: 20px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex: 1;
+}
+.cta-left h2 { font-family: var(--font-d); font-weight: 800; font-size: 17px; letter-spacing: -.02em; color: #f6f1ea; line-height: 1.2; margin-bottom: 6px; }
+.cta-left p { font-size: 11px; color: rgba(246,241,234,.75); line-height: 1.55; max-width: 400px; }
+.cta-right { text-align: right; flex-shrink: 0; }
+.cta-name { font-family: var(--font-d); font-size: 18px; font-weight: 800; color: #f6f1ea; letter-spacing: -.02em; margin-bottom: 5px; }
+.cta-contact { font-size: 10.5px; color: rgba(246,241,234,.65); line-height: 1.8; }
+
+</style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">⬇ Exportar PDF</button>
+
+
+<!-- ═══════════════════════════ PÁGINA 1 ═══════════════════════════ -->
+<div class="page">
+  <svg class="watermark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" fill="none">
+    <line x1="250" y1="88"  x2="148" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="352" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#8a6448"/>
+    <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+    <circle cx="250" cy="88"  r="13" fill="#8a6448"/>
+    <circle cx="148" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="352" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="250" cy="282" r="13" fill="#8a6448"/>
+  </svg>
+
+  <div class="header">
+    <div class="logo-block">
+      <svg width="34" height="34" viewBox="120 60 260 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <line x1="250" y1="88"  x2="148" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="352" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
+        <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+        <circle cx="250" cy="88"  r="13" fill="#f6f1ea"/>
+        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
+      </svg>
+      <div>
+        <div class="logo-text">CROLIA</div>
+        <div class="logo-sub">Agentes IA y sistemas a medida</div>
+      </div>
+    </div>
+    <div class="header-contact">
+      <a href="mailto:contacto@crolia.com.ar">contacto@crolia.com.ar</a>
+      <a href="#">www.crolia.com.ar</a>
+    </div>
+  </div>
+
+  <div class="p1-hero">
+    <div class="hero-eyebrow">Para brokers, aseguradoras y cualquier empresa con cartera de clientes</div>
+    <h1 class="hero-h1">Lo que hoy hacés a mano,<br/><em>lo podemos poner a trabajar solo.</em></h1>
+    <p class="hero-sub">Construimos agentes de IA que venden y atienden, sistemas de gestión a medida para tu operación, integraciones por API con lo que ya usás, y la web o el portal que haga falta. No vendemos un producto cerrado — armamos lo que tu negocio necesita, punto por punto.</p>
+
+    <div class="proof-row">
+      <div class="proof-label">Ya en producción</div>
+      <div class="proof-logos">
+        <img src="/ies-logo-icon.png" alt="IES Seguros" />
+        <img src="/nuevoLogoJyS.webp" alt="JYS Confort" onerror="this.style.display='none'" />
+      </div>
+    </div>
+  </div>
+
+  <div class="p1-pilares">
+    <div class="section-label">Las cuatro formas en que trabajamos</div>
+    <div class="section-title">Elegís uno, o los cuatro juntos</div>
+    <div class="pilares-grid-big">
+      <div class="pilar-big">
+        <div class="pilar-big-num">01 — Agentes IA</div>
+        <div class="pilar-big-title">Que venden y atienden solos</div>
+        <div class="pilar-big-desc">En WhatsApp, Instagram o Facebook. Cotizan, agendan, cobran y derivan a una persona cuando hace falta — las 24 horas, sin turnos.</div>
+      </div>
+      <div class="pilar-big">
+        <div class="pilar-big-num">02 — Sistemas de gestión</div>
+        <div class="pilar-big-title">Hechos a tu operación, no al revés</div>
+        <div class="pilar-big-desc">Nada de adaptar tu negocio a un ERP genérico. El sistema se construye alrededor de cómo trabajás hoy, con tus procesos reales.</div>
+      </div>
+      <div class="pilar-big">
+        <div class="pilar-big-num">03 — Automatización</div>
+        <div class="pilar-big-title">Procesos que hoy son manuales</div>
+        <div class="pilar-big-desc">Reportes, notificaciones, cobranzas, onboarding, conciliación — lo que hoy ocupa horas de alguien por planilla.</div>
+      </div>
+      <div class="pilar-big">
+        <div class="pilar-big-num">04 — Desarrollo web</div>
+        <div class="pilar-big-title">Sitio, cotizador, portal de cliente</div>
+        <div class="pilar-big-desc">Landing, e-commerce o un sistema institucional completo, con la terminación de un producto en producción.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p1-problems">
+    <div class="section-label">El punto de partida</div>
+    <div class="section-title">Si tu negocio tiene alguna de estas señales</div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="pcard-title">Todo vive en WhatsApp</div>
+        <div class="pcard-desc">Cotizaciones, consultas y seguimiento de clientes se gestionan por mensajes sueltos, sin un sistema que ordene el proceso.</div>
+      </div>
+      <div class="problem-card">
+        <div class="pcard-title">Nadie ve el negocio completo</div>
+        <div class="pcard-desc">Stock, ventas, cartera o trámites en curso no se pueden ver desde un solo lugar — cada área tiene su propia planilla.</div>
+      </div>
+      <div class="problem-card">
+        <div class="pcard-title">Atención limitada a horario de oficina</div>
+        <div class="pcard-desc">Fuera de ese horario, el cliente espera — y en ese tiempo, a veces se va a la competencia.</div>
+      </div>
+      <div class="problem-card">
+        <div class="pcard-title">Sistemas que no se hablan entre sí</div>
+        <div class="pcard-desc">Cargás el mismo dato dos o tres veces porque el sistema de ventas, el de stock y el de facturación no están conectados.</div>
+      </div>
+      <div class="problem-card">
+        <div class="pcard-title">Proveedores o compañías con API, sin usar</div>
+        <div class="pcard-desc">El banco, la aseguradora o el proveedor ofrecen conexión directa — pero nadie la conectó todavía.</div>
+      </div>
+      <div class="problem-card">
+        <div class="pcard-title">Cada cliente nuevo, más trabajo manual</div>
+        <div class="pcard-desc">El sistema actual no escala: cada crecimiento suma más carga operativa en vez de absorberla.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-strip">
+    <span>© 2026 Crolia — <strong>Agentes IA y sistemas a medida</strong></span>
+    <span>Argentina &nbsp;·&nbsp; www.crolia.com.ar</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════ PÁGINA 2 ═══════════════════════════ -->
+<div class="page">
+  <svg class="watermark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" fill="none">
+    <line x1="250" y1="88"  x2="148" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="352" y2="242" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="282" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="250" y1="88"  x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="148" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <line x1="352" y1="242" x2="250" y2="210" stroke="#8a6448" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#8a6448"/>
+    <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+    <circle cx="250" cy="88"  r="13" fill="#8a6448"/>
+    <circle cx="148" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="352" cy="242" r="13" fill="#8a6448"/>
+    <circle cx="250" cy="282" r="13" fill="#8a6448"/>
+  </svg>
+
+  <div class="header">
+    <div class="logo-block">
+      <svg width="34" height="34" viewBox="120 60 260 240" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <line x1="250" y1="88"  x2="148" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="352" y2="242" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="282" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="250" y1="88"  x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="148" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="352" y1="242" x2="250" y2="210" stroke="#f6f1ea" stroke-width="8.5" stroke-linecap="round"/>
+        <path d="M 250,178 C 240,192 238,210 250,222 C 262,210 260,192 250,178 Z" fill="#f6f1ea"/>
+        <path d="M 250,182 C 244,193 243,205 250,212 C 257,205 256,193 250,182 Z" fill="#c4a882"/>
+        <circle cx="250" cy="88"  r="13" fill="#f6f1ea"/>
+        <circle cx="148" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="352" cy="242" r="13" fill="#f6f1ea"/>
+        <circle cx="250" cy="282" r="13" fill="#f6f1ea"/>
+      </svg>
+      <div>
+        <div class="logo-text">CROLIA</div>
+        <div class="logo-sub">Agentes IA y sistemas a medida</div>
+      </div>
+    </div>
+    <div class="header-contact">
+      <a href="mailto:contacto@crolia.com.ar">contacto@crolia.com.ar</a>
+      <a href="#">www.crolia.com.ar</a>
+    </div>
+  </div>
+
+  <div class="p2-modules">
+    <div class="section-label">Qué podemos construir</div>
+    <div class="section-title">Todo lo que entra en cada pilar</div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="mod-icon">💬</div>
+        <div class="mod-title">Agentes de WhatsApp / IG / Facebook</div>
+        <div class="mod-desc">Agentes conversacionales con IA que atienden como lo haría tu mejor vendedor.</div>
+        <ul class="mod-items">
+          <li>Ventas y cotización automática</li>
+          <li>Agendamiento de turnos</li>
+          <li>Cobranzas y recordatorios</li>
+          <li>Derivación a humano cuando hace falta</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="mod-icon">🗂️</div>
+        <div class="mod-title">Sistemas de gestión a medida</div>
+        <div class="mod-desc">El equivalente a un ERP, pero construido alrededor de tu operación real.</div>
+        <ul class="mod-items">
+          <li>Stock, ventas y cuotas</li>
+          <li>Paneles internos con CRM</li>
+          <li>Multi-sucursal y multi-usuario</li>
+          <li>Facturación electrónica integrada</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="mod-icon">🔌</div>
+        <div class="mod-title">Integraciones y APIs internas</div>
+        <div class="mod-desc">Conectamos tu sistema con lo que ya usás, o con terceros que expongan API.</div>
+        <ul class="mod-items">
+          <li>Aseguradoras, bancos, proveedores</li>
+          <li>Pasarelas de pago y facturación</li>
+          <li>Google Sheets, Calendar, CRMs</li>
+          <li>APIs propias para tu propio producto</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="mod-icon">🌐</div>
+        <div class="mod-title">Desarrollo web</div>
+        <div class="mod-desc">Del sitio institucional al portal de cliente, con el mismo estándar de producción.</div>
+        <ul class="mod-items">
+          <li>Landing y sitio institucional</li>
+          <li>Cotizadores y formularios inteligentes</li>
+          <li>Portal de cliente con seguimiento</li>
+          <li>E-commerce conectado al stock</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="p2-apis">
+    <div class="section-label">Nos conectamos con lo que ya usás</div>
+    <div class="section-title">Si expone una API, la integramos</div>
+    <div class="apis-grid">
+      <div class="api-chip">Aseguradoras</div>
+      <div class="api-chip">Bancos y pagos</div>
+      <div class="api-chip">Facturación (ARCA)</div>
+      <div class="api-chip">CRMs existentes</div>
+      <div class="api-chip">Google Sheets</div>
+      <div class="api-chip">WhatsApp / Meta</div>
+      <div class="api-chip">Proveedores</div>
+      <div class="api-chip">Sistemas propios</div>
+    </div>
+  </div>
+
+  <div class="p2-stats">
+    <div class="section-label">En números</div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="stat-num">4</div><div class="stat-label">Formas de trabajar juntos</div></div>
+      <div class="stat-cell"><div class="stat-num">2+</div><div class="stat-label">Sistemas propios en producción</div></div>
+      <div class="stat-cell"><div class="stat-num">N</div><div class="stat-label">Integraciones por API, sin límite</div></div>
+      <div class="stat-cell"><div class="stat-num">24/7</div><div class="stat-label">Disponibilidad de los agentes</div></div>
+    </div>
+  </div>
+
+  <div class="cta-footer">
+    <div class="cta-left">
+      <h2>Contanos qué hacés hoy a mano</h2>
+      <p>Si gestionás clientes, vendés por WhatsApp, o tenés un sistema que no habla con otro — seguramente se puede resolver. Charlemos cinco minutos.</p>
+    </div>
+    <div class="cta-right">
+      <div class="cta-name">Crolia</div>
+      <div class="cta-contact">contacto@crolia.com.ar<br/>www.crolia.com.ar</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
