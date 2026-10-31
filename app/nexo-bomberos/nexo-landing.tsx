@@ -10,21 +10,13 @@ const WA_LINK = "https://wa.me/5491173729899?text=Hola%20Crolia%2C%20quiero%20in
 const DEMO_LINK = "https://colaboradores.bvgssanmiguel.org.ar/colaborador-oficial";
 
 const MODULOS = [
-  { icon: "🖥️", title: "Página de colaboradores propia", desc: "Formulario de inscripción con el nombre, logo y colores de tu institución, en tu propio dominio.", color: BRAND },
-  { icon: "🔄", title: "Cobro automático", desc: "Suscripción recurrente por Mercado Pago, se cobra solo, todos los meses, sin que nadie lo cargue a mano.", color: GREEN },
-  { icon: "📊", title: "Panel para el Consejo Directivo", desc: "Activos, altas, bajas, ingresos del mes, comisión de MP y neto disponible, en tiempo real.", color: "#3b82f6" },
-  { icon: "💵", title: "Pagos manuales", desc: "Para quien colabora en efectivo o transferencia. Queda registrado y filtrable igual que el resto.", color: "#f59e0b" },
-  { icon: "🧾", title: "Historial por colaborador", desc: "Cada vecino ve sus propios aportes; el Consejo Directivo ve el historial completo de cada uno.", color: "#8b5cf6" },
-  { icon: "✅", title: "Chequeos diarios recurrentes", desc: "El sistema se sincroniza todos los días con Mercado Pago para que la información que ves esté siempre al día.", color: "#06b6d4" },
+  { icon: "🖥️", title: "Página de colaboradores propia", desc: "Con tu nombre, logo y colores, en tu propio dominio.", color: BRAND },
+  { icon: "🔄", title: "Cobro automático", desc: "Por Mercado Pago, todos los meses, sin cargar nada a mano.", color: GREEN },
+  { icon: "📊", title: "Panel para el Consejo Directivo", desc: "Activos, altas, bajas e ingresos, en tiempo real.", color: "#3b82f6" },
+  { icon: "💵", title: "Pagos manuales", desc: "Para quien colabora en efectivo o transferencia.", color: "#f59e0b" },
+  { icon: "🧾", title: "Historial por colaborador", desc: "Cada vecino ve sus propios aportes.", color: "#8b5cf6" },
+  { icon: "✅", title: "Chequeos diarios recurrentes", desc: "Se sincroniza solo con Mercado Pago todos los días.", color: "#06b6d4" },
 ];
-
-const EXTRA = [
-  { icon: "📣", title: "Convocatoria por WhatsApp", desc: "Alertas automáticas a la dotación ante una emergencia, con confirmación de asistencia.", color: GREEN },
-  { icon: "📍", title: "Rastreo de móviles", desc: "Ubicación en tiempo real de las unidades en servicio.", color: "#3b82f6" },
-  { icon: "🧑‍🚒", title: "Gestión de personal", desc: "Guardias, legajos, capacitaciones y horas de servicio de la dotación.", color: "#f59e0b" },
-  { icon: "🧰", title: "Control de materiales y unidades", desc: "Inventario, mantenimiento preventivo y vencimientos de equipamiento y móviles.", color: "#8b5cf6" },
-];
-
 
 const PLANES = [
   {
@@ -101,6 +93,7 @@ export default function NexoLanding() {
   const [scrollY, setScrollY] = useState(0);
   const [activeModulo, setActiveModulo] = useState(0);
   const [heroScreen, setHeroScreen] = useState(0);
+  const [faqAbierta, setFaqAbierta] = useState<number | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY);
@@ -134,15 +127,15 @@ export default function NexoLanding() {
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <span style={{ fontSize: "1.4rem" }}>🚒</span>
             <span style={{ fontSize: "1.3rem", fontWeight: 800, color: scrollY > 50 ? BRAND : "white", fontFamily: "'Oswald', sans-serif" }}>Nexo</span>
-            <span style={{ fontSize: "0.75rem", color: scrollY > 50 ? "#aaa" : "rgba(255,255,255,0.5)", marginLeft: 4 }}>by Crolia</span>
+            <span className="nav-by-crolia" style={{ fontSize: "0.75rem", color: scrollY > 50 ? "#aaa" : "rgba(255,255,255,0.5)", marginLeft: 4 }}>by Crolia</span>
           </div>
           <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-            <a href="#como-funciona" style={{ color: scrollY > 50 ? "#666" : "rgba(255,255,255,0.8)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 500 }} className="nav-link">¿Cómo funciona?</a>
-            <a href="#precios" style={{ color: scrollY > 50 ? "#666" : "rgba(255,255,255,0.8)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 500 }} className="nav-link">Precios</a>
+            <a href="#como-funciona" style={{ color: scrollY > 50 ? "#666" : "rgba(255,255,255,0.8)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 500 }} className="nav-link nav-link-desktop">¿Cómo funciona?</a>
+            <a href="#precios" style={{ color: scrollY > 50 ? "#666" : "rgba(255,255,255,0.8)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 500 }} className="nav-link nav-link-desktop">Precios</a>
             <a href={WA_LINK} target="_blank" rel="noreferrer" style={{
-              background: BRAND, color: "white", padding: "8px 20px", borderRadius: 999,
-              textDecoration: "none", fontSize: "0.88rem", fontWeight: 600,
-              boxShadow: `0 4px 14px ${BRAND}40`,
+              background: BRAND, color: "white", padding: "8px 16px", borderRadius: 999,
+              textDecoration: "none", fontSize: "0.85rem", fontWeight: 600,
+              boxShadow: `0 4px 14px ${BRAND}40`, whiteSpace: "nowrap",
             }}>Contactar</a>
           </div>
         </div>
@@ -274,154 +267,64 @@ export default function NexoLanding() {
         </div>
       </section>
 
-      {/* SIN INTERMEDIARIOS */}
-      <section style={{ background: "white", padding: "70px 5%", borderBottom: "1px solid #f0ede8" }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 48, alignItems: "center" }} className="stack-mobile">
-            <div>
-              <div style={{ display: "inline-block", background: "#dcfce7", color: "#16a34a", padding: "5px 14px", borderRadius: 999, fontSize: "0.8rem", fontWeight: 600, marginBottom: 18, border: "1px solid #bbf7d0" }}>
-                🔒 Sin intermediarios
-              </div>
-              <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.7rem, 3vw, 2.3rem)", fontWeight: 800, color: "#1a1a1a", lineHeight: 1.25, marginBottom: 16 }}>
-                Los aportes entran directo a la cuenta de tu institución
-              </h2>
-              <p style={{ color: "#555", fontSize: "1rem", lineHeight: 1.8 }}>
-                Sin intermediarios en el medio. Crolia no administra ni retiene fondos en ningún momento,
-                solo te damos la herramienta. Eso genera una confianza mayor y un vínculo directo con el
-                vecino, asegurando su colaboración mes a mes, con visibilidad constante y transparencia
-                contable para el Consejo Directivo.
-              </p>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div style={{ background: "#fafafa", borderRadius: 14, padding: "20px 22px", border: "1px solid #eee" }}>
-                <div style={{ fontSize: "0.72rem", color: "#888", marginBottom: 4 }}>Nuestra filosofía</div>
-                <div style={{ fontSize: "1rem", fontWeight: 700, color: "#1a1a1a" }}>Una herramienta para la autosustentabilidad de tu institución, no un socio que se queda con tu crecimiento</div>
-              </div>
-              <div style={{ background: "#fafafa", borderRadius: 14, padding: "20px 22px", border: "1px solid #eee" }}>
-                <div style={{ fontSize: "0.72rem", color: "#888", marginBottom: 4 }}>Acompañamiento con límite claro</div>
-                <div style={{ fontSize: "1rem", fontWeight: 700, color: "#1a1a1a" }}>Lo que supere el límite mensual es 100% de la institución, siempre</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* VS RIFEROS */}
+      {/* SIN INTERMEDIARIOS + VS RIFEROS + SEGURIDAD, todo junto y corto */}
       <section style={{
-        padding: "90px 5%",
+        padding: "80px 5%",
         background: `linear-gradient(135deg, ${BRAND_DARK} 0%, ${BRAND_DARK2} 100%)`,
-        position: "relative", overflow: "hidden",
       }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <div style={{ display: "inline-block", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.8)", padding: "5px 14px", borderRadius: 999, fontSize: "0.8rem", fontWeight: 600, marginBottom: 18 }}>
-              💸 vs. rifas tradicionales
-            </div>
-            <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 800, color: "white", lineHeight: 1.25, marginBottom: 16 }}>
-              ¿Le seguís dando un % de las donaciones<br />de tus vecinos a un rifero?
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 40 }}>
+            <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.7rem, 3.2vw, 2.4rem)", fontWeight: 800, color: "white", lineHeight: 1.25, marginBottom: 12 }}>
+              ¿Le seguís dando un % de las donaciones a un rifero?
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "1rem", lineHeight: 1.8, maxWidth: 680, margin: "0 auto" }}>
-              Muchas instituciones hoy dependen de una empresa privada de rifas para armar su campaña de socios,
-              y le entregan un porcentaje de todo lo recaudado, sin límite, para siempre. Nosotros ofrecemos
-              un acompañamiento sincero y real: un <strong style={{ color: BRAND_LIGHT }}>límite mensual
-              claro</strong> (todo lo que supere ese monto es 100% tuyo) y un porcentaje mensual que{" "}
-              <strong style={{ color: BRAND_LIGHT }}>baja con el tiempo</strong>, a medida que tu institución se
-              consolida y nuestro rol en el día a día va siendo menor.
+            <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.95rem", lineHeight: 1.7, maxWidth: 620, margin: "0 auto" }}>
+              Nosotros no administramos ni retenemos tu plata: va directo a tu cuenta de Mercado Pago, con un
+              límite mensual claro y un porcentaje que baja con el tiempo.
             </p>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }} className="stack-mobile">
-            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16, padding: "24px 26px" }}>
-              <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.9rem", fontWeight: 700, color: "rgba(255,255,255,0.55)", marginBottom: 16, textTransform: "uppercase", letterSpacing: 0.5 }}>Rifero tradicional</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 16, padding: "22px 24px" }}>
+              <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.85rem", fontWeight: 700, color: "rgba(255,255,255,0.5)", marginBottom: 14, textTransform: "uppercase", letterSpacing: 0.5 }}>Rifero tradicional</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {[
-                  "Comisión sin límite sobre todo lo recaudado, para siempre",
-                  "Los datos de tus colaboradores quedan en manos de un tercero",
-                  "Campaña y marca compartidas con la rifera",
-                  "Cuanto más crecés, más le pagás a otro, sin límite",
+                  "Comisión sin límite, para siempre",
+                  "Tus datos quedan en manos de un tercero",
+                  "Cuanto más crecés, más le pagás a otro",
                 ].map((t) => (
                   <div key={t} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
                     <span style={{ color: "#f87171", fontWeight: 700, fontSize: "0.85rem", marginTop: 1 }}>✕</span>
-                    <span style={{ fontSize: "0.86rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.5 }}>{t}</span>
+                    <span style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.5 }}>{t}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <div style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 16, padding: "24px 26px" }}>
-              <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.9rem", fontWeight: 700, color: GREEN, marginBottom: 16, textTransform: "uppercase", letterSpacing: 0.5 }}>Con Nexo</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            <div style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 16, padding: "22px 24px" }}>
+              <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.85rem", fontWeight: 700, color: GREEN, marginBottom: 14, textTransform: "uppercase", letterSpacing: 0.5 }}>Con Nexo</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {[
-                  "Porcentaje con límite mensual claro, siempre transparente",
-                  "Los datos de tus colaboradores son 100% tuyos, en tu propio panel",
-                  "Tu nombre, tu institución, tu campaña",
-                  "El porcentaje baja con el tiempo, hasta un 10% fijo de forma estable",
+                  "Límite mensual claro, siempre transparente",
+                  "Tus datos son 100% tuyos, en tu propio panel",
+                  "El porcentaje baja con el tiempo",
                 ].map((t) => (
                   <div key={t} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
                     <span style={{ color: GREEN, fontWeight: 700, fontSize: "0.85rem", marginTop: 1 }}>✓</span>
-                    <span style={{ fontSize: "0.86rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.5 }}>{t}</span>
+                    <span style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.5 }}>{t}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-          <div style={{
-            marginTop: 24, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)",
-            borderRadius: 14, padding: "20px 26px", display: "flex", alignItems: "flex-start", gap: 14,
-          }}>
-            <div>
-              <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.92rem", fontWeight: 700, color: "white", marginBottom: 4 }}>
-                Generamos tu propia base de datos para que la sigas usando mucho después
+          <div style={{ display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center", marginTop: 28 }}>
+            {[
+              ["🔒", "La cuenta es siempre de la institución"],
+              ["🔓", "El vecino se da de baja cuando quiere, solo"],
+              ["🛡️", "Misma tecnología que usan miles de negocios"],
+            ].map(([icon, text]) => (
+              <div key={String(text)} style={{ display: "flex", alignItems: "center", gap: 8, maxWidth: 260 }}>
+                <span style={{ fontSize: "1rem" }}>{icon}</span>
+                <span style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.82rem", lineHeight: 1.4 }}>{text}</span>
               </div>
-              <div style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.7 }}>
-                Cada colaborador que se suma queda registrado en tu propio sistema, nombre, contacto,
-                historial de aportes. Esa base es tuya para siempre, y te sirve para mucho más que cobrar:
-                armar campañas de sorteos, convocar a eventos o anunciar novedades, sin depender de nadie.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SEGURIDAD MERCADO PAGO */}
-      <section style={{ padding: "90px 5%", background: "#fafafa" }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <div style={{ display: "inline-block", background: "#eff6ff", color: "#2563eb", padding: "5px 14px", borderRadius: 999, fontSize: "0.8rem", fontWeight: 600, marginBottom: 18, border: "1px solid #bfdbfe" }}>
-              🛡️ Integración con Mercado Pago
-            </div>
-            <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 800, color: "#1a1a1a", marginBottom: 16 }}>
-              Transparencia y seguridad, de punta a punta
-            </h2>
-            <p style={{ color: "#666", fontSize: "1rem", lineHeight: 1.8, maxWidth: 640, margin: "0 auto" }}>
-              Usamos la integración oficial de Mercado Pago para suscripciones recurrentes, la misma
-              tecnología que usan miles de negocios en Argentina.
-            </p>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }} className="pasos-grid">
-            <div style={{ background: "white", borderRadius: 14, padding: "24px 22px", border: "1px solid #eee" }}>
-              <div style={{ fontSize: "1.3rem", marginBottom: 12 }}>👁️</div>
-              <h3 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.92rem", fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>Visibilidad acotada, a propósito</h3>
-              <p style={{ color: "#888", fontSize: "0.85rem", lineHeight: 1.7 }}>
-                Nexo solo consulta los pagos y suscripciones que se generan a través del programa de
-                colaboradores. No accede a ningún otro movimiento de tu cuenta de Mercado Pago, ni falta
-                que hace para que el sistema funcione.
-              </p>
-            </div>
-            <div style={{ background: "white", borderRadius: 14, padding: "24px 22px", border: "1px solid #eee" }}>
-              <div style={{ fontSize: "1.3rem", marginBottom: 12 }}>🔓</div>
-              <h3 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.92rem", fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>El vecino siempre tiene el control</h3>
-              <p style={{ color: "#888", fontSize: "0.85rem", lineHeight: 1.7 }}>
-                Cualquier colaborador puede dar de baja su suscripción cuando quiera, directamente desde su
-                propia cuenta de Mercado Pago, sin trámites, sin depender de nadie de la institución.
-              </p>
-            </div>
-            <div style={{ background: "white", borderRadius: 14, padding: "24px 22px", border: "1px solid #eee" }}>
-              <div style={{ fontSize: "1.3rem", marginBottom: 12 }}>🏦</div>
-              <h3 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.92rem", fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>La cuenta es siempre de la institución</h3>
-              <p style={{ color: "#888", fontSize: "0.85rem", lineHeight: 1.7 }}>
-                Conectás tu propia cuenta oficial de Mercado Pago. El dinero nunca pasa por una cuenta de
-                Crolia ni de un tercero.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -440,7 +343,7 @@ export default function NexoLanding() {
               No es un formulario suelto. Es un sistema completo, probado con pagos reales de punta a punta.
             </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="pasos-grid">
             {MODULOS.map((m, i) => (
               <div key={m.title}
                 onMouseEnter={() => setActiveModulo(i)}
@@ -492,66 +395,62 @@ export default function NexoLanding() {
             </div>
           </div>
 
-          <div style={{ background: "white", borderRadius: 20, padding: 22, boxShadow: "0 30px 80px rgba(0,0,0,0.4)" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-              <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#1a1a1a" }}>Resumen</div>
-              <div style={{ background: "#f5f3f0", color: "#888", padding: "4px 10px", borderRadius: 20, fontSize: "0.65rem", fontWeight: 600 }}>Este mes</div>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 8, marginBottom: 10 }}>
-              {[
-                { label: "Activos", value: "8", color: GREEN },
-                { label: "Altas este mes", value: "2", color: "#3b82f6" },
-                { label: "Neto disponible", value: "$9.876", color: BRAND },
-                { label: "Comisión MP", value: "-$124", color: "#888" },
-              ].map((k) => (
-                <div key={k.label} style={{ background: "#fafafa", borderRadius: 10, padding: "12px", borderLeft: `3px solid ${k.color}` }}>
-                  <div style={{ fontSize: "0.6rem", color: "#888", marginBottom: 3 }}>{k.label}</div>
-                  <div style={{ fontSize: "0.9rem", fontWeight: 800, color: "#1a1a1a" }}>{k.value}</div>
-                </div>
-              ))}
-            </div>
-            <div style={{ background: "#fafafa", borderRadius: 10, padding: "12px", marginTop: 8 }}>
-              <div style={{ fontSize: "0.62rem", color: "#888", marginBottom: 8, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>Colaboradores por estado</div>
-              <div style={{ height: 10, borderRadius: 999, background: "#f0ede8", overflow: "hidden", display: "flex" }}>
-                {[{ w: "67%", c: GREEN }, { w: "25%", c: "#f59e0b" }, { w: "8%", c: "#888" }].map((b, i) => (
-                  <div key={i} style={{ width: b.w, background: b.c, height: "100%" }} />
-                ))}
+          <div style={{ display: "flex", flexDirection: "column", gap: 14, maxWidth: 400, marginLeft: "auto" }}>
+            <div style={{ background: "white", borderRadius: 16, padding: 16, boxShadow: "0 24px 60px rgba(0,0,0,0.4)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: "0.85rem", color: "#1a1a1a" }}>Resumen</div>
+                <div style={{ background: "#f5f3f0", color: "#888", padding: "3px 9px", borderRadius: 20, fontSize: "0.6rem", fontWeight: 600 }}>Este mes</div>
               </div>
-              <div style={{ display: "flex", gap: 10, marginTop: 6, flexWrap: "wrap" }}>
-                {[["Activo", GREEN], ["Pend. pago", "#f59e0b"], ["Baja", "#888"]].map(([l, c]) => (
-                  <div key={l as string} style={{ display: "flex", alignItems: "center", gap: 3 }}>
-                    <div style={{ width: 6, height: 6, borderRadius: "50%", background: c as string }} />
-                    <span style={{ fontSize: "0.58rem", color: "#666" }}>{l}</span>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 7, marginBottom: 8 }}>
+                {[
+                  { label: "Activos", value: "8", color: GREEN },
+                  { label: "Altas este mes", value: "2", color: "#3b82f6" },
+                  { label: "Neto disponible", value: "$9.876", color: BRAND },
+                  { label: "Comisión MP", value: "-$124", color: "#888" },
+                ].map((k) => (
+                  <div key={k.label} style={{ background: "#fafafa", borderRadius: 8, padding: "10px", borderLeft: `3px solid ${k.color}` }}>
+                    <div style={{ fontSize: "0.56rem", color: "#888", marginBottom: 2 }}>{k.label}</div>
+                    <div style={{ fontSize: "0.8rem", fontWeight: 800, color: "#1a1a1a" }}>{k.value}</div>
                   </div>
                 ))}
               </div>
+              <div style={{ background: "#fafafa", borderRadius: 8, padding: "10px" }}>
+                <div style={{ height: 8, borderRadius: 999, background: "#f0ede8", overflow: "hidden", display: "flex" }}>
+                  {[{ w: "67%", c: GREEN }, { w: "25%", c: "#f59e0b" }, { w: "8%", c: "#888" }].map((b, i) => (
+                    <div key={i} style={{ width: b.w, background: b.c, height: "100%" }} />
+                  ))}
+                </div>
+                <div style={{ display: "flex", gap: 8, marginTop: 5, flexWrap: "wrap" }}>
+                  {[["Activo", GREEN], ["Pend. pago", "#f59e0b"], ["Baja", "#888"]].map(([l, c]) => (
+                    <div key={l as string} style={{ display: "flex", alignItems: "center", gap: 3 }}>
+                      <div style={{ width: 5, height: 5, borderRadius: "50%", background: c as string }} />
+                      <span style={{ fontSize: "0.54rem", color: "#666" }}>{l}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* DIFUSIÓN */}
-      <section style={{ padding: "90px 5%", background: "#fff" }}>
-        <div style={{ maxWidth: 880, margin: "0 auto", textAlign: "center" }}>
-          <div style={{ display: "inline-block", background: "#eff6ff", color: "#2563eb", padding: "5px 14px", borderRadius: 999, fontSize: "0.8rem", fontWeight: 600, marginBottom: 18, border: "1px solid #bfdbfe" }}>
-            📣 Difusión
-          </div>
-          <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 800, color: "#1a1a1a", marginBottom: 16 }}>
-            La difusión también te la facilitamos
-          </h2>
-          <p style={{ color: "#666", fontSize: "1rem", lineHeight: 1.8, maxWidth: 620, margin: "0 auto 28px" }}>
-            Instagram y Facebook te dan el alcance, pero no cobran ni hacen seguimiento por vos. Nexo es el
-            complemento que convierte ese alcance en colaboradores reales: con un posteo compartiendo el
-            link de inscripción, la campaña ya tiene a dónde llevar a la gente, una página pensada para
-            convertir, con cobro automático y sin que nadie tenga que hacer seguimiento manual después. No
-            reemplaza tus redes, las potencia.
-          </p>
-          <div style={{ background: "#fafafa", border: "1px dashed #ddd", borderRadius: 14, padding: "20px 26px", maxWidth: 560, margin: "0 auto", textAlign: "left" }}>
-            <div style={{ fontSize: "0.9rem", color: "#1a1a1a", fontWeight: 700, marginBottom: 6 }}>¿No tenés quién arme esos posteos?</div>
-            <div style={{ fontSize: "0.85rem", color: "#666", lineHeight: 1.7 }}>
-              El plan <strong>Sistema + Edición</strong> incluye justamente eso: te pedimos las fotos y
-              videos, armamos los guiones, editamos el contenido del mes y te lo entregamos con un calendario
-              de publicación, ver <a href="#precios" style={{ color: BRAND }}>precios</a>.
+            <div style={{ background: "white", borderRadius: 16, padding: 16, boxShadow: "0 24px 60px rgba(0,0,0,0.4)" }}>
+              <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: "0.85rem", color: "#1a1a1a", marginBottom: 10 }}>Colaboradores</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {[
+                  { nombre: "Milagros Perez", estado: "Activo", color: GREEN, monto: "$20.000" },
+                  { nombre: "Pablo Nuñez", estado: "Activo", color: GREEN, monto: "$20.000" },
+                  { nombre: "Mónica Uranga", estado: "Pend. pago", color: "#f59e0b", monto: "$5.000" },
+                ].map((c) => (
+                  <div key={c.nombre} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#fafafa", borderRadius: 8, padding: "8px 10px" }}>
+                    <div>
+                      <div style={{ fontSize: "0.72rem", fontWeight: 700, color: "#1a1a1a" }}>{c.nombre}</div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>
+                        <div style={{ width: 5, height: 5, borderRadius: "50%", background: c.color }} />
+                        <span style={{ fontSize: "0.6rem", color: "#888" }}>{c.estado}</span>
+                      </div>
+                    </div>
+                    <div style={{ fontSize: "0.72rem", fontWeight: 700, color: "#1a1a1a" }}>{c.monto}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -651,11 +550,8 @@ export default function NexoLanding() {
           <div style={{ height: 1, background: "#eee", margin: "80px 0 50px" }} />
 
           <div style={{ textAlign: "center", marginBottom: 36 }}>
-            <div style={{ display: "inline-block", background: "#dcfce7", color: "#16a34a", padding: "5px 14px", borderRadius: 999, fontSize: "0.8rem", fontWeight: 600, marginBottom: 18, border: "1px solid #bbf7d0" }}>
-              Se activa solo, no hace falta pedirlo
-            </div>
             <h3 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.4rem, 2.6vw, 1.8rem)", fontWeight: 800, maxWidth: 700, margin: "0 auto" }}>
-              ¿Qué pasa cuando tu institución logra crecer con ingresos fuertes a lo largo del tiempo?
+              Tu institución crece de forma sostenida, y Nexo pasa a ser solo tu sistema de cobro
             </h3>
           </div>
 
@@ -744,229 +640,59 @@ export default function NexoLanding() {
         </div>
       </section>
 
-      {/* ESTO ES SOLO EL PRINCIPIO */}
-      <section style={{ padding: "100px 5%", background: "#fff" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 56 }}>
-            <div style={{ display: "inline-block", background: "#f5f3ff", color: "#7c3aed", padding: "6px 18px", borderRadius: 999, fontSize: "0.82rem", fontWeight: 600, marginBottom: 16, border: "1px solid #ddd6fe" }}>
-              Más allá de Nexo
-            </div>
-            <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 800, color: "#1a1a1a", marginBottom: 16 }}>
-              Esto es solo el principio
-            </h2>
-            <p style={{ color: "#888", fontSize: "1.05rem", maxWidth: 560, margin: "0 auto" }}>
-              Nexo es un ejemplo de lo que hacemos: sistemas y automatizaciones a medida para instituciones
-              como la tuya. Para una institución, además del cobro de colaboradores, también automatizamos:
-            </p>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 20 }}>
-            {EXTRA.map((m) => (
-              <div key={m.title} style={{ background: "#fafafa", borderLeft: `3px solid ${m.color}`, padding: "20px 22px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-                  <span style={{ fontSize: "1.05rem" }}>{m.icon}</span>
-                  <h3 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.95rem", fontWeight: 700, color: "#1a1a1a" }}>{m.title}</h3>
-                </div>
-                <p style={{ color: "#888", fontSize: "0.83rem", lineHeight: 1.6 }}>{m.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ marginTop: 28, background: "#f5f3ff", border: "1px dashed #ddd6fe", borderRadius: 14, padding: "22px 26px", maxWidth: 760, marginLeft: "auto", marginRight: "auto", textAlign: "center" }}>
-            <div style={{ fontSize: "0.92rem", color: "#4c1d95", fontWeight: 700, marginBottom: 6 }}>
-              ¿Tenés otra idea o necesidad puntual que no está en esta lista?
-            </div>
-            <div style={{ fontSize: "0.85rem", color: "#6d28d9", lineHeight: 1.7 }}>
-              A eso nos dedicamos en Crolia: convertir cualquier idea o necesidad de tu institución en un
-              sistema que funcione solo, automático. Si se puede pensar, lo podemos construir, contanos qué
-              necesitás.
-            </div>
-          </div>
-
-          {/* MOCKUP CENTRO DE COMANDO */}
-          <div style={{
-            marginTop: 40, background: `linear-gradient(160deg, #0f172a 0%, #1e1b2e 100%)`,
-            borderRadius: 20, overflow: "hidden", boxShadow: "0 30px 80px rgba(0,0,0,0.3)",
-          }}>
-            <div style={{ background: "rgba(255,255,255,0.05)", padding: "10px 18px", display: "flex", alignItems: "center", gap: 10, borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-              <div style={{ display: "flex", gap: 6 }}>
-                {["#ff5f57", "#febc2e", "#28c840"].map((c) => <div key={c} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
-              </div>
-              <div style={{ flex: 1, background: "rgba(255,255,255,0.06)", borderRadius: 6, height: 22, display: "flex", alignItems: "center", paddingLeft: 10 }}>
-                <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.72rem" }}>nexo.tucuartel.org.ar/comando</span>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 999, padding: "3px 10px" }}>
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: GREEN, boxShadow: `0 0 6px ${GREEN}` }} />
-                <span style={{ color: GREEN, fontSize: "0.65rem", fontWeight: 700 }}>EN VIVO</span>
-              </div>
-            </div>
-
-            <div style={{ padding: "22px", display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 18 }} className="stack-mobile">
-              {/* Mini mapa estilo Google Maps */}
-              <div style={{ position: "relative", borderRadius: 14, minHeight: 240, overflow: "hidden" }}>
-                <svg viewBox="0 0 400 240" style={{ display: "block", width: "100%", height: 240 }}>
-                  <rect width="400" height="240" fill="#e8e6e1" />
-
-                  {/* manzanas con edificios */}
-                  {[
-                    [20, 15, 24, 16], [70, 60, 20, 14], [100, 15, 16, 18], [180, 55, 26, 16],
-                    [250, 110, 18, 20], [290, 150, 22, 14], [20, 170, 20, 16], [100, 165, 16, 22],
-                    [190, 160, 20, 16], [360, 60, 16, 20], [360, 170, 18, 16], [20, 105, 16, 18],
-                  ].map(([bx, by, bw, bh], i) => (
-                    <rect key={i} x={bx} y={by} width={bw} height={bh} rx="1.5" fill="#d8d4cb" />
-                  ))}
-
-                  {/* parque */}
-                  <rect x="300" y="15" width="85" height="65" rx="6" fill="#c9e4ca" />
-                  <circle cx="320" cy="35" r="7" fill="#a9d1ab" />
-                  <circle cx="355" cy="55" r="9" fill="#a9d1ab" />
-                  <circle cx="335" cy="65" r="6" fill="#a9d1ab" />
-
-                  {/* calles */}
-                  {[40, 95, 150, 205].map((y) => (
-                    <rect key={`h${y}`} x="0" y={y - 3} width="400" height="6" fill="#fff" />
-                  ))}
-                  {[60, 150, 240, 330].map((x) => (
-                    <rect key={`v${x}`} x={x - 3} y="0" width="6" height="240" fill="#fff" />
-                  ))}
-
-                  {/* ruta activa del cuartel al incendio */}
-                  <path d="M 60,150 L 60,95 L 330,95 L 330,70" stroke="white" strokeWidth="7" fill="none" strokeLinecap="round" />
-                  <path d="M 60,150 L 60,95 L 330,95 L 330,70" stroke="#4285F4" strokeWidth="4" fill="none" strokeLinecap="round" strokeDasharray="1 10" />
-
-                  {/* pin cuartel */}
-                  <g transform="translate(60,150) scale(1.5) translate(-12,-21)">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill={BRAND} stroke="white" strokeWidth="1.2" />
-                    <circle cx="12" cy="9" r="3.4" fill="white" />
-                  </g>
-
-                  {/* foco del incendio */}
-                  <circle cx="340" cy="58" r="13" fill="#ef4444" opacity="0.18" />
-                  <g transform="translate(340,58)">
-                    <circle r="10" fill="white" stroke="#ef4444" strokeWidth="3" />
-                    <text textAnchor="middle" dy="4" fontSize="11">🔥</text>
-                  </g>
-
-                  {/* unidades: 1 en el lugar, 2 en camino */}
-                  <g transform="translate(330,70)">
-                    <circle r="11" fill="white" stroke="#ef4444" strokeWidth="3.5" />
-                    <text textAnchor="middle" dy="4" fontSize="10">🚒</text>
-                  </g>
-                  {[
-                    { x: 150, y: 95 },
-                    { x: 60, y: 110 },
-                  ].map((u, i) => (
-                    <g key={i} transform={`translate(${u.x},${u.y})`}>
-                      <circle r="10" fill="white" stroke="#4285F4" strokeWidth="3" />
-                      <text textAnchor="middle" dy="4" fontSize="9">🚒</text>
-                    </g>
-                  ))}
-                </svg>
-
-                {/* etiquetas */}
-                {[
-                  { left: "15%", top: "62.5%", label: "Cuartel Central" },
-                  { left: "78%", top: "29.2%", label: "Móvil A-7 · en el lugar" },
-                  { left: "37.5%", top: "39.6%", label: "Móvil A-3 · en camino" },
-                  { left: "15%", top: "45.8%", label: "Móvil A-10 · en camino" },
-                ].map((l) => (
-                  <div key={l.label} style={{
-                    position: "absolute", left: l.left, top: l.top, transform: "translate(-50%,0)",
-                    fontSize: "0.56rem", fontWeight: 700, color: "#1a1a1a", whiteSpace: "nowrap",
-                    background: "rgba(255,255,255,0.9)", borderRadius: 4, padding: "1px 5px",
-                    boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
-                  }}>{l.label}</div>
-                ))}
-              </div>
-
-              {/* KPIs */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "12px 14px" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-                    <span style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.55)" }}>Confirmados, convocatoria WhatsApp</span>
-                    <span style={{ fontSize: "0.78rem", fontWeight: 800, color: "white" }}>14/22</span>
-                  </div>
-                  <div style={{ height: 6, borderRadius: 999, background: "rgba(255,255,255,0.1)", overflow: "hidden" }}>
-                    <div style={{ width: "64%", height: "100%", background: GREEN }} />
-                  </div>
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "10px 14px", borderLeft: `3px solid ${BRAND}` }}>
-                    <div style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.5)", marginBottom: 3 }}>Choferes</div>
-                    <div style={{ fontSize: "1rem", fontWeight: 800, color: "white" }}>3</div>
-                  </div>
-                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "10px 14px", borderLeft: "3px solid #3b82f6" }}>
-                    <div style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.5)", marginBottom: 3 }}>Oficiales</div>
-                    <div style={{ fontSize: "1rem", fontWeight: 800, color: "white" }}>2</div>
-                  </div>
-                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "10px 14px", borderLeft: "3px solid #8b5cf6" }}>
-                    <div style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.5)", marginBottom: 3 }}>Suboficiales</div>
-                    <div style={{ fontSize: "1rem", fontWeight: 800, color: "white" }}>4</div>
-                  </div>
-                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "10px 14px", borderLeft: `3px solid ${GREEN}` }}>
-                    <div style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.5)", marginBottom: 3 }}>Bomberos</div>
-                    <div style={{ fontSize: "1rem", fontWeight: 800, color: "white" }}>5</div>
-                  </div>
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "10px 14px", borderLeft: "3px solid #f59e0b" }}>
-                    <div style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.5)", marginBottom: 3 }}>En servicio ahora</div>
-                    <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "white" }}>3</div>
-                  </div>
-                  <div style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "10px 14px", borderLeft: "3px solid #9aa0a6" }}>
-                    <div style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.5)", marginBottom: 3 }}>Unidades disponibles</div>
-                    <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "white" }}>1/4</div>
-                  </div>
-                </div>
-                <div style={{ background: "rgba(245,158,11,0.1)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: 10, padding: "10px 12px", fontSize: "0.65rem", color: "#fbbf24", display: "flex", alignItems: "center", gap: 6 }}>
-                  🚨 Móvil A-7 en el lugar · A-3 y A-10 en camino; incendio estructural, Av. Rivadavia 1200
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* QUIENES SOMOS */}
-      <section style={{ padding: "90px 5%", background: "#fff" }}>
+      {/* MÁS ALLÁ DE NEXO + QUIENES SOMOS, un solo bloque compacto */}
+      <section style={{ padding: "40px 5%", background: "#fff", borderTop: "1px solid #f0ede8" }}>
         <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
-          <div style={{ display: "inline-block", background: "#fef2f2", color: BRAND, padding: "5px 14px", borderRadius: 999, fontSize: "0.8rem", fontWeight: 600, marginBottom: 18, border: "1px solid #fecaca" }}>
-            ¿Quiénes somos?
+          <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "1.1rem", fontWeight: 800, color: "#1a1a1a", marginBottom: 8 }}>
+            Nexo es solo un ejemplo de lo que hacemos
           </div>
-          <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 800, color: "#1a1a1a", marginBottom: 16 }}>
-            Somos Crolia
-          </h2>
-          <p style={{ color: "#666", fontSize: "1rem", lineHeight: 1.8, maxWidth: 620, margin: "0 auto 24px" }}>
-            Crolia es un estudio de consultoría en inteligencia artificial y automatización. Construimos
-            agentes de IA, sistemas de gestión y automatizaciones a medida para empresas e instituciones en
-            Argentina. Nexo es uno de nuestros productos, pensado específicamente para cuarteles de bomberos
-            voluntarios.
+          <p style={{ color: "#888", fontSize: "0.9rem", lineHeight: 1.7, maxWidth: 560, margin: "0 auto 14px" }}>
+            En Crolia también automatizamos convocatorias por WhatsApp, rastreo de móviles, gestión de
+            personal y control de materiales. Si tenés otra necesidad para tu institución,{" "}
+            <a href={WA_LINK} target="_blank" rel="noreferrer" style={{ color: BRAND, fontWeight: 700 }}>contanos</a>.
           </p>
-          <a href="https://www.crolia.com.ar" target="_blank" rel="noreferrer" style={{
-            color: BRAND, fontWeight: 700, fontSize: "0.95rem", textDecoration: "none",
-          }}>
-            Conocé más sobre lo que hacemos en www.crolia.com.ar →
-          </a>
+          <p style={{ color: "#999", fontSize: "0.82rem" }}>
+            Nexo es un producto de <strong style={{ color: "#555" }}>Crolia</strong>, estudio de IA y
+            automatización.{" "}
+            <a href="https://www.crolia.com.ar" target="_blank" rel="noreferrer" style={{ color: BRAND, fontWeight: 600 }}>
+              Conocé más →
+            </a>
+          </p>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section style={{ padding: "100px 5%", background: "#fafafa" }}>
+      {/* FAQ, acordeón colapsado */}
+      <section style={{ padding: "70px 5%", background: "#fafafa" }}>
         <div style={{ maxWidth: 760, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 48 }}>
-            <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 800, color: "#1a1a1a", marginBottom: 16 }}>
+          <div style={{ textAlign: "center", marginBottom: 32 }}>
+            <h2 style={{ fontFamily: "'Oswald', sans-serif", fontSize: "clamp(1.7rem, 3.2vw, 2.3rem)", fontWeight: 800, color: "#1a1a1a", marginBottom: 10 }}>
               Preguntas frecuentes
             </h2>
-            <p style={{ color: "#888", fontSize: "1.05rem" }}>
+            <p style={{ color: "#888", fontSize: "0.95rem" }}>
               Lo que suele preguntar un Consejo Directivo antes de decidir.
             </p>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            {FAQS.map((f) => (
-              <div key={f.q} style={{ background: "white", border: "1px solid #eee", borderRadius: 14, padding: "20px 24px" }}>
-                <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.98rem", fontWeight: 700, color: "#1a1a1a", marginBottom: 8 }}>{f.q}</div>
-                <div style={{ fontSize: "0.88rem", color: "#666", lineHeight: 1.7 }}>{f.a}</div>
-              </div>
-            ))}
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {FAQS.map((f, i) => {
+              const abierta = faqAbierta === i;
+              return (
+                <div key={f.q} style={{ background: "white", border: "1px solid #eee", borderRadius: 12, overflow: "hidden" }}>
+                  <button
+                    onClick={() => setFaqAbierta(abierta ? null : i)}
+                    style={{
+                      width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer",
+                      padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12,
+                    }}
+                  >
+                    <span style={{ fontFamily: "'Oswald', sans-serif", fontSize: "0.92rem", fontWeight: 700, color: "#1a1a1a" }}>{f.q}</span>
+                    <span style={{ color: BRAND, fontSize: "1.1rem", fontWeight: 700, flexShrink: 0 }}>{abierta ? "−" : "+"}</span>
+                  </button>
+                  {abierta && (
+                    <div style={{ padding: "0 20px 18px", fontSize: "0.86rem", color: "#666", lineHeight: 1.7 }}>{f.a}</div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1014,6 +740,25 @@ export default function NexoLanding() {
         </div>
       </footer>
 
+      {/* BOTÓN FLOTANTE DE WHATSAPP, siempre presente */}
+      <a
+        href={WA_LINK}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Escribinos por WhatsApp"
+        style={{
+          position: "fixed", bottom: 24, right: 24, zIndex: 200,
+          width: 58, height: 58, borderRadius: "50%",
+          background: GREEN, display: "flex", alignItems: "center", justifyContent: "center",
+          boxShadow: "0 8px 24px rgba(34,197,94,0.45)",
+        }}
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.116 1.528 5.845L.057 23.428l5.736-1.504A11.949 11.949 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.51-5.166-1.4l-.371-.22-3.4.893.907-3.32-.242-.383A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+        </svg>
+      </a>
+
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1024,6 +769,10 @@ export default function NexoLanding() {
           .hero-grid, .stack-mobile { grid-template-columns: 1fr !important; }
           .pasos-grid { grid-template-columns: 1fr 1fr !important; }
           .pasos-line { display: none; }
+          .nav-link-desktop { display: none !important; }
+        }
+        @media (max-width: 420px) {
+          .nav-by-crolia { display: none !important; }
         }
       `}</style>
     </div>
