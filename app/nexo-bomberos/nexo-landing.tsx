@@ -736,7 +736,10 @@ export default function NexoLanding() {
           <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.8rem" }}>by Crolia</span>
         </div>
         <div style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.78rem" }}>
-          © 2026 Crolia · crolia.com.ar
+          © 2026 Crolia ·{" "}
+          <a href="https://www.crolia.com.ar" target="_blank" rel="noreferrer" style={{ color: "rgba(255,255,255,0.3)" }}>
+            crolia.com.ar
+          </a>
         </div>
       </footer>
 
