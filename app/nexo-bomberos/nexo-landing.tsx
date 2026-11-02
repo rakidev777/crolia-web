@@ -36,9 +36,9 @@ const PLANES = [
   },
   {
     nombre: "Sistema + Edición",
-    precio: "35%",
+    precio: "30%",
     explicacion: "Es lo que Nexo cobra sobre lo que tu institución recauda cada mes a través de los colaboradores.",
-    tope: "Tope mensual de comisión: $2.800.000, sin importar cuánto sea tu recaudación total.",
+    tope: "Tope mensual de comisión: $2.400.000, sin importar cuánto sea tu recaudación total.",
     limite: "Superado ese tope, Nexo no comisiona más: todo lo que sigue queda 100% para tu institución.",
     destacado: true,
     features: [
@@ -557,7 +557,7 @@ export default function NexoLanding() {
 
           <div style={{ maxWidth: 560, margin: "0 auto 50px", background: "#fafafa", border: "1px solid #eee", borderRadius: 16, padding: "28px 26px" }}>
             <div style={{ fontSize: "0.85rem", color: "#444", lineHeight: 1.6, marginBottom: 18 }}>
-              Nexo cobra 15% o 35% de tu recaudación mensual, según el plan elegido, cada uno con su propio tope.
+              Nexo cobra 15% o 30% de tu recaudación mensual, según el plan elegido, cada uno con su propio tope.
             </div>
 
             <div style={{ fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: 0.5, color: "#aaa", fontWeight: 700, marginBottom: 10 }}>
