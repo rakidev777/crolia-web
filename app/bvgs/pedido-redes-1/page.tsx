@@ -113,7 +113,7 @@ const REELS: Reel[] = [
     fondo: "Parado frente al camión o la pared del cuartel, que se lea el logo si entra en cuadro. Luz de día, sin gente ni autos circulando atrás.",
     texto: "Detrás de cada salida hay una familia que nos llama, un vecino que no sabe qué hacer, un animal que quedó atrapado, todos necesitan de nuestra ayuda.\n\nY detrás de nosotros, para poder llegar, hace falta equipamiento en condiciones, para cuidarte y cuidarnos, unidades que funcionen y gente capacitada que sepa cómo actuar en el momento justo.\n\nEso no se sostiene solo. Se sostiene con vecinos como vos.\n\nSumate como Colaborador Oficial de Bomberos Voluntarios de San Miguel. El link está en la bio.",
     planos: "Mientras se repite el texto en los distintos ángulos, en alguna toma dejá que la mirada baje un segundo o se desvíe al costado al decir \"eso no se sostiene solo\" — mirar fijo a cámara todo el tiempo se siente impostado.",
-    comoGrabar: "Es la frase más larga de todas, así que conviene grabarla completa (sin cortar en el medio) al menos 3 veces: 1) de frente, quieto, a 1,5m; 2) un plano más cerrado desde el pecho, quieto; 3) caminando despacio hacia la cámara mientras la dice, arrancando a unos 3 metros. Si en algún intento se traba o duda, no importa — quedan las otras dos para elegir en edición, y además podés cortar entre los tres planos a mitad de frase sin que se note el salto de audio.",
+    comoGrabar: "La voz se graba en vivo mientras pasa una acción real, no se dobla después. Como la frase es larga, repetila completa 2-3 veces, cada vez sobre algo distinto: una vez caminando hacia la cámara con el camión de fondo; otra mientras se pone o se ajusta el equipo de protección, mirando a cámara de a ratos; y si se puede, una tercera sosteniendo el micrófono con una pértiga/selfie stick para un plano más dinámico. Elegís la mejor en edición, o cortás entre ellas.",
     linkEjemplo: "https://www.instagram.com/reels/DfiP3tSu-BA/",
   },
   {
@@ -126,7 +126,7 @@ const REELS: Reel[] = [
     fondo: "Frente al camión o al box de equipamiento, bien iluminado.",
     texto: "Desde enero de 2026, nuestro cuartel de bomberos voluntarios recibió [X] llamados de emergencia.\n[X] accidentes. [X] incendios. [X] rescates de animales. [X] emergencias especiales. [sumar las categorías reales que tengamos].\n\nCada una de esas [X] veces, ahí estuvimos para ayudarte. Las 24 horas, los 365 días del año.\n\nPara mejorar nuestro servicio y estar cada vez más preparados necesitamos que te sumes como Colaborador Oficial. Tu aporte mensual hace posible que nos capacitemos y podamos mantener nuestros materiales y unidades móviles.\n\nSumate como Colaborador Oficial. No nos des la espalda y ayudanos a que la próxima vez que escuches la sirena, seas vos quien también está ayudando a esa familia que necesita ayuda.",
     planos: "Mientras se dice cada número, cortar a una imagen relacionada: accidentes → unidad lista para salir; incendios → equipo de incendio; rescate de animales → algo relacionado (aunque sea de archivo); emergencias especiales → equipo especial. Cuantas más tomas de apoyo por categoría, mejor se arma el corte.",
-    comoGrabar: "⚠️ Antes de filmar esta, necesitamos los números reales: total de llamados desde enero 2026 y el desglose por tipo (accidentes, incendios, animales, especiales, lo que tengan registrado). Grabarlo con las X sin completar no sirve — un número inventado o aproximado en un video institucional resta credibilidad si alguien lo cuestiona. Una vez con los datos reales, grabá el texto completo 2-3 veces desde ángulos distintos (de frente quieto, 3/4 quieto, y una vez caminando) igual que en los demás guiones, para tener margen en la edición.",
+    comoGrabar: "⚠️ Antes de filmar esta, necesitamos los números reales: total de llamados desde enero 2026 y el desglose por tipo (accidentes, incendios, animales, especiales, lo que tengan registrado). Grabarlo con las X sin completar no sirve — un número inventado o aproximado en un video institucional resta credibilidad si alguien lo cuestiona. Una vez con los datos, como el texto es largo conviene partirlo en 2-3 bloques y grabar cada uno en vivo sobre una acción distinta: los números generales con el camión saliendo a un servicio o de fondo; \"para mejorar nuestro servicio...\" mientras se revisa o guarda equipamiento, mirando a cámara; y el cierre (\"no nos des la espalda\") caminando hacia la cámara. Grabando por bloques, en vivo, no hace falta repetir el monólogo entero cada vez.",
     linkEjemplo: "https://www.instagram.com/reel/DffanncRhc2/",
   },
   {
@@ -139,7 +139,7 @@ const REELS: Reel[] = [
     fondo: "Escena 1: cualquier calle o puerta reconocible de San Miguel. Escenas 2-3: el puesto de guardia/teléfono del cuartel. Escena 4: el box con el camión saliendo.",
     texto: "Escena 1: Un bombero (vestido de calle) tocando timbre casa por casa, pidiendo colaborar con $5.000 por mes. Un vecino abre la puerta, lo mira y dice: \"No, gracias\" — y cierra. (O alguien caminando se lo intenta interceptar y sigue caminando.)\n\nEscena 2 (corte): Sonido de teléfono. Alguien atiende en el cuartel: \"Bomberos Voluntarios, buenas tardes.\" Del otro lado, gritando: \"¡Se está prendiendo fuego mi casa, vengan urgente!\"\n\nEscena 3: El bombero que atendió, mirando a cámara, serio: \"Nosotros nunca te vamos a decir que no.\"\n\nEscena 4: El camión saliendo del cuartel, sirena a todo volumen.\n\nCierre, texto en pantalla: \"Nosotros nunca decimos que no. Esta vez, necesitamos que no nos des la espalda.\" → Sumate como Colaborador Oficial.",
     planos: "Escena 1 necesita 2-3 intentos para que el \"no, gracias\" se vea natural y no leído — probar la toma caminando (el vecino lo esquiva sin frenar) y la toma parado en la puerta, y quedarse con la que salga más creíble. Escena 2 es solo audio + un plano del teléfono o de la mano atendiendo, no hace falta que se vea la cara de quien llama.",
-    comoGrabar: "Esta NO es \"una persona habla a cámara\": es un sketch de varias escenas cortas que se editan intercaladas, así que grabá cada escena por separado y repetila las veces que haga falta hasta que la actuación salga creíble (sobre todo la del \"no, gracias\"). La frase clave, \"Nosotros nunca te vamos a decir que no\", es la más importante del video — grabala al menos 3 veces: parado quieto de frente, en un primer plano más cerrado, y una vez caminando hacia la cámara, para tener opciones de cuál usar en el cierre. El audio del teléfono y el grito de \"se está prendiendo fuego mi casa\" se puede grabar aparte y mezclarlo después, no hace falta sincronizarlo en vivo.",
+    comoGrabar: "Es un sketch de varias escenas cortas que se editan intercaladas — grabá cada escena por separado, con el audio real del momento (no doblado después), y repetila las veces que haga falta hasta que la actuación salga creíble (sobre todo la del \"no, gracias\"). La frase clave, \"Nosotros nunca te vamos a decir que no\", grabala en vivo al menos 2 veces actuando la escena: una parado serio mirando a cámara, y otra caminando hacia la cámara justo después de colgar el teléfono, para tener opciones de cuál usar en el cierre.",
     linkEjemplo: "https://www.instagram.com/reel/DffanncRhc2/",
   },
   {
@@ -152,7 +152,7 @@ const REELS: Reel[] = [
     fondo: "Frente al destacamento o dentro del box, con algo de equipamiento visible.",
     texto: "Ya somos 30 colaboradores oficiales que mensualmente apoyan a nuestro cuartel de bomberos voluntarios. Treinta vecinos que dijeron \"esto me importa\" y se sumaron con un aporte mensual.\n\nNo importa el monto. Importa que estés.\n\nCon lo que aportás, compramos equipos, mantenemos los vehículos y seguimos capacitándonos. Y todos los meses participás por un sorteo entre los colaboradores que decidieron sumarse a esta causa.\n\nAyudanos a seguir ayudando a nuestra comunidad. No nos des la espalda.\n\nSumate acá 👇",
     planos: "Cortar a tomas de equipamiento o mantenimiento mientras dice \"compramos equipos, mantenemos los vehículos\", y a una toma del cuartel o del grupo mientras dice \"ayudanos a seguir ayudando a nuestra comunidad\".",
-    comoGrabar: "Grabá el texto completo 3 veces desde ángulos distintos: de frente quieto, 3/4 quieto, y una vez caminando lentamente de costado frente a cámara (de costado, no hacia adelante, para variar el tipo de movimiento respecto a los otros reels). Dejá que se le note una sonrisa natural al decir \"no importa el monto, importa que estés\" — no hace falta tono serio todo el video, este es el más amigable de todos.",
+    comoGrabar: "Grabá la voz en vivo mientras hace algo, no parado fijo todo el video. Repetí el texto completo 2-3 veces, cada vez sobre una acción distinta: caminando por el cuartel mirando a cámara; haciendo mantenimiento o revisando equipamiento mientras habla de a ratos a cámara; y cerca del camión o la unidad. La sonrisa natural al decir \"no importa el monto, importa que estés\" sale mejor si la dice haciendo algo, no parado fijo — este es el más amigable de todos.",
     linkEjemplo: "https://www.facebook.com/reel/1053952053844300",
   },
   {
@@ -165,7 +165,7 @@ const REELS: Reel[] = [
     fondo: "Un lugar cotidiano reconocible de San Miguel. Que NO sea el cuartel.",
     texto: "Yo me sumé como Colaborador Oficial hace [tiempo]. No porque tenga plata de sobra, sino porque un día pensé: si algún día les toca venir a mi casa, quiero que puedan llegar bien equipados.\n\nEs un aporte chico todos los meses. Y la verdad, ni lo siento.\n\nSi todavía no te sumaste, hacelo. El cuartel es de todos nosotros.",
     planos: "Cierre con texto en pantalla: \"Sumate como Colaborador Oficial\" + el link.",
-    comoGrabar: "Antes de grabar, preguntale a la persona hace cuánto tiempo es colaborador para completar el \"[tiempo]\" con un dato real (\"hace 8 meses\", \"desde marzo\") — suena mucho más genuino que dejarlo genérico. Grabalo parado, quieto, 2 veces: una de frente y otra 3/4, repitiendo el texto completo las dos veces. Si a la persona le sale natural, una tercera toma caminando por el lugar mientras habla le suma espontaneidad, pero no es obligatoria — mejor dos tomas quietas bien hechas que una caminando forzada.",
+    comoGrabar: "Antes de grabar, preguntale a la persona hace cuánto tiempo es colaborador para completar el \"[tiempo]\" con un dato real (\"hace 8 meses\", \"desde marzo\") — suena mucho más genuino que dejarlo genérico. Grabá la voz en vivo mientras camina por su casa o su local haciendo algo cotidiano, no parada fija mirando a cámara todo el video — se siente mucho más natural. Repetí el texto completo 2 veces, desde ángulos distintos (de frente y 3/4), para tener opciones en edición.",
   },
   {
     titulo: "\"Cuando nos necesitás, estamos\"",
@@ -177,7 +177,7 @@ const REELS: Reel[] = [
     fondo: "Parado a 1-1,5m de la pared del cuartel o frente al camión, de forma que se lea el logo si entra en cuadro. Nada de autos pasando atrás ni gente circulando.",
     texto: "Cuando alguien de San Miguel nos necesita, tenemos que estar preparados. Somos bomberos voluntarios — nadie de nosotros cobra un sueldo por esto. Para eso hacen falta capacitación, equipamiento y unidades en condiciones. Hoy te invitamos a ser parte: con un aporte mensual podés ayudar a sostener nuestro cuartel. Sumate como Colaborador Oficial. El enlace está en nuestro perfil.",
     planos: "Primer plano de un bombero · preparación del equipo · camión en el cuartel · cierre mirando a cámara.",
-    comoGrabar: "Es un plano estático, no hace falta moverse. Repetí el texto completo 3 veces: 1) de frente, a 1,5m, quieto; 2) un primer plano más cerrado (desde el pecho), quieto; 3) la misma frase pero empezando de perfil y girando la cabeza hacia cámara a mitad de frase. Son recursos para poder cortar entre planos en la edición sin que se note el salto.",
+    comoGrabar: "Grabá la voz en vivo mientras pasa una acción real, no la dobles después. Repetí el texto completo 2-3 veces, cada vez sobre algo distinto: una vez caminando hacia el camión mientras habla; otra ajustándose el equipo o cerrando un bolso de guardia, mirando a cámara de a ratos; y si se puede, una con el micrófono en una pértiga para un plano más dinámico.",
   },
   {
     titulo: "\"¿Para qué sirve tu aporte?\"",
@@ -189,7 +189,7 @@ const REELS: Reel[] = [
     fondo: "Dentro del box/garage, con la unidad o la mesa de herramientas de fondo, bien iluminado (luz del garage encendida + puerta abierta si hay luz natural).",
     texto: "Detrás de cada salida hay mucho trabajo previo: revisar equipos, mantener las unidades y capacitarnos. Somos bomberos voluntarios, no cobramos un sueldo por estar acá — por eso tu aporte mensual ayuda a sostener ese trabajo cotidiano. Queremos sumar a más vecinos a esta red de colaboración. Entrá al enlace y elegí el aporte que esté a tu alcance.",
     planos: "Revisión de mangueras, herramientas, mantenimiento de unidad, práctica de capacitación. Solo necesidades reales.",
-    comoGrabar: "Si la persona está haciendo la tarea mientras habla, grabá el audio completo una vez así, mirando de a ratos a cámara. Después, en silencio (sin hablar), repetí la MISMA tarea desde 2-3 ángulos más: de cerca a las manos, desde arriba, y desde el costado. Esas tomas mudas se superponen en edición tapando los cortes mientras sigue sonando el audio original — por eso no importa que en esas repeticiones no hable, lo que importa es que las manos hagan lo mismo.",
+    comoGrabar: "La voz se graba en vivo mientras hace la tarea de mantenimiento — no se graba aparte para doblarla después, se nota mucho. Si la frase es larga, repetila completa 2 veces, siempre mientras sigue trabajando (revisando una manguera, ajustando una herramienta), mirando a cámara de a ratos. Después, aparte y en silencio, podés filmar las mismas manos haciendo la tarea desde otro ángulo (de cerca, desde arriba) como toma de repuesto para tapar un corte — pero la toma principal, con la voz, siempre se graba en vivo.",
   },
   {
     titulo: "\"San Miguel se suma\"",
@@ -201,7 +201,7 @@ const REELS: Reel[] = [
     fondo: "Cada uno frente al cartel o entrada de su propio local, para que se note que son lugares distintos.",
     texto: "Una frase cada uno: \"Yo quiero ayudar a nuestros bomberos\" / \"En mi comercio difundimos la campaña\" / \"Vos también podés sumarte\". Cierre: bomberos en cuadro, texto en pantalla \"Colaborador Oficial · el link está en nuestra bio\".",
     planos: "Tres personas, cada una mirando a cámara en su propio lugar; cierre con bomberos.",
-    comoGrabar: "Cada persona grabá su frase 2 veces: una estática mirando a cámara, y otra caminando hacia la cámara mientras la dice (un ligero movimiento ayuda a que el corte entre las tres personas no se sienta repetitivo, ya que las tres van a hablar paradas de la misma forma si no se varía algo).",
+    comoGrabar: "Cada persona grabá su frase en vivo, 2 veces: una caminando hacia la cámara mientras la dice, y otra parada frente a su local o cartel. El movimiento de caminar ayuda a que el corte entre las tres personas no se sienta repetitivo.",
   },
   {
     titulo: "\"Un día en el cuartel\"",
@@ -213,7 +213,7 @@ const REELS: Reel[] = [
     fondo: "Recorrido caminando dentro del cuartel: entrada, zona de equipos, patio. No hace falta que sea estático, puede ser cámara en mano siguiendo a la persona.",
     texto: "Ser bombero no es solamente salir ante una emergencia. También es prepararse, revisar los equipos y entrenar para responder de la mejor manera — todo esto, sin cobrar un sueldo, porque somos voluntarios. Ayudanos a sostener todo ese trabajo. Sumate como Colaborador Oficial.",
     planos: "Preparación de equipo, orden del material, práctica, revisión de unidad, saludo del equipo al cierre.",
-    comoGrabar: "Este es en movimiento todo el tiempo: cámara en mano (sin trípode) siguiendo al grupo mientras camina por el cuartel. Grabá el recorrido completo una vez con el audio puesto. Repetí el mismo recorrido 1-2 veces más, sin que hablen, desde otro ángulo (yendo delante del grupo, o cruzándote y grabando desde atrás) — esas tomas mudas sirven de repuesto para tapar cualquier corte en edición.",
+    comoGrabar: "La voz se graba en vivo mientras el grupo camina y hace cosas reales (ordenar equipo, revisar una unidad) — no se dobla después. Cámara en mano (sin trípode) siguiendo al grupo. Grabá el recorrido completo una vez con el audio puesto, y si querés variar el ángulo, repetilo entero una vez más (de nuevo con audio en vivo, no solo imagen muda) para tener dos opciones completas.",
   },
   {
     titulo: "\"Un vecino invita a otro\"",
@@ -225,7 +225,7 @@ const REELS: Reel[] = [
     fondo: "Un lugar cotidiano reconocible de San Miguel (la puerta de su casa, su local, una plaza). Que NO sea el cuartel, para que se note que es un vecino cualquiera, no alguien de adentro.",
     texto: "Yo ya conocí la campaña de Colaboradores Oficiales y quiero invitarte a que la conozcas. Cada persona puede ayudar según sus posibilidades. Entrá al enlace, mirá cómo funciona y compartilo con alguien de San Miguel.",
     planos: "Vecino o colaborador en un lugar cotidiano, mirando a cámara; cierre con el link en pantalla.",
-    comoGrabar: "Grabalo parado, quieto, en 2 tomas: una de frente a cámara y otra levemente de costado (3/4), repitiendo el texto completo en las dos. Da opciones para elegir la toma si en el medio hay un error, una duda o un silencio raro al hablar.",
+    comoGrabar: "Grabá la voz en vivo mientras camina por el lugar que elijan (su casa, su local), no parado fijo todo el video — se siente más natural con algo de movimiento cotidiano. Repetí el texto completo 2 veces, desde ángulos distintos (de frente y 3/4), para tener opciones si en el medio hay un error o una duda.",
   },
   {
     titulo: "\"¿Sos vecino de San Miguel?\"",
@@ -237,7 +237,7 @@ const REELS: Reel[] = [
     fondo: "De pie en la entrada, con el cartel o el frente del cuartel detrás, bien iluminado de día.",
     texto: "¿Sos vecino de San Miguel? Entonces ya sabés que acá estamos, las 24 horas, los 365 días — como bomberos voluntarios, sin cobrar un sueldo por eso. Lo que quizás no sabías es que podés ser parte con un aporte mensual, sosteniendo el equipamiento y la capacitación de tu cuartel. Sumate como Colaborador Oficial, el link está en nuestra bio.",
     planos: "Arranca con la pregunta a cámara bien cerca (primer plano, genera el gancho); corte a equipo/camión mientras sigue hablando; cierre de nuevo a cámara para el \"sumate\".",
-    comoGrabar: "El arranque (la pregunta) grabalo quieto, primer plano bien cerca — ahí no conviene moverse, tiene que pegar fuerte. Para la frase de cierre ('Sumate como Colaborador Oficial'), grabala 2 veces: una quieta en el mismo lugar, y otra caminando hacia la cámara desde la entrada del cuartel — así en edición podés elegir el cierre con más movimiento si el estático queda soso.",
+    comoGrabar: "El arranque (la pregunta) grabalo en vivo, primer plano bien cerca, quieto — ahí no conviene moverse, tiene que pegar fuerte. Para el cierre ('Sumate como Colaborador Oficial'), grabalo en vivo caminando hacia la cámara desde la entrada del cuartel, para variar el plano — las dos tomas llevan audio real grabado en el momento, no doblado después.",
   },
 ];
 
@@ -417,33 +417,27 @@ export default function PedidoRedes1() {
             Reels / videos cortos
           </h2>
           <p style={{ color: MUTED, fontSize: "0.9rem", margin: "0 0 16px" }}>
-            Grabá cada guion dos veces: una completa mirando a cámara, y otra más espontánea. Cada reel
-            tiene asignado un local distinto (Cuartel Central, Destacamento 1, Destacamento 2) a propósito,
-            para que no quede todo grabado en el mismo lugar.
+            Cada reel tiene asignado un local distinto (Cuartel Central, Destacamento 1, Destacamento 2) a
+            propósito, para que no quede todo grabado en el mismo lugar.
           </p>
-          <div style={{ background: "#fff8e8", border: "1px solid #f3dca0", borderRadius: 10, padding: "12px 16px", marginBottom: 14 }}>
-            <div style={{ fontSize: "0.85rem", fontWeight: 700, marginBottom: 4 }}>⚠️ Cada reel son DOS grabaciones, no una</div>
-            <div style={{ fontSize: "0.82rem", color: "#555", lineHeight: 1.6 }}>
-              1) La persona hablando a cámara, el audio completo. 2) Por separado, los "planos de apoyo" que
-              aparecen en la sección de abajo de cada tarjeta: esas tomas se usan editadas por encima,
-              tapando el corte, mientras se sigue escuchando la voz de la persona hablando. No hace falta
-              que la persona esté en pantalla todo el tiempo, por eso hay que filmar esas tomas sueltas
-              también, aunque no aparezcan en el guion.
-            </div>
-          </div>
 
           <div style={{ background: "#eef6ff", border: "1px solid #bcdcff", borderRadius: 10, padding: "12px 16px", marginBottom: 20 }}>
-            <div style={{ fontSize: "0.85rem", fontWeight: 700, marginBottom: 4 }}>🎥 Grabá cada guion en varios ángulos — "en off"</div>
+            <div style={{ fontSize: "0.85rem", fontWeight: 700, marginBottom: 4 }}>🎥 Así se graba la voz en off (importante, leé esto)</div>
             <div style={{ fontSize: "0.82rem", color: "#555", lineHeight: 1.6 }}>
-              No hace falta que la persona esté siempre mirando fijo a cámara con la boca sincronizada: podés
-              grabar la voz diciendo el texto completo, y por separado la imagen de la persona (quieta o
-              caminando) para superponer encima — eso es grabar <strong>"en off"</strong>. Para tener margen en la
-              edición, repetí el texto completo de cada guion <strong>2 o 3 veces</strong>, cambiando algo cada vez:
-              una vez parado y quieto, de frente; otra en un plano más cerrado (busto); y otra caminando
-              despacio (hacia cámara, de costado, o alejándose, según lo que pida cada guion). Son la misma
-              frase dicha varias veces desde ángulos distintos — así en edición se puede cortar entre planos
-              sin que se note el salto, o descartar una toma si se traba o queda forzada. Cada guion de abajo
-              tiene su propio recuadro "Cómo grabar" con el detalle para ese caso puntual.
+              La voz en off <strong>NO</strong> es grabar el audio solo y después tapar con un video mudo — eso es
+              muy difícil de sincronizar bien y se nota. Es al revés: se filma una acción real (el camión
+              saliendo a un servicio, un bombero vistiéndose, apagando un incendio de auto, un rescate de
+              animal, un incendio de una casa/estructura, o una capacitación armada para que lo parezca) y la
+              persona dice el guion <strong>en ese mismo momento</strong>, mientras se filma — el audio queda grabado
+              junto con la escena, en vivo.
+              <br /><br />
+              Si la frase es larga, no hace falta decirla toda sobre una sola acción: se puede repetir
+              completa <strong>2 o 3 veces</strong>, cada vez sobre algo distinto — caminando hacia la cámara con el
+              camión de fondo, mostrando el equipo de protección mientras habla, guardando un material y
+              mirando a cámara a mitad de frase, o incluso sosteniendo el micrófono con una pértiga/selfie
+              stick para un plano que llame más la atención. Todas son la MISMA frase, grabada en vivo sobre
+              acciones distintas — en edición se elige la mejor, o se corta entre ellas. Cada guion de abajo
+              tiene su propio recuadro "Cómo grabar" con ideas concretas de qué acción filmar en cada caso.
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -499,9 +493,9 @@ export default function PedidoRedes1() {
                 <div style={{ background: BG, border: `1px solid ${LINE}`, borderRadius: 8, padding: "12px 14px", fontSize: "0.86rem", fontStyle: "italic", marginBottom: 8, whiteSpace: "pre-line" }}>
                   {r.texto}
                 </div>
-                <div style={{ fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.03em", color: MUTED, marginBottom: 4 }}>🎬 Grabar aparte, para tapar el corte mientras se escucha la voz</div>
+                <div style={{ fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.03em", color: MUTED, marginBottom: 4 }}>🎬 Tomas extra (de repuesto, por si falta cubrir algo en edición)</div>
                 <div style={{ fontSize: "0.8rem", color: "#555", background: BG, borderRadius: 8, padding: "9px 11px", marginBottom: 8 }}>{r.planos}</div>
-                <div style={{ fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.03em", color: MUTED, marginBottom: 4 }}>🎥 Cómo grabar (ángulos y movimiento)</div>
+                <div style={{ fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.03em", color: MUTED, marginBottom: 4 }}>🎥 Cómo grabar la voz en off para esta escena</div>
                 <div style={{ fontSize: "0.8rem", color: "#444", background: "#eef6ff", border: "1px solid #d8ecff", borderRadius: 8, padding: "9px 11px" }}>{r.comoGrabar}</div>
               </div>
             ))}
