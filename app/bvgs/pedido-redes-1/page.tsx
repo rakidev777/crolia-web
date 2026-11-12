@@ -111,7 +111,7 @@ const REELS: Reel[] = [
     quien: SUGERENCIA_QUIEN + "alguien con experiencia real en salidas, para que las imágenes le salgan naturales al hablar.",
     vestimenta: "Uniforme de trabajo, prolijo. NO el equipo completo de emergencia ni casco.",
     fondo: "Parado frente al camión o la pared del cuartel, que se lea el logo si entra en cuadro. Luz de día, sin gente ni autos circulando atrás.",
-    texto: "Detrás de cada salida hay una familia que nos llama, un vecino que no sabe qué hacer, un animal que quedó atrapado, todos necesitan de nuestra ayuda.\n\nY detrás de nosotros, para poder llegar, hace falta equipamiento en condiciones, para cuidarte y cuidarnos, unidades que funcionen y gente capacitada que sepa cómo actuar en el momento justo.\n\nEso no se sostiene solo. Se sostiene con vecinos como vos.\n\nSumate como Colaborador Oficial de Bomberos de San Miguel. El link está en la bio.",
+    texto: "Detrás de cada salida hay una familia que nos llama, un vecino que no sabe qué hacer, un animal que quedó atrapado, todos necesitan de nuestra ayuda.\n\nY detrás de nosotros, para poder llegar, hace falta equipamiento en condiciones, para cuidarte y cuidarnos, unidades que funcionen y gente capacitada que sepa cómo actuar en el momento justo.\n\nEso no se sostiene solo. Se sostiene con vecinos como vos.\n\nSumate como Colaborador Oficial de Bomberos Voluntarios de San Miguel. El link está en la bio.",
     planos: "Mientras se repite el texto en los distintos ángulos, en alguna toma dejá que la mirada baje un segundo o se desvíe al costado al decir \"eso no se sostiene solo\" — mirar fijo a cámara todo el tiempo se siente impostado.",
     comoGrabar: "Es la frase más larga de todas, así que conviene grabarla completa (sin cortar en el medio) al menos 3 veces: 1) de frente, quieto, a 1,5m; 2) un plano más cerrado desde el pecho, quieto; 3) caminando despacio hacia la cámara mientras la dice, arrancando a unos 3 metros. Si en algún intento se traba o duda, no importa — quedan las otras dos para elegir en edición, y además podés cortar entre los tres planos a mitad de frase sin que se note el salto de audio.",
     linkEjemplo: "https://www.instagram.com/reels/DfiP3tSu-BA/",
@@ -124,7 +124,7 @@ const REELS: Reel[] = [
     quien: SUGERENCIA_QUIEN + "alguien con buena dicción, porque tiene bastantes números y conviene que no se trabe.",
     vestimenta: "Uniforme de trabajo, prolijo.",
     fondo: "Frente al camión o al box de equipamiento, bien iluminado.",
-    texto: "Desde enero de 2026, nuestro cuartel de bomberos recibió [X] llamados de emergencia.\n[X] accidentes. [X] incendios. [X] rescates de animales. [X] emergencias especiales. [sumar las categorías reales que tengamos].\n\nCada una de esas [X] veces, ahí estuvimos para ayudarte. Las 24 horas, los 365 días del año.\n\nPara mejorar nuestro servicio y estar cada vez más preparados necesitamos que te sumes como Colaborador Oficial. Tu aporte mensual hace posible que nos capacitemos y podamos mantener nuestros materiales y unidades móviles.\n\nSumate como Colaborador Oficial. No nos des la espalda y ayudanos a que la próxima vez que escuches la sirena, seas vos quien también está ayudando a esa familia que necesita ayuda.",
+    texto: "Desde enero de 2026, nuestro cuartel de bomberos voluntarios recibió [X] llamados de emergencia.\n[X] accidentes. [X] incendios. [X] rescates de animales. [X] emergencias especiales. [sumar las categorías reales que tengamos].\n\nCada una de esas [X] veces, ahí estuvimos para ayudarte. Las 24 horas, los 365 días del año.\n\nPara mejorar nuestro servicio y estar cada vez más preparados necesitamos que te sumes como Colaborador Oficial. Tu aporte mensual hace posible que nos capacitemos y podamos mantener nuestros materiales y unidades móviles.\n\nSumate como Colaborador Oficial. No nos des la espalda y ayudanos a que la próxima vez que escuches la sirena, seas vos quien también está ayudando a esa familia que necesita ayuda.",
     planos: "Mientras se dice cada número, cortar a una imagen relacionada: accidentes → unidad lista para salir; incendios → equipo de incendio; rescate de animales → algo relacionado (aunque sea de archivo); emergencias especiales → equipo especial. Cuantas más tomas de apoyo por categoría, mejor se arma el corte.",
     comoGrabar: "⚠️ Antes de filmar esta, necesitamos los números reales: total de llamados desde enero 2026 y el desglose por tipo (accidentes, incendios, animales, especiales, lo que tengan registrado). Grabarlo con las X sin completar no sirve — un número inventado o aproximado en un video institucional resta credibilidad si alguien lo cuestiona. Una vez con los datos reales, grabá el texto completo 2-3 veces desde ángulos distintos (de frente quieto, 3/4 quieto, y una vez caminando) igual que en los demás guiones, para tener margen en la edición.",
     linkEjemplo: "https://www.instagram.com/reel/DffanncRhc2/",
@@ -137,7 +137,7 @@ const REELS: Reel[] = [
     quien: SUGERENCIA_QUIEN + "para la escena 1, dos personas con ganas de actuar un poco (puede ser un bombero vestido de calle, para que no se note el giro hasta el final, y otro haciendo de vecino que dice \"no, gracias\"). Para las escenas 2-4, quien se sienta cómodo diciendo la frase clave a cámara.",
     vestimenta: "Escena 1: ropa de calle normal para los dos (ni uniforme ni nada que los identifique como bomberos todavía). Escenas 2-4: uniforme de trabajo.",
     fondo: "Escena 1: cualquier calle o puerta reconocible de San Miguel. Escenas 2-3: el puesto de guardia/teléfono del cuartel. Escena 4: el box con el camión saliendo.",
-    texto: "Escena 1: Un bombero (vestido de calle) tocando timbre casa por casa, pidiendo colaborar con $5.000 por mes. Un vecino abre la puerta, lo mira y dice: \"No, gracias\" — y cierra. (O alguien caminando se lo intenta interceptar y sigue caminando.)\n\nEscena 2 (corte): Sonido de teléfono. Alguien atiende en el cuartel: \"Bomberos, buenas tardes.\" Del otro lado, gritando: \"¡Se está prendiendo fuego mi casa, vengan urgente!\"\n\nEscena 3: El bombero que atendió, mirando a cámara, serio: \"Nosotros nunca te vamos a decir que no.\"\n\nEscena 4: El camión saliendo del cuartel, sirena a todo volumen.\n\nCierre, texto en pantalla: \"Nosotros nunca decimos que no. Esta vez, necesitamos que no nos des la espalda.\" → Sumate como Colaborador Oficial.",
+    texto: "Escena 1: Un bombero (vestido de calle) tocando timbre casa por casa, pidiendo colaborar con $5.000 por mes. Un vecino abre la puerta, lo mira y dice: \"No, gracias\" — y cierra. (O alguien caminando se lo intenta interceptar y sigue caminando.)\n\nEscena 2 (corte): Sonido de teléfono. Alguien atiende en el cuartel: \"Bomberos Voluntarios, buenas tardes.\" Del otro lado, gritando: \"¡Se está prendiendo fuego mi casa, vengan urgente!\"\n\nEscena 3: El bombero que atendió, mirando a cámara, serio: \"Nosotros nunca te vamos a decir que no.\"\n\nEscena 4: El camión saliendo del cuartel, sirena a todo volumen.\n\nCierre, texto en pantalla: \"Nosotros nunca decimos que no. Esta vez, necesitamos que no nos des la espalda.\" → Sumate como Colaborador Oficial.",
     planos: "Escena 1 necesita 2-3 intentos para que el \"no, gracias\" se vea natural y no leído — probar la toma caminando (el vecino lo esquiva sin frenar) y la toma parado en la puerta, y quedarse con la que salga más creíble. Escena 2 es solo audio + un plano del teléfono o de la mano atendiendo, no hace falta que se vea la cara de quien llama.",
     comoGrabar: "Esta NO es \"una persona habla a cámara\": es un sketch de varias escenas cortas que se editan intercaladas, así que grabá cada escena por separado y repetila las veces que haga falta hasta que la actuación salga creíble (sobre todo la del \"no, gracias\"). La frase clave, \"Nosotros nunca te vamos a decir que no\", es la más importante del video — grabala al menos 3 veces: parado quieto de frente, en un primer plano más cerrado, y una vez caminando hacia la cámara, para tener opciones de cuál usar en el cierre. El audio del teléfono y el grito de \"se está prendiendo fuego mi casa\" se puede grabar aparte y mezclarlo después, no hace falta sincronizarlo en vivo.",
     linkEjemplo: "https://www.instagram.com/reel/DffanncRhc2/",
@@ -175,7 +175,7 @@ const REELS: Reel[] = [
     quien: SUGERENCIA_QUIEN + "el jefe de cuartel o alguien con antigüedad, por la presencia que da, pero no es excluyente.",
     vestimenta: "Uniforme de trabajo (chomba o campera institucional), NO el equipo completo de emergencia ni casco. Prolijo, sin manchas.",
     fondo: "Parado a 1-1,5m de la pared del cuartel o frente al camión, de forma que se lea el logo si entra en cuadro. Nada de autos pasando atrás ni gente circulando.",
-    texto: "Cuando alguien de San Miguel nos necesita, tenemos que estar preparados. Para eso hacen falta capacitación, equipamiento y unidades en condiciones. Hoy te invitamos a ser parte: con un aporte mensual podés ayudar a sostener nuestro cuartel. Sumate como Colaborador Oficial. El enlace está en nuestro perfil.",
+    texto: "Cuando alguien de San Miguel nos necesita, tenemos que estar preparados. Somos bomberos voluntarios — nadie de nosotros cobra un sueldo por esto. Para eso hacen falta capacitación, equipamiento y unidades en condiciones. Hoy te invitamos a ser parte: con un aporte mensual podés ayudar a sostener nuestro cuartel. Sumate como Colaborador Oficial. El enlace está en nuestro perfil.",
     planos: "Primer plano de un bombero · preparación del equipo · camión en el cuartel · cierre mirando a cámara.",
     comoGrabar: "Es un plano estático, no hace falta moverse. Repetí el texto completo 3 veces: 1) de frente, a 1,5m, quieto; 2) un primer plano más cerrado (desde el pecho), quieto; 3) la misma frase pero empezando de perfil y girando la cabeza hacia cámara a mitad de frase. Son recursos para poder cortar entre planos en la edición sin que se note el salto.",
   },
@@ -187,7 +187,7 @@ const REELS: Reel[] = [
     quien: SUGERENCIA_QUIEN + "quien habitualmente hace el mantenimiento o maneja la unidad, para que hable de algo que conoce bien.",
     vestimenta: "Uniforme de trabajo. Si está haciendo la tarea mientras habla, mejor: guantes puestos, manga arremangada.",
     fondo: "Dentro del box/garage, con la unidad o la mesa de herramientas de fondo, bien iluminado (luz del garage encendida + puerta abierta si hay luz natural).",
-    texto: "Detrás de cada salida hay mucho trabajo previo: revisar equipos, mantener las unidades y capacitarnos. Tu aporte mensual ayuda a sostener ese trabajo cotidiano. Queremos sumar a más vecinos a esta red de colaboración. Entrá al enlace y elegí el aporte que esté a tu alcance.",
+    texto: "Detrás de cada salida hay mucho trabajo previo: revisar equipos, mantener las unidades y capacitarnos. Somos bomberos voluntarios, no cobramos un sueldo por estar acá — por eso tu aporte mensual ayuda a sostener ese trabajo cotidiano. Queremos sumar a más vecinos a esta red de colaboración. Entrá al enlace y elegí el aporte que esté a tu alcance.",
     planos: "Revisión de mangueras, herramientas, mantenimiento de unidad, práctica de capacitación. Solo necesidades reales.",
     comoGrabar: "Si la persona está haciendo la tarea mientras habla, grabá el audio completo una vez así, mirando de a ratos a cámara. Después, en silencio (sin hablar), repetí la MISMA tarea desde 2-3 ángulos más: de cerca a las manos, desde arriba, y desde el costado. Esas tomas mudas se superponen en edición tapando los cortes mientras sigue sonando el audio original — por eso no importa que en esas repeticiones no hable, lo que importa es que las manos hagan lo mismo.",
   },
@@ -211,7 +211,7 @@ const REELS: Reel[] = [
     quien: SUGERENCIA_QUIEN + "2 o 3 bomberos jóvenes, en grupo, mejor que uno solo hablando.",
     vestimenta: "Uniforme de trabajo, prolijo y parejo entre todos (que no haya uno con el uniforme completo y otro de particular).",
     fondo: "Recorrido caminando dentro del cuartel: entrada, zona de equipos, patio. No hace falta que sea estático, puede ser cámara en mano siguiendo a la persona.",
-    texto: "Ser bombero no es solamente salir ante una emergencia. También es prepararse, revisar los equipos y entrenar para responder de la mejor manera. Ayudanos a sostener todo ese trabajo. Sumate como Colaborador Oficial.",
+    texto: "Ser bombero no es solamente salir ante una emergencia. También es prepararse, revisar los equipos y entrenar para responder de la mejor manera — todo esto, sin cobrar un sueldo, porque somos voluntarios. Ayudanos a sostener todo ese trabajo. Sumate como Colaborador Oficial.",
     planos: "Preparación de equipo, orden del material, práctica, revisión de unidad, saludo del equipo al cierre.",
     comoGrabar: "Este es en movimiento todo el tiempo: cámara en mano (sin trípode) siguiendo al grupo mientras camina por el cuartel. Grabá el recorrido completo una vez con el audio puesto. Repetí el mismo recorrido 1-2 veces más, sin que hablen, desde otro ángulo (yendo delante del grupo, o cruzándote y grabando desde atrás) — esas tomas mudas sirven de repuesto para tapar cualquier corte en edición.",
   },
@@ -235,26 +235,20 @@ const REELS: Reel[] = [
     quien: SUGERENCIA_QUIEN + "alguien joven y con energía, para que el gancho inicial pegue fuerte.",
     vestimenta: "Uniforme de trabajo, prolijo.",
     fondo: "De pie en la entrada, con el cartel o el frente del cuartel detrás, bien iluminado de día.",
-    texto: "¿Sos vecino de San Miguel? Entonces ya sabés que acá estamos, las 24 horas, los 365 días. Lo que quizás no sabías es que podés ser parte con un aporte mensual, sosteniendo el equipamiento y la capacitación de tu cuartel. Sumate como Colaborador Oficial, el link está en nuestra bio.",
+    texto: "¿Sos vecino de San Miguel? Entonces ya sabés que acá estamos, las 24 horas, los 365 días — como bomberos voluntarios, sin cobrar un sueldo por eso. Lo que quizás no sabías es que podés ser parte con un aporte mensual, sosteniendo el equipamiento y la capacitación de tu cuartel. Sumate como Colaborador Oficial, el link está en nuestra bio.",
     planos: "Arranca con la pregunta a cámara bien cerca (primer plano, genera el gancho); corte a equipo/camión mientras sigue hablando; cierre de nuevo a cámara para el \"sumate\".",
     comoGrabar: "El arranque (la pregunta) grabalo quieto, primer plano bien cerca — ahí no conviene moverse, tiene que pegar fuerte. Para la frase de cierre ('Sumate como Colaborador Oficial'), grabala 2 veces: una quieta en el mismo lugar, y otra caminando hacia la cámara desde la entrada del cuartel — así en edición podés elegir el cierre con más movimiento si el estático queda soso.",
   },
 ];
 
-const CHECK_ITEMS = [
-  "Retrato de un bombero",
-  "Equipo trabajando / mantenimiento",
-  "Unidad y equipamiento",
-  "Cuartel por fuera (día + atardecer)",
-  "Capacitación en acción",
-  "Detalle humano (manos, equipo)",
+const FINAL_ITEMS = [
   "Al menos 2 reels grabados (completo + espontáneo)",
   "3-4 tomas sueltas para historias",
   "Permiso verbal de las personas identificables",
   "Todo guardado en una carpeta, ordenado",
 ];
 
-const STORAGE_KEY = "bvgs_pedido_redes_1_v1";
+const STORAGE_KEY = "bvgs_pedido_redes_1_v2";
 
 type Pestana = "reels" | "fotos";
 const PESTANAS: { id: Pestana; label: string }[] = [
@@ -263,14 +257,21 @@ const PESTANAS: { id: Pestana; label: string }[] = [
 ];
 
 export default function PedidoRedes1() {
-  const [checked, setChecked] = useState<boolean[]>(() => CHECK_ITEMS.map(() => false));
+  const [fotosChecked, setFotosChecked] = useState<boolean[]>(() => FOTOS.map(() => false));
+  const [reelsChecked, setReelsChecked] = useState<boolean[]>(() => REELS.map(() => false));
+  const [finalChecked, setFinalChecked] = useState<boolean[]>(() => FINAL_ITEMS.map(() => false));
   const [loaded, setLoaded] = useState(false);
   const [pestana, setPestana] = useState<Pestana>("reels");
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) setChecked(JSON.parse(saved));
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.fotos) setFotosChecked(parsed.fotos);
+        if (parsed.reels) setReelsChecked(parsed.reels);
+        if (parsed.final) setFinalChecked(parsed.final);
+      }
     } catch {}
     setLoaded(true);
   }, []);
@@ -278,14 +279,23 @@ export default function PedidoRedes1() {
   useEffect(() => {
     if (!loaded) return;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ fotos: fotosChecked, reels: reelsChecked, final: finalChecked }));
     } catch {}
-  }, [checked, loaded]);
+  }, [fotosChecked, reelsChecked, finalChecked, loaded]);
 
-  const done = checked.filter(Boolean).length;
+  const totalItems = FOTOS.length + REELS.length + FINAL_ITEMS.length;
+  const done = fotosChecked.filter(Boolean).length + reelsChecked.filter(Boolean).length + finalChecked.filter(Boolean).length;
 
-  function toggle(i: number) {
-    setChecked((c) => c.map((v, idx) => (idx === i ? !v : v)));
+  function toggleFoto(i: number) {
+    setFotosChecked((c) => c.map((v, idx) => (idx === i ? !v : v)));
+  }
+
+  function toggleReel(i: number) {
+    setReelsChecked((c) => c.map((v, idx) => (idx === i ? !v : v)));
+  }
+
+  function toggleFinal(i: number) {
+    setFinalChecked((c) => c.map((v, idx) => (idx === i ? !v : v)));
   }
 
   return (
@@ -299,11 +309,11 @@ export default function PedidoRedes1() {
             Jornada de producción · BVGS
           </div>
           <h1 style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 700, fontSize: "clamp(1.8rem, 6vw, 2.4rem)", lineHeight: 1.1, margin: "0 0 10px" }}>
-            Lo que vas a salir a filmar hoy
+            Propuestas de guiones para filmaciones
           </h1>
           <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "0.95rem", maxWidth: 560, margin: 0 }}>
-            Guía con ejemplos de cómo encuadrar cada foto. Tildá lo que vas completando, y cuando termines
-            mandanos todo el contenido.
+            Contenido para redes sociales: guiones de reels y ejemplos de cómo encuadrar cada foto. Tildá lo
+            que vas completando, y cuando termines mandanos todo el contenido.
           </p>
         </div>
       </header>
@@ -323,7 +333,7 @@ export default function PedidoRedes1() {
             fontFamily: "monospace", fontSize: "0.78rem", color: OK, background: "#e9f7ee",
             borderRadius: 999, padding: "4px 12px",
           }}>
-            {done} / {CHECK_ITEMS.length} listo
+            {done} / {totalItems} listo
           </span>
         </div>
 
@@ -377,14 +387,14 @@ export default function PedidoRedes1() {
                     <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer" }}>
                       <input
                         type="checkbox"
-                        checked={checked[i]}
-                        onChange={() => toggle(i)}
+                        checked={fotosChecked[i]}
+                        onChange={() => toggleFoto(i)}
                         style={{ marginTop: 4, width: 17, height: 17, accentColor: BRAND, flexShrink: 0 }}
                       />
                       <div>
                         <div style={{
                           fontFamily: "'Oswald', sans-serif", fontWeight: 600, fontSize: "1rem", marginBottom: 4,
-                          textDecoration: checked[i] ? "line-through" : "none", color: checked[i] ? MUTED : INK,
+                          textDecoration: fotosChecked[i] ? "line-through" : "none", color: fotosChecked[i] ? MUTED : INK,
                         }}>
                           {f.titulo}
                         </div>
@@ -437,9 +447,22 @@ export default function PedidoRedes1() {
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            {REELS.map((r) => (
+            {REELS.map((r, i) => (
               <div key={r.titulo} style={{ background: "white", border: `1px solid ${LINE}`, borderRadius: 12, padding: "16px 18px" }}>
-                <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 600, fontSize: "1rem", marginBottom: 6 }}>{r.titulo}</div>
+                <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer", marginBottom: 6 }}>
+                  <input
+                    type="checkbox"
+                    checked={reelsChecked[i]}
+                    onChange={() => toggleReel(i)}
+                    style={{ marginTop: 3, width: 17, height: 17, accentColor: BRAND, flexShrink: 0 }}
+                  />
+                  <div style={{
+                    fontFamily: "'Oswald', sans-serif", fontWeight: 600, fontSize: "1rem",
+                    textDecoration: reelsChecked[i] ? "line-through" : "none", color: reelsChecked[i] ? MUTED : INK,
+                  }}>
+                    {r.titulo}
+                  </div>
+                </label>
                 <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap", alignItems: "center" }}>
                   <span style={{ fontFamily: "monospace", fontSize: "0.68rem", color: BRAND, border: `1px solid ${BRAND}`, borderRadius: 999, padding: "2px 8px" }}>{r.dur}</span>
                   <span style={{ fontFamily: "monospace", fontSize: "0.68rem", color: MUTED, border: `1px solid ${LINE}`, borderRadius: 999, padding: "2px 8px" }}>{r.tag}</span>
@@ -513,6 +536,28 @@ export default function PedidoRedes1() {
               <div key={t} style={{ background: "white", border: `1px solid ${LINE}`, borderRadius: 10, padding: "10px 12px", fontSize: "0.82rem" }}>
                 {t}
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CHECKLIST FINAL */}
+        <section style={{ padding: "16px 0 24px", borderTop: `1px solid ${LINE}` }}>
+          <h2 style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 600, fontSize: "1.4rem", margin: "20px 0 14px" }}>
+            Antes de mandarlo, repasá esto
+          </h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {FINAL_ITEMS.map((item, i) => (
+              <label key={item} style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer", background: "white", border: `1px solid ${LINE}`, borderRadius: 10, padding: "10px 12px" }}>
+                <input
+                  type="checkbox"
+                  checked={finalChecked[i]}
+                  onChange={() => toggleFinal(i)}
+                  style={{ marginTop: 2, width: 17, height: 17, accentColor: BRAND, flexShrink: 0 }}
+                />
+                <span style={{ fontSize: "0.85rem", textDecoration: finalChecked[i] ? "line-through" : "none", color: finalChecked[i] ? MUTED : INK }}>
+                  {item}
+                </span>
+              </label>
             ))}
           </div>
         </section>
